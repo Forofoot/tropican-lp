@@ -21,15 +21,16 @@ const ReviewStyle = styled.section`
         }
     }
     .cardsContainer{
-        display: grid;
+        display: flex;
+        flex-direction: column;
+        gap:100px;
         width: 100%;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 150px;
-        grid-template-rows: 900px;
         align-items: center;
         justify-items: center;
         padding: 50px 0;
         @media (min-width:1024px){
+            display: grid;
+            grid-template-rows: 400px;
             grid-template-columns: repeat(3, 1fr);
             grid-gap: 50px;
         }
