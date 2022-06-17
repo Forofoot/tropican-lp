@@ -34,6 +34,14 @@ const ReviewStyle = styled.div`
         text-align: left;
         color:#484F75;
     }
+    @media screen and (max-width: 1200px){
+        width:50vw;
+        margin-top:10px;
+    }
+    @media screen and (max-width: 700px){
+        width:80vw;
+        margin-top:30px;
+    }
     
 }
 `

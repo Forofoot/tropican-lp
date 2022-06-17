@@ -21,12 +21,15 @@ const SectionStyle = styled.div`
     padding:0 100px;
     display: flex;
     justify-content:space-around;
+    margin-bottom:90px;
+    flex-wrap: wrap;
   }
 `
 
 export default function Home() {
   return (
-    <div>
+<SectionStyle>
+<div>
       < Hero/>
       <Infos/>
       <h2 className='sectionTitle'>Vos <span>avis</span> et <span>ressenties</span> comptes</h2>
@@ -36,5 +39,6 @@ export default function Home() {
         <Review srcPhoto="/logo.svg" nom="Jimmy Renden" statut="Grand-Père" testimony="Lorem ipsum dolor sit amet" />
         </div>
     </div>
+</SectionStyle>
   )
 }

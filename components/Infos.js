@@ -7,6 +7,7 @@ const InfoStyle = styled.section`
     border-radius: 25px 25px 0 0;
     padding: 80px 50px;
     text-align: center;
+    margin-bottom:50px;
     h1{
         font-weight: 400;
         color:#F0E5C3;
