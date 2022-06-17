@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styled from 'styled-components'
+import Infos from '/components/Infos'
 
 const SectionStyle = styled.div`
   section{
@@ -11,10 +12,8 @@ const SectionStyle = styled.div`
 export default function Home() {
   return (
     <div>
-      <SectionStyle>
-      <section id='section1'></section>
+      <Infos/>
       <section id='section2'></section>
-        </SectionStyle>
     </div>
   )
 }
