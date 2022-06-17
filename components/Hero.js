@@ -86,8 +86,8 @@ const Hero = () => {
         <HeroStyle id="section1">
         <div className='container'>
             <div className='containerInfo'>
-                <h1>Vivre en,<br></br> <span className='highlight'>intergénérations</span></h1>
-                <h2>Facilité les liens et les transmissions familiales</h2>
+                <h1>Vivre en<br></br> <span className='highlight'>intergénération</span></h1>
+                <h2>Faciliter les liens et les transmissions familiales</h2>
                 <p>Souhaitez-vous faciliter les interractions avec vos petits enfants ? Créer du lien à travers ce que vous aimez avec eux sans crainte !</p>
                 <div className='containerImageLeafTop'>
                     <Image
