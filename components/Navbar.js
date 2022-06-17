@@ -112,7 +112,7 @@ const HeaderStyle = styled.header`
       display: none;
       @media (min-width: 768px){
         display: flex;
-        width: 50%;
+        width: 40%;
         justify-content: space-between;
         align-items: center;
       }

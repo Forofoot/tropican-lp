@@ -20,6 +20,9 @@ export default createGlobalStyle`
     text-decoration: none;
     color: #000;
   }
+  h1,h2,h3{
+    margin: 0;
+  } 
   h1{
     font-size:1.875em;
   }
