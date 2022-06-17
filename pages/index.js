@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styled from 'styled-components'
+import Hero from '../components/Hero'
 
 const SectionStyle = styled.div`
   section{
@@ -22,9 +23,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SectionStyle>
-      <section id='section1'></section>
-      <section id='section2'></section>
-        </SectionStyle>
+        < Hero/>
+        
+        <section id='section2'></section>
+      </SectionStyle>
     </div>
   )
 }

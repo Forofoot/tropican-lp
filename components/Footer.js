@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Image from "next/image"
 
 const FooterStyle = styled.footer`
-    backgrond:red;
+    background:red;
 `
 
 export default function Footer() {
