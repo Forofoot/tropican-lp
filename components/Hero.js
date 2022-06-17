@@ -5,8 +5,11 @@ const HeroStyle = styled.div`
 
 
     .container{
-        margin:100px 200px 0px 200px;
-        height:90vh ;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 95vh;
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -24,8 +27,9 @@ const HeroStyle = styled.div`
         .container__image--mobile {
             position: absolute;
             z-index: -1;
-            top: 15px;
-            transform: rotate(90deg);
+            top: 50px;
+            left: 0;
+            transform: rotate(105deg);
         }
         p{
             margin-bottom: 105px;
