@@ -6,7 +6,8 @@ const HeroStyle = styled.div`
 
 
     .container{
-        margin:100px 200px ;
+        margin:100px 200px 0px 200px;
+        height:90vh ;
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -85,7 +86,7 @@ const Hero = () => {
         <HeroStyle>
         <div className='container'>
             <div className='container__info'>
-                <h1>Vivre en,<br></br> <span className='highlight'>intégrations</span></h1>
+                <h1>Vivre en,<br></br> <span className='highlight'>intergénérations</span></h1>
                 <h2>Facilité les liens et les transmissions familiales</h2>
                 <p>Souhaitez-vous faciliter les interractions avec vos petits enfants ? Créer du lien à travers ce que vous aimez avec eux sans crainte !</p>
                 <div className='container__image--mobile'>
