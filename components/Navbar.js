@@ -6,9 +6,15 @@ import { useState } from 'react'
 const HeaderStyle = styled.header`
   background:#42A0B6;
   padding: 30px 55px;
+  border-radius: 0 0 25px 25px;
   nav{
     display:flex;
     justify-content:space-between;
+    .logoMobile{
+      @media (min-width:768px){
+        display: none;
+      }
+    }
     .navLinks{
         @media (min-width:768px){
           display: none;
@@ -37,7 +43,7 @@ const HeaderStyle = styled.header`
         }
       }
       &.opened{
-        background: #F0E5C3;
+        background: #42A0B6;
         left: 0;
         transition: all .3s ease-in-out;
           .close{
@@ -53,7 +59,7 @@ const HeaderStyle = styled.header`
           .closeline{
             width: 100%;
             height: 2px;
-            background-color: #000;
+            background-color: #fff;
             transform: rotate(45deg) translate(11px, -10px);
             &:last-child{
               transform: rotate(-45deg) translate(-7px, -7px);
@@ -65,6 +71,18 @@ const HeaderStyle = styled.header`
         }
       }
       
+      
+    }
+    @media (min-width:768px){
+      .navLinks,
+      .logoMobile{
+        display: none;
+      }
+    }
+    @media (max-width:768px){
+    .logoDesktop{
+        display: none;
+      }
     }
     
     .burger{
@@ -86,7 +104,7 @@ const HeaderStyle = styled.header`
     .burgerline {
       width: 30px;
       height: 2px;
-      background-color: #000;
+      background-color: #F0E5C3;
       margin-top: 2.5px;
       margin-bottom: 2.5px;
       transition: all 0.3s ease;
@@ -137,12 +155,22 @@ export default function Navbar() {
             </div>
           </div>
           <Link href="#">
-            <a>
+            <a className="logoMobile">
               <Image
                 src="/logo.svg"
                 alt="Logo"
                 width={53}
                 height={53}
+              />
+            </a>  
+          </Link>
+          <Link href="#">
+            <a className='logoDesktop'>
+            <Image
+                src="/fullLogo.svg"
+                alt="Logo"
+                width={198}
+                height={44}
               />
             </a>  
           </Link>

@@ -9,6 +9,7 @@ const HeroStyle = styled.div`
         align-items: center;
         justify-content: center;
         height: 95vh;
+        padding: 0 50px;
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -41,7 +42,6 @@ const HeroStyle = styled.div`
     @media (max-width:768px){
         .container{
             justify-content: start;
-            padding: 0 50px;
             h1{
                 font-size: 2em;
                 text-align: left;
