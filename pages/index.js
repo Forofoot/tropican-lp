@@ -1,6 +1,4 @@
-import Head from 'next/head'
 import Review from '../components/review'
-import Image from 'next/image'
 import styled from 'styled-components'
 import Infos from '/components/Infos'
 import Hero from '../components/Hero'

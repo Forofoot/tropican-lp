@@ -38,9 +38,6 @@ const HeroStyle = styled.div`
 
     @media (max-width:768px){
         .container{
-            margin: 0;
-            padding:45px;
-            height: 75vh;
             .scroll_anim{
                 display:flex;
                 justify-content: center ;

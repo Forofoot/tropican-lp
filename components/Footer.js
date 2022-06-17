@@ -46,6 +46,7 @@ const FooterStyle = styled.footer`
         }
       }
       
+      h2,
       form,
       label{
         margin-bottom:25px;
