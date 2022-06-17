@@ -30,8 +30,11 @@ const HeaderStyle = styled.header`
         flex-direction: column;
         font-size: 2rem;
         text-align: center;
-      li:first-child{
+      li{
         margin-bottom: 35px;
+        &:last-child{
+          margin-bottom: 0;
+        }
       }
       &.opened{
         background: #F0E5C3;
@@ -105,6 +108,18 @@ const HeaderStyle = styled.header`
         transform: scaleX(0);
       }
     }
+    .desktopLinks{
+      display: none;
+      @media (min-width: 768px){
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    a{
+      color:#fff;
+    }
   }
 `
 
@@ -139,16 +154,38 @@ export default function Navbar() {
               <ul >
                 <li>
                   <Link href="#section1">
-                    <a onClick={() => setActive(!active)}>À propos</a>
+                    <a onClick={() => setActive(!active)}>Tropican</a>
                   </Link>
                 </li>
                 <li>
                   <Link href="#section2">
-                    <a onClick={() => setActive(!active)}>Contact</a>
+                    <a onClick={() => setActive(!active)}>xxxxxxxxxxxx</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#section3">
+                    <a onClick={() => setActive(!active)}>Vos retours</a>
                   </Link>
                 </li>
               </ul>
           </aside>
+          <ul className='desktopLinks'>
+            <li>
+              <Link href="#section1">
+                <a>Tropican</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="#section2">
+                <a>xxxxxxxxxxxx</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="#section3">
+                <a>Vos retours</a>
+              </Link>
+            </li>
+          </ul>
           
         </nav>
         

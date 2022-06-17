@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Image from 'next/image'
-import { useRef } from 'react'
 
 const HeroStyle = styled.div`
 
@@ -83,7 +82,7 @@ const Hero = () => {
     //   path: "/public/hero/scrollDown.json"
     // });
     return (
-        <HeroStyle>
+        <HeroStyle id="section1">
         <div className='container'>
             <div className='container__info'>
                 <h1>Vivre en,<br></br> <span className='highlight'>intergénérations</span></h1>

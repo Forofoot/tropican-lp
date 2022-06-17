@@ -53,7 +53,7 @@ const InfoStyle = styled.section`
 export default function Footer() {
     
   return (
-    <InfoStyle id="section1">
+    <InfoStyle id="section2">
         <h1>Qui sommes-nous ?</h1>
         <div className="infoLogoContainer">
             <Image
