@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 
 const HeaderStyle = styled.header`
-  background:#F0E5C3;
+  background:#42A0B6;
   padding: 30px 55px;
   nav{
     display:flex;
