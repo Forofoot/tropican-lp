@@ -121,8 +121,8 @@ export default function Footer() {
               <Link href={elt.link} title={elt.title}><a target="_blank"><Image
                 src="/logo.svg"
                 alt={elt.title}
-                width={30}
-                height={30}
+                width='30'
+                height='30'
               /></a></Link>
             </li>
           ))}

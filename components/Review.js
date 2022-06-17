@@ -115,8 +115,8 @@ export default function Review() {
                             <Image
                                 src={elt.srcPhoto}
                                 alt="photo profil"
-                                width={53}
-                                height={53}
+                                width='53'
+                                height='53'
                             />
                         </figure>
                         <h2>{elt.name}</h2>
@@ -129,8 +129,8 @@ export default function Review() {
                 <Image
                 src={"/hero/img_hero.svg"}
                 alt="image d'une feuille "
-                width={450}
-                height={450}
+                width='450'
+                height='450'
                 
                 />
             </div>

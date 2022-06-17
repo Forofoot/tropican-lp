@@ -159,8 +159,8 @@ export default function Navbar() {
               <Image
                 src="/logo.svg"
                 alt="Logo"
-                width={53}
-                height={53}
+                width='53'
+                height='53'
               />
             </a>  
           </Link>
@@ -169,8 +169,8 @@ export default function Navbar() {
             <Image
                 src="/fullLogo.svg"
                 alt="Logo"
-                width={198}
-                height={44}
+                width='198'
+                height='44'
               />
             </a>  
           </Link>

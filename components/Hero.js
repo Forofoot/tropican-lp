@@ -93,8 +93,8 @@ const Hero = () => {
                     <Image
                     src={"/hero/img_hero.svg"}
                     alt="image d'une feuille "
-                    width={450}
-                    height={450}
+                    width='450'
+                    height='450'
                     
                     />
                 </div>
@@ -102,8 +102,8 @@ const Hero = () => {
                     <Image
                     src={"/hero/img_hero.svg"}
                     alt="image d'une feuille "
-                    width={450}
-                    height={450}
+                    width='450'
+                    height='450'
                     
                     />
                 </div>
@@ -113,8 +113,8 @@ const Hero = () => {
                 <Image
                     src={"/hero/scrolldown.svg"}
                     alt=''
-                    width={50}
-                    height={50}
+                    width='50'
+                    height='50'
                 />
 
             </div>

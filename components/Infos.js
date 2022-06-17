@@ -60,8 +60,8 @@ export default function Footer() {
             <Image
                 src={'/fullLogo.svg'}
                 alt="Logo Tropican"
-                width={259} 
-                height={58}
+                width='259' 
+                height='58'
                 className="logoFull"
             />
         </div>
