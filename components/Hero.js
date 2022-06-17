@@ -75,13 +75,6 @@ const HeroStyle = styled.div`
 `
 
 const Hero = () => {
-    // const scrollIndicator = useRef()
-    // let animItem = bodymovin.loadAnimation({
-    //   wrapper: scrollIndicator,
-    //   animType: 'svg',
-    //   loop: true,
-    //   path: "/public/hero/scrollDown.json"
-    // });
     return (
         <HeroStyle id="section1">
         <div className='container'>
@@ -106,7 +99,6 @@ const Hero = () => {
                     alt=''
                     width={50}
                     height={50}
-                    /*ref={scrollIndicator}*/
                 />
                 
             </div>
