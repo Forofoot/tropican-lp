@@ -7,7 +7,7 @@ const ReviewStyle = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    padding: 0 50px;
     @media (min-width:1024px){
         height: 70vh;
     }
@@ -24,7 +24,7 @@ const ReviewStyle = styled.section`
         display: grid;
         width: 100%;
         grid-template-columns: repeat(1, 1fr);
-        grid-gap: 150px;
+        gap: 150px;
         grid-template-rows: 400px;
         align-items: center;
         justify-items: center;
@@ -40,7 +40,6 @@ const ReviewStyle = styled.section`
             border-radius:7px;
             text-align:center;
             padding: 0 20px 20px;
-            width: 70%;
             min-height: 100%;
             @media (min-width:1024px){
                 min-height: 350px;
