@@ -1,4 +1,3 @@
-import Review from '../components/review'
 import styled from 'styled-components'
 import Infos from '/components/Infos'
 import Hero from '../components/Hero'
