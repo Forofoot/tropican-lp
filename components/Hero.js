@@ -35,7 +35,7 @@ const HeroStyle = styled.div`
         .container{
             margin: 0;
             padding:45px;
-            height: 60vh;
+            height: 75vh;
             .scroll_anim{
                 display:flex;
                 justify-content: center ;
@@ -47,15 +47,20 @@ const HeroStyle = styled.div`
                 font-size: 2em;
                 text-align: center;
                 margin-bottom: 25px;
+                color: #484F75;
             }
             h2{
                 margin-bottom: 32px;
+                color: #484F75;
             }
             p{
-                position: absolute ;
+                position: absolute;
+                padding: 2px 40px 2px 5px;
+                line-height: 28px;
+                color: #484F75;
             }
             .container__info{
-                margin-bottom: 15px ;
+                margin-bottom: -15px ;
             }
             .container__image--mobile {
                 position: relative;
@@ -86,8 +91,8 @@ const Hero = () => {
                     <Image
                     src="/hero/img_hero.svg"
                     alt="image d'une feuille "
-                    width={250}
-                    height={250}
+                    width={450}
+                    height={450}
                     
                     />
                 </div>
