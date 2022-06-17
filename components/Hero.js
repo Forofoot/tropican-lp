@@ -91,7 +91,7 @@ const Hero = () => {
                 <p>Souhaitez-vous faciliter les interractions avec vos petits enfants ? Créer du lien à travers ce que vous aimez avec eux sans crainte !</p>
                 <div className='container__image--mobile'>
                     <Image
-                    src={"/img_hero.svg"}
+                    src={"hero/img_hero.svg"}
                     alt="image d'une feuille "
                     width={450}
                     height={450}
@@ -102,7 +102,7 @@ const Hero = () => {
             <div className='container__scroll'>
 
                 <Image
-                    src={"/scrolldown.svg"}
+                    src={"hero/scrolldown.svg"}
                     alt=''
                     width={50}
                     height={50}
