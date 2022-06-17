@@ -20,20 +20,32 @@ const HeroStyle = styled.div`
         h2{
             margin-bottom: 75px ;
         }
-        .container__scroll{
+        .containerScroll{
             position: absolute;
             bottom: 100px;
         }
         .container__info{
             color: #484F75;
         }
-        .container__image--mobile {
+        .containerImageLeafTop,
+        .containerImageLeafBottom{
             position: absolute;
             z-index: -1;
+        }
+
+        .containerImageLeafTop{
             top: -50px;
             left: 0;
             transform: rotate(105deg);
         }
+
+        .containerImageLeafBottom{
+            bottom: -50px;
+            right: 0;
+            transform: rotate(0deg);
+            transform: scaleX(-1);
+        }
+
         p{
             margin-bottom: 105px;
         }
@@ -55,16 +67,15 @@ const HeroStyle = styled.div`
                 padding: 2px 40px 2px 5px;
                 line-height: 28px;
             }
-            .container__info{
+            .containerInfo{
                 margin-top: 55px;
             }
-            .container__image--mobile {
-                position: absolute;
-                z-index: -1;
-                top: auto;
-                bottom:-50px;
+            .containerImageLeafTop{
+                display: none;
+            }
+            .containerImageLeafBottom {
                 left: 0;
-                transform: rotate(0deg);
+                transform: scaleX(1);
             }
         }
     }
@@ -74,11 +85,20 @@ const Hero = () => {
     return (
         <HeroStyle id="section1">
         <div className='container'>
-            <div className='container__info'>
+            <div className='containerInfo'>
                 <h1>Vivre en,<br></br> <span className='highlight'>intergénérations</span></h1>
                 <h2>Facilité les liens et les transmissions familiales</h2>
                 <p>Souhaitez-vous faciliter les interractions avec vos petits enfants ? Créer du lien à travers ce que vous aimez avec eux sans crainte !</p>
-                <div className='container__image--mobile'>
+                <div className='containerImageLeafTop'>
+                    <Image
+                    src={"/hero/img_hero.svg"}
+                    alt="image d'une feuille "
+                    width={450}
+                    height={450}
+                    
+                    />
+                </div>
+                <div className='containerImageLeafBottom'>
                     <Image
                     src={"/hero/img_hero.svg"}
                     alt="image d'une feuille "
@@ -88,7 +108,7 @@ const Hero = () => {
                     />
                 </div>
             </div> 
-            <div className='container__scroll'>
+            <div className='containerScroll'>
 
                 <Image
                     src={"/hero/scrolldown.svg"}
