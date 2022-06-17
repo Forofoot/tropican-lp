@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
   html{
     scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
   }
   body {
     margin: 0;
@@ -17,5 +18,25 @@ export default createGlobalStyle`
     cursor: pointer;
     text-decoration: none;
     color: #000;
+  }
+  h1{
+    font-size:1.875em;
+  }
+  h2{
+    font-size:1.5em;
+  }
+  .btnDefault{
+    all: unset;
+    background-color: #F0E5C3;
+    color: #42A0B6;
+    padding: 10px 0;
+    text-align: center;
+    text-transform:uppercase;
+    width: 100%;
+    border-radius: 50px;
+    margin-top: 15px;
+    &:hover{
+      cursor: pointer;
+    }
   }
 `
