@@ -2,9 +2,8 @@ import styled from 'styled-components'
 import Image from 'next/image'
 
 const HeroStyle = styled.div`
-
-
     .container{
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -21,13 +20,16 @@ const HeroStyle = styled.div`
             margin-bottom: 75px ;
         }
         .container__scroll{
-            display: flex;
-            justify-content:center ;
+            position: absolute;
+            bottom: 100px;
+        }
+        .container__info{
+            color: #484F75;
         }
         .container__image--mobile {
             position: absolute;
             z-index: -1;
-            top: 50px;
+            top: -50px;
             left: 0;
             transform: rotate(105deg);
         }
@@ -38,36 +40,30 @@ const HeroStyle = styled.div`
 
     @media (max-width:768px){
         .container{
-            .scroll_anim{
-                display:flex;
-                justify-content: center ;
-            }
-            .highlight{
-                text-transform: uppercase;
-            }
+            justify-content: start;
+            padding: 0 50px;
             h1{
                 font-size: 2em;
-                text-align: center;
+                text-align: left;
                 margin-bottom: 25px;
-                color: #484F75;
             }
             h2{
                 margin-bottom: 32px;
-                color: #484F75;
             }
             p{
                 position: absolute;
                 padding: 2px 40px 2px 5px;
                 line-height: 28px;
-                color: #484F75;
             }
             .container__info{
-                margin-bottom: -15px ;
+                margin-top: 55px;
             }
             .container__image--mobile {
-                position: relative;
+                position: absolute;
                 z-index: -1;
-                top: 15px;
+                top: auto;
+                bottom:-50px;
+                left: 0;
                 transform: rotate(0deg);
             }
         }
@@ -75,13 +71,6 @@ const HeroStyle = styled.div`
 `
 
 const Hero = () => {
-    // const scrollIndicator = useRef()
-    // let animItem = bodymovin.loadAnimation({
-    //   wrapper: scrollIndicator,
-    //   animType: 'svg',
-    //   loop: true,
-    //   path: "/public/hero/scrollDown.json"
-    // });
     return (
         <HeroStyle id="section1">
         <div className='container'>
@@ -91,7 +80,7 @@ const Hero = () => {
                 <p>Souhaitez-vous faciliter les interractions avec vos petits enfants ? Créer du lien à travers ce que vous aimez avec eux sans crainte !</p>
                 <div className='container__image--mobile'>
                     <Image
-                    src={"hero/img_hero.svg"}
+                    src={"/hero/img_hero.svg"}
                     alt="image d'une feuille "
                     width={450}
                     height={450}
@@ -102,12 +91,12 @@ const Hero = () => {
             <div className='container__scroll'>
 
                 <Image
-                    src={"hero/scrolldown.svg"}
+                    src={"/hero/scrolldown.svg"}
                     alt=''
                     width={50}
                     height={50}
                 />
-                
+
             </div>
         </div>
         </HeroStyle>
