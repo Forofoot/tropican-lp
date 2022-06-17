@@ -15,7 +15,7 @@ const InfoStyle = styled.section`
         margin-bottom: 15px;
     }
     .logoFull{
-        @media (min-width: 768px){
+        @media (max-width: 768px){
             min-width: 186px!important;
             min-height: 42px!important;
         }

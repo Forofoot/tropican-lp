@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Infos from '/components/Infos'
 import Hero from '../components/Hero'
+import Review from '../components/Review'
 
 const SectionStyle = styled.div`
 
@@ -26,8 +27,9 @@ const SectionStyle = styled.div`
 export default function Home() {
   return (
     <>
-      < Hero/>
+      <Hero/>
       <Infos/>
+      <Review/>
     </>
   )
 }
