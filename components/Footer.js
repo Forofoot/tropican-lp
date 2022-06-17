@@ -130,7 +130,7 @@ export default function Footer() {
           <label htmlFor="email">Suivre nos actualités</label >
           <input type="text" name="email" id="email" placeholder="E_mail"/>
           <span className="separator"></span>
-          <button className="btnDefault">S'abonner</button>
+          <button className="btnDefault">S&apos;abonner</button>
         </form>
         <div className="policy">
           <Link href="#" title="Politique de confidentialité"><a target="_blank">Politique de confidentialité</a></Link>
