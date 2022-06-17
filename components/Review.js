@@ -25,7 +25,7 @@ const ReviewStyle = styled.section`
         width: 100%;
         grid-template-columns: repeat(1, 1fr);
         gap: 150px;
-        grid-template-rows: 400px;
+        grid-template-rows: 900px;
         align-items: center;
         justify-items: center;
         padding: 50px 0;
