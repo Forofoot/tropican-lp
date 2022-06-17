@@ -24,10 +24,10 @@ const HeaderStyle = styled.header`
         position: fixed;
         width: 100%;
         height: 100%;
-        background: #F0E5C3;
+        background: #42A0B6;
         top: 0;
         will-change:left;
-        transition: all .3s ease-in-out;
+        transition: left .3s ease-in-out;
         left: -100%;
         z-index: 5;
         display: flex;
@@ -43,9 +43,8 @@ const HeaderStyle = styled.header`
         }
       }
       &.opened{
-        background: #42A0B6;
         left: 0;
-        transition: all .3s ease-in-out;
+        transition: left .3s ease-in-out;
           .close{
           position: absolute;
           top:0;
@@ -107,6 +106,7 @@ const HeaderStyle = styled.header`
       background-color: #F0E5C3;
       margin-top: 2.5px;
       margin-bottom: 2.5px;
+      will-change: all;
       transition: all 0.3s ease;
       transform-origin: left;
       transform: scaleX(1);
