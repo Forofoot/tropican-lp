@@ -20,6 +20,7 @@ const HeaderStyle = styled.header`
         height: 100%;
         background: #F0E5C3;
         top: 0;
+        will-change:left;
         transition: all .3s ease-in-out;
         left: -100%;
         z-index: 5;
@@ -109,7 +110,7 @@ const HeaderStyle = styled.header`
 
 export default function Navbar() {
   const [active, setActive] = useState(false)
-    
+  
   return (
     <HeaderStyle>
         <nav>
