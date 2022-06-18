@@ -9,6 +9,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    overflow-x: hidden;
   }
   ul{
     list-style: none;

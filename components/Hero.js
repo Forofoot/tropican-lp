@@ -81,6 +81,10 @@ const HeroStyle = styled.div`
                 left: 0;
                 transform: scaleX(1);
             }
+            .containerImageLeafBottom{
+                width: 350px;
+                height: 350px;
+            }
         }
     }
 `

@@ -80,11 +80,13 @@ const ReviewStyle = styled.section`
     }
     .leafBackground{
         position: absolute;
-        width: 450px;
-        height: 450px;
+        width: 350px;
+        height: 350px;
         left: 0;
         bottom: -50px;
         @media(min-width:1024px){
+            width: 450px;
+            height: 450px;
             left: auto;
             right: 0;
             transform: scaleX(-1);
