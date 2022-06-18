@@ -87,19 +87,19 @@ const ReviewStyle = styled.section`
 export default function Review() {
     let cards = [
         {
-            srcPhoto: '/logo.svg',
+            srcPhoto: '/logo.webp',
             name: 'Jérémy Ferrier',
             statut: 'Grand-Père',
             testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
         },
         {
-            srcPhoto: '/logo.svg',
+            srcPhoto: '/logo.webp',
             name: 'Marine Tourret',
             statut: 'Grand-Mère',
             testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
         },
         {
-            srcPhoto: '/logo.svg',
+            srcPhoto: '/logo.webp',
             name: 'Jimmy Renden',
             statut: 'Grand-Père',
             testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -127,7 +127,7 @@ export default function Review() {
             </div>
             <div className='leafBackground'>
                 <Image
-                src={"/hero/img_hero.svg"}
+                src={"/hero/img_hero.webp"}
                 alt="image d'une feuille "
                 width='450'
                 height='450'

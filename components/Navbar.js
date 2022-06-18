@@ -157,7 +157,7 @@ export default function Navbar() {
           <Link href="#">
             <a className="logoMobile">
               <Image
-                src="/logo.svg"
+                src="/logo.webp"
                 alt="Logo"
                 width='53'
                 height='53'
@@ -167,7 +167,7 @@ export default function Navbar() {
           <Link href="#">
             <a className='logoDesktop'>
             <Image
-                src="/fullLogo.svg"
+                src="/fullLogo.webp"
                 alt="Logo"
                 width='198'
                 height='44'

@@ -58,7 +58,7 @@ export default function Footer() {
         <h1>Qui sommes-nous ?</h1>
         <div className="infoLogoContainer">
             <Image
-                src={'/fullLogo.svg'}
+                src={'/fullLogo.webp'}
                 alt="Logo Tropican"
                 width='259' 
                 height='58'

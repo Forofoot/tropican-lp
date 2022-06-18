@@ -119,7 +119,7 @@ export default function Footer() {
           {socials.map((elt, i) => (
             <li className="iconSocial" key={i}>
               <Link href={elt.link} title={elt.title}><a target="_blank"><Image
-                src="/logo.svg"
+                src="/logo.webp"
                 alt={elt.title}
                 width='30'
                 height='30'
