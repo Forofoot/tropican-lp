@@ -55,6 +55,11 @@ const ReviewStyle = styled.section`
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                .profilImage{
+                    width: 50px;
+                    height: 50px;
+                    position: relative;
+                }
             }
 
             h2{
@@ -75,6 +80,8 @@ const ReviewStyle = styled.section`
     }
     .leafBackground{
         position: absolute;
+        width: 450px;
+        height: 450px;
         left: 0;
         bottom: -50px;
         @media(min-width:1024px){
@@ -111,14 +118,15 @@ export default function Review() {
             <div className="cardsContainer">
                 {cards.map((elt,i) => (
                     <div key={i} className="cardTestimony">
-                        <figure className="profil">
-                            <Image
-                                src={elt.srcPhoto}
-                                alt="photo profil"
-                                width='53'
-                                height='53'
-                            />
-                        </figure>
+                        <div className="profil">
+                            <figure className="profilImage">
+                                <Image
+                                    src={elt.srcPhoto}
+                                    alt="photo profil"
+                                    layout="fill"
+                                />
+                            </figure>
+                        </div>
                         <h2>{elt.name}</h2>
                         <p className="statut">{elt.statut}</p>
                         <p className="testimony">{elt.testimony}</p>
@@ -127,11 +135,9 @@ export default function Review() {
             </div>
             <div className='leafBackground'>
                 <Image
-                src={"/hero/img_hero.webp"}
-                alt="image d'une feuille "
-                width='450'
-                height='450'
-                
+                    src={"/hero/img_hero.webp"}
+                    alt="image d'une feuille "
+                    layout="fill"
                 />
             </div>
         </ReviewStyle>

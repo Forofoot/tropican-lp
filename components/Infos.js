@@ -13,11 +13,14 @@ const InfoStyle = styled.section`
         color:#F0E5C3;
         white-space: nowrap;
         margin-bottom: 15px;
-    }
-    .logoFull{
+    }.infoLogoContainer{
+        width: 259px;
+        height: 58px;
+        position: relative;
+        margin: auto;
         @media (max-width: 768px){
-            min-width: 186px!important;
-            min-height: 42px!important;
+            width: 186px;
+            height: 42px;
         }
     }
     .infosContainer{
@@ -60,9 +63,7 @@ export default function Footer() {
             <Image
                 src={'/fullLogo.webp'}
                 alt="Logo Tropican"
-                width='259' 
-                height='58'
-                className="logoFull"
+                layout="fill"
             />
         </div>
         <div className="infosContainer">

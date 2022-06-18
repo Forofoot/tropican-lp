@@ -11,9 +11,17 @@ const HeaderStyle = styled.header`
     display:flex;
     justify-content:space-between;
     .logoMobile{
+      width: 53px;
+      height: 53px;
+      position: relative;
       @media (min-width:768px){
         display: none;
       }
+    }
+    .logoDesktop{
+      width: 198px;
+      height: 44px;
+      position: relative;
     }
     .navLinks{
         @media (min-width:768px){
@@ -159,8 +167,7 @@ export default function Navbar() {
               <Image
                 src="/logo.webp"
                 alt="Logo"
-                width='53'
-                height='53'
+                layout='fill'
               />
             </a>  
           </Link>
@@ -170,7 +177,7 @@ export default function Navbar() {
                 src="/fullLogo.webp"
                 alt="Logo"
                 width='198'
-                height='44'
+                layout='fill'
               />
             </a>  
           </Link>

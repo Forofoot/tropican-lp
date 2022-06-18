@@ -43,4 +43,7 @@ export default createGlobalStyle`
       cursor: pointer;
     }
   }
+  figure{
+    margin: 0;
+  }
 `

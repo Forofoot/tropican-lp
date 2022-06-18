@@ -67,6 +67,11 @@ const FooterStyle = styled.footer`
           &:last-child{
             margin-right:0;
           }
+          .iconContainer{
+            width: 30px;
+            height: 30px;
+            position: relative;
+          }
         }
       }
       .policy{
@@ -118,12 +123,17 @@ export default function Footer() {
         <ul>
           {socials.map((elt, i) => (
             <li className="iconSocial" key={i}>
-              <Link href={elt.link} title={elt.title}><a target="_blank"><Image
-                src="/logo.webp"
-                alt={elt.title}
-                width='30'
-                height='30'
-              /></a></Link>
+              <Link href={elt.link} title={elt.title}>
+                <a target="_blank">
+                  <div className="iconContainer">
+                    <Image
+                      src="/logo.webp"
+                      alt={elt.title}
+                      layout='fill'
+                    />
+                  </div>
+                  
+              </a></Link>
             </li>
           ))}
         </ul>

@@ -22,6 +22,8 @@ const HeroStyle = styled.div`
         }
         .containerScroll{
             position: absolute;
+            width: 50px;
+            height: 50px;
             bottom: 100px;
         }
         .container__info{
@@ -31,6 +33,8 @@ const HeroStyle = styled.div`
         .containerImageLeafBottom{
             position: absolute;
             z-index: -1;
+            width: 450px;
+            height: 450px;
         }
 
         .containerImageLeafTop{
@@ -93,30 +97,23 @@ const Hero = () => {
                     <Image
                     src={"/hero/img_hero.webp"}
                     alt="image d'une feuille "
-                    width='450'
-                    height='450'
-                    
+                    layout='fill'
                     />
                 </div>
                 <div className='containerImageLeafBottom'>
                     <Image
                     src={"/hero/img_hero.webp"}
                     alt="image d'une feuille "
-                    width='450'
-                    height='450'
-                    
+                    layout='fill'
                     />
                 </div>
             </div> 
             <div className='containerScroll'>
-
                 <Image
                     src={"/hero/scrolldown.webp"}
                     alt=''
-                    width='50'
-                    height='50'
+                    layout='fill'
                 />
-
             </div>
         </div>
         </HeroStyle>
