@@ -63,8 +63,9 @@ export default function Footer() {
             <Image
                 src={'/fullLogo.webp'}
                 alt="Logo Tropican"
-                layout="fill"
-                objectFit='contain'
+                layout="raw"
+                width='259px'
+                height='58px'
             />
         </div>
         <div className="infosContainer">

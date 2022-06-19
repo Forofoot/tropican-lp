@@ -103,6 +103,7 @@ const Hero = () => {
                     alt="image d'une feuille "
                     layout='fill'
                     objectFit='contain'
+                    priority
                     />
                 </div>
                 <div className='containerImageLeafBottom'>
@@ -118,8 +119,9 @@ const Hero = () => {
                 <Image
                     src={"/hero/scrolldown.webp"}
                     alt='Indicateur de scroll'
-                    layout='fill'
-                    objectFit='contain'
+                    layout='raw'
+                    width='50px'
+                    height='50px'
                 />
             </div>
         </div>

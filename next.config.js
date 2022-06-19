@@ -8,6 +8,11 @@ module.exports = {
     locales: ["fr"],
     defaultLocale: "fr",
   },
+  experimental: {
+    images: {
+        layoutRaw: true
+    }
+  },
   nextConfig,
   productionBrowserSourceMaps: true,
 };

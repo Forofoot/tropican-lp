@@ -130,8 +130,9 @@ export default function Footer() {
                     <Image
                       src="/logo.webp"
                       alt={elt.title}
-                      layout='fill'
-                      objectFit='contain'
+                      layout='raw'
+                      width= '30px'
+                      height= '30px'
                     />
                   </div>
                   
