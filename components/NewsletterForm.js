@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { decode } from 'html-entities';
 
-const NewsletterFormStyle= styled.div`
-`
 
 const NewsletterForm = ( { status, message, onValidated }) => {
 
