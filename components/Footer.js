@@ -131,6 +131,7 @@ export default function Footer() {
                       src="/logo.webp"
                       alt={elt.title}
                       layout='fill'
+                      objectFit='contain'
                     />
                   </div>
                   

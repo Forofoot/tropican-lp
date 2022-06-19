@@ -168,6 +168,7 @@ export default function Navbar() {
                 src="/logo.webp"
                 alt="Logo"
                 layout='fill'
+                objectFit='contain'
               />
             </a>  
           </Link>
@@ -176,8 +177,8 @@ export default function Navbar() {
             <Image
                 src="/fullLogo.webp"
                 alt="Logo"
-                width='198'
                 layout='fill'
+                objectFit='contain'
               />
             </a>  
           </Link>

@@ -126,6 +126,7 @@ export default function Review() {
                                     src={elt.srcPhoto}
                                     alt="photo profil"
                                     layout="fill"
+                                    objectFit='contain'
                                 />
                             </figure>
                         </div>
@@ -140,6 +141,7 @@ export default function Review() {
                     src={"/hero/img_hero.webp"}
                     alt="image d'une feuille "
                     layout="fill"
+                    objectFit='contain'
                 />
             </div>
         </ReviewStyle>
