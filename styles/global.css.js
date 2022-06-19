@@ -47,4 +47,28 @@ export default createGlobalStyle`
   figure{
     margin: 0;
   }
+
+  .form{
+    input{
+      all: unset;
+      width:100%;
+      position: relative;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #fff;
+      &:focus{
+        color:#fff;
+        & +.separator{
+          transform: scaleX(1) translateY(-2px);   
+          opacity: 1;
+        }
+      }
+      &::placeholder{
+        color:#fff;
+      }
+    }
+  }
+  
+  .form input, .btnDefault{
+    margin-bottom:25px;
+  }
 `

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { decode } from 'html-entities';
 
-
 const NewsletterForm = ( { status, message, onValidated }) => {
 
   const [ error, setError ] = useState(null);
@@ -64,20 +63,20 @@ const NewsletterForm = ( { status, message, onValidated }) => {
   return (
     <>
       <div className="d-flex newsletter-input-fields">
-        <div className="mc-field-group">
+        <div className="mc-field-group form">
         <label htmlFor="email">Suivre nos actualités</label >
           <input
             onChange={(event) => setEmail(event?.target?.value ?? '')}
             type="email"
-            placeholder=" Votre adresse mail"
+            placeholder=" E_mail"
             className="mr-2"
             onKeyUp={(event) => handleInputKeyEvent(event)}
             id="email"
           />
         </div>
         <div className="button-wrap wp-block-button">
-          <button className="wp-block-button__link" onClick={handleFormSubmit}>
-            Submit
+          <button className="wp-block-button__link btnDefault" onClick={handleFormSubmit}>
+            S'abonner
           </button>
         </div>
       </div>
