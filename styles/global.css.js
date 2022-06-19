@@ -78,7 +78,7 @@ export default createGlobalStyle`
     }
   }
   
-  .form input, .btnDefault{
+  .form input,.form label, .btnDefault{
     margin-bottom:25px;
   }
 `
