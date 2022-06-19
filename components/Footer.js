@@ -16,41 +16,9 @@ const FooterStyle = styled.footer`
         font-weight:100;
         display:block;
       }
-      form{
-        input{
-          all: unset;
-          width:100%;
-          position: relative;
-          padding-bottom: 10px;
-          border-bottom: 1px solid #fff;
-          &:focus{
-            color:#fff;
-            & +.separator{
-              transform: scaleX(1) translateY(-2px);   
-              opacity: 1;
-            }
-          }
-          &::placeholder{
-            color:#fff;
-          }
-        }
-        .separator{
-          height:3px;
-          width: 100%;
-          background: #f4f4f4;
-          display: block;
-          transform: scaleX(0) translateY(-2px);
-          transform-origin: 50%;
-          opacity: 0;
-          will-change: all;
-          transition: all .15s linear;
-        }
-      }
-      
-      h2,
-      form,
-      label{
-        margin-bottom:25px;
+
+      h2{
+        margin-bottom: 25px;
       }
       
       ul{
