@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Image from "next/image"
 import Link from "next/link"
+import NewsletterSubscribe from "./NewsletterSubscribe"
 
 const FooterStyle = styled.footer`
       background-color:#42A0B6;
@@ -113,9 +114,9 @@ export default function Footer() {
       }
   ]
   
-  const submitForm = (e) =>{
-    e.preventDefault();
-  }
+  // const submitForm = (e) =>{
+  //   e.preventDefault();
+  // }
   return (
     <FooterStyle>
       <div className="footerTop">
@@ -137,12 +138,13 @@ export default function Footer() {
             </li>
           ))}
         </ul>
-        <form onSubmit={submitForm}>
+        {/* <form onSubmit={submitForm}>
           <label htmlFor="email">Suivre nos actualités</label >
           <input type="text" name="email" id="email" placeholder="E_mail"/>
           <span className="separator"></span>
           <button className="btnDefault">S&apos;abonner</button>
-        </form>
+        </form> */}
+        <NewsletterSubscribe/>
         <div className="policy">
           <Link href="#" title="Politique de confidentialité"><a target="_blank">Politique de confidentialité</a></Link>
           <Link href="#" title="Mentions légales"><a target="_blank">Mentions légales</a></Link>
