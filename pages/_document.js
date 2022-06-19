@@ -1,6 +1,7 @@
 // pages/_document.js
 
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { GA_TRACKING_ID } from '../lib/gtatg'
 
 class MyDocument extends Document {
   render() {
@@ -12,6 +13,22 @@ class MyDocument extends Document {
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" cross0rigin="true"/>
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;700&display=optional" rel="stylesheet"/>
+            {/* Globla site Tag */}
+            <script 
+              async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} 
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `     
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}   
+                  gtag('js', new Date());
+                  gtag('config', '${GA_TRACKING_ID}', {  
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
         </Head>
         <body>
           <Main />
