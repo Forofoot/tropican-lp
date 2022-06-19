@@ -1,14 +1,25 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+  }
+  html, body {
+    height: 100%;
+  }
   html{
     scroll-behavior: smooth;
-    font-family: 'Inter', sans-serif;
   }
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-display: optional;
   }
   ul{
     list-style: none;

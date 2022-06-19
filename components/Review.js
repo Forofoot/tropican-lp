@@ -91,7 +91,7 @@ const ReviewStyle = styled.section`
             right: 0;
             transform: scaleX(-1);
         }
-    }
+    }   
 `
 export default function Review() {
     let cards = [
@@ -125,8 +125,9 @@ export default function Review() {
                                 <Image
                                     src={elt.srcPhoto}
                                     alt="photo profil"
-                                    layout="fill"
-                                    objectFit='contain'
+                                    layout="raw"
+                                    width='50px'
+                                    height='50px'
                                 />
                             </figure>
                         </div>
