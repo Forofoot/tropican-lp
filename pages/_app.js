@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import * as gtag from '../lib/gtatg'
+import GlobalCSS from '../styles/global.css'
 
 function MyApp({ Component, pageProps }) {
 
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
   }, [router.events])
   return (
       <Layout>
+        <GlobalCSS/>
         <Component {...pageProps} />
       </Layout>
   )
