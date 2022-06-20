@@ -17,6 +17,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    min-height:100vh;
     width: 100%;
     font-family: 'Inter', sans-serif;
     font-display: optional;
