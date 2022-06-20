@@ -95,6 +95,7 @@ const ReviewStyle = styled.section`
         img{ 
             min-height:350px;
             min-width:350px;
+            width:100%;
         }
     }   
 `
