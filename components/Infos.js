@@ -22,6 +22,11 @@ const InfoStyle = styled.section`
             width: 186px;
             height: 42px;
         }
+        img{
+            min-width: 186px;
+            min-height: 42px;
+            width:100%;
+        }
     }
     .infosContainer{
         display: flex;
