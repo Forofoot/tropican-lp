@@ -24,6 +24,8 @@ const HeroStyle = styled.div`
             position: absolute;
             width: 50px;
             height: 50px;
+            min-height:50px;
+            min-width:50px;
             bottom: 100px;
         }
         .container__info{
@@ -34,11 +36,8 @@ const HeroStyle = styled.div`
             position: absolute;
             width: 450px;
             height: 450px;
-            img{
-                min-height:350px;
-                min-width:350px;
-                width:100%; 
-            }
+            min-height:350px;
+            min-width:350px;
         }
 
         .containerImageLeafTop{
