@@ -4,10 +4,6 @@ const nextConfig = {
 }
 
 module.exports = {
-  i18n: {
-    locales: ["fr"],
-    defaultLocale: "fr",
-  },
   experimental: {
     images: {
         layoutRaw: true

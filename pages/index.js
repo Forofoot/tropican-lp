@@ -3,7 +3,7 @@ import Hero from '../components/Hero'
 import Review from '../components/Review'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import {getLCP, getFID, getCLS} from 'web-vitals';
+import {getCLS} from 'web-vitals';
 
 export default function Home() {
   useEffect(() => {
