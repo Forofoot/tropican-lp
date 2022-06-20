@@ -18,14 +18,11 @@ const InfoStyle = styled.section`
         height: 58px;
         position: relative;
         margin: auto;
+        min-width: 186px;
+        min-height: 42px;
         @media (max-width: 768px){
             width: 186px;
             height: 42px;
-        }
-        img{
-            min-width: 186px;
-            min-height: 42px;
-            width:100%;
         }
     }
     .infosContainer{

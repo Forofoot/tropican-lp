@@ -85,17 +85,14 @@ const ReviewStyle = styled.section`
         height: 350px;
         left: 0;
         bottom: -50px;
+        min-height:350px;
+        min-width:350px;
         @media(min-width:1024px){
             width: 450px;
             height: 450px;
             left: auto;
             right: 0;
             transform: scaleX(-1);
-        }
-        img{ 
-            min-height:350px;
-            min-width:350px;
-            width:100%;
         }
     }   
 `

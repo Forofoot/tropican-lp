@@ -22,6 +22,13 @@ export default createGlobalStyle`
     font-family: 'Inter', sans-serif;
     font-display: optional;
   }
+  img{
+    border:0;
+    display:inline-block;
+    vertical-align:middle;
+    max-width:100%;
+    height:auto;
+  }
   ul{
     list-style: none;
     margin: 0;
