@@ -32,9 +32,12 @@ const HeroStyle = styled.div`
         .containerImageLeafTop,
         .containerImageLeafBottom{
             position: absolute;
-            z-index: -1;
             width: 450px;
             height: 450px;
+            img{
+                min-height:350px;
+                min-width:350px;
+            }
         }
 
         .containerImageLeafTop{
@@ -101,8 +104,9 @@ const Hero = () => {
                     <Image
                     src={"/hero/img_hero.webp"}
                     alt="image d'une feuille "
-                    layout='fill'
-                    objectFit='contain'
+                    layout='raw'
+                    width='450px'
+                    height='450px'
                     priority
                     />
                 </div>
@@ -110,8 +114,10 @@ const Hero = () => {
                     <Image
                     src={"/hero/img_hero.webp"}
                     alt="image d'une feuille "
-                    layout='fill'
-                    objectFit='contain'
+                    layout='raw'
+                    width='450px'
+                    height='450px'
+                    priority
                     />
                 </div>
             </div> 

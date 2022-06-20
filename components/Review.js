@@ -8,8 +8,9 @@ const ReviewStyle = styled.section`
     align-items: center;
     justify-content: center;
     padding: 0 50px;
+    height:100%;
     @media (min-width:1024px){
-        height: 70vh;
+        min-height: 70vh;
     }
     h1{
         color: #484F75;
@@ -91,6 +92,10 @@ const ReviewStyle = styled.section`
             right: 0;
             transform: scaleX(-1);
         }
+        img{ 
+            min-height:350px;
+            min-width:350px;
+        }
     }   
 `
 export default function Review() {
@@ -141,8 +146,10 @@ export default function Review() {
                 <Image
                     src={"/hero/img_hero.webp"}
                     alt="image d'une feuille "
-                    layout="fill"
-                    objectFit='contain'
+                    layout="raw"
+                    width='450px'
+                    height='450px'
+                    priority
                 />
             </div>
         </ReviewStyle>
