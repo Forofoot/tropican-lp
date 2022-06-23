@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Image from "next/image"
 
 const InfoStyle = styled.section`
     color:#FFF;
@@ -7,6 +6,9 @@ const InfoStyle = styled.section`
     text-align: center;
     margin-bottom:75px;
     position:relative;
+    @media (min-width: 768px){
+        margin-bottom: 125px;
+    }
     .gradient_position_color{
         left: -20px;
         top: 0px;
@@ -20,7 +22,7 @@ const InfoStyle = styled.section`
     }
     .infosContainer{
         display: flex;
-        margin-top: 50px;
+        padding: 25px 0;
         justify-content: space-between;
         overflow-x: scroll;
         ::-webkit-scrollbar { width: 0 !important }
@@ -43,6 +45,11 @@ const InfoStyle = styled.section`
         }
         @media (min-width: 768px){
             text-align: left;
+            overflow-x: hidden;
+            .card{
+                min-width: auto;
+                max-width: 500px;
+            }
         }
     }
 `
