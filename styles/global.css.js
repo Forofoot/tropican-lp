@@ -21,6 +21,7 @@ export default createGlobalStyle`
     width: 100%;
     font-family: 'Inter', sans-serif;
     font-display: optional;
+    font-size: 18px;
   }
   img{
     border:0;
