@@ -129,4 +129,13 @@ export default createGlobalStyle`
     background-color: #1F2AF3;
     color: #fff;
   }
+
+  .gradient{
+    position: absolute;
+width: 303px;
+height: 303px;
+opacity: 0.5;
+filter: blur(150px);
+z-index:-1;
+  }
 `
