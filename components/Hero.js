@@ -89,9 +89,12 @@ const Hero = () => {
             </div>
             <div>
                 <Link href="/">
-                    <a>
+                    <p className='btn'>
+                        <a>
                         Découvrir
-                    </a>
+                        </a>
+                    </p>
+                    
                 </Link>
             </div>
             <div className='containerScroll'>
