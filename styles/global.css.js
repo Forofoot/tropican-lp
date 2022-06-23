@@ -50,8 +50,8 @@ export default createGlobalStyle`
   }
   .btnDefault{
     all: unset;
-    background-color: #F0E5C3;
-    color: #42A0B6;
+    background-color: #FED745;
+    color: #313131;
     padding: 10px 0;
     text-align: center;
     text-transform:uppercase;
@@ -88,5 +88,12 @@ export default createGlobalStyle`
   
   .form input,.form label, .btnDefault{
     margin-bottom:25px;
+  }
+
+  .card{
+    padding: 30px 15px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
   }
 `
