@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Image from 'next/image'
 
 const ReviewStyle = styled.section`
     position: relative;
