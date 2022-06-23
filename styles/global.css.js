@@ -109,4 +109,9 @@ export default createGlobalStyle`
     border-width: 1px;
     border-style: solid;
   }
+  .btn{
+    border-radius: 20px;
+    background-color: #1F2AF3;
+    color: #fff;
+  }
 `

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
+import GlobalCSS from '../styles/global.css'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const HeroStyle = styled.div`
     .container{
@@ -82,9 +84,16 @@ const Hero = () => {
                 />
             </div>
             <div className='containerInfo'>
-                <h1>Vivre en<br></br> <span className='highlight'>intergénération</span></h1>
-                <h2>Faciliter les liens et les transmissions familiales</h2>
-            </div> 
+                <h1>Vivez des expérineces,<br></br>exceptionnelles</h1>
+                <h2>Nous vous aidons à embellir vos liens</h2>
+            </div>
+            <div>
+                <Link href="/">
+                    <a>
+                        Découvrir
+                    </a>
+                </Link>
+            </div>
             <div className='containerScroll'>
                 <Image
                     src={"/hero/scrolldown.webp"}
