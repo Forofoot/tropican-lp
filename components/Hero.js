@@ -10,9 +10,6 @@ const HeroStyle = styled.div`
         justify-content: center;
         height: 95vh;
         padding: 0 50px;
-        .hero__banner{
-            margin: 50px 0;
-        }
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -23,14 +20,14 @@ const HeroStyle = styled.div`
         h2{
             margin-bottom: 75px ;
         }
-        .containerScroll{
+        /* .containerScroll{
             position: absolute;
             width: 50px;
             height: 50px;
             min-height:50px;
             min-width:50px;
             bottom: 100px;
-        }
+        } */
         .container__info{
             color: #484F75;
         }
@@ -42,6 +39,11 @@ const HeroStyle = styled.div`
     @media (max-width:768px){
         .container{
             justify-content: start;
+            height: inherit;
+            padding: 0 20px ;
+            .hero__banner{
+                margin: 50px 0;
+            }
             h1{
                 font-size: 2em;
                 text-align: left;
@@ -57,6 +59,10 @@ const HeroStyle = styled.div`
             }
             .containerInfo{
                 margin-top: 55px;
+                line-height: 1.875rem;
+            }
+            .containerScroll{
+                margin-bottom: 60px ;
             }
         }
     }

@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import { useState } from 'react'
 
 const HeaderStyle = styled.header`
-  background:#42A0B6;
+  //background:#42A0B6;
   padding: 30px 55px;
-  border-radius: 0 0 25px 25px;
+  //border-radius: 0 0 25px 25px;
   nav{
     display:flex;
     justify-content:space-between;
@@ -111,10 +111,10 @@ const HeaderStyle = styled.header`
     .burgerline {
       width: 30px;
       height: 2px;
-      background-color: #F0E5C3;
+      background-color: #FED745;
       margin-top: 2.5px;
       margin-bottom: 2.5px;
-      will-change: all;
+      will-change: transform;
       transition: all 0.3s ease;
       transform-origin: left;
       transform: scaleX(1);

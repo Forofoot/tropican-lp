@@ -2,10 +2,8 @@ import styled from "styled-components"
 import Image from "next/image"
 
 const InfoStyle = styled.section`
-    background-color:#42A0B6;
     color:#FFF;
     border-radius: 25px 25px 0 0;
-    padding: 80px 50px;
     text-align: center;
     margin-bottom:50px;
     h1{
@@ -30,7 +28,7 @@ const InfoStyle = styled.section`
         flex-wrap: wrap;
         margin-top: 50px;
         justify-content: space-between;
-        .infoBlock{
+        /*.infoBlock{
             width: 100%;
                 h2{
                     display: none;
@@ -42,16 +40,16 @@ const InfoStyle = styled.section`
                     font-weight: bold;
                 }
             }
-        }
+        }*/
         
         @media (min-width: 768px){
             text-align: left;
-            .infoBlock{
+            /*.infoBlock{
                 width: 25%;
                 h2{
                     display: block;
                 }
-            }
+            }*/
         }
     }
 `
@@ -71,19 +69,19 @@ export default function Footer() {
             />
         </div>
         <div className="infosContainer">
-            <div className="infoBlock">
+            <div className="card infoBlock">
                 <h2>Notre mission</h2>
                 <p className="infoText">
                     <span>Tropican</span> est une agence de communication qui a pour objectif principal faciliter et de valoriser les échange des grand-parents avec leur petits enfants.
                 </p>
             </div>
-            <div className="infoBlock">
+            <div className="card infoBlock">
                 <h2>Nos actions</h2>
                 <p className="infoText">
                     <span>Tropican</span> est une agence de communication qui a pour objectif principal faciliter et de valoriser les échange des grand-parents avec leur petits enfants.
                 </p>
             </div>
-            <div className="infoBlock">
+            <div className="card infoBlock">
                 <h2>Notre mission</h2>
                 <p className="infoText">
                     <span>Tropican</span> est une agence de communication qui a pour objectif principal faciliter et de valoriser les échange des grand-parents avec leur petits enfants.
