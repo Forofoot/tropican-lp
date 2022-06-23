@@ -97,4 +97,9 @@ export default createGlobalStyle`
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
   }
+  .btn{
+    border-radius: 20px;
+    background-color: #1F2AF3;
+    color: #fff;
+  }
 `
