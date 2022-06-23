@@ -14,7 +14,8 @@ const HeroStyle = styled.div`
         padding: 0 50px;
         h1{
             font-size: 4em;
-            margin-bottom: 55px ;
+            margin-bottom: 55px;
+            text-align: center;
         }
         .highlight{
             text-transform: uppercase ;
@@ -22,19 +23,41 @@ const HeroStyle = styled.div`
         h2{
             margin-bottom: 75px ;
         }
-        /* .containerScroll{
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            min-height:50px;
-            min-width:50px;
-            bottom: 100px;
-        } */
         .container__info{
             color: #484F75;
         }
         p{
+            margin-bottom: 30px;
+        }
+        a{
+            color: #fff;
+        }
+        .btnDefault{
             margin-bottom: 105px;
+        }
+        .containerScroll{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .scrollIndicator{
+                border: 1px solid #fff;
+                width: 30px;
+                height: 60px;
+                border-radius: 27px;
+                text-align: center;
+                position: relative;
+                margin-bottom: 5px;
+                div{
+                    width: 15px;
+                    height: 15px;
+                    background-color: #fff;
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: 2px;
+                    border-radius: 50%;
+                }
+            }
         }
     }
 
@@ -48,16 +71,10 @@ const HeroStyle = styled.div`
             }
             h1{
                 font-size: 2em;
-                text-align: left;
                 margin-bottom: 25px;
             }
             h2{
                 margin-bottom: 32px;
-            }
-            p{
-                position: absolute;
-                padding: 2px 40px 2px 5px;
-                line-height: 28px;
             }
             .containerInfo{
                 margin-top: 55px;
@@ -85,23 +102,20 @@ const Hero = () => {
             </div>
             <div className='containerInfo'>
                 <h1>Vivez des expérineces,<br></br>exceptionnelles</h1>
-                <h2>Nous vous aidons à embellir vos liens</h2>
+                <p>Nous vous aidons à transcender vos liens</p>
             </div>
-            <div>
+            <div className='btnDefault btnPrimary'>
                 <Link href="/">
-                    <a>
+                    <a className=''>
                         Découvrir
                     </a>
                 </Link>
             </div>
             <div className='containerScroll'>
-                <Image
-                    src={"/hero/scrolldown.webp"}
-                    alt='Indicateur de scroll'
-                    layout='raw'
-                    width='50px'
-                    height='50px'
-                />
+                <div className='scrollIndicator'>
+                    <div className='scrollIndicator'></div>
+                </div>
+                <p>Dérouler</p>
             </div>
         </div>
         </HeroStyle>

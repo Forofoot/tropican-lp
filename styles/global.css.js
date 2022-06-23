@@ -7,6 +7,12 @@ export default createGlobalStyle`
   * {
     margin: 0;
   }
+  @font-face {
+    font-family: "SofiaPRO";
+    src: url('./fonts/sofiapro-light-webfont.woff') format('woff'); 
+    font-weight: normal;
+    font-style: normal;
+  }
   html, body {
     height: 100%;
   }
@@ -19,8 +25,7 @@ export default createGlobalStyle`
     overflow-x: hidden;
     min-height:100vh;
     width: 100%;
-    font-family: 'Inter', sans-serif;
-    font-display: optional;
+    font-family: 'SofiaPRO', sans-serif;
     font-size: 18px;
     background-color: #171717;
     color: #fff;
@@ -44,22 +49,24 @@ export default createGlobalStyle`
   }
   h1,h2,h3{
     margin: 0;
+    line-height: 37px;
+    font-weight: 400;
   } 
   h1{
     font-size:1.875em;
   }
   h2{
     font-size:1.5em;
-    font-weight: 400;
   }
   .container{
     padding: 0 25px;
   }
+  
   .btnDefault{
     all: unset;
     background-color: #FED745;
     color: #313131;
-    padding: 10px 0;
+    padding: 15px 0;
     text-align: center;
     text-transform:uppercase;
     width: 100%;
@@ -69,6 +76,14 @@ export default createGlobalStyle`
       cursor: pointer;
     }
   }
+
+  .btnPrimary{
+    color: #ffffff;
+    text-transform: none;
+    width: 180px;
+    background: #1F2AF3;
+  }
+
   figure{
     margin: 0;
   }
