@@ -18,6 +18,7 @@ const InfoStyle = styled.section`
         justify-content: space-between;
         overflow-x: scroll;
         padding: 10px;
+        ::-webkit-scrollbar { width: 0 !important }
         .card{
             min-width: 95%;
             margin-right: 10px;
