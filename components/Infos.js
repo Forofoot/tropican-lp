@@ -17,21 +17,17 @@ const InfoStyle = styled.section`
         margin-top: 50px;
         justify-content: space-between;
         overflow-x: scroll;
-        padding: 10px;
         ::-webkit-scrollbar { width: 0 !important }
         .card{
             min-width: 95%;
-            margin-right: 10px;
-            color: #313131;
-            text-align: left;
-            line-height: 26px;
+            margin-right: 5%;
+            color: #fff;
             &:last-child{
                 margin-right: 0;
             }
             h2{
                 color: #4BA6FB;
                 margin-bottom: 25px;
-                font-weight: 400;
             }
             &:nth-child(2n+1){
                 h2{
