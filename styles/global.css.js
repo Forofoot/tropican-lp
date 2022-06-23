@@ -97,4 +97,12 @@ export default createGlobalStyle`
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
   }
+
+  .gradient{
+    position: absolute;
+width: 303px;
+height: 303px;
+opacity: 0.5;
+filter: blur(100px);
+  }
 `

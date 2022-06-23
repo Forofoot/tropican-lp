@@ -10,6 +10,12 @@ const HeroStyle = styled.div`
         justify-content: center;
         height: 95vh;
         padding: 0 50px;
+        
+        .gradient_position_color{
+            right: -20px;
+            top: 0px;
+            background: #4BA6FB;
+        }
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -71,30 +77,31 @@ const HeroStyle = styled.div`
 const Hero = () => {
     return (
         <HeroStyle id="section1">
-        <div className='container'>
-            <div className='hero__banner'>
-                <Image
-                    src={"/hero/image_banner.webp"}
-                    alt="Image banner d'une cabane dans un arbre"
-                    layout='raw'
-                    width='350px'
-                    height='350px'
-                />
+            <div className='container'>
+                <div className="gradient gradient_position_color"></div>
+                <div className='hero__banner'>
+                    <Image
+                        src={"/hero/image_banner.webp"}
+                        alt="Image banner d'une cabane dans un arbre"
+                        layout='raw'
+                        width='350px'
+                        height='350px'
+                    />
+                </div>
+                <div className='containerInfo'>
+                    <h1>Vivre en<br></br> <span className='highlight'>intergénération</span></h1>
+                    <h2>Faciliter les liens et les transmissions familiales</h2>
+                </div>
+                <div className='containerScroll'>
+                    <Image
+                        src={"/hero/scrolldown.webp"}
+                        alt='Indicateur de scroll'
+                        layout='raw'
+                        width='50px'
+                        height='50px'
+                    />
+                </div>
             </div>
-            <div className='containerInfo'>
-                <h1>Vivre en<br></br> <span className='highlight'>intergénération</span></h1>
-                <h2>Faciliter les liens et les transmissions familiales</h2>
-            </div> 
-            <div className='containerScroll'>
-                <Image
-                    src={"/hero/scrolldown.webp"}
-                    alt='Indicateur de scroll'
-                    layout='raw'
-                    width='50px'
-                    height='50px'
-                />
-            </div>
-        </div>
         </HeroStyle>
     )
 }
