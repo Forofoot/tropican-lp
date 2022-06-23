@@ -44,9 +44,6 @@ const ReviewStyle = styled.section`
             @media (min-width:1024px){
                 min-height: 350px;
             }
-            @media (max-width:764px){
-                width: 47%;
-            }
             h2{
                 margin-bottom:20px;
 
@@ -76,7 +73,7 @@ export default function Review() {
     let cards = [
         {
             name: 'Jérémy Ferrier',
-            testimony: 'J’ai pu profiter d’un court et magnifique séjour avec mes petits-enfants. C’était super sympa les petits ont hâte qu’on reparte ensemble. On a adoré',
+            testimony: 'J’ai pu profiter d’un court et magnifique séjour avec mes petits-enfants. C’était super sympa les petits ont hâte qu’on reparte ensemble. On a adoré!',
         },
         {
             name: 'Marine Tourret',
