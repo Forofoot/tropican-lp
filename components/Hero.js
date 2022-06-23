@@ -10,6 +10,9 @@ const HeroStyle = styled.div`
         justify-content: center;
         height: 95vh;
         padding: 0 50px;
+        .hero__banner{
+            margin: 50px 0;
+        }
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -31,28 +34,6 @@ const HeroStyle = styled.div`
         .container__info{
             color: #484F75;
         }
-        .containerImageLeafTop,
-        .containerImageLeafBottom{
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            min-height:350px;
-            min-width:350px;
-        }
-
-        .containerImageLeafTop{
-            top: -50px;
-            left: 0;
-            transform: rotate(105deg);
-        }
-
-        .containerImageLeafBottom{
-            bottom: -50px;
-            right: 0;
-            transform: rotate(0deg);
-            transform: scaleX(-1);
-        }
-
         p{
             margin-bottom: 105px;
         }
@@ -77,17 +58,6 @@ const HeroStyle = styled.div`
             .containerInfo{
                 margin-top: 55px;
             }
-            .containerImageLeafTop{
-                display: none;
-            }
-            .containerImageLeafBottom {
-                left: 0;
-                transform: scaleX(1);
-            }
-            .containerImageLeafBottom{
-                width: 350px;
-                height: 350px;
-            }
         }
     }
 `
@@ -96,30 +66,18 @@ const Hero = () => {
     return (
         <HeroStyle id="section1">
         <div className='container'>
+            <div className='hero__banner'>
+                <Image
+                    src={"/hero/image_banner.webp"}
+                    alt="Image banner d'une cabane dans un arbre"
+                    layout='raw'
+                    width='350px'
+                    height='350px'
+                />
+            </div>
             <div className='containerInfo'>
                 <h1>Vivre en<br></br> <span className='highlight'>intergénération</span></h1>
                 <h2>Faciliter les liens et les transmissions familiales</h2>
-                <p>Souhaitez-vous faciliter les interractions avec vos petits enfants ? Créer du lien à travers ce que vous aimez avec eux sans crainte !</p>
-                <div className='containerImageLeafTop'>
-                    <Image
-                    src={"/hero/img_hero.webp"}
-                    alt="image d'une feuille "
-                    layout='raw'
-                    width='450px'
-                    height='450px'
-                    priority
-                    />
-                </div>
-                <div className='containerImageLeafBottom'>
-                    <Image
-                    src={"/hero/img_hero.webp"}
-                    alt="image d'une feuille "
-                    layout='raw'
-                    width='450px'
-                    height='450px'
-                    priority
-                    />
-                </div>
             </div> 
             <div className='containerScroll'>
                 <Image
