@@ -26,9 +26,9 @@ const ReviewStyle = styled.section`
     .cardsContainer{
         display: flex;
         flex-direction: column;
-        gap:10px;
+        gap:60px;
         width: 100%;
-        padding: 30px 0;
+        padding: 50px 0;
         @media (min-width:1024px){
             display: grid;
             grid-template-rows: 400px;

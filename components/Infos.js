@@ -5,7 +5,7 @@ const InfoStyle = styled.section`
     color:#FFF;
     border-radius: 25px 25px 0 0;
     text-align: center;
-    margin-bottom:50px;
+    margin-bottom:75px;
     position:relative;
     .gradient_position_color{
         left: -20px;
@@ -26,7 +26,7 @@ const InfoStyle = styled.section`
         ::-webkit-scrollbar { width: 0 !important }
         .card{
             min-width: 95%;
-            margin-right: 5%;
+            margin-right: 10%;
             color: #fff;
             &:last-child{
                 margin-right: 0;
