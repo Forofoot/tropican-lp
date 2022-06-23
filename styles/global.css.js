@@ -89,4 +89,11 @@ export default createGlobalStyle`
   .form input,.form label, .btnDefault{
     margin-bottom:25px;
   }
+
+  .card{
+    padding: 30px 15px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+  }
 `
