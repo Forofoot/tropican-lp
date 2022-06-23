@@ -11,82 +11,67 @@ const InfoStyle = styled.section`
         color:#F0E5C3;
         white-space: nowrap;
         margin-bottom: 15px;
-    }.infoLogoContainer{
-        width: 259px;
-        height: 58px;
-        position: relative;
-        margin: auto;
-        min-width: 186px;
-        min-height: 42px;
-        @media (max-width: 768px){
-            width: 186px;
-            height: 42px;
-        }
     }
     .infosContainer{
         display: flex;
-        flex-wrap: wrap;
         margin-top: 50px;
         justify-content: space-between;
-        /*.infoBlock{
-            width: 100%;
-                h2{
-                    display: none;
-                }
-                .infoText{
-                font-weight: 100;
+        overflow-x: scroll;
+        padding: 10px;
+        .card{
+            min-width: 95%;
+            margin-right: 10px;
+            color: #313131;
+            text-align: left;
+            line-height: 26px;
+            &:last-child{
+                margin-right: 0;
+            }
+            h2{
+                color: #4BA6FB;
                 margin-bottom: 25px;
-                span{
-                    font-weight: bold;
+                font-weight: 400;
+            }
+            &:nth-child(2n+1){
+                h2{
+                    color:#FED745;
                 }
             }
-        }*/
-        
+        }
         @media (min-width: 768px){
             text-align: left;
-            /*.infoBlock{
-                width: 25%;
-                h2{
-                    display: block;
-                }
-            }*/
         }
     }
 `
 
 export default function Footer() {
+    let infos =[ 
+        {
+            title : 'Qui sommes-nous ?',
+            description : "Leste est le meilleur dispositif qui a pour but de créer des voyages et des activités entre grands-parents et petits-enfants pour renfoncer leurs formidable liens."
+        },
+        {
+            title : 'Comment ?',
+            description : "Leste vous permets d’organiser des voyages et des activités extraordinaires en France, entre grands-parents et petits-enfants tout en ayant la possibilité de les personnaliser."
+        },
+        {
+            title : 'Avec qui ?',
+            description : "Grâce à nos merveilleux partenaires et nos équipes prodigieuses nous vous accompagnons tout au long de vos voyages et/ou vos activités."
+        }
+        
+    ]
     
   return (
     <InfoStyle id="section2">
-        <h1>Qui sommes-nous ?</h1>
-        <div className="infoLogoContainer">
-            <Image
-                src={'/fullLogo.webp'}
-                alt="Logo Tropican"
-                layout="raw"
-                width='259px'
-                height='58px'
-            />
-        </div>
         <div className="infosContainer">
-            <div className="card infoBlock">
-                <h2>Notre mission</h2>
-                <p className="infoText">
-                    <span>Tropican</span> est une agence de communication qui a pour objectif principal faciliter et de valoriser les échange des grand-parents avec leur petits enfants.
-                </p>
-            </div>
-            <div className="card infoBlock">
-                <h2>Nos actions</h2>
-                <p className="infoText">
-                    <span>Tropican</span> est une agence de communication qui a pour objectif principal faciliter et de valoriser les échange des grand-parents avec leur petits enfants.
-                </p>
-            </div>
-            <div className="card infoBlock">
-                <h2>Notre mission</h2>
-                <p className="infoText">
-                    <span>Tropican</span> est une agence de communication qui a pour objectif principal faciliter et de valoriser les échange des grand-parents avec leur petits enfants.
-                </p>
-            </div>
+            {infos.map((info, i)=>(
+                <div key={i} className="card infoBlock">
+                    <h2>{info.title}</h2>
+                    <p>
+                        {info.description}
+                    </p>
+                </div>
+            ))}
         </div>
     </InfoStyle>
   )
