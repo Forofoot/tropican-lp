@@ -22,6 +22,8 @@ export default createGlobalStyle`
     font-family: 'Inter', sans-serif;
     font-display: optional;
     font-size: 18px;
+    background-color: #171717;
+    color: #fff;
   }
   img{
     border:0;
@@ -48,6 +50,10 @@ export default createGlobalStyle`
   }
   h2{
     font-size:1.5em;
+    font-weight: 400;
+  }
+  .container{
+    padding: 0 25px;
   }
   .btnDefault{
     all: unset;
@@ -93,8 +99,14 @@ export default createGlobalStyle`
 
   .card{
     padding: 30px 15px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 30px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    color: #fff;
+    text-align: left;
+    line-height: 26px;
+    border-width: 1px;
+    border-style: solid;
   }
 `

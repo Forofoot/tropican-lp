@@ -32,7 +32,7 @@ const HeaderStyle = styled.header`
         position: fixed;
         width: 100%;
         height: 100%;
-        background: #42A0B6;
+        background: #171717;
         top: 0;
         will-change:left;
         transition: left .3s ease-in-out;
@@ -66,7 +66,7 @@ const HeaderStyle = styled.header`
           .closeline{
             width: 100%;
             height: 2px;
-            background-color: #fff;
+            background-color: #FED745 ;
             transform: rotate(45deg) translate(11px, -10px);
             &:last-child{
               transform: rotate(-45deg) translate(-7px, -7px);
