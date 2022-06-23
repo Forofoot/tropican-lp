@@ -120,6 +120,7 @@ export default createGlobalStyle`
 width: 303px;
 height: 303px;
 opacity: 0.5;
-filter: blur(100px);
+filter: blur(150px);
+z-index:-1;
   }
 `

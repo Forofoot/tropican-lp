@@ -13,11 +13,12 @@ const HeroStyle = styled.div`
         height: 95vh;
         padding: 0 50px;
         
-        .gradient_position_color{
+        .gradient_position_blue{
             right: -20px;
             top: 0px;
             background: #4BA6FB;
         }
+        
         h1{
             font-size: 4em;
             margin-bottom: 55px ;
@@ -27,6 +28,13 @@ const HeroStyle = styled.div`
         }
         h2{
             margin-bottom: 75px ;
+        }
+        .containerInfo{
+            .gradient_position_yellow{
+                left: -70px;
+                bottom: 40px;
+                background: #FED745;
+            }
         }
         /* .containerScroll{
             position: absolute;
@@ -80,7 +88,7 @@ const Hero = () => {
     return (
         <HeroStyle id="section1">
         <div className='container'>
-        <div className="gradient gradient_position_color"></div>
+        <div className="gradient gradient_position_blue"></div>
             <div className='hero__banner'>
                 <Image
                     src={"/hero/image_banner.webp"}
@@ -93,6 +101,7 @@ const Hero = () => {
             <div className='containerInfo'>
                 <h1>Vivez des expérineces,<br></br>exceptionnelles</h1>
                 <h2>Nous vous aidons à embellir vos liens</h2>
+                <div className="gradient gradient_position_yellow"></div>
             </div>
             <div>
                 <Link href="/">
