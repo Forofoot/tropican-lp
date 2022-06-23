@@ -7,7 +7,7 @@ const ReviewStyle = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 50px;
+    padding: 0 20px;
     height:100%;
     @media (min-width:1024px){
         min-height: 70vh;
@@ -24,53 +24,45 @@ const ReviewStyle = styled.section`
     .cardsContainer{
         display: flex;
         flex-direction: column;
-        gap:100px;
+        gap:10px;
         width: 100%;
-        align-items: center;
-        justify-items: center;
-        padding: 50px 0;
+        padding: 30px 0;
         @media (min-width:1024px){
             display: grid;
             grid-template-rows: 400px;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-gap: 50px;
+        }
+        @media (max-width:764px){
+            flex-direction: row;
+            flex-wrap:wrap;
         }
     
         .cardTestimony{
             max-width: 440px;
-            border: solid 2px #42A0B6;
-            border-radius:7px;
-            text-align:center;
-            padding: 0 20px 20px;
             min-height: 100%;
             @media (min-width:1024px){
                 min-height: 350px;
             }
-            .profil{
-                border-radius:50%;
-                width: 90px;
-                height: 90px;
-                margin:auto;
-                transform:translate(0, -50%);
-                background-color: #42A0B6;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .profilImage{
-                    width: 50px;
-                    height: 50px;
-                    position: relative;
+            @media (max-width:764px){
+                width: 47%;
+            }
+            h2{
+                margin-bottom:20px;
+
+            }
+
+            :nth-child(2n+1){
+                h2{
+                    color: #FED745;
+                }
+            }
+            :nth-child(2n+0){
+                h2{
+                    color: #4BA6FB;
                 }
             }
 
-            h2{
-                color: #F0E5C3;
-                text-align: center;
-            }
-
-            .statut{
-                text-align:center;
-                color:#484F75;
             }
 
             .testimony{
@@ -83,43 +75,21 @@ const ReviewStyle = styled.section`
 export default function Review() {
     let cards = [
         {
-            srcPhoto: '/logo.webp',
             name: 'Jérémy Ferrier',
-            statut: 'Grand-Père',
-            testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
+            testimony: 'J’ai pu profiter d’un court et magnifique séjour avec mes petits-enfants. C’était super sympa les petits ont hâte qu’on reparte ensemble. On a adoré',
         },
         {
-            srcPhoto: '/logo.webp',
             name: 'Marine Tourret',
-            statut: 'Grand-Mère',
-            testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
-        },
-        {
-            srcPhoto: '/logo.webp',
-            name: 'Jimmy Renden',
-            statut: 'Grand-Père',
-            testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            testimony: 'Nous avons passer un séjour exceptionnel grâce à Leste. Mes loulous et moi avons trouvé des centres d’intérets communs, ce que nous avions pas forcément auparavant.',
         }
     ]
     return (
         <ReviewStyle id="section3">
             <h1>Vos <span>avis</span> et <span>ressentis</span> comptes</h1>
             <div className="cardsContainer">
-                {cards.map((elt,i) => (
-                    <div key={i} className="cardTestimony">
-                        <div className="profil">
-                            <figure className="profilImage">
-                                <Image
-                                    src={elt.srcPhoto}
-                                    alt="photo profil"
-                                    layout="raw"
-                                    width='50px'
-                                    height='50px'
-                                />
-                            </figure>
-                        </div>
+                {cards.map((elt, i) => (
+                    <div key={i} className="cardTestimony card">
                         <h2>{elt.name}</h2>
-                        <p className="statut">{elt.statut}</p>
                         <p className="testimony">{elt.testimony}</p>
                     </div>
                 ))}
