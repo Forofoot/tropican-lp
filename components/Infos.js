@@ -6,6 +6,12 @@ const InfoStyle = styled.section`
     border-radius: 25px 25px 0 0;
     text-align: center;
     margin-bottom:50px;
+    position:relative;
+    .gradient_position_color{
+        left: -20px;
+        top: 0px;
+        background: #4BA6FB;
+    }
     h1{
         font-weight: 400;
         color:#F0E5C3;
@@ -60,6 +66,7 @@ export default function Footer() {
     
   return (
     <InfoStyle id="section2">
+        <div className="gradient gradient_position_color"></div>
         <div className="infosContainer">
             {infos.map((info, i)=>(
                 <div key={i} className="card infoBlock">
