@@ -10,7 +10,7 @@ const VideoStyle = styled.div`
         border: 1px solid;
         margin: 0 auto;
         border-radius: 20px ;
-        margin-bottom: 50px ;
+        margin-bottom: 150px ;
     }
 `
 const Video = () => {

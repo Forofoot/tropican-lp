@@ -15,6 +15,7 @@ export default createGlobalStyle`
   }
   html, body {
     height: 100%;
+    overflow-x: hidden;
   }
   html{
     scroll-behavior: smooth;
@@ -22,7 +23,6 @@ export default createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     min-height:100vh;
     width: 100%;
     font-family: 'SofiaPRO', sans-serif;
