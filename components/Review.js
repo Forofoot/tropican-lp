@@ -8,6 +8,18 @@ const ReviewStyle = styled.section`
     align-items: center;
     justify-content: center;
     height:100%;
+
+    .gradient_position_yellow{
+        right: -80px;
+        top: 0px;
+        background: #FED745;
+    }
+
+    .gradient_position_blue{
+        right: 0px;
+        bottom: 0px;
+        background: #4BA6FB;
+    }
     @media (min-width:1024px){
         min-height: 70vh;
     }
@@ -66,6 +78,8 @@ export default function Review() {
     return (
         <ReviewStyle id="section3">
             <h2>Ils nous partagent avec fougue leurs retours</h2>
+            <div className="gradient gradient_position_yellow"></div>
+            <div className="gradient gradient_position_blue"></div>
             <div className="cardsContainer">
                 {cards.map((elt, i) => (
                     <div key={i} className="cardTestimony card">
