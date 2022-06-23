@@ -79,22 +79,6 @@ const ReviewStyle = styled.section`
             }
         }
     }
-    .leafBackground{
-        position: absolute;
-        width: 350px;
-        height: 350px;
-        left: 0;
-        bottom: -50px;
-        min-height:350px;
-        min-width:350px;
-        @media(min-width:1024px){
-            width: 450px;
-            height: 450px;
-            left: auto;
-            right: 0;
-            transform: scaleX(-1);
-        }
-    }   
 `
 export default function Review() {
     let cards = [
@@ -139,16 +123,6 @@ export default function Review() {
                         <p className="testimony">{elt.testimony}</p>
                     </div>
                 ))}
-            </div>
-            <div className='leafBackground'>
-                <Image
-                    src={"/hero/img_hero.webp"}
-                    alt="image d'une feuille "
-                    layout="raw"
-                    width='450px'
-                    height='450px'
-                    priority
-                />
             </div>
         </ReviewStyle>
     )
