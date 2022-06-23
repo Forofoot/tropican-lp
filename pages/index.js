@@ -11,10 +11,13 @@ export default function Home() {
       <Head>
         <title>Tropican App</title>
       </Head> 
-      <Hero/>
-      <Infos/>
-      <Video />
-      <Review/>
+      <div className='container'>
+        <Hero/>
+        <Infos/>
+        <Video />
+        <Review/>
+      </div>
+      
     </>
   )
 }

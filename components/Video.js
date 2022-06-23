@@ -2,11 +2,10 @@ import styled from 'styled-components'
 
 const VideoStyle = styled.div`
     h2{
-        text-align: center;
         margin-bottom: 36px ;
     }
-    .__video{
-        width: 350px;
+    .video{
+        width: 100%;
         height: 200px;
         border: 1px solid;
         margin: 0 auto;
@@ -17,9 +16,9 @@ const VideoStyle = styled.div`
 const Video = () => {
     return ( 
         <VideoStyle>
-            <h2>Il n&apos;est jamais trop tard pour nouer ou renforcer vos liens </h2>
-            <div className='container__video'>
-                <div className='__video'>
+            <h2>Soyez originaux là où on ne s&apos;y attend pas</h2>
+            <div className='containerVideo'>
+                <div className='video'>
 
                 </div>
             </div>
