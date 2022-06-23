@@ -116,6 +116,7 @@ const Hero = () => {
                     layout='raw'
                     width='350px'
                     height='350px'
+                    priority
                 />
             </div>
             <div className='containerInfo'>
@@ -125,12 +126,9 @@ const Hero = () => {
             </div>
             <div className='btnDefault btnPrimary'>
                 <Link href="#">
-                    <p className='btn'>
-                        <a>
+                    <a className='btn'>
                         Découvrir
-                        </a>
-                    </p>
-                    
+                    </a>
                 </Link>
             </div>
             <div className='containerScroll'>
