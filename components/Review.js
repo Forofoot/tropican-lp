@@ -7,19 +7,9 @@ const ReviewStyle = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
     height:100%;
     @media (min-width:1024px){
         min-height: 70vh;
-    }
-    h1{
-        color: #484F75;
-        font-weight: 400;
-        text-align: center;
-        margin-bottom: 50px;
-        span{
-            font-weight: bold;
-        }
     }
     .cardsContainer{
         display: flex;
@@ -59,13 +49,6 @@ const ReviewStyle = styled.section`
                     color: #4BA6FB;
                 }
             }
-
-            }
-
-            .testimony{
-                text-align: left;
-                color:#484F75;
-            }
         }
     }
 `
@@ -82,7 +65,7 @@ export default function Review() {
     ]
     return (
         <ReviewStyle id="section3">
-            <h1>Vos <span>avis</span> et <span>ressentis</span> comptes</h1>
+            <h2>Ils nous partagent avec fougue leurs retours</h2>
             <div className="cardsContainer">
                 {cards.map((elt, i) => (
                     <div key={i} className="cardTestimony card">
