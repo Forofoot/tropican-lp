@@ -196,7 +196,7 @@ export default function Navbar() {
                 </li>
                 <li>
                   <Link href="#section2">
-                    <a onClick={() => setActive(!active)}>xxxxxxxxxxxx</a>
+                    <a onClick={() => setActive(!active)}>Qui sommes-nous ?</a>
                   </Link>
                 </li>
                 <li>
@@ -214,7 +214,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link href="#section2">
-                <a>xxxxxxxxxxxx</a>
+                <a>Qui sommes-nous ?</a>
               </Link>
             </li>
             <li>

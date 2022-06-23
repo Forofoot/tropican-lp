@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const HeroStyle = styled.div`
+    margin-bottom: 50px;
     .container{
         position: relative;
         display: flex;
@@ -12,7 +13,10 @@ const HeroStyle = styled.div`
         justify-content: center;
         height: 95vh;
         padding: 0 50px;
-        
+        .heroBanner{
+            margin: 20px 0;
+        }
+
         .gradient_position_blue{
             right: -20px;
             top: 0px;
@@ -20,7 +24,6 @@ const HeroStyle = styled.div`
         }
         
         h1{
-            font-size: 4em;
             margin-bottom: 55px;
             text-align: center;
         }
@@ -77,9 +80,6 @@ const HeroStyle = styled.div`
             justify-content: start;
             height: inherit;
             padding: 0 20px ;
-            .hero__banner{
-                margin: 50px 0;
-            }
             h1{
                 font-size: 2em;
                 margin-bottom: 25px;
@@ -103,7 +103,7 @@ const Hero = () => {
         <HeroStyle id="section1">
         <div className='container'>
         <div className="gradient gradient_position_blue"></div>
-            <div className='hero__banner'>
+            <div className='heroBanner'>
                 <Image
                     src={"/hero/image_banner.webp"}
                     alt="Image banner d'une cabane dans un arbre"

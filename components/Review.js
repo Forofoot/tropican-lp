@@ -26,25 +26,23 @@ const ReviewStyle = styled.section`
     .cardsContainer{
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         gap:60px;
         width: 100%;
         padding: 50px 0;
         @media (min-width:1024px){
-            display: grid;
-            grid-template-rows: 400px;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 50px;
-        }
-        @media (max-width:764px){
+            display: flex;
+            justify-content: space-around;
             flex-direction: row;
-            flex-wrap:wrap;
         }
     
         .cardTestimony{
-            max-width: 440px;
+            width: 100%;
             min-height: 100%;
             @media (min-width:1024px){
                 min-height: 350px;
+                max-width: 450px;
             }
             h2{
                 margin-bottom:20px;
