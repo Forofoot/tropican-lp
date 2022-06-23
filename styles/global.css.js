@@ -50,8 +50,8 @@ export default createGlobalStyle`
   }
   .btnDefault{
     all: unset;
-    background-color: #F0E5C3;
-    color: #42A0B6;
+    background-color: #FED745;
+    color: #313131;
     padding: 10px 0;
     text-align: center;
     text-transform:uppercase;

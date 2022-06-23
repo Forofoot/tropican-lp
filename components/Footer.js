@@ -4,7 +4,7 @@ import Link from "next/link"
 import NewsletterSubscribe from "./NewsletterSubscribe"
 
 const FooterStyle = styled.footer`
-      background-color:#42A0B6;
+      background-color:#313131;
       color:#FFF;
       border-radius: 25px 25px 0 0;
     .footerTop{
@@ -31,7 +31,7 @@ const FooterStyle = styled.footer`
           margin-right:15px;
           height:38px;
           width:38px;
-          background:#F0E5C3;
+          background:#FED745;
           border-radius:50%;
           &:last-child{
             margin-right:0;
