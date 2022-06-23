@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import GlobalCSS from '../styles/global.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -70,6 +69,7 @@ const HeroStyle = styled.div`
                     transform: translateX(-50%);
                     bottom: 2px;
                     border-radius: 50%;
+                    animation: bounce 3s ease infinite;
                 }
             }
         }
@@ -96,6 +96,12 @@ const HeroStyle = styled.div`
             }
         }
     }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);}
+	    40% {transform: translate(-50%, -25px);}
+	    60% {transform: translate(-50%, -15px);}
+    }
 `
 
 const Hero = () => {
@@ -118,7 +124,7 @@ const Hero = () => {
                 <div className="gradient gradient_position_yellow"></div>
             </div>
             <div className='btnDefault btnPrimary'>
-                <Link href="/">
+                <Link href="#">
                     <p className='btn'>
                         <a>
                         Découvrir
