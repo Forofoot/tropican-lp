@@ -57,6 +57,9 @@ export default createGlobalStyle`
   h2{
     font-size:1.5em;
   }
+  section{
+    margin-bottom: 80px;
+  }
   .container{
     padding: 0 25px;
   }
@@ -123,12 +126,10 @@ export default createGlobalStyle`
     text-align: left;
     line-height: 26px;
     box-shadow: 0px 0px 10px rgba(113, 89, 173, 0.5);
+    max-width: 500px;
     h2{
       color: #7159AD;
       margin-bottom: 25px;
-    }
-    &:nth-child(2n+1){
-      
     }
   }
 `
