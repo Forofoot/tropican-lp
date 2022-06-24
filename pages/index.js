@@ -23,18 +23,22 @@ export default function Home({infos,cards}) {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  try{
-  
-  const res = await fetch(`${process.env.API_URL}api/infos`)
+  const res = await fetch(`${process.env.API_URL}api/infos`, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  const resCards = await fetch(`${process.env.API_URL}api/cards`, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
   const infos = await res.json()
-
-  const resCards = await fetch(`${process.env.API_URL}api/cards`)
   const cards = await resCards.json()
-
   // Pass data to the page via props
   return { props: {infos, cards} }
-
-  } catch(err) {
-      console.log("err: ", err)
-  }
 }
