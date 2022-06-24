@@ -9,8 +9,8 @@ export default createGlobalStyle`
   }
   @font-face {
     font-family: "SofiaPRO";
-    src: url('./fonts/sofiapro-light-webfont.woff') format('woff'); 
-    font-weight: normal;
+    src: url('./fonts/Sofia-Pro-Regular.woff') format('woff'); 
+    font-weight: 400;
     font-style: normal;
   }
 
