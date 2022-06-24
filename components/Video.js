@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image';
 
 const VideoStyle = styled.section`
     h2{
@@ -15,6 +16,9 @@ const VideoStyle = styled.section`
         margin: 0 auto;
         border-radius: 20px ;
         background-color: #313131;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `
 const Video = () => {
@@ -22,7 +26,15 @@ const Video = () => {
         <VideoStyle>
             <h2>Découvrez cette fabuleuse expérience !</h2>
             <div className='containerVideo'>
-                <div className='video'></div>
+                <div className='video'>
+                    <Image 
+                        src={"/video/play.webp"}
+                        alt="Player video"
+                        height={85}
+                        width={85}
+                        layout="raw"
+                    />
+                </div>
             </div>
         </VideoStyle>
     );

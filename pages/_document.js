@@ -47,6 +47,13 @@ export default class MyDocument extends Document {
         type="font/woff"
         crossOrigin=""
       />
+      <link
+        rel="preload"
+        href="/fonts/Mark-Pro-Bold.woff"
+        as="font"
+        type="font/woff"
+        crossOrigin=""
+      />
       {/* Globla site Tag */}
       <script 
         async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} 
