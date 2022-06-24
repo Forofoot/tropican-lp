@@ -14,14 +14,6 @@ const HeaderStyle = styled.header`
       width: 53px;
       height: 53px;
       position: relative;
-      @media (min-width:768px){
-        display: none;
-      }
-    }
-    .logoDesktop{
-      width: 198px;
-      height: 44px;
-      position: relative;
     }
     .navLinks{
         @media (min-width:768px){
@@ -81,13 +73,7 @@ const HeaderStyle = styled.header`
       
     }
     @media (min-width:768px){
-      .navLinks,
-      .logoMobile{
-        display: none;
-      }
-    }
-    @media (max-width:768px){
-    .logoDesktop{
+      .navLinks{
         display: none;
       }
     }
@@ -170,17 +156,6 @@ export default function Navbar() {
                 alt="Logo"
                 layout='fill'
                 objectFit='contain'
-              />
-            </a>  
-          </Link>
-          <Link href="#">
-            <a className='logoDesktop'>
-            <Image
-                src="/fullLogo.webp"
-                alt="Logo"
-                layout='raw'
-                width= '198px'
-                height= '44px'
               />
             </a>  
           </Link>

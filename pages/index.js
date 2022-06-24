@@ -2,6 +2,7 @@ import Infos from '/components/Infos'
 import Hero from '../components/Hero'
 import Video from '../components/Video'
 import Review from '../components/Review'
+import Brands from '../components/Brands'
 import Head from 'next/head'
 
 export default function Home({infos,cards}) {
@@ -16,8 +17,8 @@ export default function Home({infos,cards}) {
         <Infos infos={infos}/>
         <Video />
         <Review cards={cards} />
+        <Brands />
       </div>
-      
     </>
   )
 }
@@ -26,11 +27,21 @@ export async function getStaticProps() {
   let cards = [
     {
         name: 'Jérémy Ferrier',
-        testimony: 'J’ai pu profiter d’un court et magnifique séjour avec mes petits-enfants. C’était super sympa les petits ont hâte qu’on reparte ensemble. On a adoré!',
+        testimony: 'Passer du temps avec papy, c’est trop cool ! Il est plus vif que ce que j’imaginais. Hâte de faire de nouvelles activités et de le découvrir un peu plus :)',
+        img:'/reviews/review1.webp',
+        date: '23/06/22'
     },
     {
         name: 'Marine Tourret',
-        testimony: 'Nous avons passer un séjour exceptionnel grâce à Leste. Mes loulous et moi avons trouvé des centres d’intérets communs, ce que nous avions pas forcément auparavant.',
+        testimony: 'Je me suis retrouvée une jeunesse avec mes enfants ! J’ai pu leur faire découvrir ma passion et ils ont chéri nos moment passés ensemble !',
+        img:'/reviews/review2.webp',
+        date: '21/02/22'
+    },
+    {
+        name: 'Grégory Pinard',
+        testimony: 'On a découvert notre destination deux jours avant de partir ! C’était génial on a fait plein de choses. Ça a changé de journées que l’on passe ensemble habituellement.',
+        img:'/reviews/review3.webp',
+        date: '16/01/22'
     }
   ]
   
@@ -41,5 +52,5 @@ export async function getStaticProps() {
     }
     
 ]
-  return { props: {infos, cards} }
+  return { props: {infos, cards}}
 }
