@@ -10,7 +10,7 @@ export default function Home({infos,cards}) {
   return (
     <>
       <Head>
-        <title>Tropican App</title>
+        <title>Leste</title>
       </Head> 
       <div className='container'>
         <Hero/>
@@ -48,7 +48,7 @@ export async function getStaticProps() {
   let infos =[ 
     {
         title : 'Qui sommes-nous ?',
-        description : "Leste est le meilleur dispositif qui a pour but de créer des voyages et des activités entre grands-parents et petits-enfants pour renfoncer leurs formidable liens."
+        description : "Leste est un dispositif incroyable ! Nous vous organisons différentes expériences de voyages et d’activités entre vous et vos petits-enfants inoubliable."
     }
     
 ]
