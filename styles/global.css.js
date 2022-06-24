@@ -13,6 +13,14 @@ export default createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
+
+  @font-face {
+    font-family: "MarkPRO";
+    src: url('./fonts/Mark-Pro-Bold.woff') format('woff'); 
+    font-weight: bold;
+    font-style: normal;
+  }
+
   html, body {
     height: 100%;
     overflow-x: hidden;
@@ -51,6 +59,9 @@ export default createGlobalStyle`
     font-weight: 400;
     color:#147543;
   } 
+  h1,h2,h3, label{
+    font-family: 'MarkPRO', sans-serif;
+  }
   h1{
     font-size:1.875em;
   }
@@ -60,6 +71,7 @@ export default createGlobalStyle`
   section{
     margin-bottom: 80px;
   }
+  
   .container{
     padding: 0 25px;
   }

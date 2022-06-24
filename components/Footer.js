@@ -13,7 +13,7 @@ const FooterStyle = styled.footer`
       label{
         font-size:1em;
         text-transform:uppercase;
-        font-weight:100;
+        font-weight:bold;
         display:block;
         margin-bottom: 15px;
       }
