@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
       <link rel="icon" href="/favicon.ico" />
       <link
         rel="preload"
-        href="/fonts/sofiapro-light-webfont.woff"
+        href="/fonts/Sofia-Pro-Regular.woff"
         as="font"
         type="font/woff"
         crossOrigin=""
