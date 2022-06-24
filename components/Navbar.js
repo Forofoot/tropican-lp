@@ -137,8 +137,9 @@ const HeaderStyle = styled.header`
     .desktopLinks{
       display: none;
       @media (min-width: 768px){
+        gap: 15px;
         display: flex;
-        width: 40%;
+        max-width: 60%;
         justify-content: space-between;
         align-items: center;
       }

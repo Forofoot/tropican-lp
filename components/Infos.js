@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { useEffect } from "react";
 
 const InfoStyle = styled.section`
-    color:#FFF;
     border-radius: 25px 25px 0 0;
     text-align: center;
     margin-bottom:75px;
@@ -19,24 +18,14 @@ const InfoStyle = styled.section`
     .infosContainer{
         display: flex;
         padding: 25px 0;
-        justify-content: space-between;
+        justify-content: center;
         overflow-x: scroll;
         ::-webkit-scrollbar { width: 0 !important }
         .card{
             min-width: 95%;
             margin-right: 10%;
-            color: #fff;
             &:last-child{
                 margin-right: 0;
-            }
-            h2{
-                color: #4BA6FB;
-                margin-bottom: 25px;
-            }
-            &:nth-child(2n+1){
-                h2{
-                    color:#FED745;
-                }
             }
         }
         
