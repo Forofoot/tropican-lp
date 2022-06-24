@@ -5,6 +5,7 @@ import Review from '../components/Review'
 import Head from 'next/head'
 
 export default function Home({infos,cards}) {
+
   return (
     <>
       <Head>
@@ -14,35 +15,39 @@ export default function Home({infos,cards}) {
         <Hero/>
         <Infos infos={infos}/>
         <Video />
-        <Review cards={cards}/>
+        <Review cards={cards} />
       </div>
       
     </>
   )
 }
 
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`${process.env.API_URL}api/infos`, {
-    method: "GET",
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'User-Agent': '*', //
+export async function getStaticProps() {
+  let cards = [
+    {
+        name: 'Jérémy Ferrier',
+        testimony: 'J’ai pu profiter d’un court et magnifique séjour avec mes petits-enfants. C’était super sympa les petits ont hâte qu’on reparte ensemble. On a adoré!',
     },
-  })
-
-  const resCards = await fetch(`${process.env.API_URL}api/cards`, {
-    method: "GET",
-    headers: {
-      'Content-Type': 'application/json',
-    Accept: 'application/json',
-    'User-Agent': '*', //
+    {
+        name: 'Marine Tourret',
+        testimony: 'Nous avons passer un séjour exceptionnel grâce à Leste. Mes loulous et moi avons trouvé des centres d’intérets communs, ce que nous avions pas forcément auparavant.',
+    }
+  ]
+  
+  let infos =[ 
+    {
+        title : 'Qui sommes-nous ?',
+        description : "Leste est le meilleur dispositif qui a pour but de créer des voyages et des activités entre grands-parents et petits-enfants pour renfoncer leurs formidable liens."
     },
-  })
-
-  const infos = await res.json()
-  const cards = await resCards.json()
-  // Pass data to the page via props
+    {
+        title : 'Comment ?',
+        description : "Leste vous permets d’organiser des voyages et des activités extraordinaires en France, entre grands-parents et petits-enfants tout en ayant la possibilité de les personnaliser."
+    },
+    {
+        title : 'Avec qui ?',
+        description : "Grâce à nos merveilleux partenaires et nos équipes prodigieuses nous vous accompagnons tout au long de vos voyages et/ou vos activités."
+    }
+    
+]
   return { props: {infos, cards} }
 }
