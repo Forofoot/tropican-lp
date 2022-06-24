@@ -15,12 +15,6 @@ const HeroStyle = styled.div`
         .heroBanner{
             margin: 20px 0;
         }
-
-        .gradient_position_blue{
-            right: -20px;
-            top: 0px;
-            background: #4BA6FB;
-        }
         
         h1{
             margin-bottom: 55px;
@@ -32,20 +26,10 @@ const HeroStyle = styled.div`
         h2{
             margin-bottom: 75px ;
         }
-        .containerInfo{
-            .gradient_position_yellow{
-                left: -70px;
-                bottom: 40px;
-                background: #FED745;
-            }
-        }
         .container__info{
             color: #484F75;
         }
-        a{
-            color: #fff;
-        }
-        .btnDefault{
+        .btnPrimary{
             margin-bottom: 105px;
         }
         .containerScroll{
@@ -53,7 +37,7 @@ const HeroStyle = styled.div`
             flex-direction: column;
             align-items: center;
             .scrollIndicator{
-                border: 1px solid #fff;
+                border: 1px solid #313131;
                 width: 30px;
                 height: 60px;
                 border-radius: 27px;
@@ -63,7 +47,7 @@ const HeroStyle = styled.div`
                 div{
                     width: 15px;
                     height: 15px;
-                    background-color: #fff;
+                    background-color: #313131;
                     position: absolute;
                     left: 50%;
                     transform: translateX(-50%);
@@ -108,7 +92,6 @@ const Hero = () => {
     return (
         <HeroStyle id="section1">
         <div className='container'>
-        <div className="gradient gradient_position_blue"></div>
             <div className='heroBanner'>
                 <Image
                     src={"/hero/image_banner.webp"}
@@ -122,9 +105,8 @@ const Hero = () => {
             <div className='containerInfo'>
                 <h1>Vivez des expériences,<br></br>exceptionnelles</h1>
                 <p>Nous vous aidons à transcender vos liens</p>
-                <div className="gradient gradient_position_yellow"></div>
             </div>
-            <div className='btnDefault btnPrimary'>
+            <div className='btnPrimary'>
                 <Link href="#">
                     <a className='btn'>
                         Découvrir

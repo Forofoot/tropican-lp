@@ -4,21 +4,22 @@ import Link from "next/link"
 import NewsletterSubscribe from "./NewsletterSubscribe"
 
 const FooterStyle = styled.footer`
-      background-color:#313131;
-      color:#FFF;
+      background-color:#7159AD;
+      color:#F4F4F4;
       border-radius: 25px 25px 0 0;
     .footerTop{
-      padding:25px 50px;
+      padding:50px 25px;
       h2,
       label{
         font-size:1em;
         text-transform:uppercase;
         font-weight:100;
         display:block;
+        margin-bottom: 15px;
       }
 
       h2{
-        margin-bottom: 25px;
+        color: #F4F4F4;
       }
       
       ul{
@@ -31,7 +32,7 @@ const FooterStyle = styled.footer`
           margin-right:15px;
           height:38px;
           width:38px;
-          background:#FED745;
+          background:#F4F4F4;
           border-radius:50%;
           &:last-child{
             margin-right:0;
@@ -41,6 +42,12 @@ const FooterStyle = styled.footer`
             height: 30px;
             position: relative;
           }
+        }
+      }
+      .buttonWrap{
+        text-align: center;
+        @media (min-width: 768px) {
+          text-align: right;
         }
       }
       .policy{
@@ -81,10 +88,6 @@ export default function Footer() {
           link: 'https://www.twitter.com/'
       }
   ]
-  
-  // const submitForm = (e) =>{
-  //   e.preventDefault();
-  // }
   return (
     <FooterStyle>
       <div className="footerTop">
@@ -108,12 +111,6 @@ export default function Footer() {
             </li>
           ))}
         </ul>
-        {/* <form onSubmit={submitForm}>
-          <label htmlFor="email">Suivre nos actualités</label >
-          <input type="text" name="email" id="email" placeholder="E_mail"/>
-          <span className="separator"></span>
-          <button className="btnDefault">S&apos;abonner</button>
-        </form> */}
         <NewsletterSubscribe/>
         <div className="policy">
           <Link href="#" title="Politique de confidentialité"><a target="_blank">Politique de confidentialité</a></Link>

@@ -25,8 +25,8 @@ export default createGlobalStyle`
     width: 100%;
     font-family: 'SofiaPRO', sans-serif;
     font-size: 18px;
-    background-color: #171717;
-    color: #fff;
+    background-color: #F4F4F4;
+    color: #313131;
   }
   img{
     border:0;
@@ -43,12 +43,13 @@ export default createGlobalStyle`
   a{
     cursor: pointer;
     text-decoration: none;
-    color: #000;
+    color:#F4F4F4;
   }
   h1,h2,h3{
     margin: 0;
     line-height: 37px;
     font-weight: 400;
+    color:#147543;
   } 
   h1{
     font-size:1.875em;
@@ -59,27 +60,33 @@ export default createGlobalStyle`
   .container{
     padding: 0 25px;
   }
-  
-  .btnDefault{
+  .btnDefault,
+  .btnPrimary{
     all: unset;
-    background-color: #FED745;
-    color: #313131;
     padding: 15px 0;
     text-align: center;
-    text-transform:uppercase;
-    width: 100%;
+    width: 180px;
     border-radius: 50px;
     margin-top: 15px;
+  }
+
+  .btnDefault{
+    border: 1px solid #F4F4F4;
+    background-color: transparent;
+    transition: all .3s ease-in-out;
+    will-change: background-color, color;
     &:hover{
       cursor: pointer;
+      background-color: #F4F4F4;
+      color: #7159AD;
     }
   }
 
   .btnPrimary{
-    color: #ffffff;
     text-transform: none;
-    width: 180px;
-    background: #1F2AF3;
+    background-color: #7159AD;
+    color: #F4F4F4;
+    border: none;
   }
 
   figure{
@@ -92,16 +99,16 @@ export default createGlobalStyle`
       width:100%;
       position: relative;
       padding-bottom: 10px;
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid #F4F4F4;
       &:focus{
-        color:#fff;
+        color:#F4F4F4;
         & +.separator{
           transform: scaleX(1) translateY(-2px);   
           opacity: 1;
         }
       }
       &::placeholder{
-        color:#fff;
+        color:#F4F4F4;
       }
     }
   }
@@ -116,24 +123,10 @@ export default createGlobalStyle`
     background: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(4px);
     border-radius: 20px;
-    color: #fff;
+    color: #F4F4F4;
     text-align: left;
     line-height: 26px;
     border-width: 1px;
     border-style: solid;
-  }
-  .btn{
-    border-radius: 20px;
-    background-color: #1F2AF3;
-    color: #fff;
-  }
-
-  .gradient{
-    position: absolute;
-width: 303px;
-height: 303px;
-opacity: 0.5;
-filter: blur(150px);
-z-index:-1;
   }
 `

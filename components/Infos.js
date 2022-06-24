@@ -10,11 +10,6 @@ const InfoStyle = styled.section`
     @media (min-width: 768px){
         margin-bottom: 125px;
     }
-    .gradient_position_color{
-        left: -20px;
-        top: 0px;
-        background: #4BA6FB;
-    }
     h1{
         font-weight: 400;
         color:#F0E5C3;
@@ -101,7 +96,6 @@ export default function Infos({ infos }) {
     }, []);
   return (
     <InfoStyle id="section2">
-        <div className="gradient gradient_position_color"></div>
         <div className="infosContainer">
             {infos.map((info, i)=>(
                 <div key={i} className="card infoBlock" data-info="true" data-info-number={i}>
