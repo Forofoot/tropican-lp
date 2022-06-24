@@ -27,6 +27,8 @@ export async function getStaticProps() {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'User-Agent': '*', //
     },
   })
 
@@ -34,6 +36,8 @@ export async function getStaticProps() {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'User-Agent': '*', //
     },
   })
 
