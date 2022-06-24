@@ -4,8 +4,7 @@ import Video from '../components/Video'
 import Review from '../components/Review'
 import Head from 'next/head'
 
-export default function Home() {
-  
+export default function Home({infos,cards}) {
   return (
     <>
       <Head>
@@ -13,11 +12,23 @@ export default function Home() {
       </Head> 
       <div className='container'>
         <Hero/>
-        <Infos/>
+        <Infos infos={infos}/>
         <Video />
-        <Review/>
+        <Review cards={cards}/>
       </div>
       
     </>
   )
+}
+
+export async function getStaticProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.API_URL}api/infos`)
+  const infos = await res.json()
+
+  const resCards = await fetch(`${process.env.API_URL}api/cards`)
+  const cards = await resCards.json()
+
+  // Pass data to the page via props
+  return { props: {infos, cards} }
 }

@@ -61,17 +61,7 @@ const ReviewStyle = styled.section`
         }
     }
 `
-export default function Review() {
-    let cards = [
-        {
-            name: 'Jérémy Ferrier',
-            testimony: 'J’ai pu profiter d’un court et magnifique séjour avec mes petits-enfants. C’était super sympa les petits ont hâte qu’on reparte ensemble. On a adoré!',
-        },
-        {
-            name: 'Marine Tourret',
-            testimony: 'Nous avons passer un séjour exceptionnel grâce à Leste. Mes loulous et moi avons trouvé des centres d’intérets communs, ce que nous avions pas forcément auparavant.',
-        }
-    ]
+export default function Review({cards}) {
     return (
         <ReviewStyle id="section3">
             <h2>Ils nous partagent avec fougue leurs retours</h2>
