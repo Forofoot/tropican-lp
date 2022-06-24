@@ -4,11 +4,17 @@ const ReviewStyle = styled.section`
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     height:100%;
     @media (min-width:1024px){
         min-height: 70vh;
+    }
+    @media (min-width: 768px) {
+        align-items: center;
+    }
+    h2{
+        color: #7159AD;
     }
     .cardsContainer{
         display: flex;
@@ -33,7 +39,6 @@ const ReviewStyle = styled.section`
             }
             h2{
                 margin-bottom:20px;
-
             }
 
             :nth-child(2n+1){
@@ -52,7 +57,7 @@ const ReviewStyle = styled.section`
 export default function Review({cards}) {
     return (
         <ReviewStyle id="section3">
-            <h2>Ils nous partagent avec fougue leurs retours</h2>
+            <h2>C&apos;est vous qui le dites ! </h2>
             <div className="cardsContainer">
                 {cards.map((elt, i) => (
                     <div key={i} className="cardTestimony card">

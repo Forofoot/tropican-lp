@@ -15,16 +15,15 @@ const VideoStyle = styled.div`
         margin: 0 auto;
         border-radius: 20px ;
         margin-bottom: 150px ;
+        background-color: #313131;
     }
 `
 const Video = () => {
     return ( 
         <VideoStyle>
-            <h2>Soyez originaux là où on ne s&apos;y attend pas</h2>
+            <h2>Découvrez cette fabuleuse expérience !</h2>
             <div className='containerVideo'>
-                <div className='video'>
-
-                </div>
+                <div className='video'></div>
             </div>
         </VideoStyle>
     );

@@ -118,15 +118,17 @@ export default createGlobalStyle`
   }
 
   .card{
-    padding: 30px 15px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(4px);
+    padding: 20px 30px;
     border-radius: 20px;
-    color: #F4F4F4;
     text-align: left;
     line-height: 26px;
-    border-width: 1px;
-    border-style: solid;
+    box-shadow: 0px 0px 10px rgba(113, 89, 173, 0.5);
+    h2{
+      color: #7159AD;
+      margin-bottom: 25px;
+    }
+    &:nth-child(2n+1){
+      
+    }
   }
 `
