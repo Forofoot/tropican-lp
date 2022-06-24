@@ -39,6 +39,7 @@ const ReviewStyle = styled.section`
                 display: flex;
                 align-items: center;
                 gap: 20px;
+                margin-bottom: 15px;
                 .picture{
                     border-radius: 50%;
                     width: 73px;
@@ -47,7 +48,7 @@ const ReviewStyle = styled.section`
                     max-height: 73px;
                 }
                 h2{
-                    margin-bottom:20px;
+                    margin-bottom:0;
                 } 
             }
            

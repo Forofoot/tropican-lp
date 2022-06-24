@@ -7,11 +7,11 @@ const InfoStyle = styled.section`
     @media (min-width: 768px){
         margin-bottom: 125px;
     }
-    h1{
+    h2{
         font-weight: 400;
         color:#F0E5C3;
         white-space: nowrap;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     .infosContainer{
         padding: 25px 10px;

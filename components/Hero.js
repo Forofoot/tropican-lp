@@ -13,16 +13,17 @@ const HeroStyle = styled.section`
     .heroBanner{
         margin: 20px 0;
     }
-    
-    h1{
-        margin-bottom: 55px;
-        text-align: center;
+    .containerInfo{
+        h1{
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        p{
+            margin-bottom: 25px;
+        }
     }
     .highlight{
         text-transform: uppercase ;
-    }
-    h2{
-        margin-bottom: 75px ;
     }
     .container__info{
         color: #484F75;
