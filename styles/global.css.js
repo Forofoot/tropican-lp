@@ -32,7 +32,7 @@ export default createGlobalStyle`
     min-height:100vh;
     width: 100%;
     font-family: 'SofiaPRO', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     background-color: #F4F4F4;
     color: #313131;
   }
@@ -82,7 +82,6 @@ export default createGlobalStyle`
     text-align: center;
     width: 180px;
     border-radius: 50px;
-    margin-top: 15px;
   }
 
   .btnDefault{
@@ -136,12 +135,11 @@ export default createGlobalStyle`
     padding: 20px 30px;
     border-radius: 20px;
     text-align: left;
-    line-height: 26px;
+    line-height: 20px;
     box-shadow: 0px 0px 10px rgba(113, 89, 173, 0.5);
     max-width: 500px;
     h2{
       color: #7159AD;
-      margin-bottom: 25px;
     }
   }
 `
