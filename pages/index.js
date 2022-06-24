@@ -21,7 +21,7 @@ export default function Home({infos,cards}) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.API_URL}api/infos`, {
     method: "GET",
