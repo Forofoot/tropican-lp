@@ -32,7 +32,7 @@ const HeaderStyle = styled.header`
         position: fixed;
         width: 100%;
         height: 100%;
-        background: #171717;
+        background-color: #F4F4F4;
         top: 0;
         will-change:left;
         transition: left .3s ease-in-out;
@@ -66,7 +66,7 @@ const HeaderStyle = styled.header`
           .closeline{
             width: 100%;
             height: 2px;
-            background-color: #FED745 ;
+            background-color: #7159AD ;
             transform: rotate(45deg) translate(11px, -10px);
             &:last-child{
               transform: rotate(-45deg) translate(-7px, -7px);
@@ -111,7 +111,7 @@ const HeaderStyle = styled.header`
     .burgerline {
       width: 30px;
       height: 2px;
-      background-color: #FED745;
+      background-color: #7159AD;
       margin-top: 2.5px;
       margin-bottom: 2.5px;
       will-change: transform;
@@ -144,7 +144,7 @@ const HeaderStyle = styled.header`
       }
     }
     a{
-      color:#fff;
+      color:#313131;
     }
   }
 `

@@ -74,9 +74,9 @@ const NewsletterForm = ( { status, message, onValidated }) => {
             id="email"
           />
         </div>
-        <div className="button-wrap wp-block-button">
+        <div className="buttonWrap wp-block-button">
           <button className="wp-block-button__link btnDefault" onClick={handleFormSubmit}>
-            S&apos;abonner
+            S&apos;enregistrer
           </button>
         </div>
       </div>
