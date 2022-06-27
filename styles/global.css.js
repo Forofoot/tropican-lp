@@ -35,6 +35,7 @@ export default createGlobalStyle`
     font-size: 16px;
     background-color: #F4F4F4;
     color: #313131;
+    position: relative;
   }
   img{
     border:0;
