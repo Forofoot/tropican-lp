@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import styled from "styled-components"
 
 const InfoStyle = styled.section`
@@ -7,9 +8,24 @@ const InfoStyle = styled.section`
     @media (min-width: 768px){
         margin-bottom: 125px;
     }
+    .info_star{
+        position:absolute;
+    }
+    
+    .info_star:nth-child(1){
+        bottom:0px;
+        right: 30px;
+    }
+    .info_star:nth-child(2){
+        top:0px;
+        right: 30px;
+    }
+    .info_star:nth-child(3){
+        bottom:-15px;
+        left: 20px;
+    }
     h2{
         font-weight: 400;
-        color:#F0E5C3;
         white-space: nowrap;
         margin-bottom: 10px;
     }
@@ -32,18 +48,39 @@ const InfoStyle = styled.section`
 `
 
 export default function Infos({ infos }) {
-  return (
-    <InfoStyle id="section2">
-        <div className="infosContainer">
-            {infos.map((info, i)=>(
-                <div key={i} className="infoBlock" data-info="true" data-info-number={i}>
-                    <h2>{info.title}</h2>
-                    <p>
-                        {info.description}
-                    </p>
-                </div>
-            ))}
-        </div>
-    </InfoStyle>
-  )
+    return (
+        <InfoStyle id="section2">
+            <div className="info_star">
+                <Image
+                src={"/star.svg"}
+                alt="Star"
+                height={35}
+                width={35}
+            /></div>
+            <div className="info_star">
+                <Image
+                src={"/star.svg"}
+                alt="Star"
+                height={15}
+                width={15}
+            /></div>
+            <div className="info_star">
+                <Image
+                src={"/star.svg"}
+                alt="Star"
+                height={25}
+                width={25}
+            /></div>
+            <div className="infosContainer">
+                {infos.map((info, i) => (
+                    <div key={i} className="infoBlock" data-info="true" data-info-number={i}>
+                        <h2>{info.title}</h2>
+                        <p>
+                            {info.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </InfoStyle>
+    )
 }
