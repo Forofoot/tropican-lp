@@ -85,16 +85,7 @@ export default function Footer() {
             <li className="iconSocial" key={i}>
               <Link href={elt.link} title={elt.title}>
                 <a target="_blank">
-                  {/* <div className="iconContainer"> */}
                     {elt.icon}
-                    {/* <Image
-                      src="/logo.webp"
-                      alt={elt.title}
-                      layout='raw'
-                      width= '30px'
-                      height= '30px'
-                    /> */}
-                  {/* </div> */}
                   
               </a></Link>
             </li>
