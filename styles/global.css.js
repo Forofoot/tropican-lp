@@ -67,7 +67,7 @@ export default createGlobalStyle`
     font-size:1.875em;
   }
   h2{
-    font-size:1.5em;
+    font-size:1.875em;
   }
   section{
     margin-bottom: 80px;
@@ -133,6 +133,9 @@ export default createGlobalStyle`
   }
 
   .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px 30px;
     border-radius: 20px;
     text-align: left;
@@ -143,4 +146,28 @@ export default createGlobalStyle`
       color: #7159AD;
     }
   }
+  
+  .slideIndicatorContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin: auto;
+        @media (min-width: 768px){
+            display: none;
+        }
+        .slideIndicator{
+            width: 40px;
+            height: 5px;
+            border-radius: 5px;
+            background: #147543;
+            opacity: 0.3;
+            transition: opacity .1s linear;
+            will-change: opacity;
+            &.current{
+                background-color: #147543;
+                opacity: 1;
+            }
+        }
+    }
 `
