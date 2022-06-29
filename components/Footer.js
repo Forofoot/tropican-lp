@@ -31,14 +31,25 @@ const FooterStyle = styled.footer`
       
       ul{
         display:flex;
+        gap: 10px;
         margin-bottom:50px;
-          .iconSocial{
+        .iconSocial{ 
           a{
             font-size: 30px;
-            margin-right:10px;
           }
           &:last-child{
             margin-right:0;
+          }
+          svg{
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+          }
+          &:last-child{
+            svg{
+              width: 48px;
+              height: 48px;
+            }
           }
         }
       }
@@ -68,12 +79,12 @@ export default function Footer() {
       {
           title: 'Facebook',
           icon: <BsFacebook/>,
-          link: 'https://www.facebook.com/'
+          link: 'https://www.facebook.com/Leste-109388878480844'
       },
       {
           title: 'Instagram',
           icon: <AiFillInstagram/>,
-          link: 'https://www.instagram.com/'
+          link: 'https://www.instagram.com/leste.officiel/'
       }
   ]
   return (
@@ -85,17 +96,7 @@ export default function Footer() {
             <li className="iconSocial" key={i}>
               <Link href={elt.link} title={elt.title}>
                 <a target="_blank">
-                  {/* <div className="iconContainer"> */}
-                    {elt.icon}
-                    {/* <Image
-                      src="/logo.webp"
-                      alt={elt.title}
-                      layout='raw'
-                      width= '30px'
-                      height= '30px'
-                    /> */}
-                  {/* </div> */}
-                  
+                  {elt.icon}
               </a></Link>
             </li>
           ))}

@@ -5,7 +5,7 @@ import Review from '../components/Review'
 import Brands from '../components/Brands'
 import Head from 'next/head'
 
-export default function Home({infos,cards}) {
+export default function Home({infos,cards,brands}) {
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function Home({infos,cards}) {
         <Infos infos={infos}/>
         <Video />
         <Review cards={cards} />
-        <Brands />
+        <Brands brands={brands}/>
       </div>
     </>
   )
@@ -50,7 +50,40 @@ export async function getStaticProps() {
         title : 'Qui sommes-nous ?',
         description : "Leste est un dispositif incroyable ! Nous vous organisons différentes expériences de voyages et d’activités entre vous et vos petits-enfants inoubliable."
     }
-    
-]
-  return { props: {infos, cards}}
+  ]
+
+  let brands =[
+    {
+      img:'/brands/easyjet-logo.webp',
+      title:'Easyjet',
+      width:124,
+      height:31
+    },
+    {
+      img:'/brands/decathlon-logo.webp',
+      title:'Decathlon',
+      width:126,
+      height:31
+    },
+    {
+      img:'/brands/flixbus-logo.webp',
+      title:'Flixbus',
+      width:114,
+      height:60
+    },
+    {
+      img:'/brands/centerpark-logo.webp',
+      title:'CenterParcs',
+      width:96,
+      height:96
+    },
+    {
+      img:'/brands/sncf-logo.webp',
+      title:'SNCF',
+      width:73,
+      height:39
+    }
+  ]
+
+  return { props: {infos, cards, brands}}
 }

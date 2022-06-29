@@ -18,6 +18,16 @@ const InfoStyle = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
+        .infoBlock{
+            text-align: left;
+            @media (min-width: 768px){
+                max-width: 580px;
+                text-align: center;
+            }
+            h2{
+                color: #7159AD;
+            }
+        }
     }
 `
 
@@ -26,7 +36,7 @@ export default function Infos({ infos }) {
     <InfoStyle id="section2">
         <div className="infosContainer">
             {infos.map((info, i)=>(
-                <div key={i} className="card infoBlock" data-info="true" data-info-number={i}>
+                <div key={i} className="infoBlock" data-info="true" data-info-number={i}>
                     <h2>{info.title}</h2>
                     <p>
                         {info.description}
