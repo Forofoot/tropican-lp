@@ -68,7 +68,7 @@ export default function Brands({brands}) {
                 console.log(entry.target)
             }
             })
-        }, {threshold: 1})
+        }, {threshold: 0.7})
 
         brands.forEach(elt => {
             containerio.observe(elt)
