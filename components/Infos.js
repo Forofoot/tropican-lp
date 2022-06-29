@@ -26,7 +26,6 @@ const InfoStyle = styled.section`
     }
     h2{
         font-weight: 400;
-        color:#7159AD;
         white-space: nowrap;
         margin-bottom: 10px;
     }
@@ -35,9 +34,15 @@ const InfoStyle = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-
         .infoBlock{
-            text-align:left;
+            text-align: left;
+            @media (min-width: 768px){
+                max-width: 580px;
+                text-align: center;
+            }
+            h2{
+                color: #7159AD;
+            }
         }
     }
 `
