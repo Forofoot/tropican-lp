@@ -10,6 +10,9 @@ const InfoStyle = styled.section`
     }
     .info_star{
         position:absolute;
+        @media (min-width: 768px){
+            display: none;
+        }
     }
     
     .info_star:nth-child(1){
