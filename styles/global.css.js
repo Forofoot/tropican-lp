@@ -181,7 +181,7 @@ export default createGlobalStyle`
         }
         .slideIndicator{
             width: 40px;
-            height: 5px;
+            height: 10px;
             border-radius: 5px;
             background: #147543;
             opacity: 0.3;
@@ -208,5 +208,14 @@ export default createGlobalStyle`
                 transform: scale(-1, -1);
             }
         }
+    }
+    .bepVfn svg path:last-child {
+    fill: rgb(255, 255, 255);
+    }
+    .bepVfn svg path {
+    fill:#7159ad ;
+    }
+    .button#axeptio_btn_acceptAll {
+      color: #7159AD!important;
     }
 `
