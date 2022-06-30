@@ -65,7 +65,6 @@ export default function Brands({brands}) {
                         elt.classList.remove('current');
                     }
                 });
-                console.log(entry.target)
             }
             })
         }, {threshold: 0.7})
