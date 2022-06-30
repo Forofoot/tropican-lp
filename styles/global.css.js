@@ -170,4 +170,15 @@ export default createGlobalStyle`
             }
         }
     }
+
+
+  .bepVfn svg path:last-child {
+  fill: rgb(255, 255, 255);
+  }
+  .bepVfn svg path {
+  fill:#7159ad ;
+  }
+  #axeptio_btn_acceptAll {
+    color: #7159AD!important;
+  }
 `
