@@ -170,4 +170,20 @@ export default createGlobalStyle`
             }
         }
     }
+
+    .infoBackground{
+        display: none;
+        @media (min-width: 768px) {
+            display: block;
+            position: absolute;
+            top: -150px;
+            left: -25px;
+            &.bottom{
+                right: -25px;
+                top: -218px;
+                left: auto;
+                transform: scale(-1, -1);
+            }
+        }
+    }
 `
