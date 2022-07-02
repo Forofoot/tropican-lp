@@ -55,21 +55,21 @@ export default function Infos({ infos }) {
         <InfoStyle id="section2">
             <div className="info_star">
                 <Image
-                src={"/star.svg"}
+                src={"/infos/star.svg"}
                 alt="Star"
                 height={35}
                 width={35}
             /></div>
             <div className="info_star">
                 <Image
-                src={"/star.svg"}
+                src={"/infos/star.svg"}
                 alt="Star"
                 height={15}
                 width={15}
             /></div>
             <div className="info_star">
                 <Image
-                src={"/star.svg"}
+                src={"/infos/star.svg"}
                 alt="Star"
                 height={25}
                 width={25}
@@ -83,6 +83,14 @@ export default function Infos({ infos }) {
                         </p>
                     </div>
                 ))}
+            </div>
+            <div className="infoBackground">
+                <Image
+                    src={"/infos/infosBackground.svg"}
+                    alt="Épingle"
+                    height={218}
+                    width={133}
+                />
             </div>
         </InfoStyle>
     )

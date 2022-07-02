@@ -103,7 +103,7 @@ const Hero = () => {
                 <p>Nous vous aidons à transcender vos liens</p>
             </div>
             <div className='btnPrimary'>
-                <Link href="#">
+                <Link href="/experience/dashboard">
                     <a className='btn'>
                         Découvrir
                     </a>

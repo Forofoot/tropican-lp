@@ -43,7 +43,7 @@ const ReviewStyle = styled.section`
             width: 98%;
             min-height: 100%;
             @media (min-width:1024px){
-                min-height: 250px;
+                min-height: 300px;
                 max-width: 450px;
             }
             .title{
@@ -155,6 +155,14 @@ export default function Review({cards}) {
                         <div className="slideIndicator" data-info-slide-number='2' data-info-slide-indicator="true"></div>
                     </a>
                 </Link>
+            </div>
+            <div className="infoBackground bottom">
+                <Image
+                    src={"/infos/infosBackground.svg"}
+                    alt="Épingle"
+                    height={218}
+                    width={133}
+                />
             </div>
         </ReviewStyle>
     )

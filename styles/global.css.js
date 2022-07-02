@@ -36,6 +36,9 @@ export default createGlobalStyle`
     background-color: #F4F4F4;
     color: #313131;
     position: relative;
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
   }
   img{
     border:0;
@@ -72,7 +75,25 @@ export default createGlobalStyle`
   section{
     margin-bottom: 80px;
   }
-  
+
+  @media (min-width: 768px) {
+    .titleStyled{
+      font-size: 2.5em;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      opacity: 0.4;
+      width: auto;
+      span{
+        &:first-child{
+          margin-right: 400px;
+        }
+        &:last-child{
+          margin-left: 140px;
+        }
+      }
+    }
+  }
   .container{
     padding: 0 25px;
   }
@@ -171,14 +192,28 @@ export default createGlobalStyle`
         }
     }
 
-
-  .bepVfn svg path:last-child {
-  fill: rgb(255, 255, 255);
-  }
-  .bepVfn svg path {
-  fill:#7159ad ;
-  }
-  #axeptio_btn_acceptAll {
-    color: #7159AD!important;
-  }
+    .infoBackground{
+        display: none;
+        @media (min-width: 1024px){
+            display: block;
+            position: absolute;
+            top: -150px;
+            left: -25px;
+            &.bottom{
+                right: -25px;
+                top: -218px;
+                left: auto;
+                transform: scale(-1, -1);
+            }
+        }
+    }
+    .bepVfn svg path:last-child {
+    fill: rgb(255, 255, 255);
+    }
+    .bepVfn svg path {
+    fill:#7159ad ;
+    }
+    .button#axeptio_btn_acceptAll {
+      color: #7159AD!important;
+    }
 `
