@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import * as gtag from '../lib/gtatg'
 import { GTM_ID, pageview } from '../lib/gtm'
 import GlobalCSS from '../styles/global.css'
+import '../styles/cookieconsent.css'
 
 function MyApp({ Component, pageProps }) {
 
