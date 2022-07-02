@@ -64,7 +64,7 @@ const NewsletterForm = ( { status, message, onValidated }) => {
     <>
       <div className="d-flex newsletter-input-fields">
         <div className="mc-field-group form">
-        <h2>Suivre nos actualités</h2 >
+        <label htmlFor="email">Suivre nos actualités</label >
           <input
             onChange={(event) => setEmail(event?.target?.value ?? '')}
             type="email"

@@ -14,17 +14,6 @@ const HeaderStyle = styled.header`
       width: 53px;
       height: 53px;
       position: relative;
-      @media (min-width: 768px){
-        display: none;
-      }
-    }.logoDesktop{
-      display: none;
-      @media (min-width: 768px){
-        display: block;
-        width: 187px;
-        height: 32px;
-        position: relative;
-      }
     }
     .navLinks{
         @media (min-width:768px){
@@ -134,8 +123,9 @@ const HeaderStyle = styled.header`
     .desktopLinks{
       display: none;
       @media (min-width: 768px){
-        gap: 80px;
+        gap: 15px;
         display: flex;
+        max-width: 60%;
         justify-content: space-between;
         align-items: center;
       }
@@ -169,18 +159,6 @@ export default function Navbar() {
               />
             </a>  
           </Link>
-
-          <Link href="#">
-            <a className="logoDesktop">
-              <Image
-                src="/logo-full.webp"
-                alt="Logo"
-                layout='fill'
-                objectFit='contain'
-              />
-            </a>  
-          </Link>
-
           <aside className={`navLinks ${active ? "opened" : ""}`}>
               <div className="close" onClick={() => setActive(!active)}>
                 <div className="closeline"></div>
