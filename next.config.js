@@ -6,8 +6,13 @@ const nextConfig = {
 module.exports = {
   experimental: {
     images: {
-        layoutRaw: true
+        layoutRaw: true,
+        domains: ['res.cloudinary.com']
     }
+  },
+  env: {
+    CLOUD_NAME: process.env.CLOUD_NAME,
+    SERVER_PATH: process.env.SERVER_PATH,
   },
   nextConfig,
   productionBrowserSourceMaps: true,

@@ -1,0 +1,70 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Grandparent {
+  id            Int             @id @default(autoincrement())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  avatar_publicId   String?
+  avatar        String?
+  pseudo        String
+  firstName     String
+  lastName      String
+  email         String
+  password      String
+  grandChildren Grandchildren[]
+  notifications Notification[]
+}
+
+model Grandchildren {
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  avatar_publicId   String?
+  avatar        String?
+  pseudo        String
+  firstName     String
+  lastName      String
+  email         String
+  password      String
+  grandParent   Grandparent[]
+  notifications Notification[]
+}
+
+model Notification {
+  id               Int            @id @default(autoincrement())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  grandParent      Grandparent?   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int?
+  grandChildren    Grandchildren? @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int?
+}
+
+model Activity {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  theme     Theme[]
+}
+
+model Theme {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  mainTheme   String
+  secondTheme String?
+  thirdTheme  String?
+  activity    Activity @relation(fields: [activity_id], references: [id])
+  activity_id Int
+}
