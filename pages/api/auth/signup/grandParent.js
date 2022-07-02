@@ -16,13 +16,19 @@ export default async function handler(
             return
         }
 
-        const exist = await prisma.grandchildren.findFirst({
+        const grandChildrenExist = await prisma.grandchildren.findFirst({
             where:{
-                email
+                pseudo
+            }
+        })
+
+        const grandParentExist = await prisma.grandchildren.findFirst({
+            where:{
+                pseudo
             }
         })
         //Hash password
-        if(exist){
+        if(grandChildrenExist || grandParentExist){
             res.status(500).json({ message: 'Existe déjà'})
         }
          const status = await prisma.grandparent.create({
