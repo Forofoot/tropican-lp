@@ -78,19 +78,19 @@ export default class MyDocument extends Document {
         <script
             dangerouslySetInnerHTML={{
               __html: `     
-              window.axeptioSettings = {
-                clientId: "62bd75f3603853d1880ab6f4",
-                cookiesVersion: "https://leste-lp/-fr",
-              };
-               
-              (function(d, s) {
-                var t = d.getElementsByTagName(s)[0], e = d.createElement(s);
-                e.async = true; e.src = "//static.axept.io/sdk.js";
-                t.parentNode.insertBefore(e, t);
-              })(document, "script");
-          `,
-            }}
-          />
+                  window.axeptioSettings = {
+                    clientId: "62bd75f3603853d1880ab6f4",
+                    cookiesVersion: "https://leste-lp/-fr",
+                  };
+                  
+                  (function(d, s) {
+                    var t = d.getElementsByTagName(s)[0], e = d.createElement(s);
+                    e.async = true; e.src = "//static.axept.io/sdk.js";
+                    t.parentNode.insertBefore(e, t);
+                  })(document, "script");
+              `,
+                }}
+              />
 
           <script
             async src="https://www.googletagmanager.com/ns.html?id=GTM-MKS45SB"

@@ -24,7 +24,7 @@ const VideoStyle = styled.section`
 const Video = () => {
     return ( 
         <VideoStyle>
-            <h2>Découvrez cette fabuleuse expérience !</h2>
+            <h2 className="titleStyled"><span>Découvrez cette</span> <span>fabuleuse expérience !</span></h2>
             <div className='containerVideo'>
                 <div className='video'>
                     <Image 
