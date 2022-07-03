@@ -23,14 +23,14 @@ const AuthStyle = styled.section`
             border-bottom: 1px solid #F20D97;
             color : #F20D97;
             margin-bottom: 40px;
-            :nth-child(1){
+            &:nth-child(1){
                 border-bottom: 1px solid #212F89;
                 color: #212F89;
-                :active{
+                &.active{
                     border-bottom: 3px solid #212F89;
                 }
             }
-            :active{
+            &.active{
                 border-bottom: 3px solid #F20D97;
             }
         }
@@ -52,10 +52,10 @@ const AuthStyle = styled.section`
             border-radius: 10px;
             border: 1px solid #212F89;
             text-align: center;
-            :hover{
+            &:hover{
                 border: 2px solid #212F89;
             }
-            :active{
+            &.active{
                 background-color: red;
             }
         }
@@ -74,7 +74,7 @@ const AuthStyle = styled.section`
             width: 100%;
             padding: 2px 0;
             border-bottom: 1px solid black;
-            :focus{
+            &:focus{
                 border-bottom: 2px solid #212F89;
                 }
             }

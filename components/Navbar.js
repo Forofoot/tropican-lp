@@ -217,7 +217,14 @@ export default function Navbar() {
               </ul>
           </aside>
           {currentUser?.pseudo ? (
-            <button onClick={logout}>Déconnexion</button>
+              <>
+              <Link href={`profile/${currentUser?.pseudo}`}>
+                <a>
+                  {currentUser?.pseudo}
+                </a>
+              </Link>
+              <button onClick={logout}>Déconnexion</button>
+            </>
           ) : (
             
             <ul className='desktopLinks'>
@@ -237,10 +244,7 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>)
-
           }
-          
-          
         </nav>
         
     </HeaderStyle>
