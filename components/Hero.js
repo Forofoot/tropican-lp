@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const HeroStyle = styled.section`
     position: relative;
@@ -154,32 +154,40 @@ const HeroStyle = styled.section`
 `
 
 const Hero = () => {
+    const firstStar = useRef()
+    const secondStar = useRef()
+    const thirdStar = useRef()
+
+    
     useEffect(() => {
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log('chargé');
-            document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
-                console.log('1');
-                var id = (event.target.id);
-                document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
-            })
-            document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
-                console.log('2');
-                document.querySelector(".image_banner img").src="/hero/image_banner.webp";
-            })
-        });
+        console.log('chargé');
+        firstStar.current.addEventListener('mouseenter', function(e){
+            console.log(this.id)
+        })
+        /*document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
+            console.log('1');
+            var id = (event.target.id);
+            document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
+        })
+        document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
+            console.log('2');
+            document.querySelector(".image_banner img").src="/hero/image_banner.webp";
+        })*/
+        
     })
     return (
         <HeroStyle id="section1">
-            <div className='star' id="over_1">
+            <div className='star' id="over_1" ref={firstStar}>
                 <Image
                     src={"/star.svg"}
                     alt="étoile"
                     width='35px'
                     height='35px'
                     fill='#147543'
+                    
                 />
-                </div>
-                <div className='star' id="over_2">
+            </div>
+            <div className='star' id="over_2" ref={secondStar}>
                 <Image
                     src={"/star.svg"}
                     alt="étoile"
@@ -187,8 +195,8 @@ const Hero = () => {
                     height='20px'
                     fill='#147543'
                 />
-                </div>
-                <div className='star' id="over_3">
+            </div>
+            <div className='star' id="over_3" ref={thirdStar}>
                 <Image
                     src={"/star.svg"}
                     alt="étoile"
@@ -196,7 +204,7 @@ const Hero = () => {
                     height='25px'
                     fill='#147543'
                 />
-                </div>
+            </div>
             <div className='heroBanner'>
                 <Image
                     src={"/hero/image_banner.webp"}
