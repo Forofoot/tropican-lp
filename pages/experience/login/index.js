@@ -202,10 +202,10 @@ export default function Index() {
             />
         </div>
         <div className='loginChoiceBlock'>
-            <div className='loginChoice' onClick={() => setLoginChoice('signin')}>
+            <div className={`loginChoice ${loginChoice == 'signin' ? 'active' : ''}`} onClick={() => setLoginChoice('signin')}>
                 Se connecter
             </div>
-            <div className='loginChoice' onClick={() => setLoginChoice('signup')}>
+            <div className={`loginChoice ${loginChoice == 'signup' ? 'active' : ''}`} onClick={() => setLoginChoice('signup')}>
                 S&apos;inscrire
             </div>
         </div>
