@@ -34,6 +34,12 @@ const AuthStyle = styled.section`
         justify-content: center;
         align-items: center;
         gap: 30px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        .choice__highlight{
+            padding:0 20px ;
+            width: 100% ;
+        }
         .loginButton{
             width: 20px;
             height: 20px;
@@ -205,6 +211,10 @@ export default function Index() {
         { loginChoice == 'signup' ? (
             <>
             <div className='buttonBlock'>
+                <div className='choice__highlight'>
+                    <p>Utilisateur</p>
+                </div>
+            
                 <div className='loginButton' onClick={() => setType('grandChildren')}>
                 </div>
                 <p>Petit-enfant</p>
