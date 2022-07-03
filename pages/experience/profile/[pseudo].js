@@ -21,6 +21,7 @@ const ProfileStyle = styled.section`
 `
 
 export default function Profile({profile}) {
+    console.log(profile.experience)
   return (
     <ProfileStyle>
         <figure>
@@ -57,6 +58,26 @@ export default function Profile({profile}) {
                 </a>
             </Link>
         </div>
+        <div>
+            Mes photos
+            {profile.experience.map((exp,i) =>(
+                <figure key={i}>
+                    {exp.image.map((img, index) =>(
+                        <figure key={index}>
+                            <Image
+                                src={img.image}
+                                alt='bamako'
+                                height={195}
+                                width={195}
+                            />
+                        </figure>
+                    ))}
+                    <p >{exp.name}</p>
+                </figure>
+                
+                
+            ))}
+        </div>
     </ProfileStyle>
   )
 }
@@ -78,9 +99,18 @@ export const getServerSideProps = async ({query}) => {
         firstName:true,
         lastName: true,
         pseudo:true,
-        avatar:true
+        avatar:true,
+        experience:{
+            select:{
+                name:true,
+                image:{
+                    select:{
+                        image: true
+                    }
+                }
+            }
+        }
     }
-
     })
     return{
     props:{
