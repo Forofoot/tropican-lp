@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useCookies } from "react-cookie";
+import { useRouter } from 'next/router'
 
 const HeaderStyle = styled.header`
   //background:#42A0B6;
@@ -148,7 +150,18 @@ const HeaderStyle = styled.header`
 
 export default function Navbar() {
   const [active, setActive] = useState(false)
-  
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [currentUser, setCurrentUser] = useState(null)
+  const router = useRouter()
+
+  const logout = () => {
+    removeCookie("user")
+    setCurrentUser(null)
+    router.push('/')
+  }
+  useEffect(() => {
+    setCurrentUser(cookies.user)
+  }, [cookies.user])
   return (
     <HeaderStyle>
         <nav>
@@ -203,7 +216,11 @@ export default function Navbar() {
                 </li>
               </ul>
           </aside>
-          <ul className='desktopLinks'>
+          {currentUser?.pseudo ? (
+            <button onClick={logout}>Déconnexion</button>
+          ) : (
+            
+            <ul className='desktopLinks'>
             <li>
               <Link href="#section1">
                 <a>Tropican</a>
@@ -219,7 +236,10 @@ export default function Navbar() {
                 <a>Vos retours</a>
               </Link>
             </li>
-          </ul>
+          </ul>)
+
+          }
+          
           
         </nav>
         
