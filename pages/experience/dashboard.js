@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Router from 'next/router';
 import styled from 'styled-components';
 import { parseCookies } from "../../helpers/"
 import { useCookies } from "react-cookie"
@@ -10,11 +11,15 @@ const DashboardStyle = styled.section`
 const Dashboard = ({user}) => {
     const [cookies] = useCookies(["user"])
     const [currentUser, setCurrentUser] = useState(null)
+    
     useEffect(() => {
         setCurrentUser(cookies.user)
+        if(!cookies.user){
+          Router.push('/experience/login')
+        }
     }, [cookies.user])
 
-    console.log(currentUser)
+
     return (
         <DashboardStyle>
             Expérience de {currentUser?.firstName}
