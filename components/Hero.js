@@ -1,28 +1,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
-import Script from 'next/script'
-
-<Script
- dangerouslySetInnerHTML={{
-    __html: ` 
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log('chargé');
-        document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
-            console.log('1');
-            var id = (event.target.id);
-            document.querySelector(".image_banner img").src="banner_over_".id.".webp";
-        })
-        document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
-            console.log('2');
-            document.querySelector(".image_banner img").src="/hero/image_banner.webp";
-        })
-      });
-        
-        `,  
- }}
-/>
+import { useState, useEffect } from 'react'
 
 const HeroStyle = styled.section`
     position: relative;
@@ -175,6 +154,20 @@ const HeroStyle = styled.section`
 `
 
 const Hero = () => {
+    useEffect(() => {
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log('chargé');
+            document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
+                console.log('1');
+                var id = (event.target.id);
+                document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
+            })
+            document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
+                console.log('2');
+                document.querySelector(".image_banner img").src="/hero/image_banner.webp";
+            })
+        });
+    })
     return (
         <HeroStyle id="section1">
             <div className='star' id="over_1">
