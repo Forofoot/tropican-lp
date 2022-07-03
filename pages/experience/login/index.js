@@ -26,6 +26,12 @@ const AuthStyle = styled.section`
             :nth-child(1){
                 border-bottom: 1px solid #212F89;
                 color: #212F89;
+                :active{
+                    border-bottom: 3px solid #212F89;
+                }
+            }
+            :active{
+                border-bottom: 3px solid #F20D97;
             }
         }
     }
@@ -48,6 +54,9 @@ const AuthStyle = styled.section`
             text-align: center;
             :hover{
                 border: 2px solid #212F89;
+            }
+            :active{
+                background-color: red;
             }
         }
     }
@@ -190,6 +199,19 @@ export default function Index() {
         router.push('/experience/dashboard')
     }
   }
+
+  const handleClick = event => {
+    // 👇️ toggle class on click
+    event.currentTarget.classList.toggle('bg-salmon');
+
+    // 👇️ add class on click
+    // event.currentTarget.classList.add('bg-salmon');
+
+    // 👇️ remove class on click
+    // event.currentTarget.classList.remove('bg-salmon');
+  };
+
+  
   return (
     <AuthStyle>
         <div className='loginLogo'>
@@ -216,7 +238,7 @@ export default function Index() {
                     <p>Utilisateur</p>
                 </div>
             
-                <div className='loginButton' onClick={() => setType('grandChildren')}>
+                <div className={`loginButton ${type == 'grandChildren' ? 'active' : ''}`} onClick={() => setType('grandChildren')}>
                 </div>
                 <p>Petit-enfant</p>
                 <div className='loginButton' onClick={() => setType('grandParent')}>
