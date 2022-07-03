@@ -7,8 +7,10 @@ module.exports = {
   experimental: {
     images: {
         layoutRaw: true,
-        domains: ['res.cloudinary.com']
     }
+  },
+  images:{
+    domains: ['res.cloudinary.com']
   },
   env: {
     CLOUD_NAME: process.env.CLOUD_NAME,
