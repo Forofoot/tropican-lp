@@ -3,25 +3,85 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const AuthStyle = styled.section`
     width: 100%;
     max-width: 800px;
-    height: 100vh;
     margin: auto;
-    h1{
-        text-align: center;
+    .loginLogo{
+        display:flex;
+        justify-content: center;
         margin-bottom: 50px;
+    }
+    .loginChoiceBlock{
+        display:flex;
+        .loginChoice {
+            width: 50%;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #F20D97;
+            color : #F20D97;
+            margin-bottom: 40px;
+            :nth-child(1){
+                border-bottom: 1px solid #212F89;
+                color: #212F89;
+            }
+        }
     }
     .buttonBlock{
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 30px;
         .loginButton{
-            background-color: grey;
-            padding: 30px;
-            width: 320px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            border: 1px solid #212F89;
             text-align: center;
+            :hover{
+                border: 2px solid #212F89;
+            }
+        }
+    }
+    form{
+        padding: 0 20px;
+        label, input{
+            all: unset;
+            margin-bottom: 30px;
+            display: flex;
+        }
+        label{
+            color: #212F89;
+        }
+        input{
+            width: 100%;
+            padding: 2px 0;
+            border-bottom: 1px solid black;
+            :focus{
+                border-bottom: 2px solid #212F89;
+                }
+            }
+        
+        p{
+            text-align: center;
+            margin: 75px 0;
+            a{
+                color: #212F89;
+            }
+            
+        }
+        button{
+            all: unset;
+            padding: 15px 45px;
+            background: #212F89;
+            border-radius: 25px;
+            color: #F4F4F4;
+            font-family: 'Mark Pro';
+            font-style: normal;
+            display: block;
+            margin: auto;
         }
     }
     
@@ -125,7 +185,15 @@ export default function Index() {
   }
   return (
     <AuthStyle>
-        <h1>Vous êtes ?</h1>
+        <div className='loginLogo'>
+            <Image
+                src={"/../public/logo.webp"}
+                alt="logo Leste"
+                width={165}
+                height={130}
+                priority
+            />
+        </div>
         <div className='loginChoiceBlock'>
             <div className='loginChoice' onClick={() => setLoginChoice('signin')}>
                 Se connecter
@@ -138,39 +206,54 @@ export default function Index() {
             <>
             <div className='buttonBlock'>
                 <div className='loginButton' onClick={() => setType('grandChildren')}>
-                    Petit-enfant
                 </div>
+                <p>Petit-enfant</p>
                 <div className='loginButton' onClick={() => setType('grandParent')}>
-                    Grand-parent
                 </div>
+                <p>Grand-parent</p>
             </div>
             { type == 'grandChildren' &&
                 <form method='POST' onSubmit={handleCreateGrandChildren}>
+                <label>Email</label>
                 <input type="text" value={inputedGrandChildren.email || ""} placeholder='email' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, email:e.target.value })}/>
+                <label>Prénom</label>
                 <input type="text" value={inputedGrandChildren.firstName || ""} placeholder='Prénom' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, firstName:e.target.value })}/>
+                <label>Nom</label>
                 <input type="text" value={inputedGrandChildren.lastName || ""} placeholder='Nom' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, lastName:e.target.value })}/>
+                <label>Pseudo</label>
                 <input type="text" value={inputedGrandChildren.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, pseudo:e.target.value })}/>
+                <label>Mot de passe</label>
                 <input type="text"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
-                <button type='submit'>Submit</button>
+                <button type='submit'>S&apos;inscrire</button>
             </form>
             }
 
             { type == 'grandParent' &&
-                <form method='POST' onSubmit={handleCreateGrandParent}>
+                <form className='form__signup' method='POST' onSubmit={handleCreateGrandParent}>
+                    <label>Email</label>
                     <input type="text" value={inputedGrandParent.email || ""} placeholder='email' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, email:e.target.value })}/>
+                    <label>Prénom</label>
                     <input type="text" value={inputedGrandParent.firstName || ""} placeholder='Prénom' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, firstName:e.target.value })}/>
+                    <label>Nom</label>
                     <input type="text" value={inputedGrandParent.lastName || ""} placeholder='Nom' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, lastName:e.target.value })}/>
+                    <label>Pseudo</label>
                     <input type="text" value={inputedGrandParent.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, pseudo:e.target.value })}/>
+                    <label>Mot de passe</label>
                     <input type="text"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
-                    <button type='submit'>Submit</button>
+                    <button type='submit'>S&apos;inscrire</button>
                 </form>
             }
             </>
         ) : (
             <form method='POST' onSubmit={handleSignin}>
+                <label>Nom d&apos;utilisateur</label>
                 <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
+                <label>Mot de passe</label>
                 <input type="text"  value={inputedUser.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
-                <button type='submit'>Submit</button>
+                <p>
+                    <a> Mot de passe oublié ?</a>
+                </p>
+                <button type='submit'>Se connecter</button>
             </form>
         )
         }
