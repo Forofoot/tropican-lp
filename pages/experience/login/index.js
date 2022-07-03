@@ -88,6 +88,7 @@ const AuthStyle = styled.section`
             font-style: normal;
             display: block;
             margin: auto;
+            margin-bottom: 35px
         }
     }
     
