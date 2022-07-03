@@ -23,6 +23,8 @@ model Grandparent {
   password      String
   grandChildren Grandchildren[]
   notifications Notification[]
+  gallery       Image[]
+  experience    Experience[]
 }
 
 model Grandchildren {
@@ -38,6 +40,8 @@ model Grandchildren {
   password      String
   grandParent   Grandparent[]
   notifications Notification[]
+  gallery       Image[]
+  experience    Experience[]
 }
 
 model Notification {
@@ -50,11 +54,26 @@ model Notification {
   grandChildren_id Int?
 }
 
+model Experience{
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  name            String
+  place           String
+  date            DateTime
+  grandParent      Grandparent   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int
+  grandChildren    Grandchildren @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int
+  image            Image[]
+}
+
 model Activity {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
+  place     String
   theme     Theme[]
 }
 
@@ -67,4 +86,18 @@ model Theme {
   thirdTheme  String?
   activity    Activity @relation(fields: [activity_id], references: [id])
   activity_id Int
+}
+
+model Image {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  image_publicId   String
+  image            String
+  grandParent      Grandparent?   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int?
+  grandChildren    Grandchildren? @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int?
+  experience       Experience @relation(fields: [experience_id], references: [id])
+  experience_id    Int
 }
