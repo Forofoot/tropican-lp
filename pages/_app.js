@@ -5,6 +5,7 @@ import * as gtag from '../lib/gtatg'
 import { GTM_ID, pageview } from '../lib/gtm'
 import GlobalCSS from '../styles/global.css'
 import '../styles/cookieconsent.css'
+import {CookiesProvider} from "react-cookie"
 
 function MyApp({ Component, pageProps }) {
 
@@ -32,11 +33,13 @@ function MyApp({ Component, pageProps }) {
           `,
         }}
       />
-    
-      <Layout>
-        <GlobalCSS/>
-        <Component {...pageProps} />
-      </Layout>
+      
+      <CookiesProvider>
+        <Layout>
+          <GlobalCSS/>
+          <Component {...pageProps} />
+        </Layout>
+      </CookiesProvider>
     </>
   )
 }
