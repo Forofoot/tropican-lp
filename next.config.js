@@ -13,6 +13,7 @@ module.exports = {
     domains: ['res.cloudinary.com']
   },
   env: {
+    MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
     CLOUD_NAME: process.env.CLOUD_NAME,
     SERVER_PATH: process.env.SERVER_PATH,
   },
