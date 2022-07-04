@@ -21,7 +21,6 @@ const ProfileStyle = styled.section`
 `
 
 export default function Profile({profile}) {
-    console.log(profile.experience)
   return (
     <ProfileStyle>
         <figure>
@@ -85,9 +84,6 @@ export default function Profile({profile}) {
 export const getServerSideProps = async ({query}) => {
     // Fetch data from external API
     //const cookie = parseCookies(req)
-
-    console.log(query)
-    
     const prisma = new PrismaClient();
     const currentPseudo = query.pseudo
 

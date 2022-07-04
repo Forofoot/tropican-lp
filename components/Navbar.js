@@ -157,7 +157,7 @@ export default function Navbar() {
   const logout = () => {
     removeCookie("user")
     setCurrentUser(null)
-    router.push('/')
+    router.push('/experience/login')
   }
   useEffect(() => {
     setCurrentUser(cookies.user)
@@ -221,6 +221,11 @@ export default function Navbar() {
               <Link href={`profile/${currentUser?.pseudo}`}>
                 <a>
                   {currentUser?.pseudo}
+                </a>
+              </Link>
+              <Link href='/experience/contact/addContact'>
+                <a>
+                  Ajouter un contact
                 </a>
               </Link>
               <button onClick={logout}>Déconnexion</button>
