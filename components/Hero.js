@@ -210,8 +210,6 @@ const Hero = () => {
                     src={"/hero/image_banner.webp"}
                     alt="Image banner d'une cabane dans un arbre"
                     layout='fill'
-                    width='100%'
-                    height='350px'
                     objectFit='cover'
                     priority
                 />
