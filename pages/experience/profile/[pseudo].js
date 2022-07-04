@@ -56,6 +56,11 @@ export default function Profile({profile}) {
                     Album
                 </a>
             </Link>
+            <Link href={`/experience/map/${profile.pseudo}`}>
+                <a>
+                    Map
+                </a>
+            </Link>
         </div>
         <div>
             Mes photos
