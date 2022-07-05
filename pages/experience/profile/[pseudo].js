@@ -55,7 +55,7 @@ const ProfileStyle = styled.section`
                 flex-wrap:wrap ;
                 margin-bottom:15px;
                 background: #212F89;
-                width:95%;
+                width:100%;
                 padding: 10px 45px;
                 border-radius: 25px;
                 a{
@@ -67,12 +67,12 @@ const ProfileStyle = styled.section`
                     color:#f4F4F4;
                 }
                 &:nth-child(2){
-                    width: 45%;
+                    width: 47%;
                     padding: 10px 20px;
                     margin-right: 15px
                 }
                 &:nth-child(3){
-                    width: 45%;
+                    width: 47%;
                     padding: 10px 20px;
                 }
             }
@@ -90,11 +90,11 @@ const ProfileStyle = styled.section`
                 font-style: normal;
             }
             &--album{
-                display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    grid-template-rows: 1fr;
-                    grid-column-gap: 0px;
-                    grid-row-gap: 0px;
+                display: flex;
+
+                Image{
+
+                }
                 }
             }
         }
@@ -191,8 +191,8 @@ export default function Profile({profile}) {
                                 <Image
                                     src={img?.image}
                                     alt='bamako'
-                                    height={195}
-                                    width={195}
+                                    height={180}
+                                    width={180}
                                 />
                             </figure>
                         ))}

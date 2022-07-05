@@ -12,9 +12,31 @@ const AuthStyle = styled.section`
         display:flex;
         justify-content: center;
         margin-bottom: 50px;
+        @media(min-width: 768px){
+            display: none;
+        }
     }
+    .loginPhoto{
+        display: none;
+        @media(min-width: 768px){
+            display: flex;
+            align-items: center;
+            padding:20px ;
+        }
+    }
+    .container__login{
+        @media(min-width: 768px){
+            display:flex;
+            &--form{
+                width: 100%
+            }
+        }
+    }
+    
     .loginChoiceBlock{
         display:flex;
+        @media(min-width: 768px){
+        }
         .loginChoice {
             width: 50%;
             text-align: center;
@@ -34,6 +56,7 @@ const AuthStyle = styled.section`
             }
         }
     }
+    
     .buttonBlock{
         display: flex;
         justify-content: center;
@@ -97,6 +120,9 @@ const AuthStyle = styled.section`
             display: block;
             margin: auto;
             margin-bottom: 35px
+        }
+        @media(min-width: 768px){
+            width: 100%;
         }
     }
     
@@ -210,19 +236,6 @@ export default function Index() {
     }
   }
 
-  
-  const handleClick = event => {
-    // 👇️ toggle class on click
-    event.currentTarget.classList.toggle('bg-salmon');
-
-    // 👇️ add class on click
-    // event.currentTarget.classList.add('bg-salmon');
-
-    // 👇️ remove class on click
-    // event.currentTarget.classList.remove('bg-salmon');
-  };
-
-  
   return (
     <AuthStyle>
         <div className='loginLogo'>
@@ -234,73 +247,88 @@ export default function Index() {
                 priority
             />
         </div>
-        <div className='loginChoiceBlock'>
-            <div className={`loginChoice ${loginChoice == 'signin' ? 'active' : ''}`} onClick={() => setLoginChoice('signin')}>
-                Se connecter
+        <div className='container__login' >
+            <div className='loginPhoto'>
+                <Image
+                    src={'/../public/profil/photo_login.webp'}
+                    alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
+                    width={540}
+                    height={768}
+                
+                />
             </div>
-            <div className={`loginChoice ${loginChoice == 'signup' ? 'active' : ''}`} onClick={() => setLoginChoice('signup')}>
-                S&apos;inscrire
+            <div className='container__login--form'>
+
+            
+            <div className='loginChoiceBlock'>
+                <div className={`loginChoice ${loginChoice == 'signin' ? 'active' : ''}`} onClick={() => setLoginChoice('signin')}>
+                    Se connecter
+                </div>
+                <div className={`loginChoice ${loginChoice == 'signup' ? 'active' : ''}`} onClick={() => setLoginChoice('signup')}>
+                    S&apos;inscrire
+                </div>
+            </div>
+                { loginChoice == 'signup' ? (
+                    <>
+                    <div className='buttonBlock'>
+                        <div className='choice__highlight'>
+                            <p>Utilisateur</p>
+                        </div>
+                    
+                        <div className={`loginButton ${type == 'grandChildren' ? 'active' : ''}`} onClick={() => setType('grandChildren')}>
+                        </div>
+                        <p>Petit-enfant</p>
+                        <div className={`loginButton ${type == 'grandParent' ? 'active' : ''}`} onClick={() => setType('grandParent')}>
+                        </div>
+                        <p>Grand-parent</p>
+                    </div>
+                    { type == 'grandChildren' &&
+                        <form method='POST' onSubmit={handleCreateGrandChildren}>
+                        <label>Email</label>
+                        <input type="text" value={inputedGrandChildren.email || ""} placeholder='email' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, email:e.target.value })}/>
+                        <label>Prénom</label>
+                        <input type="text" value={inputedGrandChildren.firstName || ""} placeholder='Prénom' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, firstName:e.target.value })}/>
+                        <label>Nom</label>
+                        <input type="text" value={inputedGrandChildren.lastName || ""} placeholder='Nom' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, lastName:e.target.value })}/>
+                        <label>Pseudo</label>
+                        <input type="text" value={inputedGrandChildren.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, pseudo:e.target.value })}/>
+                        <label>Mot de passe</label>
+                        <input type="text"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
+                        <button type='submit'>S&apos;inscrire</button>
+                    </form>
+                    }
+
+                    { type == 'grandParent' &&
+                        <form className='form__signup' method='POST' onSubmit={handleCreateGrandParent}>
+                            <label>Email</label>
+                            <input type="text" value={inputedGrandParent.email || ""} placeholder='email' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, email:e.target.value })}/>
+                            <label>Prénom</label>
+                            <input type="text" value={inputedGrandParent.firstName || ""} placeholder='Prénom' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, firstName:e.target.value })}/>
+                            <label>Nom</label>
+                            <input type="text" value={inputedGrandParent.lastName || ""} placeholder='Nom' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, lastName:e.target.value })}/>
+                            <label>Pseudo</label>
+                            <input type="text" value={inputedGrandParent.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, pseudo:e.target.value })}/>
+                            <label>Mot de passe</label>
+                            <input type="text"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
+                            <button type='submit'>S&apos;inscrire</button>
+                        </form>
+                    }
+                    </>
+                ) : (
+                    <form method='POST' onSubmit={handleSignin}>
+                        <label>Nom d&apos;utilisateur</label>
+                        <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
+                        <label>Mot de passe</label>
+                        <input type="text"  value={inputedUser.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
+                        <p>
+                            <a> Mot de passe oublié ?</a>
+                        </p>
+                        <button type='submit'>Se connecter</button>
+                    </form>
+                )
+                }
             </div>
         </div>
-        { loginChoice == 'signup' ? (
-            <>
-            <div className='buttonBlock'>
-                <div className='choice__highlight'>
-                    <p>Utilisateur</p>
-                </div>
-            
-                <div className={`loginButton ${type == 'grandChildren' ? 'active' : ''}`} onClick={() => setType('grandChildren')}>
-                </div>
-                <p>Petit-enfant</p>
-                <div className='loginButton' onClick={() => setType('grandParent')}>
-                </div>
-                <p>Grand-parent</p>
-            </div>
-            { type == 'grandChildren' &&
-                <form method='POST' onSubmit={handleCreateGrandChildren}>
-                <label>Email</label>
-                <input type="text" value={inputedGrandChildren.email || ""} placeholder='email' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, email:e.target.value })}/>
-                <label>Prénom</label>
-                <input type="text" value={inputedGrandChildren.firstName || ""} placeholder='Prénom' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, firstName:e.target.value })}/>
-                <label>Nom</label>
-                <input type="text" value={inputedGrandChildren.lastName || ""} placeholder='Nom' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, lastName:e.target.value })}/>
-                <label>Pseudo</label>
-                <input type="text" value={inputedGrandChildren.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, pseudo:e.target.value })}/>
-                <label>Mot de passe</label>
-                <input type="text"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
-                <button type='submit'>S&apos;inscrire</button>
-            </form>
-            }
-
-            { type == 'grandParent' &&
-                <form className='form__signup' method='POST' onSubmit={handleCreateGrandParent}>
-                    <label>Email</label>
-                    <input type="text" value={inputedGrandParent.email || ""} placeholder='email' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, email:e.target.value })}/>
-                    <label>Prénom</label>
-                    <input type="text" value={inputedGrandParent.firstName || ""} placeholder='Prénom' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, firstName:e.target.value })}/>
-                    <label>Nom</label>
-                    <input type="text" value={inputedGrandParent.lastName || ""} placeholder='Nom' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, lastName:e.target.value })}/>
-                    <label>Pseudo</label>
-                    <input type="text" value={inputedGrandParent.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, pseudo:e.target.value })}/>
-                    <label>Mot de passe</label>
-                    <input type="text"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
-                    <button type='submit'>S&apos;inscrire</button>
-                </form>
-            }
-            </>
-        ) : (
-            <form method='POST' onSubmit={handleSignin}>
-                <label>Nom d&apos;utilisateur</label>
-                <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
-                <label>Mot de passe</label>
-                <input type="text"  value={inputedUser.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
-                <p>
-                    <a> Mot de passe oublié ?</a>
-                </p>
-                <button type='submit'>Se connecter</button>
-            </form>
-        )
-        }
     </AuthStyle>
   )
 }
