@@ -218,7 +218,7 @@ export default function Navbar() {
           </aside>
           {currentUser?.pseudo ? (
               <>
-              <Link href={`profile/${currentUser?.pseudo}`}>
+              <Link href={`experience/profile/${currentUser?.pseudo}`}>
                 <a>
                   {currentUser?.pseudo}
                 </a>
