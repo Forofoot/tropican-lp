@@ -152,29 +152,35 @@ const HeroStyle = styled.section`
 	    60% {transform: translate(-50%, -15px);}
     }
 `
-
-const Hero = () => {
-    const firstStar = useRef()
-    const secondStar = useRef()
-    const thirdStar = useRef()
-
-    
-    useEffect(() => {
-        console.log('chargé');
-        firstStar.current.addEventListener('mouseenter', function(e){
-            console.log(this.id)
-        })
-        /*document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
-            console.log('1');
-            var id = (event.target.id);
-            document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
-        })
-        document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
-            console.log('2');
-            document.querySelector(".image_banner img").src="/hero/image_banner.webp";
-        })*/
+ 
+    export default function Hero (){
+        const firstStar = useRef()
+            const secondStar = useRef()
+            const thirdStar = useRef()
+            const imageRef = useRef()
+            let src = "/hero/image_banner.webp"
+        useEffect(() => {
+            console.log(imageRef.current)
         
-    })
+            firstStar.current.addEventListener('mouseenter', function(e){
+               var source = this.id;
+               var id = source.split('_');
+               console.log(imageRef)
+               src = "banner_over_"+id[1]+".webp"
+               imageRef.current.src=src;
+            })
+    
+            /*document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
+                console.log('1');
+                var id = (event.target.id);
+                document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
+            })
+            document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
+                console.log('2');
+                document.querySelector(".image_banner img").src="/hero/image_banner.webp";
+            })*/
+            
+        },[src])
     return (
         <HeroStyle id="section1">
             <div className='star' id="over_1" ref={firstStar}>
@@ -207,7 +213,8 @@ const Hero = () => {
             </div>
             <div className='heroBanner'>
                 <Image
-                    src={"/hero/image_banner.webp"}
+                    ref={imageRef}
+                    src={src}
                     alt="Image banner d'une cabane dans un arbre"
                     layout='fill'
                     width='100%'
@@ -239,5 +246,3 @@ const Hero = () => {
         </HeroStyle>
     )
 }
-
-export default Hero;
