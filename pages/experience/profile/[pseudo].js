@@ -145,7 +145,7 @@ export default function Profile({profile}) {
                     width={20}
                     height={20} 
                 />
-                <Link href={'#'}>
+                <Link href={`/experience/planning/${profile.pseudo}`}>
                     <a>
                         Agenda
                     </a>
