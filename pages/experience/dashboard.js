@@ -80,10 +80,6 @@ export const getServerSideProps = async ({ req, res }) => {
   const cookie = parseCookies(req)
 
   if (res) {
-    if (Object.keys(cookie).length === 0 && cookie.constructor === Object) {
-      res.writeHead(301, { Location: "/" })
-      res.end()
-    }
     if(cookie.user){
       const parsedUser =  JSON.parse(cookie.user)
       const prisma = new PrismaClient()
@@ -132,9 +128,6 @@ export const getServerSideProps = async ({ req, res }) => {
           }
         }
       }
-    }else{
-      res.writeHead(301, { Location: "/experience/login" })
-      res.end()
     }
   }
 }
