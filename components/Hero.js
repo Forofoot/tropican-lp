@@ -217,8 +217,6 @@ const HeroStyle = styled.section`
                     src={src}
                     alt="Image banner d'une cabane dans un arbre"
                     layout='fill'
-                    width='100%'
-                    height='350px'
                     objectFit='cover'
                     priority
                 />
@@ -229,7 +227,7 @@ const HeroStyle = styled.section`
                 <p>Nous vous aidons à transcender vos liens</p>
             </div>
             <div className='btnPrimary'>
-                <Link href="/experience/dashboard">
+                <Link href="/experience/login">
                     <a className='btn'>
                         Découvrir
                     </a>
