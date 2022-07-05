@@ -23,6 +23,7 @@ export default async function handler(
                     id: notificationGrandChildren.id
                 }
             }); 
+            await prisma.$disconnect()
             res.status(201).json({message: "demande d'amis refusé"})
         }
 
@@ -38,6 +39,7 @@ export default async function handler(
                     id: notificationGrandParent.id
                 }
             }); 
+            await prisma.$disconnect()
              res.status(201).json({message: "demande d'amis refusé"})
         }
     }

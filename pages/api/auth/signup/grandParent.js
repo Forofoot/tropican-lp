@@ -40,6 +40,7 @@ export default async function handler(
                 password: await hash(password, 12),
             }
         })
+        await prisma.$disconnect()
         //Send success response
         res.status(201).json({ message: 'User created', ...status });
         //Close DB connection

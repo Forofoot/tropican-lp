@@ -75,7 +75,10 @@ model Experience{
   updatedAt     DateTime       @updatedAt
   name            String
   place           String
-  date            DateTime
+  start           DateTime
+  end             DateTime
+  long            String
+  lat             String
   grandParent      Grandparent   @relation(fields: [grandParent_id], references: [id])
   grandParent_id   Int
   grandChildren    Grandchildren @relation(fields: [grandChildren_id], references: [id])
