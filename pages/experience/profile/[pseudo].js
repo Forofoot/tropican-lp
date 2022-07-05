@@ -98,7 +98,6 @@ const ProfileStyle = styled.section`
                 }
             }
         }
-    }
 
 `
 
