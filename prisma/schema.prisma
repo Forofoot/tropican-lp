@@ -16,13 +16,17 @@ model Grandparent {
   updatedAt     DateTime        @updatedAt
   avatar_publicId   String?
   avatar        String?
-  pseudo        String
+  pseudo        String          @unique
   firstName     String
   lastName      String
   email         String
   password      String
+  role          String          @default("grandparent")
   grandChildren Grandchildren[]
   notifications Notification[]
+  gallery       Image[]
+  experience    Experience[]
+  relation      Relation[]
 }
 
 model Grandchildren {
@@ -31,23 +35,52 @@ model Grandchildren {
   updatedAt     DateTime       @updatedAt
   avatar_publicId   String?
   avatar        String?
-  pseudo        String
+  pseudo        String         @unique
   firstName     String
   lastName      String
   email         String
   password      String
+  role          String          @default("grandchildren")
   grandParent   Grandparent[]
   notifications Notification[]
+  gallery       Image[]
+  experience    Experience[]
+  relation      Relation[]
 }
 
 model Notification {
   id               Int            @id @default(autoincrement())
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
-  grandParent      Grandparent?   @relation(fields: [grandParent_id], references: [id])
-  grandParent_id   Int?
+  grandparent      Grandparent?   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int
   grandChildren    Grandchildren? @relation(fields: [grandChildren_id], references: [id])
-  grandChildren_id Int?
+  grandChildren_id Int
+  sender           String
+}
+
+model Relation {
+  id               Int            @id @default(autoincrement())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  grandparent      Grandparent?   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int
+  grandChildren    Grandchildren? @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int
+}
+
+model Experience{
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  name            String
+  place           String
+  date            DateTime
+  grandParent      Grandparent   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int
+  grandChildren    Grandchildren @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int
+  image            Image[]
 }
 
 model Activity {
@@ -55,6 +88,7 @@ model Activity {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
+  place     String
   theme     Theme[]
 }
 
@@ -67,4 +101,18 @@ model Theme {
   thirdTheme  String?
   activity    Activity @relation(fields: [activity_id], references: [id])
   activity_id Int
+}
+
+model Image {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  image_publicId   String
+  image            String
+  grandParent      Grandparent?   @relation(fields: [grandParent_id], references: [id])
+  grandParent_id   Int?
+  grandChildren    Grandchildren? @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int?
+  experience       Experience @relation(fields: [experience_id], references: [id])
+  experience_id    Int
 }
