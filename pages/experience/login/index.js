@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
-import { useCookies } from "react-cookie"
+import { Cookies, useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
@@ -109,7 +108,18 @@ export default function Index() {
   const [loginChoice, setLoginChoice] = useState('signin')
   const [type, setType] = useState(null)
  
- const [cookie, setCookie] = useCookies(["test"])
+ const [cookie, setCookie] = useCookies(["user"])
+
+ const [currentUser, setCurrentUser] = useState(null)
+
+ if (currentUser){
+    router.push('/experience/dashboard')
+ }
+
+ useEffect(() => {
+    setCurrentUser(cookie.user)
+ }, [cookie.user]);
+
  const [inputedUser, setInputedUser] = useState({
     pseudo: "",
     password: ""
@@ -216,7 +226,7 @@ export default function Index() {
     <AuthStyle>
         <div className='loginLogo'>
             <Image
-                src={"/../public/logo.webp"}
+                src={"/logo.webp"}
                 alt="logo Leste"
                 width={165}
                 height={130}
