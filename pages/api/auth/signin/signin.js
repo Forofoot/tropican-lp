@@ -39,6 +39,7 @@ export default async function handler(
                     role: resultGrandChildren.role,
                     id: resultGrandChildren.id
                 })
+                await prisma.$disconnect()
             }
         }
 
@@ -57,6 +58,7 @@ export default async function handler(
                     role: resultGrandParent.role,
                     id: resultGrandParent.id
                 })
+                await prisma.$disconnect()
             }
         }
 

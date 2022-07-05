@@ -98,6 +98,7 @@ export const getServerSideProps = async ({ req, res }) => {
             sender:true
           }
         })
+        await prisma.$disconnect()
         return{
           props:{
             friendRequest,
@@ -121,6 +122,7 @@ export const getServerSideProps = async ({ req, res }) => {
             sender:true
           }
         })
+        await prisma.$disconnect()
         return{
           props:{
             friendRequest,

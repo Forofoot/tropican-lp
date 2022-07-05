@@ -4,9 +4,10 @@ export default async function handler(
     req, res
 ) {
 
-    const prisma = new PrismaClient();
+    
     //Only POST mothod is accepted
     if (req.method === 'POST') {
+        const prisma = new PrismaClient();
         //Getting email and password from body
         const { pseudo, role, currentUser, currentUserId } = req.body
         //Validate
@@ -53,7 +54,7 @@ export default async function handler(
                             sender: role
                         }
                     })
-                    
+                    await prisma.$disconnect()
                     res.status(201).json({ message: 'Friend request send'})
                 }
                 res.status(500).json({message: 'Déjà demandé'})
@@ -76,7 +77,7 @@ export default async function handler(
                             sender: role
                         }
                     })
-
+                    await prisma.$disconnect()
                     res.status(201).json({ message: 'Friend request send'})
                 }
                 res.status(500).json({message: 'Déjà demandé'})
