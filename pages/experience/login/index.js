@@ -210,6 +210,7 @@ export default function Index() {
     }
   }
 
+  
   const handleClick = event => {
     // 👇️ toggle class on click
     event.currentTarget.classList.toggle('bg-salmon');
