@@ -27,6 +27,8 @@ export default function Map({profile}) {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
 
+    console.log(new Date())
+
     const handleSelect = ( ranges ) =>{
         setStartDate(ranges.selection.startDate)
         setEndDate(ranges.selection.endDate)
@@ -44,6 +46,7 @@ export default function Map({profile}) {
             minDate={new Date()}
             rangeColors={["#FD5B61"]}
             onChange={handleSelect}
+            disabledDates={[]}
         />
     </PlanningStyle>
   )

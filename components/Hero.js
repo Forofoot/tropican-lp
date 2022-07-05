@@ -220,7 +220,7 @@ const Hero = () => {
                 <p>Nous vous aidons à transcender vos liens</p>
             </div>
             <div className='btnPrimary'>
-                <Link href="/experience/dashboard">
+                <Link href="/experience/login">
                     <a className='btn'>
                         Découvrir
                     </a>
