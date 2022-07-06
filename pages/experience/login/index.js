@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import { Cookies, useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
@@ -134,6 +134,7 @@ export default function Index() {
 
   const [loginChoice, setLoginChoice] = useState('signin')
   const [type, setType] = useState(null)
+  const [error, setError] = useState()
  
  const [cookies, setCookie] = useCookies(["user"])
 
@@ -166,6 +167,7 @@ export default function Index() {
     pseudo: "",
     password: "",
   })
+
 
   const handleCreateGrandParent = async (e) => {
     e.preventDefault();
@@ -211,6 +213,9 @@ export default function Index() {
     });
   };
 
+  
+  const errormessage = useRef()
+
   const handleSignin = async (e) => {
     e.preventDefault()
 
@@ -233,13 +238,15 @@ export default function Index() {
             sameSite: true,
         })
         router.push('/experience/dashboard')
-    }else{
-        alert(data)
+    }else{  
+        errormessage.current.classList.add('active')
+        setError(data)
     }
   }
 
   return (
     <AuthStyle>
+        <p className='error' ref={errormessage}>{error}</p>
         <div className='loginLogo'>
             <Image
                 src={"/logo.webp"}
