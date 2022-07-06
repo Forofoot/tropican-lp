@@ -1,4 +1,4 @@
-import { getImage } from "../../utils/formidable";
+/*import { getImage } from "../../utils/formidable";
 import { uploadImage } from "../../utils/cloudinary";
 import { PrismaClient } from "@prisma/client";
 
@@ -27,4 +27,4 @@ export default async function handle(req, res) {
   });
 
   res.json(result);
-}
+}*/
