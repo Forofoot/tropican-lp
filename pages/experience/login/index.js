@@ -225,7 +225,7 @@ export default function Index() {
     });
     
     const data = await res.json();
-    if(data.ok){
+    if(res.ok){
         setCookie("user", JSON.stringify(data), {
             maxAge: 3600, // Expires after 1hr
             sameSite: true,
