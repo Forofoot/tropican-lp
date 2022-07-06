@@ -26,6 +26,13 @@ const PlanningStyle = styled.section`
         gap: 30px;
         padding-top: 25px;
     }
+    .rdrDateRangePickerWrapper,
+    .rdrMonth{
+        width: 100%;
+    }
+    .rdrDefinedRangesWrapper{
+        display: none;
+    }
 `
 
 let daysOfYear = [];
