@@ -249,7 +249,7 @@ export default function Index() {
         <div className='container__login' >
             <div className='loginPhoto'>
                 <Image
-                    src={'/../public/profil/photo_login.webp'}
+                    src={'/profil/photo_login.webp'}
                     alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
                     width={540}
                     height={768}
