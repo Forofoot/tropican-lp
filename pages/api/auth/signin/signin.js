@@ -46,7 +46,7 @@ export default async function handler(
         if (resultGrandParent) {
             const checkGrandParentPassword = await compare(password, resultGrandParent.password);
             if(!checkGrandParentPassword){
-                return false
+                res.status(500).json('tests')
             }else{
                 res.status(200).json({
                     firstName: resultGrandParent.firstName,
