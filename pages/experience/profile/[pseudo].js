@@ -105,7 +105,7 @@ const ProfileStyle = styled.section`
 
 export default function Profile({profile}) {
     
-  const [cookies, removeCookie] = useCookies(["user"]);
+  const [cookies,setCookie, removeCookie] = useCookies(["user"]);
 
   const [currentUser, setCurrentUser] = useState(null)
   
@@ -120,7 +120,7 @@ export default function Profile({profile}) {
 
   const logout = (e) => {
     e.preventDefault()
-    removeCookie("user", { path: '/'})
+    removeCookie("user")
     setCurrentUser(null)
     router.push('/experience/login')
   }
