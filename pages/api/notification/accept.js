@@ -29,6 +29,7 @@ export default async function handler(
                     grandChildren_id: currentUserID
                 }
             })
+            await prisma.$disconnect()
             res.status(201).json({message: "demande d'amis refusé"})
         }
 
@@ -51,6 +52,7 @@ export default async function handler(
                     grandChildren_id: relationID
                 }
             })
+            await prisma.$disconnect()
              res.status(201).json({message: "demande d'amis accepté"})
         }
     }

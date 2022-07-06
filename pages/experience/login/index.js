@@ -134,17 +134,16 @@ export default function Index() {
   const [loginChoice, setLoginChoice] = useState('signin')
   const [type, setType] = useState(null)
  
- const [cookie, setCookie] = useCookies(["user"])
+ const [cookies, setCookie] = useCookies(["user"])
 
  const [currentUser, setCurrentUser] = useState(null)
 
- if (currentUser){
-    router.push('/experience/dashboard')
- }
-
  useEffect(() => {
-    setCurrentUser(cookie.user)
- }, [cookie.user]);
+    setCurrentUser(cookies.user)
+    if(cookies.user){
+        router.push('/experience/dashboard')
+    }
+ }, [cookies.user]);
 
  const [inputedUser, setInputedUser] = useState({
     pseudo: "",
@@ -226,13 +225,14 @@ export default function Index() {
     });
     
     const data = await res.json();
-    if(data){
+    if(res.ok){
         setCookie("user", JSON.stringify(data), {
             maxAge: 3600, // Expires after 1hr
             sameSite: true,
         })
-
         router.push('/experience/dashboard')
+    }else{
+        alert(data)
     }
   }
 
@@ -250,7 +250,7 @@ export default function Index() {
         <div className='container__login' >
             <div className='loginPhoto'>
                 <Image
-                    src={'/../public/profil/photo_login.webp'}
+                    src={'/profil/photo_login.webp'}
                     alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
                     width={540}
                     height={768}

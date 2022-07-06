@@ -3,7 +3,6 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import { useCookies } from "react-cookie";
-import { useRouter } from 'next/router'
 
 const HeaderStyle = styled.header`
   //background:#42A0B6;
@@ -152,16 +151,11 @@ export default function Navbar() {
   const [active, setActive] = useState(false)
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [currentUser, setCurrentUser] = useState(null)
-  const router = useRouter()
 
-  const logout = () => {
-    removeCookie("user")
-    setCurrentUser(null)
-    router.push('/experience/login')
-  }
   useEffect(() => {
     setCurrentUser(cookies.user)
   }, [cookies.user])
+
   return (
     <HeaderStyle>
         <nav>
@@ -217,19 +211,48 @@ export default function Navbar() {
               </ul>
           </aside>
           {currentUser?.pseudo ? (
-              <>
-              <Link href={`/experience/profile/${currentUser?.pseudo}`}>
-                <a>
-                  {currentUser?.pseudo}
-                </a>
-              </Link>
-              <Link href='/experience/contact/addContact'>
+            <ul className='desktopLinks'>
+              <li>
+                <Link href={`/experience/profile/${currentUser?.pseudo}`}>
+                  <a>
+                    Profil
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/experience/planning/${currentUser?.pseudo}`}>
+                  <a>
+                    Calendrier
+                  </a>
+                </Link>
+              </li>
+              {/*<Link href='/experience/contact/addContact'>
                 <a>
                   Ajouter un contact
                 </a>
-              </Link>
-              <button onClick={logout}>Déconnexion</button>
-            </>
+          </Link>*/}
+              <li>
+                <Link href={`/experience/map/${currentUser?.pseudo}`}>
+                  <a>
+                    Carte
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/experience/dashboard'>
+                  <a>
+                    Mes albums
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/'>
+                  <a>
+                    Le blog
+                  </a>
+                </Link>
+              </li>
+            </ul>
           ) : (
             
             <ul className='desktopLinks'>

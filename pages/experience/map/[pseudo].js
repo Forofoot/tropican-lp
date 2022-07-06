@@ -26,8 +26,8 @@ export default function Map({profile, country}) {
     
     const [selectedLocation, setSelectedLocation] = useState({})
     const [viewState, setViewState] = useState({
-        longitude: -100,
-        latitude: 40,
+        longitude: profile.experience[0].long,
+        latitude:profile.experience[0].lat,
         zoom: 3.5
     });
 
@@ -43,27 +43,27 @@ export default function Map({profile, country}) {
                 positionOptions={{ enableHighAccuracy: true }}
                 trackUserLocation={true}
             />
-            {country.map((result, i) => (
+            {profile.experience.map((result, i) => (
                 <div key={i}>
                     <Marker
-                        longitude={result.longitude}
-                        latitude={result.latitude}
+                        longitude={result.long}
+                        latitude={result.lat}
                         offsetLeft={-20}
                         offsetTop={-10}
                     >
                         <p onClick={() => setSelectedLocation(result)}>
-                            Destination
+                            {result.name}
                         </p>
                     </Marker>
 
-                    {result.longitude === selectedLocation.longitude ? (
+                    {result.long === selectedLocation.long ? (
                         <Popup
                             onClose={() => setSelectedLocation({})}
                             closeOnClick={false}
-                            latitude={result.latitude}
-                            longitude={result.longitude}
+                            latitude={result.lat}
+                            longitude={result.long}
                         >
-                            {result.country}
+                            {result.name}
                         </Popup>
                     ) : (
                         false
@@ -82,58 +82,70 @@ export const getServerSideProps = async ({query}) => {
     const prisma = new PrismaClient();
     const currentPseudo = query.pseudo
 
-    const profile = await prisma.grandchildren.findFirst({
-    where:{
-        pseudo:currentPseudo
-    },
-    select:{
-        firstName:true,
-        lastName: true,
-        pseudo:true,
-        avatar:true,
-        experience:{
-            select:{
-                name:true,
-                image:{
-                    select:{
-                        image: true
+    const findWhereGrandParent = await prisma.grandparent.findFirst({
+        where:{
+            pseudo: currentPseudo
+        }
+    })
+    if(findWhereGrandParent){
+        const profile = await prisma.grandparent.findFirst({
+        where:{
+            pseudo:currentPseudo
+        },
+        select:{
+            firstName:true,
+            lastName: true,
+            pseudo:true,
+            avatar:true,
+            experience:{
+                select:{
+                    name:true,
+                    long:true,
+                    lat:true,
+                    image:{
+                        select:{
+                            image: true
+                        }
                     }
                 }
             }
         }
+        })
+        await prisma.$disconnect()
+        return{
+        props:{
+                profile
+            }
+        }
     }
+    const profile = await prisma.grandchildren.findFirst({
+        where:{
+            pseudo:currentPseudo
+        },
+        select:{
+            firstName:true,
+            lastName: true,
+            pseudo:true,
+            avatar:true,
+            experience:{
+                select:{
+                    name:true,
+                    long:true,
+                    lat:true,
+                    image:{
+                        select:{
+                            image: true
+                        }
+                    }
+                }
+            }
+        }
     })
-
-    let country =  [
-        {
-              country : "Albania",
-              alpha2 : "AL",
-              alpha3 : "ALB",
-              numeric : 8,
-              latitude : 50.06,
-              longitude : 1.49
-            },
-        {
-              country : "Algeria",
-              alpha2 : "DZ",
-              alpha3 : "DZA",
-              numeric : 12,
-              latitude : 28,
-              longitude : 3
-            },
-        {
-              country : "American Samoa",
-              alpha2 : "AS",
-              alpha3 : "ASM",
-              numeric : 16,
-              latitude : -14.3333,
-              longitude : -170
-            },
-    ]
+    
+    await prisma.$disconnect()
     return{
-    props:{
-        profile,
-        country
+        props:{
+            profile
         }
     }
 }

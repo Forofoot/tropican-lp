@@ -39,13 +39,14 @@ export default async function handler(
                     role: resultGrandChildren.role,
                     id: resultGrandChildren.id
                 })
+                await prisma.$disconnect()
             }
         }
 
         if (resultGrandParent) {
             const checkGrandParentPassword = await compare(password, resultGrandParent.password);
             if(!checkGrandParentPassword){
-                return false
+                res.status(500).json('tests')
             }else{
                 res.status(200).json({
                     firstName: resultGrandParent.firstName,
@@ -57,6 +58,7 @@ export default async function handler(
                     role: resultGrandParent.role,
                     id: resultGrandParent.id
                 })
+                await prisma.$disconnect()
             }
         }
 

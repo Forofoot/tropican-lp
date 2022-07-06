@@ -5,9 +5,9 @@ export default async function handler(
     req, res
 ) {
 
-    const prisma = new PrismaClient();
     //Only POST mothod is accepted
     if (req.method === 'POST') {
+        const prisma = new PrismaClient();
         //Getting email and password from body
         const { firstName, lastName, pseudo, email, password } = req.body
         //Validate
@@ -40,6 +40,7 @@ export default async function handler(
                 password: await hash(password, 12),
             }
         })
+        await prisma.$disconnect()
         //Send success response
         res.status(201).json({ message: 'User created', ...status });
         //Close DB connection
