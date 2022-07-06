@@ -3,7 +3,6 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import { useCookies } from "react-cookie";
-import { useRouter } from 'next/router'
 
 const HeaderStyle = styled.header`
   //background:#42A0B6;
@@ -152,16 +151,11 @@ export default function Navbar() {
   const [active, setActive] = useState(false)
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [currentUser, setCurrentUser] = useState(null)
-  const router = useRouter()
 
-  const logout = () => {
-    removeCookie("user")
-    setCurrentUser(null)
-    router.push('/experience/login')
-  }
   useEffect(() => {
     setCurrentUser(cookies.user)
   }, [cookies.user])
+
   return (
     <HeaderStyle>
         <nav>
@@ -228,7 +222,6 @@ export default function Navbar() {
                   Ajouter un contact
                 </a>
               </Link>
-              <button onClick={logout}>Déconnexion</button>
             </>
           ) : (
             

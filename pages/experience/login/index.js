@@ -134,17 +134,16 @@ export default function Index() {
   const [loginChoice, setLoginChoice] = useState('signin')
   const [type, setType] = useState(null)
  
- const [cookie, setCookie] = useCookies(["user"])
+ const [cookies, setCookie] = useCookies(["user"])
 
  const [currentUser, setCurrentUser] = useState(null)
 
- if (currentUser){
-    router.push('/experience/dashboard')
- }
-
  useEffect(() => {
-    setCurrentUser(cookie.user)
- }, [cookie.user]);
+    setCurrentUser(cookies.user)
+    if(!cookies.user){
+        router.push('/experience/dashboard')
+    }
+ }, [cookies.user]);
 
  const [inputedUser, setInputedUser] = useState({
     pseudo: "",
