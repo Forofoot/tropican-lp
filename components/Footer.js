@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Image from "next/image"
 import Link from "next/link"
 import NewsletterSubscribe from "./NewsletterSubscribe"
 import { BsFacebook } from 'react-icons/bs';
