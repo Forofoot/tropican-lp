@@ -150,7 +150,7 @@ export default function Profile({profile}) {
                     width={20}
                     height={20} 
                 />
-                <Link href={'#'}>
+                <Link href={`/experience/contact/addContact`}>
                     <a>
                         Ajouter un contact
                     </a>

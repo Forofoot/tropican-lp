@@ -28,7 +28,7 @@ const PlanningStyle = styled.section`
     }
     .rdrDateRangePickerWrapper,
     .rdrMonth{
-        width: 100%;
+        width: 600px;
     }
     .rdrDefinedRangesWrapper{
         display: none;
