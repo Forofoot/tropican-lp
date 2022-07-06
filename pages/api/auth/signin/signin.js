@@ -1,5 +1,5 @@
 import { compare } from 'bcryptjs';
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 
 const prisma = new PrismaClient();
@@ -46,7 +46,7 @@ export default async function handler(
         if (resultGrandParent) {
             const checkGrandParentPassword = await compare(password, resultGrandParent.password);
             if(!checkGrandParentPassword){
-                res.status(500).json('tests')
+                res.status(500).json('Mot de passe ou nom d\'utilisateur incorrect')
             }else{
                 res.status(200).json({
                     firstName: resultGrandParent.firstName,
