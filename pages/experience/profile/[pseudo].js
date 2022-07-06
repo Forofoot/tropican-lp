@@ -69,13 +69,19 @@ const ProfileStyle = styled.section`
                     color:#f4F4F4;
                 }
                 &:nth-child(2){
-                    width: 47%;
+                    width: 48%;
                     padding: 10px 20px;
-                    margin-right: 15px
+                    margin-right: 15px;
+                    @media(min-width: 768px){
+                        width: 49%;
+                    }
                 }
                 &:nth-child(3){
-                    width: 47%;
+                    width: 48%;
                     padding: 10px 20px;
+                    @media(min-width: 768px){
+                        width: 49%;
+                    }
                 }
             }
         }
@@ -168,8 +174,8 @@ export default function Profile({profile}) {
                 <Image
                     src={'/../public/profil/contact.png'}
                     alt='logo icone contact'
-                    width={20}
-                    height={20} 
+                    width={25}
+                    height={25} 
                 />
                 <Link href={`/experience/contact/addContact`}>
                     <a>
@@ -181,8 +187,8 @@ export default function Profile({profile}) {
                 <Image
                     src={'/../public/profil/agenda.png'}
                     alt='logo icone contact'
-                    width={20}
-                    height={20} 
+                    width={25}
+                    height={25} 
                 />
                 <Link href={`/experience/planning/${profile?.pseudo}`}>
                     <a>
@@ -194,8 +200,8 @@ export default function Profile({profile}) {
                 <Image
                     src={'/../public/profil/album.png'}
                     alt='logo icone contact'
-                    width={20}
-                    height={20} 
+                    width={25}
+                    height={25} 
                 />
                 <Link href={'#'}>
                     <a>
