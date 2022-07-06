@@ -140,7 +140,7 @@ export default function Index() {
 
  useEffect(() => {
     setCurrentUser(cookies.user)
-    if(!cookies.user){
+    if(cookies.user){
         router.push('/experience/dashboard')
     }
  }, [cookies.user]);
@@ -225,13 +225,14 @@ export default function Index() {
     });
     
     const data = await res.json();
-    if(data){
+    if(data.ok){
         setCookie("user", JSON.stringify(data), {
             maxAge: 3600, // Expires after 1hr
             sameSite: true,
         })
-
         router.push('/experience/dashboard')
+    }else{
+        alert(data)
     }
   }
 
