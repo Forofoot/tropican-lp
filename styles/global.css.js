@@ -216,4 +216,17 @@ export default createGlobalStyle`
     .button#axeptio_btn_acceptAll {
       color: #7159AD!important;
     }
+
+    .error{
+      color: red;
+      visibility: hidden;
+      text-align: center;
+      opacity: 0;
+      will-change: opacity;
+      transition: opacity linear .5s ;
+      &.active{
+        visibility: visible;
+        opacity: 1;
+      }
+    }
 `
