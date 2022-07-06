@@ -211,18 +211,48 @@ export default function Navbar() {
               </ul>
           </aside>
           {currentUser?.pseudo ? (
-              <>
-              <Link href={`/experience/profile/${currentUser?.pseudo}`}>
-                <a>
-                  {currentUser?.pseudo}
-                </a>
-              </Link>
-              <Link href='/experience/contact/addContact'>
+            <ul className='desktopLinks'>
+              <li>
+                <Link href={`/experience/profile/${currentUser?.pseudo}`}>
+                  <a>
+                    Profil
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/experience/planning/${currentUser?.pseudo}`}>
+                  <a>
+                    Calendrier
+                  </a>
+                </Link>
+              </li>
+              {/*<Link href='/experience/contact/addContact'>
                 <a>
                   Ajouter un contact
                 </a>
-              </Link>
-            </>
+          </Link>*/}
+              <li>
+                <Link href={`/experience/map/${currentUser?.pseudo}`}>
+                  <a>
+                    Carte
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/experience/dashboard'>
+                  <a>
+                    Mes albums
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/'>
+                  <a>
+                    Le blog
+                  </a>
+                </Link>
+              </li>
+            </ul>
           ) : (
             
             <ul className='desktopLinks'>
