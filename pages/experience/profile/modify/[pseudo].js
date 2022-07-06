@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+/*import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
@@ -177,4 +177,4 @@ export const getServerSideProps = async ({query}) => {
             profile
         }
     }
-}
+}*/
