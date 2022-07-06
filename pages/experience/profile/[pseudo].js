@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
+import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useCookies } from "react-cookie";
 
 const ProfileStyle = styled.section`
     text-align: center;
@@ -102,8 +104,30 @@ const ProfileStyle = styled.section`
 `
 
 export default function Profile({profile}) {
+    
+  const [cookies, removeCookie] = useCookies(["user"]);
+
+  const [currentUser, setCurrentUser] = useState(null)
+  
+  const router = useRouter()
+
+  useEffect(() => {
+    setCurrentUser(cookies.user)
+    if(!cookies.user){
+        router.push('/experience/login')
+    }
+  }, [cookies.user])
+
+  const logout = (e) => {
+    e.preventDefault()
+    removeCookie("user", { path: '/'})
+    setCurrentUser(null)
+    router.push('/experience/login')
+  }
   return (
     <ProfileStyle>
+        <button onClick={(e) => logout(e)}>Déconnexion</button>
+
         <div className='profil__photo'>
             <figure>
             </figure>
