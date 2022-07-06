@@ -1,9 +1,7 @@
-/*import React, { useEffect, useState } from 'react'
-import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { useCookies } from "react-cookie";
 
 const ModifyStyle = styled.section`
@@ -41,21 +39,29 @@ export default function Modify({profile}) {
     try {
         const formData = new FormData();
         formData.append("image", imageUploaded);
-        formData.append("userId", currentUser?.id)
-        formData.append("currentAvatar", currentUser?.avatar_publicId)
+        formData.append("userId", profile?.id)
+        formData.append("currentAvatar", profile?.avatar_publicId)
+        formData.append("currentPseudo", profile?.pseudo)
 
-        const res = await fetch("/api/upload", {
+        const res = await fetch("../../../api/profile/modify", {
             method: "POST",
             body: formData,
         });
 
         const data = await res.json();
 
-        setCookie("user", JSON.stringify(data), {
-            path: "/",
-            maxAge: 3600, // Expires after 1hr
-            sameSite: true,
-        })
+        if(res.ok){
+            setCookie("user", JSON.stringify(data), {
+                path: "/",
+                maxAge: 3600, // Expires after 1hr
+                sameSite: true,
+            })
+
+            router.push(`/experience/profile/${profile.pseudo}`)
+        }else{
+            alert(data)
+        }
+        
   
     //router.push('/')
     } catch (error) {
@@ -113,10 +119,12 @@ export const getServerSideProps = async ({query}) => {
             pseudo:currentPseudo
         },
         select:{
+            id:true,
             firstName:true,
             lastName: true,
             pseudo:true,
             avatar:true,
+            avatar_publicId:true,
             email:true,
             experience:{
                 select:{
@@ -148,10 +156,12 @@ export const getServerSideProps = async ({query}) => {
             pseudo:currentPseudo
         },
         select:{
+            id:true,
             firstName:true,
             lastName: true,
             pseudo:true,
             avatar:true,
+            avatar_publicId:true,
             email:true,
             experience:{
                 select:{
@@ -177,4 +187,4 @@ export const getServerSideProps = async ({query}) => {
             profile
         }
     }
-}*/
+}
