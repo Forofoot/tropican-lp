@@ -41,18 +41,13 @@ const AuthStyle = styled.section`
             width: 50%;
             text-align: center;
             padding: 20px;
-            border-bottom: 1px solid #F20D97;
-            color : #F20D97;
+            border-bottom: 1px solid #212F89;
+            color : #212F89;
             margin-bottom: 40px;
-            &:nth-child(1){
-                border-bottom: 1px solid #212F89;
-                color: #212F89;
-                &.active{
-                    border-bottom: 3px solid #212F89;
-                }
-            }
+            font-weight: 700;
+            font-size: 1.1rem;
             &.active{
-                border-bottom: 3px solid #F20D97;
+                border-bottom: 3px solid #212F89;
             }
         }
     }
@@ -65,12 +60,15 @@ const AuthStyle = styled.section`
         margin-bottom: 30px;
         flex-wrap: wrap;
         .choice__highlight{
-            padding:0 20px ;
-            width: 100% ;
+            padding:0 20px;
+            width: 100%;
+            p{
+                font-weight: 700;
+                color: #212F89;
+            }
         }
         .loginButton{
-            width: 20px;
-            height: 20px;
+            padding: 8px 70px 8px 10px;
             border-radius: 10px;
             border: 1px solid #212F89;
             text-align: center;
@@ -83,19 +81,21 @@ const AuthStyle = styled.section`
         }
     }
     form{
-        padding: 0 20px;
+        padding: 0 25px;
         label, input{
             all: unset;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: flex;
         }
         label{
             color: #212F89;
+            font-weight: 700;
         }
         input{
             width: 100%;
-            padding: 2px 0;
-            border-bottom: 1px solid black;
+            padding: 8px 5px;
+            border: .5px solid black;
+            border-radius: 10px;
             &:focus{
                 border-bottom: 2px solid #212F89;
                 }
@@ -103,7 +103,7 @@ const AuthStyle = styled.section`
         
         p{
             text-align: center;
-            margin: 75px 0;
+            margin: 0 0 75px 0;
             a{
                 color: #212F89;
             }
@@ -115,11 +115,12 @@ const AuthStyle = styled.section`
             background: #212F89;
             border-radius: 25px;
             color: #F4F4F4;
-            font-family: 'Mark Pro';
+            font-family: 'Sofia Pro';
             font-style: normal;
+            font-weight: 700;
             display: block;
             margin: auto;
-            margin-bottom: 35px
+            margin-bottom: 20px;
         }
         @media(min-width: 768px){
             width: 100%;
@@ -275,12 +276,12 @@ export default function Index() {
                             <p>Utilisateur</p>
                         </div>
                     
-                        <div className={`loginButton ${type == 'grandChildren' ? 'active' : ''}`} onClick={() => setType('grandChildren')}>
+                        <div className={`loginButton ${type == 'grandChildren' ? 'active' : ''}`} onClick={() => setType('grandChildren')}>Petit-enfant
                         </div>
-                        <p>Petit-enfant</p>
-                        <div className={`loginButton ${type == 'grandParent' ? 'active' : ''}`} onClick={() => setType('grandParent')}>
+                        
+                        <div className={`loginButton ${type == 'grandParent' ? 'active' : ''}`} onClick={() => setType('grandParent')}>Grand-parent
                         </div>
-                        <p>Grand-parent</p>
+
                     </div>
                     { type == 'grandChildren' &&
                         <form method='POST' onSubmit={handleCreateGrandChildren}>
@@ -320,10 +321,11 @@ export default function Index() {
                         <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
                         <input type="text"  value={inputedUser.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
+                        <button type='submit'>Se connecter</button>
                         <p>
                             <a> Mot de passe oublié ?</a>
                         </p>
-                        <button type='submit'>Se connecter</button>
+                        
                     </form>
                 )
                 }
