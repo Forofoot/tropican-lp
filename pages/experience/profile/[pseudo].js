@@ -126,7 +126,7 @@ export default function Profile({profile}) {
 
   const logout = (e) => {
     e.preventDefault()
-    removeCookie("user")
+    removeCookie("user",  {path: '/'})
     setCurrentUser(null)
     router.push('/experience/login')
   }
@@ -135,8 +135,29 @@ export default function Profile({profile}) {
         <button onClick={(e) => logout(e)}>Déconnexion</button>
 
         <div className='profil__photo'>
+            
             <figure>
+                {profile.avatar ? (
+                    <Image
+                        src={profile?.avatar}
+                        alt={profile?.pseudo}
+                        width={125}
+                        height={125}
+                    />
+                ) : (
+                    <Image
+                        src={'/logo.webp'}
+                        alt={'photo de profil'}
+                        width={125}
+                        height={125}
+                    />
+                )} 
             </figure>
+            <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                <a>
+                    Modifier
+                </a>
+            </Link>
         </div>
         
         <p className='profil__name'>{profile?.firstName} {profile?.lastName}</p>
