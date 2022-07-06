@@ -60,7 +60,7 @@ export default function Map({profile, date}) {
   return (
     <PlanningStyle>
         <DateRangePicker
-            ranges={[selectionRange]}
+            ranges={[]}
             minDate={new Date()}
             rangeColors={["#FD5B61"]}
             onChange={handleSelect}
