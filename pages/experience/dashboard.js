@@ -3,12 +3,16 @@ import Router from 'next/router';
 import styled from 'styled-components';
 import { parseCookies } from "../../helpers/"
 import { useCookies } from "react-cookie"
-import { prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import Link from 'next/link';
 
 const DashboardStyle = styled.section`
     height: 100vh;
     h3{
       margin-top: 45px;
+    }
+    a{
+      color:#000;
     }
 `
 
@@ -51,8 +55,9 @@ const Dashboard = ({user, friendRequest}) => {
 
     return (
         <DashboardStyle>
-            Expérience de {currentUser?.firstName}
+            <h1>Expérience de {currentUser?.firstName}</h1>
 
+            <Link href="/experience/quizz"><a>Commencer le quizz</a></Link> 
             {friendRequest ? (
             <h3>Demande d&apos;amis de : {friendRequest.map((elt, i) =>(
                   <div key={i}>

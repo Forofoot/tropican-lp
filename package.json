@@ -33,6 +33,7 @@
     "react-map-gl-geocoder": "^2.2.0",
     "react-moment": "^1.1.2",
     "rsuite": "^5.15.2",
+    "survey-react": "^1.9.37",
     "styled-components": "^5.3.5",
     "superjson": "^1.9.1"
   },
