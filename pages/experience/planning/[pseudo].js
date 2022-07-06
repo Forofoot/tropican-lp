@@ -69,7 +69,7 @@ export default function Map({profile, date}) {
         <DateRangePicker
             ranges={[]}
             minDate={new Date()}
-            rangeColors={["#FD5B61"]}
+            rangeColors={["#F885CA"]}
             onChange={handleSelect}
             inputRanges={[]}
             disabledDates={daysOfYear}
