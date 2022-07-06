@@ -129,7 +129,23 @@ export default function Profile({profile}) {
         <button onClick={(e) => logout(e)}>Déconnexion</button>
 
         <div className='profil__photo'>
-            <figure>
+            
+        <figure>
+            {profile.avatar ? (
+                <Image
+                    src={profile?.avatar}
+                    alt={profile?.pseudo}
+                    width={125}
+                    height={125}
+                />
+            ) : (
+                <Image
+                    src={'/logo.webp'}
+                    alt={'photo de profil'}
+                    width={125}
+                    height={125}
+                />
+            )} 
             </figure>
         </div>
         
