@@ -2,23 +2,26 @@ import React, { useState, useEffect } from 'react'
 import * as Survey from "survey-react" // import surveyjs
 //import { questions } from "./content/questions" // these are the survey question
 
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker } from 'react-date-range';
 
 // Modern theme
 import "survey-react/modern.min.css"
 
-export default function SurveryQuizz() {
-    
+const daysOfYear = []
+
+export default function SurveryQuizz({user, relation}) {
     const questions = {
-        title: "Quizz",
-        showProgressBar: "bottom",
+        showProgressBar: "top",
         firstPageIsStarted: true,
-        startSurveyText: "Suivant",
+        startSurveyText: "Valider",
         pages: [
         {
             "elements": [
             {
                 "type": "html",
-                "html": "Nous allons vous poser quelques questions concernant vos conditions physiques mais également sur vos préférences. Afin de mieux vous connaitre et de vous proposer une expérience sur mesure !"
+                "html": ""
             }
             ]
         },
@@ -290,7 +293,36 @@ export default function SurveryQuizz() {
     // Create a modal
     const survey = new Survey.Model(questions)
 
-        
+    const [currentPage, setCurrentPage] = useState('agenda')
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    
+    const handleSelect = ( ranges ) =>{
+        setStartDate(ranges.selection.startDate)
+        setEndDate(ranges.selection.endDate)
+        setValue({
+            start:ranges.selection.startDate,
+            end:ranges.selection.endDate
+        })
+    }
+
+    const selectionRange = {
+        startDate: startDate,
+        endDate: endDate,
+        key: 'selection'
+    }
+
+    
+    const [value, setValue] = useState({
+        start: new Date(),
+        end: new Date(),
+        pseudo: ""
+    });
+    relation.experience.forEach(pro => {
+        for (let d = pro.start; d <= pro.end; d.setDate(d.getDate() + 1)) {
+            daysOfYear.push(new Date(d));
+        }
+    });
     const [state, setstate] = useState([])
     const [datas, setDatas] = useState([])
     survey.onComplete.add(function (survey, options) {
@@ -303,12 +335,65 @@ export default function SurveryQuizz() {
             survey.data.accomodation,
             survey.data.mainTheme, 
             survey.data.secondThemeSport || survey.data.secondThemeCulturel || survey.data.secondThemeDetente || survey.data.secondThemeJeux, 
-            survey.data.thirdTheme])
-      });
+            survey.data.thirdTheme
+        
 
-      console.log(state)
-      survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
+            ])
+    });
+
+    const handleChoose = ( choose ) =>{
+        console.log(value)
+        if(!value.pseudo || !value.start || !value.end){
+            alert('Choisir une relation et une date')
+        }else{
+            setCurrentPage(choose)
+        }
+    }
+
+    const handleSelectRelation = (pseudo) =>{
+        setValue({ ...value, pseudo:pseudo})
+    }
+    survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
+
+    useEffect(() =>{
+    })
   return (
-    <div><Survey.Survey model={survey} /></div>
+    <div>
+        Agenda
+        {currentPage == 'agenda' &&
+            <>
+                Sélectionner un contact: 
+                    {relation.relation.map((elt, i)=>(
+                        <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent.pseudo}`)}>
+                            {elt.grandparent.pseudo}
+                        </p>
+                    ))}
+                <DateRangePicker
+                    ranges={[selectionRange]}
+                    minDate={new Date()}
+                    rangeColors={["#F885CA"]}
+                    onChange={handleSelect}
+                    inputRanges={[]}
+                    disabledDates={daysOfYear}
+                />
+                <button onClick={() => handleChoose('infos')}>
+                    Valider
+                </button>
+            </>
+        }
+        {currentPage == 'infos' &&
+            <>
+                <h3>Avez-vous des difficultés pour :</h3>
+                <p>La mobilité</p>
+                <p>La vision</p>
+                <p>L'audition</p>
+                <p>Le langage</p>
+                <Survey.Survey model={survey} />
+                <button onClick={() => handleChoose('agenda')}>
+                    Retour
+                </button>
+            </>
+        }
+    </div>
   )
 }

@@ -26,6 +26,7 @@ model Grandparent {
   gallery       Image[]
   experience    Experience[]
   relation      Relation[]
+  physicalIssue PhysicalIssue[]
 }
 
 model Grandchildren {
@@ -44,6 +45,7 @@ model Grandchildren {
   gallery       Image[]
   experience    Experience[]
   relation      Relation[]
+  physicalIssue PhysicalIssue[]
 }
 
 model Notification {
@@ -116,6 +118,10 @@ model PhysicalIssue {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   physical    String
+  grandParent Grandparent? @relation(fields: [grandParent_id], references: [id])
+  grandParent_id Int
+  grandChildren Grandchildren? @relation(fields: [grandChildren_id], references: [id])
+  grandChildren_id Int
   activity    Activity @relation(fields: [activity_id], references: [id])
   activity_id Int
 }
