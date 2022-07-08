@@ -97,13 +97,13 @@ export const getServerSideProps = async ({query}) => {
     const prisma = new PrismaClient();
     const currentPseudo = query.pseudo
 
-    const findWhereGrandParent = await prisma.grandparent.findFirst({
+    const findWhereGrandParent = await prisma.grandparent.findUnique({
         where:{
             pseudo: currentPseudo
         }
     })
     if(findWhereGrandParent){
-        const profile = await prisma.grandparent.findFirst({
+        const profile = await prisma.grandparent.findUnique({
         where:{
             pseudo:currentPseudo
         },
@@ -132,7 +132,7 @@ export const getServerSideProps = async ({query}) => {
             }
         }
         })
-        const date = await prisma.grandparent.findFirst({
+        const date = await prisma.grandparent.findUnique({
             where:{
                 pseudo:currentPseudo
             },
@@ -153,7 +153,7 @@ export const getServerSideProps = async ({query}) => {
             }
         }
     }
-    const profile = await prisma.grandchildren.findFirst({
+    const profile = await prisma.grandchildren.findUnique({
         where:{
             pseudo:currentPseudo
         },
@@ -183,7 +183,7 @@ export const getServerSideProps = async ({query}) => {
         }
     })
 
-    const date = await prisma.grandchildren.findFirst({
+    const date = await prisma.grandchildren.findUnique({
         where:{
             pseudo:currentPseudo
         },

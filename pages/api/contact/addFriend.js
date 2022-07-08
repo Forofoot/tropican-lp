@@ -40,7 +40,7 @@ export default async function handler(
         })
         if(findReceiverGrandParent){
             if(role === resultGrandChildren.role){
-                const notificationExist = await prisma.notification.findFirst({
+                const notificationExist = await prisma.notification.findUnique({
                     where:{
                         grandChildren_id : currentUserId,
                         grandParent_id: findReceiverGrandParent.id
@@ -63,7 +63,7 @@ export default async function handler(
 
         if(findReceiverGrandChildren){
             if(role === resultGrandParent.role){
-                const notificationExist = await prisma.notification.findFirst({
+                const notificationExist = await prisma.notification.findUnique({
                     where:{
                         grandChildren_id: findReceiverGrandChildren.id,
                         grandParent_id: currentUserId

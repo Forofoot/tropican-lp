@@ -8,17 +8,18 @@ export default async function handler(
     req,
     res
 ) {
-    if (req.method === 'POST') {
+    try{
+       if (req.method === 'POST') {
 
         const { pseudo, password } = req.body
 
-        let resultGrandParent = await prisma.grandparent.findFirst({
+        let resultGrandParent = await prisma.grandparent.findUnique({
             where: {
                 pseudo
             }
         });
 
-        let resultGrandChildren = await prisma.grandchildren.findFirst({
+        let resultGrandChildren = await prisma.grandchildren.findUnique({
             where: {
                 pseudo
             }
@@ -53,5 +54,8 @@ export default async function handler(
         if(!resultGrandChildren || !resultGrandParent){
             return false
         }
+    } 
+    }catch(e){
+        console.log(e)
     }
 }
