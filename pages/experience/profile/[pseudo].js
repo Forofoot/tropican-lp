@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
@@ -69,13 +69,19 @@ const ProfileStyle = styled.section`
                     color:#f4F4F4;
                 }
                 &:nth-child(2){
-                    width: 47%;
+                    width: 48%;
                     padding: 10px 20px;
-                    margin-right: 15px
+                    margin-right: 15px;
+                    @media(min-width: 768px){
+                        width: 49%;
+                    }
                 }
                 &:nth-child(3){
-                    width: 47%;
+                    width: 48%;
                     padding: 10px 20px;
+                    @media(min-width: 768px){
+                        width: 49%;
+                    }
                 }
             }
         }
@@ -105,23 +111,19 @@ const ProfileStyle = styled.section`
 
 export default function Profile({profile}) {
     
-  const [cookies,setCookie, removeCookie] = useCookies(["user"]);
-
-  const [currentUser, setCurrentUser] = useState(null)
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   
   const router = useRouter()
 
   useEffect(() => {
-    setCurrentUser(cookies.user)
     if(!cookies.user){
         router.push('/experience/login')
     }
-  }, [cookies.user])
+  },)
 
   const logout = (e) => {
     e.preventDefault()
-    removeCookie("user")
-    setCurrentUser(null)
+    removeCookie("user",  {path: '/'})
     router.push('/experience/login')
   }
   return (
@@ -130,23 +132,28 @@ export default function Profile({profile}) {
 
         <div className='profil__photo'>
             
-        <figure>
-            {profile.avatar ? (
-                <Image
-                    src={profile?.avatar}
-                    alt={profile?.pseudo}
-                    width={125}
-                    height={125}
-                />
-            ) : (
-                <Image
-                    src={'/logo.webp'}
-                    alt={'photo de profil'}
-                    width={125}
-                    height={125}
-                />
-            )} 
+            <figure>
+                {profile.avatar ? (
+                    <Image
+                        src={profile?.avatar}
+                        alt={profile?.pseudo}
+                        width={125}
+                        height={125}
+                    />
+                ) : (
+                    <Image
+                        src={'/logo.webp'}
+                        alt={'photo de profil'}
+                        width={125}
+                        height={125}
+                    />
+                )} 
             </figure>
+            <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                <a>
+                    Modifier
+                </a>
+            </Link>
         </div>
         
         <p className='profil__name'>{profile?.firstName} {profile?.lastName}</p>
@@ -163,8 +170,8 @@ export default function Profile({profile}) {
                 <Image
                     src={'/../public/profil/contact.png'}
                     alt='logo icone contact'
-                    width={20}
-                    height={20} 
+                    width={25}
+                    height={25} 
                 />
                 <Link href={`/experience/contact/addContact`}>
                     <a>
@@ -176,8 +183,8 @@ export default function Profile({profile}) {
                 <Image
                     src={'/../public/profil/agenda.png'}
                     alt='logo icone contact'
-                    width={20}
-                    height={20} 
+                    width={25}
+                    height={25} 
                 />
                 <Link href={`/experience/planning/${profile?.pseudo}`}>
                     <a>
@@ -189,8 +196,8 @@ export default function Profile({profile}) {
                 <Image
                     src={'/../public/profil/album.png'}
                     alt='logo icone contact'
-                    width={20}
-                    height={20} 
+                    width={25}
+                    height={25} 
                 />
                 <Link href={'#'}>
                     <a>
@@ -246,82 +253,90 @@ export default function Profile({profile}) {
 }
 
 export const getServerSideProps = async ({query}) => {
-    // Fetch data from external API
-    //const cookie = parseCookies(req)
-    const prisma = new PrismaClient();
     const currentPseudo = query.pseudo
 
-    const findWhereGrandParent = await prisma.grandparent.findFirst({
-        where:{
-            pseudo: currentPseudo
-        }
-    })
-    if(findWhereGrandParent){
-        const profile = await prisma.grandparent.findFirst({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    grandChildren:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
+
+    try{
+        const prisma = new PrismaClient();
+        const findWhereGrandParent = await prisma.grandparent.findUnique({
+            where:{
+                pseudo: currentPseudo
+            }
+        })
+        if(findWhereGrandParent){
+            const profile = await prisma.grandparent.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                firstName:true,
+                lastName: true,
+                pseudo:true,
+                avatar:true,
+                experience:{
+                    select:{
+                        name:true,
+                        place:true,
+                        grandChildren:{
+                            select:{
+                                firstName:true
+                            }
+                        },
+                        image:{
+                            select:{
+                                image: true
+                            }
                         }
                     }
                 }
             }
+            })
+            await prisma.$disconnect()
+            return{
+            props:{
+                    profile
+                }
+            }
         }
+        const profile = await prisma.grandchildren.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                firstName:true,
+                lastName: true,
+                pseudo:true,
+                avatar:true,
+                experience:{
+                    select:{
+                        name:true,
+                        place:true,
+                        grandParent:{
+                            select:{
+                                firstName:true
+                            }
+                        },
+                        image:{
+                            select:{
+                                image: true
+                            }
+                        }
+                    }
+                }
+            }
         })
         await prisma.$disconnect()
         return{
-        props:{
+            props:{
                 profile
             }
         }
-    }
-    const profile = await prisma.grandchildren.findFirst({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    grandParent:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
-                        }
-                    }
-                }
-            }
-        }
-    })
-    await prisma.$disconnect()
-    return{
-        props:{
-            profile
+    }catch(e){
+        console.log(e)
+        return{
+            redirect:'/experience/dashboard',
+            permanent:false
         }
     }
+    
 }

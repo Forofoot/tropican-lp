@@ -16,13 +16,13 @@ export default async function handler(
             return
         }
 
-        const grandChildrenExist = await prisma.grandchildren.findFirst({
+        const grandChildrenExist = await prisma.grandchildren.findUnique({
             where:{
                 pseudo
             }
         })
 
-        const grandParentExist = await prisma.grandchildren.findFirst({
+        const grandParentExist = await prisma.grandchildren.findUnique({
             where:{
                 pseudo
             }

@@ -5,7 +5,6 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 
-import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment/locale/fr';
 
@@ -47,13 +46,6 @@ export default function Map({profile, date}) {
         setEndDate(ranges.selection.endDate)
     }
 
-    const selectionRange = {
-        startDate: startDate,
-        endDate: endDate,
-        key: 'selection',
-    }
-
-
     date.experience.forEach(pro => {
         for (let d = pro.start; d <= pro.end; d.setDate(d.getDate() + 1)) {
             daysOfYear.push(new Date(d));
@@ -92,47 +84,79 @@ export default function Map({profile, date}) {
 }
 
 export const getServerSideProps = async ({query}) => {
-    // Fetch data from external API
-    //const cookie = parseCookies(req)
-    const prisma = new PrismaClient();
+
     const currentPseudo = query.pseudo
 
-    const findWhereGrandParent = await prisma.grandparent.findFirst({
-        where:{
-            pseudo: currentPseudo
-        }
-    })
-    if(findWhereGrandParent){
-        const profile = await prisma.grandparent.findFirst({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    start:true,
-                    end:true,
-                    grandChildren:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
+    try{
+
+        const prisma = new PrismaClient();
+        const findWhereGrandParent = await prisma.grandparent.findUnique({
+            where:{
+                pseudo: currentPseudo
+            }
+        })
+        if(findWhereGrandParent){
+            const profile = await prisma.grandparent.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                experience:{
+                    select:{
+                        place:true,
+                        start:true,
+                        end:true,
+                        grandChildren:{
+                            select:{
+                                firstName:true
+                            }
                         }
                     }
                 }
             }
+            })
+            const date = await prisma.grandparent.findUnique({
+                where:{
+                    pseudo:currentPseudo
+                },
+                select:{
+                    experience:{
+                        select:{
+                            start:true,
+                            end:true,
+                        }
+                    }
+                }
+            })
+            await prisma.$disconnect()
+            return{
+            props:{
+                    date,
+                    profile
+                }
+            }
         }
+        const profile = await prisma.grandchildren.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                experience:{
+                    select:{
+                        place:true,
+                        start:true,
+                        end:true,
+                        grandParent:{
+                            select:{
+                                firstName:true
+                            }
+                        }
+                    }
+                }
+            }
         })
-        const date = await prisma.grandparent.findFirst({
+    
+        const date = await prisma.grandchildren.findUnique({
             where:{
                 pseudo:currentPseudo
             },
@@ -145,63 +169,19 @@ export const getServerSideProps = async ({query}) => {
                 }
             }
         })
+        
         await prisma.$disconnect()
         return{
-        props:{
+            props:{
                 date,
                 profile
             }
         }
-    }
-    const profile = await prisma.grandchildren.findFirst({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    start:true,
-                    end:true,
-                    grandParent:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
-                        }
-                    }
-                }
-            }
-        }
-    })
-
-    const date = await prisma.grandchildren.findFirst({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            experience:{
-                select:{
-                    start:true,
-                    end:true,
-                }
-            }
-        }
-    })
-    
-    await prisma.$disconnect()
-    return{
-        props:{
-            date,
-            profile
+    }catch(e){
+        console.log(e)
+        return{
+            redirect:'/experience/dashboard',
+            permanent:false
         }
     }
 }
