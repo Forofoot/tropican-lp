@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import * as Survey from "survey-react" // import surveyjs
 import styled from 'styled-components';
 //import { questions } from "./content/questions" // these are the survey question
-
+import Image from 'next/dist/client/image';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
+import Moment from 'react-moment';
+import 'moment/locale/fr';
+
 
 // Modern theme
 import "survey-react/modern.min.css"
@@ -13,16 +16,165 @@ import "survey-react/modern.min.css"
 const daysOfYear = []
 
 const SurverStyle = styled.section`
+    position: relative;
+    h2{
+        margin-bottom: 15px;
+    }
+    .btnDefault{
+        border: 1px solid #212F89;
+        color: #212F89;
+        margin: 20px auto 0 auto;
+        display: block;
+        font-weight: bold;
+    }
+    h2,
+    p{
+        color: #F20D97;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    p{
+        color: #212F89;
+        font-weight: 100;
+    }
+    .questionBlock{
+        margin-bottom: 30px;
+        .question{
+            margin-bottom: 15px;
+        }
+    }
+    .recapContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 25px 30px;
+        border: 1px solid #212F89;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        .recapBlock{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            img{
+                max-width: 50px;
+                max-height:50px ;
+            }
+            h3,
+            p{
+                font-size: 1rem;
+                color: #000;
+            }
+            h3{
+                font-weight: bold;
+            }
+        }
+    }
+    .sv-action-bar{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        margin-top:10px;
+        padding: 0;
+        position: unset;
+        overflow: auto;
+
+        .sv-btn{
+            background-color: #212F89!important;
+            padding: 15px 0;
+            text-align: center;
+            width: 180px;
+            font-size: inherit;
+            border-radius: 50px;
+            margin: auto;
+        }
+    }
+
+    .sv-footer__prev-btn{
+        display: none;
+    }
+
+    .back{
+        position: absolute;
+        top: 0;
+        width: 35px;
+        height: 35px;
+        background-image: url('/quizz/arrow-left.webp');
+        background-repeat: no-repeat;
+        &.quizz{
+            top: 45px;
+        }
+    }
+    .sv-question__title{
+        color: #212F89;
+        font-size: 1.25rem;
+        .sv-question__num{
+            color:#F20D97;
+            font-weight: bold;
+        }
+    }
+    .sv-imagepicker{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sv-progress__text{
+        display: none;
+    }
+    .sv-progress{
+        height: 5px;
+        background-color: rgba(242, 13, 151, 0.2)!important;
+        .sv-progress__bar{
+        background-color: #F20D97!important;
+        border-radius: 0px 2.5px 2.5px 0px;
+        }
+    }
+    .sv-imagepicker__item{
+        opacity: .5;
+        margin-right: 0;
+    }
+    .sv-imagepicker__item--checked{
+        opacity: 1;
+    }
+
+    .sv-imagepicker__image{
+        width: 165px;
+        height: 165px;
+        object-fit: cover!important;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    .sv-imagepicker__text{
+        font-weight: bold;
+    }
+
+    .titleCenter{
+        text-align: center;
+    }
+    .dateRangeContainer{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 45px;
+        .rdrDateRangePickerWrapper,
+        .rdrCalendarWrapper,
+        .rdrMonth{
+            width: 100%;
+            max-width: 650px;
+        }
+    }
     .choice{
-        padding: 20px 0 ;
-        width: 180px;
-        border: 1px solid pink;
-        border-radius: 15px;
+        padding: 10px 0 ;
+        width: 100%;
+        border: 1px solid #212F89;
+        border-radius: 10px;
         text-align: center;
         display: inline-block;
-        margin-right: 15px;
+        margin-bottom: 15px;
+        font-size: 1rem;
         &:last-of-type{
-            margin-right: 0;
+            margin-bottom   : 0;
         }
         &:hover{
             cursor: pointer;
@@ -31,22 +183,20 @@ const SurverStyle = styled.section`
             background: pink;
         }
     }
+    .rdrDefinedRangesWrapper{
+        display: none;
+    }
+    .btnPrimary{
+        display: block;
+        margin: auto;
+    }
 `
 
 export default function SurveryQuizz({user, relation}) {
     const questions = {
         showProgressBar: "top",
-        firstPageIsStarted: true,
         startSurveyText: "Valider",
         pages: [
-        {
-            "elements": [
-            {
-                "type": "html",
-                "html": ""
-            }
-            ]
-        },
         {
             "elements": [
             {
@@ -57,7 +207,8 @@ export default function SurveryQuizz({user, relation}) {
                 "choices": [
                 {
                     "value": "Metropole",
-                    "imageLink":"https://res.cloudinary.com/leste/image/upload/v1657140957/quizz/Metropole_e7hzm7.webp"
+                    "imageLink":"https://res.cloudinary.com/leste/image/upload/v1657140957/quizz/Metropole_e7hzm7.webp",
+                    "commentText":"test"
                 },
                 {
                     "value": "Ville",
@@ -276,6 +427,14 @@ export default function SurveryQuizz({user, relation}) {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     
+    let q = survey.getAllQuestions();
+    q.forEach(elt =>{
+        elt.showLabel = 'aaa';
+    })
+
+    survey.pageNextText = 'Suivant'
+    survey.pagePrevText = 'a'
+
     const handleSelect = ( ranges ) =>{
         setStartDate(ranges.selection.startDate)
         setEndDate(ranges.selection.endDate)
@@ -344,8 +503,8 @@ export default function SurveryQuizz({user, relation}) {
             const json = await response.json()
             setDatas(json)
         }
-        setCurrentPage('result')
         fetchData()
+        setCurrentPage('recap')
     });
 
     const handleChoose = ( choose ) =>{
@@ -362,7 +521,7 @@ export default function SurveryQuizz({user, relation}) {
             relationId:relationIdentity
         })
     }
-    survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
+    //survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
 
     const handleCreateExperience = async (key) =>{
         const response = await fetch(`/api/quizz/createExperience`, {
@@ -384,67 +543,153 @@ export default function SurveryQuizz({user, relation}) {
         });
     }
 
-    console.log(value)
-    useEffect(() =>{
-    })
+    console.log(state)
   return (
     <SurverStyle>
-        Agenda
         {currentPage == 'agenda' &&
             <>
-                Sélectionner un contact: 
+                <h2>Avec qui ?</h2>
+                <p>Sélectionner la relation :</p>
                     {relation.relation.map((elt, i)=>(
                         <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}>
                             {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
                         </p>
                     ))}
-                <DateRangePicker
-                    ranges={[selectionRange]}
-                    minDate={new Date()}
-                    rangeColors={["#F885CA"]}
-                    onChange={handleSelect}
-                    inputRanges={[]}
-                    disabledDates={daysOfYear}
-                />
-                <button onClick={() => handleChoose('infos')}>
+                <h2>Quand ?</h2>
+                <p>Date de l&apos;expérience :</p>
+                <div className='dateRangeContainer'>
+                    <DateRangePicker
+                        ranges={[selectionRange]}
+                        minDate={new Date()}
+                        rangeColors={["#F885CA"]}
+                        onChange={handleSelect}
+                        inputRanges={[]}
+                        disabledDates={daysOfYear}
+                    />
+                </div>
+                <button className='btnPrimary' onClick={() => handleChoose('infos')}>
                     Valider
                 </button>
             </>
         }
         {currentPage == 'infos' &&
             <>
-                <div>
-                    <h3>Avez-vous des problèmes de santé*</h3>
+                <h2 className='titleCenter'>Questions sur <br></br>les conditions générales</h2>
+                <div className='questionBlock'>
+                    <p className='question'>Avez-vous des problèmes de santé*</p>
                     <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
                     <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
                 </div>
 
-                <div>
-                    <h3>Avez-vous des difficultés pour :</h3>
+                <div className='questionBlock'>
+                    <p className='question'>Avez-vous des difficultés pour :</p>
                     <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
                     <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
                     <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
                     <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
                 </div>
 
-                <div>
-                    <h3>Êtes vous sportif ?*</h3>
+                <div className='questionBlock'>
+                    <p className='question'>Êtes vous sportif ?*</p>
                     <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
                     <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
                 </div>
 
-                <div>
-                    <h3>Savez-vous nager ?*</h3>
+                <div className='questionBlock'>
+                    <p className='question'>Savez-vous nager ?*</p>
                     <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
                     <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
                 </div>
 
-                <Survey.Survey model={survey} />
-                <button onClick={() => handleChoose('agenda')}>
-                    Retour
+                <button className='back' onClick={() => handleChoose('agenda')}></button>
+                <button className='btnPrimary' onClick={() => handleChoose('quizz')}>
+                    Valider
                 </button>
             </>
         }
+
+        {currentPage == 'quizz' && 
+            <>
+                <a id="surveyPrev" href="#" className='back quizz' onClick={() => survey.prevPage()}></a>
+                <Survey.Survey model={survey} />
+            </>
+        }
+    
+        {currentPage == 'recap' &&
+            <>
+                <h2>Résultat de vos brillantes réponses</h2>
+                <div className='recapContainer'>
+                    <div className='recapBlock'>
+                        <Image
+                            src={'/quizz/recap/date.webp'}
+                            alt='Image'
+                            width={50}
+                            height={50}
+                            layout='raw'
+                        />
+                        <div>
+                            <h3>Date</h3>
+                            <p><Moment locale="fr" date={value.start} format="ll" /> - <Moment locale="fr" date={value.end} format="ll" /></p>
+                        </div>
+                     </div>
+                     <div className='recapBlock'>
+                        <Image
+                            src={'/quizz/recap/location.webp'}
+                            alt='Image'
+                            width={50}
+                            height={50}
+                            layout='raw'
+                        />
+                        <div>
+                            <h3>Lieu</h3>
+                            <p>{state[0]}</p>
+                        </div>
+                     </div>
+                     <div className='recapBlock'>
+                        <Image
+                            src={'/quizz/recap/office.webp'}
+                            alt='Image'
+                            width={50}
+                            height={50}
+                            layout='raw'
+                        />
+                        <div>
+                            <h3>Logement</h3>
+                            <p>{state[1]}</p>
+                        </div>
+                     </div>
+                     <div className='recapBlock'>
+                        <Image
+                            src={'/quizz/recap/bowling.webp'}
+                            alt='Image'
+                            width={50}
+                            height={50}
+                            layout='raw'
+                        />
+                        <div>
+                            <h3>Loisir</h3>
+                            <p>{state[2]} - {state[3]}</p>
+                        </div>
+                     </div>
+                     <div className='recapBlock'>
+                        <Image
+                            src={'/quizz/recap/notepencil.webp'}
+                            alt='Image'
+                            width={50}
+                            height={50}
+                            layout='raw'
+                        />
+                        <div>
+                            <h3>Prestation</h3>
+                            <p>{state[4]}</p>
+                        </div>
+                     </div>
+                </div>
+                <button className='btnPrimary' onClick={() => handleChoose('result')}>Valider</button>
+                <button className='btnDefault' onClick={() => handleChoose('agenda')}>Annuler</button>
+            </>
+        }
+
         {currentPage == 'result' && 
             <>
                 {datas.length ? (
