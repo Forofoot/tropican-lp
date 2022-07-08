@@ -1,17 +1,34 @@
-import React from 'react'
-import Image from 'next/image';
-import styled from 'styled-components';
-import Link from 'next/link';
+import { createClient } from 'contentful'
+import ArticleCard from '../../components/ArticleCard'
 
-const BlogStyle = styled.section`
+export async function getStaticProps() {
 
-`
-export default function Blog({article}) {
+    const client = createClient({
+        space: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+    })
 
+    const res = await client.getEntries({ content_type: 'article' })
+
+    return {
+        props: {
+            article: res.items
+        }
+    }
+}
+
+export default function Articles({ article }) {
+    console.log(article)
     return (
-        <BlogStyle>
-
-
-        </BlogStyle>
+        <div>
+            <h1>Blog</h1>
+            <div className='article-list'>
+                {article.map(
+                    article => (
+                        <ArticleCard key={article.sys.id} article={article} />
+                    )
+                )}
+            </div>
+        </div>
     )
 }

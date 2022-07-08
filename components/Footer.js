@@ -147,7 +147,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="policy">
-          <Link href="#" title="Politique de confidentialité"><a target="_blank">Politique de confidentialité</a></Link>
+          <Link href="/legales/index" title="Politique de confidentialité"><a target="_blank">Politique de confidentialité</a></Link>
           <Link href="#" title="Mentions légales"><a target="_blank">Mentions légales</a></Link>
         </div>
       </div>
