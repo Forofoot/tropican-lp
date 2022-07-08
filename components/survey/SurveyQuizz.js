@@ -43,6 +43,14 @@ const SurverStyle = styled.section`
             margin-bottom: 15px;
         }
     }
+    .selectRelationLabel{
+        margin-bottom: 30px;
+    }
+    .relationResult{ 
+        border: 1px solid #F20D97;
+        border-radius: 10px;
+        padding: 20px;
+    }
     .recapContainer{
         display: flex;
         flex-direction: column;
@@ -549,12 +557,14 @@ export default function SurveryQuizz({user, relation}) {
         {currentPage == 'agenda' &&
             <>
                 <h2>Avec qui ?</h2>
-                <p>Sélectionner la relation :</p>
-                    {relation.relation.map((elt, i)=>(
-                        <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}>
-                            {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
-                        </p>
-                    ))}
+                <p className='selectRelationLabel'>Sélection de la relation :</p>
+                    <div className='relationResult'>
+                        {relation.relation.map((elt, i)=>(
+                            <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}>
+                                {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
+                            </p>
+                        ))}
+                    </div>
                 <h2>Quand ?</h2>
                 <p>Date de l&apos;expérience :</p>
                 <div className='dateRangeContainer'>
