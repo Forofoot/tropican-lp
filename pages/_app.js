@@ -2,10 +2,17 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import * as gtag from '../lib/gtatg'
-import { GTM_ID, pageview } from '../lib/gtm'
+import { GTM_ID } from '../lib/gtm'
 import GlobalCSS from '../styles/global.css'
 import '../styles/cookieconsent.css'
 import {CookiesProvider} from "react-cookie"
+import NProgress from 'nprogress'; //nprogress module
+import 'nprogress/nprogress.css'; //styles of nprogress
+import Router from 'next/router'
+
+Router.events.on('routeChangeStart', () => NProgress.start()); 
+Router.events.on('routeChangeComplete', () => NProgress.done()); 
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
 
