@@ -5,7 +5,6 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 
-import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment/locale/fr';
 
