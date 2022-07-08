@@ -8,7 +8,11 @@ export default async function handler(
   res
 ) {
 
+<<<<<<< Updated upstream
   const {areas, accomodation, healthIssue, vision, mobility, language, audition, sportaddict, swim, mainTheme, secondTheme, thirdTheme} = req.body
+=======
+    const {areas, accomodation, healthIssue, vision, mobility, language, audition, sportaddict, swim, mainTheme, secondTheme, thirdTheme} = req.body
+>>>>>>> Stashed changes
   const filteredActivity = await prisma.activity.findMany({
     where:{
         areas,

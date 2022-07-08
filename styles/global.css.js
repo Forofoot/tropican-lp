@@ -61,7 +61,7 @@ export default createGlobalStyle`
     margin: 0;
     line-height: 37px;
     font-weight: 400;
-    color:#147543;
+    color:#F20D97;
   } 
   h1,h2,h3, label{
     font-family: 'MarkPRO', sans-serif;
@@ -75,6 +75,12 @@ export default createGlobalStyle`
   section{
     margin-bottom: 80px;
   }
+
+  .back{
+    cursor:pointer;
+    color:#212F89;
+    font-weight:600;
+}
 
   @media (min-width: 768px) {
     .titleStyled{

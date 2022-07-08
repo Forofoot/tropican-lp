@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import * as Survey from "survey-react" // import surveyjs
 import styled from 'styled-components';
 //import { questions } from "./content/questions" // these are the survey question
+<<<<<<< Updated upstream
 import Image from 'next/dist/client/image';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -9,6 +10,12 @@ import { DateRangePicker } from 'react-date-range';
 import Moment from 'react-moment';
 import 'moment/locale/fr';
 
+=======
+
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker } from 'react-date-range';
+>>>>>>> Stashed changes
 
 // Modern theme
 import "survey-react/modern.min.css"
@@ -16,6 +23,7 @@ import "survey-react/modern.min.css"
 const daysOfYear = []
 
 const SurverStyle = styled.section`
+<<<<<<< Updated upstream
     position: relative;
     h2{
         margin-bottom: 15px;
@@ -175,6 +183,18 @@ const SurverStyle = styled.section`
         font-size: 1rem;
         &:last-of-type{
             margin-bottom   : 0;
+=======
+    .choice{
+        padding: 20px 0 ;
+        width: 180px;
+        border: 1px solid pink;
+        border-radius: 15px;
+        text-align: center;
+        display: inline-block;
+        margin-right: 15px;
+        &:last-of-type{
+            margin-right: 0;
+>>>>>>> Stashed changes
         }
         &:hover{
             cursor: pointer;
@@ -183,6 +203,7 @@ const SurverStyle = styled.section`
             background: pink;
         }
     }
+<<<<<<< Updated upstream
     .rdrDefinedRangesWrapper{
         display: none;
     }
@@ -190,16 +211,33 @@ const SurverStyle = styled.section`
         display: block;
         margin: auto;
     }
+=======
+>>>>>>> Stashed changes
 `
 
 export default function SurveryQuizz({user, relation}) {
     const questions = {
         showProgressBar: "top",
+<<<<<<< Updated upstream
+=======
+        firstPageIsStarted: true,
+>>>>>>> Stashed changes
         startSurveyText: "Valider",
         pages: [
         {
             "elements": [
             {
+<<<<<<< Updated upstream
+=======
+                "type": "html",
+                "html": ""
+            }
+            ]
+        },
+        {
+            "elements": [
+            {
+>>>>>>> Stashed changes
                 "type": "imagepicker",
                 "name": "place",
                 "title": "Quel type de lieu préférez-vous ?",
@@ -207,8 +245,12 @@ export default function SurveryQuizz({user, relation}) {
                 "choices": [
                 {
                     "value": "Metropole",
+<<<<<<< Updated upstream
                     "imageLink":"https://res.cloudinary.com/leste/image/upload/v1657140957/quizz/Metropole_e7hzm7.webp",
                     "commentText":"test"
+=======
+                    "imageLink":"https://res.cloudinary.com/leste/image/upload/v1657140957/quizz/Metropole_e7hzm7.webp"
+>>>>>>> Stashed changes
                 },
                 {
                     "value": "Ville",
@@ -427,6 +469,7 @@ export default function SurveryQuizz({user, relation}) {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     
+<<<<<<< Updated upstream
     let q = survey.getAllQuestions();
     q.forEach(elt =>{
         elt.showLabel = 'aaa';
@@ -435,6 +478,8 @@ export default function SurveryQuizz({user, relation}) {
     survey.pageNextText = 'Suivant'
     survey.pagePrevText = 'a'
 
+=======
+>>>>>>> Stashed changes
     const handleSelect = ( ranges ) =>{
         setStartDate(ranges.selection.startDate)
         setEndDate(ranges.selection.endDate)
@@ -503,8 +548,13 @@ export default function SurveryQuizz({user, relation}) {
             const json = await response.json()
             setDatas(json)
         }
+<<<<<<< Updated upstream
         fetchData()
         setCurrentPage('recap')
+=======
+        setCurrentPage('result')
+        fetchData()
+>>>>>>> Stashed changes
     });
 
     const handleChoose = ( choose ) =>{
@@ -521,7 +571,11 @@ export default function SurveryQuizz({user, relation}) {
             relationId:relationIdentity
         })
     }
+<<<<<<< Updated upstream
     //survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
+=======
+    survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
+>>>>>>> Stashed changes
 
     const handleCreateExperience = async (key) =>{
         const response = await fetch(`/api/quizz/createExperience`, {
@@ -543,6 +597,7 @@ export default function SurveryQuizz({user, relation}) {
         });
     }
 
+<<<<<<< Updated upstream
     console.log(state)
   return (
     <SurverStyle>
@@ -550,11 +605,23 @@ export default function SurveryQuizz({user, relation}) {
             <>
                 <h2>Avec qui ?</h2>
                 <p>Sélectionner la relation :</p>
+=======
+    console.log(value)
+    useEffect(() =>{
+    })
+  return (
+    <SurverStyle>
+        Agenda
+        {currentPage == 'agenda' &&
+            <>
+                Sélectionner un contact: 
+>>>>>>> Stashed changes
                     {relation.relation.map((elt, i)=>(
                         <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}>
                             {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
                         </p>
                     ))}
+<<<<<<< Updated upstream
                 <h2>Quand ?</h2>
                 <p>Date de l&apos;expérience :</p>
                 <div className='dateRangeContainer'>
@@ -568,39 +635,71 @@ export default function SurveryQuizz({user, relation}) {
                     />
                 </div>
                 <button className='btnPrimary' onClick={() => handleChoose('infos')}>
+=======
+                <DateRangePicker
+                    ranges={[selectionRange]}
+                    minDate={new Date()}
+                    rangeColors={["#F885CA"]}
+                    onChange={handleSelect}
+                    inputRanges={[]}
+                    disabledDates={daysOfYear}
+                />
+                <button onClick={() => handleChoose('infos')}>
+>>>>>>> Stashed changes
                     Valider
                 </button>
             </>
         }
         {currentPage == 'infos' &&
             <>
+<<<<<<< Updated upstream
                 <h2 className='titleCenter'>Questions sur <br></br>les conditions générales</h2>
                 <div className='questionBlock'>
                     <p className='question'>Avez-vous des problèmes de santé*</p>
+=======
+                <div>
+                    <h3>Avez-vous des problèmes de santé*</h3>
+>>>>>>> Stashed changes
                     <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
                     <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
                 </div>
 
+<<<<<<< Updated upstream
                 <div className='questionBlock'>
                     <p className='question'>Avez-vous des difficultés pour :</p>
+=======
+                <div>
+                    <h3>Avez-vous des difficultés pour :</h3>
+>>>>>>> Stashed changes
                     <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
                     <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
                     <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
                     <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
                 </div>
 
+<<<<<<< Updated upstream
                 <div className='questionBlock'>
                     <p className='question'>Êtes vous sportif ?*</p>
+=======
+                <div>
+                    <h3>Êtes vous sportif ?*</h3>
+>>>>>>> Stashed changes
                     <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
                     <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
                 </div>
 
+<<<<<<< Updated upstream
                 <div className='questionBlock'>
                     <p className='question'>Savez-vous nager ?*</p>
+=======
+                <div>
+                    <h3>Savez-vous nager ?*</h3>
+>>>>>>> Stashed changes
                     <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
                     <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
                 </div>
 
+<<<<<<< Updated upstream
                 <button className='back' onClick={() => handleChoose('agenda')}></button>
                 <button className='btnPrimary' onClick={() => handleChoose('quizz')}>
                     Valider
@@ -690,6 +789,14 @@ export default function SurveryQuizz({user, relation}) {
             </>
         }
 
+=======
+                <Survey.Survey model={survey} />
+                <button onClick={() => handleChoose('agenda')}>
+                    Retour
+                </button>
+            </>
+        }
+>>>>>>> Stashed changes
         {currentPage == 'result' && 
             <>
                 {datas.length ? (

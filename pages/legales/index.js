@@ -23,11 +23,7 @@ p{
     text-align:justify;
     margin-bottom:30px;
 }
-.back{
-    cursor:pointer;
-    color:#212F89;
-    font-weight:600;
-}
+
 
 `
 export default function Legales() {
@@ -51,7 +47,7 @@ export default function Legales() {
 
                 <p>Conformément au Règlement général sur la protection des données (RGPD), cette politique de confidentialité est conforme aux règlements suivants.
 
-                    Les données personnelles doivent être :
+                    Les données personnelles doivent être :</p>
                     <ul>
                         <li> traitées de manière licite, loyale et transparente au regard de la personne concernée</li>
                         <li>collectées pour des finalités déterminées, explicites et légitimes, et ne pas être traitées ultérieurement d'une manière incompatible avec ces finalités</li>
@@ -60,7 +56,7 @@ export default function Legales() {
                         <li>conservées sous une forme permettant l'identification des personnes concernées pendant une durée n'excédant pas celle nécessaire au regard des finalités pour lesquelles elles sont traitées</li>
                         <li>traitées de façon à garantir une sécurité appropriée des données à caractère personnel, y compris la protection contre le traitement non autorisé ou illicite.</li>
                     </ul>
-                </p>
+                
 
                 <h3>Consentement</h3>
 
@@ -92,14 +88,12 @@ export default function Legales() {
 
                 <h3>Collecte</h3>
 
-                <p>
                     <ul>
                         <li>Si vous décidez de vous inscrire à la newsletter mise en place sur leste-tropican.fr vous consentez à fournir une adresse e-mail valide. Veuillez noter que nous collectons uniquement les données nécessaires à l'inscription de notre newsletter.</li>
                         <li>D’autres données sont collectées automatiquement par des services tiers lors de ce site internet. Ce sont avant tout des données techniques. La collecte de ces données est automatique dès que vous entrez sur notre site.</li>
 
                         Nous ne recueillerons pas de données supplémentaires sans vous en informer au préalable.
                     </ul>
-                </p>
 
                 <h3>Utilisation</h3>
 
@@ -107,7 +101,7 @@ export default function Legales() {
 
                 <h3>Partage</h3>
 
-                <p>Nous nous engageons à ne pas vendre ou partager vos données avec des tiers, sauf dans les cas suivants :
+                <p>Nous nous engageons à ne pas vendre ou partager vos données avec des tiers, sauf dans les cas suivants :</p>
                     <ul>
                         <li>si la loi l'exige</li>
                         <li>si elle est requise pour toute procédure judiciaire</li>
@@ -115,7 +109,7 @@ export default function Legales() {
 
                         <li>Si vous suivez des hyperliens de leste-tropican.fr vers d'autres sites, veuillez noter que nous ne sommes pas responsables et n’avons pas de contrôle sur leurs politiques et pratiques de confidentialité.</li>
                     </ul>
-                </p>
+                
                 <h3>Protection</h3>
 
                 <p>L'ensemble des données fournies sont traitées et stockées par le service Mailchimp.

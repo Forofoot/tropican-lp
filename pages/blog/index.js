@@ -1,6 +1,17 @@
 import { createClient } from 'contentful'
 import ArticleCard from '../../components/ArticleCard'
+import styled from 'styled-components'
 
+const IndexStyle = styled.div`
+.content_container{
+    padding: 40px 20px;
+
+    h1{
+        text-align:center;
+        margin-bottom:40px;
+    }
+}
+`
 export async function getStaticProps() {
 
     const client = createClient({
@@ -20,7 +31,8 @@ export async function getStaticProps() {
 export default function Articles({ article }) {
     console.log(article)
     return (
-        <div>
+        <IndexStyle>
+        <div className="content_container">
             <h1>Blog</h1>
             <div className='article-list'>
                 {article.map(
@@ -30,5 +42,6 @@ export default function Articles({ article }) {
                 )}
             </div>
         </div>
+        </IndexStyle>
     )
 }
