@@ -22,11 +22,17 @@ model Grandparent {
   email         String
   password      String
   role          String          @default("grandparent")
+  healthissue   Boolean @default(false)
+  sportaddict   Boolean @default(false)
+  swim          Boolean @default(true)
+  vision        Boolean @default(false)
+  mobility      Boolean @default(false)
+  language      Boolean @default(false)
+  audition      Boolean @default(false)
   notifications Notification[]
   gallery       Image[]
   experience    Experience[]
   relation      Relation[]
-  physicalIssue PhysicalIssue[]
 }
 
 model Grandchildren {
@@ -41,11 +47,17 @@ model Grandchildren {
   email         String
   password      String
   role          String          @default("grandchildren")
+  healthissue   Boolean @default(false)
+  sportaddict   Boolean @default(false)
+  swim          Boolean @default(true)
+  vision        Boolean @default(false)
+  mobility      Boolean @default(false)
+  language      Boolean @default(false)
+  audition      Boolean @default(false)
   notifications Notification[]
   gallery       Image[]
   experience    Experience[]
   relation      Relation[]
-  physicalIssue PhysicalIssue[]
 }
 
 model Notification {
@@ -92,10 +104,14 @@ model Activity {
   updatedAt DateTime @updatedAt
   name      String
   place     String
+  areas     String
   long      String
   lat       String
   healthissue  Boolean @default(false)
-  physical     PhysicalIssue[]
+  vision        Boolean @default(false)
+  mobility      Boolean @default(false)
+  language      Boolean @default(false)
+  audition      Boolean @default(false)
   sportaddict  Boolean @default(false)
   swim         Boolean @default(true)
   accomodation String
@@ -109,21 +125,7 @@ model Theme {
   mainTheme   String
   secondTheme String?
   thirdTheme  String?
-  activity    Activity @relation(fields: [activity_id], references: [id])
-  activity_id Int
-}
-
-model PhysicalIssue {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  physical    String
-  grandParent Grandparent? @relation(fields: [grandParent_id], references: [id])
-  grandParent_id Int
-  grandChildren Grandchildren? @relation(fields: [grandChildren_id], references: [id])
-  grandChildren_id Int
-  activity    Activity @relation(fields: [activity_id], references: [id])
-  activity_id Int
+  activity    Activity[]
 }
 
 model Image {
