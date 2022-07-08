@@ -71,7 +71,7 @@ export default function Modify({profile}) {
     if(!cookies.user){
         router.push('/experience/login')
     }
-  }, [cookies.user])
+  },)
 
   return (
     <ModifyStyle>

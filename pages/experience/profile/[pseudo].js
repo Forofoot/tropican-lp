@@ -119,7 +119,7 @@ export default function Profile({profile}) {
     if(!cookies.user){
         router.push('/experience/login')
     }
-  }, [cookies.user])
+  },)
 
   const logout = (e) => {
     e.preventDefault()
