@@ -135,7 +135,6 @@ export default function Index() {
   const [loginChoice, setLoginChoice] = useState('signin')
   const [type, setType] = useState(null)
   const [error, setError] = useState()
- 
  const [cookies, setCookie] = useCookies(["user"])
 
  const [currentUser, setCurrentUser] = useState(null)
