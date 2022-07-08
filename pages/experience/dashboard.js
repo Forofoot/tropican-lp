@@ -23,38 +23,44 @@ const Dashboard = ({user, friendRequest}) => {
     }, [cookies.user])
 
     const handleCreateRelation = async( relationId ) =>{
-      const res = await fetch('/api/notification/accept', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            currentUserID: currentUser?.id,
-            relationID: relationId,
-            sender: currentUser?.role
-        }),
-    });
+      try{
+        const res = await fetch('/api/notification/accept', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              currentUserID: currentUser?.id,
+              relationID: relationId,
+              sender: currentUser?.role
+          }),
+      });
+      }catch(e){
+        console.log(e)
+      }
     }
 
     const handleDeleteRelation = async( relationId) => {
-      console.log(relationId)
-      const res = await fetch('/api/notification/reject', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          currentUserID: currentUser?.id,
-          relationID: relationId,
-          sender: currentUser?.role
-        }),
-    });
+      try{
+        const res = await fetch('/api/notification/reject', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentUserID: currentUser?.id,
+            relationID: relationId,
+            sender: currentUser?.role
+          }),
+      });
+      }catch(e){
+        console.log(e)
+      }
     }
 
 
     return (
         <DashboardStyle>
-            <h1>Expérience de {currentUser?.firstName}</h1>
 
             <Link href="/experience/quizz"><a>Commencer le quizz</a></Link> 
             {friendRequest ? (

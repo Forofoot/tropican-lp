@@ -18,9 +18,7 @@ export default function Modify({profile}) {
     
   const [imageUploaded, setImageUploaded] = useState();
 
-  const [cookies,setCookie, removeCookie] = useCookies(["user"]);
-
-  const [currentUser, setCurrentUser] = useState(null)
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   
   const router = useRouter()
 
@@ -65,12 +63,11 @@ export default function Modify({profile}) {
   
     //router.push('/')
     } catch (error) {
-    console.error(error);
-      }
+        console.error(error);
+    }
   };
 
   useEffect(() => {
-    setCurrentUser(cookies.user)
     if(!cookies.user){
         router.push('/experience/login')
     }
@@ -103,88 +100,62 @@ export default function Modify({profile}) {
 }
 
 export const getServerSideProps = async ({query}) => {
-    // Fetch data from external API
-    //const cookie = parseCookies(req)
-    const prisma = new PrismaClient();
+    
     const currentPseudo = query.pseudo
 
-    const findWhereGrandParent = await prisma.grandparent.findUnique({
-        where:{
-            pseudo: currentPseudo
-        }
-    })
-    if(findWhereGrandParent){
-        const profile = await prisma.grandparent.findUnique({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            id:true,
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            avatar_publicId:true,
-            email:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    grandChildren:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
-                        }
-                    }
+    try{
+        const prisma = new PrismaClient();
+        const findWhereGrandParent = await prisma.grandparent.findUnique({
+            where:{
+                pseudo: currentPseudo
+            }
+        })
+        if(findWhereGrandParent){
+            const profile = await prisma.grandparent.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                    id:true,
+                    firstName:true,
+                    lastName: true,
+                    pseudo:true,
+                    avatar:true,
+                    avatar_publicId:true,
+                    email:true,
+                }
+            })
+            await prisma.$disconnect()
+            return{
+            props:{
+                    profile
                 }
             }
         }
+        const profile = await prisma.grandchildren.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                firstName:true,
+                lastName: true,
+                pseudo:true,
+                avatar:true,
+                avatar_publicId:true,
+                email:true,
+            }
         })
         await prisma.$disconnect()
         return{
-        props:{
+            props:{
                 profile
             }
         }
-    }
-    const profile = await prisma.grandchildren.findUnique({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            id:true,
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            avatar_publicId:true,
-            email:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    grandParent:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
-                        }
-                    }
-                }
-            }
-        }
-    })
-    await prisma.$disconnect()
-    return{
-        props:{
-            profile
+    }catch(e){
+        console.log(e)
+        return{
+            redirect:'/experience/dashboard',
+            permanent:false
         }
     }
 }
