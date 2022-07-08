@@ -8,6 +8,21 @@ const AuthStyle = styled.section`
     width: 100%;
     max-width: 800px;
     margin: auto;
+    h1{
+        font-family: 'Mark Pro';
+        font-style: normal;
+        font-weight: 700;
+        line-height: 70px;
+        margin-bottom: 10px;
+        font-size: 3.5rem;
+    }
+    h2{
+        font-family: 'Sofia Pro';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.375rem;
+        margin-bottom: 50px;
+    }
     .loginLogo{
         display:flex;
         justify-content: center;
@@ -275,9 +290,12 @@ export default function Index() {
                     S&apos;inscrire
                 </div>
             </div>
+                <h1>Bienvenue</h1>
+
                 { loginChoice == 'signup' ? (
                     <>
                     <div className='buttonBlock'>
+                        <h2>Inscrivez-vous afin de découvrir<br></br>de nouvelles expériences !</h2>
                         <div className='choice__highlight'>
                             <p>Utilisateur</p>
                         </div>
@@ -321,7 +339,10 @@ export default function Index() {
                         </form>
                     }
                     </>
-                ) : (
+                ) : (  
+                    <>
+                    <h2>Connectez-vous afin de découvrir<br></br>de nouvelles expériences !</h2>
+                                    
                     <form method='POST' onSubmit={handleSignin}>
                         <label>Nom d&apos;utilisateur</label>
                         <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
@@ -332,7 +353,8 @@ export default function Index() {
                             <a> Mot de passe oublié ?</a>
                         </p>
                     </form>
-                )
+                    </>
+                    )
                 }
             </div>
         </div>
