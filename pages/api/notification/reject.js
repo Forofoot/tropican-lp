@@ -12,7 +12,7 @@ export default async function handler(
         const { currentUserID, relationID, sender } = req.body
 
         if(sender == 'grandchildren'){
-            let notificationGrandChildren = await prisma.notification.findFirst({
+            let notificationGrandChildren = await prisma.notification.findUnique({
                 where:{
                     grandParent_id: relationID,
                     grandChildren_id: currentUserID
@@ -28,7 +28,7 @@ export default async function handler(
         }
 
         if(sender == 'grandparent'){
-            let notificationGrandParent = await prisma.notification.findFirst({
+            let notificationGrandParent = await prisma.notification.findUnique({
                 where:{
                     grandParent_id: currentUserID,
                     grandChildren_id: relationID

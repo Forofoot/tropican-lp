@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Router from 'next/router';
 import styled from 'styled-components';
 import { parseCookies } from "../../helpers/"
 import { useCookies } from "react-cookie"
@@ -82,59 +81,68 @@ export default Dashboard;
 
 
 export const getServerSideProps = async ({ req, res }) => {
-  const cookie = parseCookies(req)
-
-  if (res) {
-    if(cookie.user){
-      const parsedUser =  JSON.parse(cookie.user)
-      const prisma = new PrismaClient()
-      if(parsedUser.role == 'grandchildren'){
-        const friendRequest = await prisma.notification.findMany({
-          where:{
-            grandChildren_id: parsedUser.id
-          },
-          select:{
-            grandParent_id:true,
-            grandparent:{
+  try {
+        const cookie = parseCookies(req)
+        if (res) {
+        if(cookie.user){
+          const parsedUser =  JSON.parse(cookie.user)
+          const prisma = new PrismaClient()
+          if(parsedUser.role == 'grandchildren'){
+            const friendRequest = await prisma.notification.findMany({
+              where:{
+                grandChildren_id: parsedUser.id
+              },
               select:{
-                pseudo:true
+                grandParent_id:true,
+                grandparent:{
+                  select:{
+                    pseudo:true
+                  }
+                },
+                sender:true
               }
-            },
-            sender:true
+            })
+            await prisma.$disconnect()
+            return{
+              props:{
+                friendRequest,
+                user: parsedUser && parsedUser,
+              }
+            }
           }
-        })
-        await prisma.$disconnect()
-        return{
-          props:{
-            friendRequest,
-            user: parsedUser && parsedUser,
+
+          if(parsedUser.role == 'grandparent'){
+            const friendRequest = await prisma.notification.findMany({
+              where:{
+                grandParent_id: parsedUser.id
+              },
+              select:{
+                grandChildren_id:true,
+                grandChildren:{
+                  select:{
+                    pseudo:true
+                  }
+                },
+                sender:true
+              }
+            })
+            await prisma.$disconnect()
+            return{
+              props:{
+                friendRequest,
+                user: parsedUser && parsedUser,
+              }
+            }
           }
         }
       }
-
-      if(parsedUser.role == 'grandparent'){
-        const friendRequest = await prisma.notification.findMany({
-          where:{
-            grandParent_id: parsedUser.id
-          },
-          select:{
-            grandChildren_id:true,
-            grandChildren:{
-              select:{
-                pseudo:true
-              }
-            },
-            sender:true
-          }
-        })
-        await prisma.$disconnect()
-        return{
-          props:{
-            friendRequest,
-            user: parsedUser && parsedUser,
-          }
-        }
+  }catch(e){
+    console.log(e)
+    return{
+      redirect:{
+        destination:'/experience/login',
+        permanent:false
       }
     }
   }
-}
+}  
