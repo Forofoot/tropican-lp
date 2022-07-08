@@ -77,11 +77,10 @@ export default function Map({profile, country}) {
 }
 
 export const getServerSideProps = async ({query}) => {
-    // Fetch data from external API
-    //const cookie = parseCookies(req)
-    const prisma = new PrismaClient();
-    const currentPseudo = query.pseudo
 
+    const currentPseudo = query.pseudo
+    try{
+    const prisma = new PrismaClient();
     const findWhereGrandParent = await prisma.grandparent.findUnique({
         where:{
             pseudo: currentPseudo
@@ -93,10 +92,6 @@ export const getServerSideProps = async ({query}) => {
             pseudo:currentPseudo
         },
         select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
             experience:{
                 select:{
                     name:true,
@@ -123,10 +118,6 @@ export const getServerSideProps = async ({query}) => {
             pseudo:currentPseudo
         },
         select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
             experience:{
                 select:{
                     name:true,
@@ -140,12 +131,19 @@ export const getServerSideProps = async ({query}) => {
                 }
             }
         }
-    })
-    
-    await prisma.$disconnect()
-    return{
-        props:{
-            profile
+        })
+        
+        await prisma.$disconnect()
+        return{
+            props:{
+                profile
+            }
+        }
+    }catch(e){
+        console.log(e)
+        return{
+            redirect: '/experience/dashboard',
+            permanent:false
         }
     }
 }

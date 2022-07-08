@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
@@ -111,14 +111,11 @@ const ProfileStyle = styled.section`
 
 export default function Profile({profile}) {
     
-  const [cookies,setCookie, removeCookie] = useCookies(["user"]);
-
-  const [currentUser, setCurrentUser] = useState(null)
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   
   const router = useRouter()
 
   useEffect(() => {
-    setCurrentUser(cookies.user)
     if(!cookies.user){
         router.push('/experience/login')
     }
@@ -127,7 +124,6 @@ export default function Profile({profile}) {
   const logout = (e) => {
     e.preventDefault()
     removeCookie("user",  {path: '/'})
-    setCurrentUser(null)
     router.push('/experience/login')
   }
   return (
@@ -257,82 +253,90 @@ export default function Profile({profile}) {
 }
 
 export const getServerSideProps = async ({query}) => {
-    // Fetch data from external API
-    //const cookie = parseCookies(req)
-    const prisma = new PrismaClient();
     const currentPseudo = query.pseudo
 
-    const findWhereGrandParent = await prisma.grandparent.findUnique({
-        where:{
-            pseudo: currentPseudo
-        }
-    })
-    if(findWhereGrandParent){
-        const profile = await prisma.grandparent.findUnique({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    grandChildren:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
+
+    try{
+        const prisma = new PrismaClient();
+        const findWhereGrandParent = await prisma.grandparent.findUnique({
+            where:{
+                pseudo: currentPseudo
+            }
+        })
+        if(findWhereGrandParent){
+            const profile = await prisma.grandparent.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                firstName:true,
+                lastName: true,
+                pseudo:true,
+                avatar:true,
+                experience:{
+                    select:{
+                        name:true,
+                        place:true,
+                        grandChildren:{
+                            select:{
+                                firstName:true
+                            }
+                        },
+                        image:{
+                            select:{
+                                image: true
+                            }
                         }
                     }
                 }
             }
+            })
+            await prisma.$disconnect()
+            return{
+            props:{
+                    profile
+                }
+            }
         }
+        const profile = await prisma.grandchildren.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                firstName:true,
+                lastName: true,
+                pseudo:true,
+                avatar:true,
+                experience:{
+                    select:{
+                        name:true,
+                        place:true,
+                        grandParent:{
+                            select:{
+                                firstName:true
+                            }
+                        },
+                        image:{
+                            select:{
+                                image: true
+                            }
+                        }
+                    }
+                }
+            }
         })
         await prisma.$disconnect()
         return{
-        props:{
+            props:{
                 profile
             }
         }
-    }
-    const profile = await prisma.grandchildren.findUnique({
-        where:{
-            pseudo:currentPseudo
-        },
-        select:{
-            firstName:true,
-            lastName: true,
-            pseudo:true,
-            avatar:true,
-            experience:{
-                select:{
-                    name:true,
-                    place:true,
-                    grandParent:{
-                        select:{
-                            firstName:true
-                        }
-                    },
-                    image:{
-                        select:{
-                            image: true
-                        }
-                    }
-                }
-            }
-        }
-    })
-    await prisma.$disconnect()
-    return{
-        props:{
-            profile
+    }catch(e){
+        console.log(e)
+        return{
+            redirect:'/experience/dashboard',
+            permanent:false
         }
     }
+    
 }
