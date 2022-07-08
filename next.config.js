@@ -10,7 +10,7 @@ module.exports = {
     }
   },
   images:{
-    domains: ['res.cloudinary.com']
+    domains: ['res.cloudinary.com', 'images.ctfassets.net']
   },
   env: {
     MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,

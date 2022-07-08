@@ -30,7 +30,7 @@ p{
 }
 
 `
-export default function Blog({ article }) {
+export default function Legales() {
     const router = useRouter()
     return (
         <LegalesStyle id="section3">
