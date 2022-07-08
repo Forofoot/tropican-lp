@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as Survey from "survey-react" // import surveyjs
+import styled from 'styled-components';
 //import { questions } from "./content/questions" // these are the survey question
 
 import 'react-date-range/dist/styles.css'; // main style file
@@ -10,6 +11,27 @@ import { DateRangePicker } from 'react-date-range';
 import "survey-react/modern.min.css"
 
 const daysOfYear = []
+
+const SurverStyle = styled.section`
+    .choice{
+        padding: 20px 0 ;
+        width: 180px;
+        border: 1px solid pink;
+        border-radius: 15px;
+        text-align: center;
+        display: inline-block;
+        margin-right: 15px;
+        &:last-of-type{
+            margin-right: 0;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+        &.active{
+            background: pink;
+        }
+    }
+`
 
 export default function SurveryQuizz({user, relation}) {
     const questions = {
@@ -22,48 +44,6 @@ export default function SurveryQuizz({user, relation}) {
             {
                 "type": "html",
                 "html": ""
-            }
-            ]
-        },
-        {
-            "elements": [
-            {
-                "type": "boolean",
-                "name": "Sante",
-                "label": "Avez-vous des problèmes de santé ?",
-                "isRequired": true
-            },
-            {
-                "type": "checkbox",
-                "name": "Physique",
-                "title": "Avez vous des difficultés ?",
-                "colCount": 1,
-                "choices": [
-                "La mobilité",
-                "La vision",
-                "L'audition",
-                "Le langage",
-                ]
-            },
-            {
-                "type": "boolean",
-                "name": "Areyousportaddict",
-                "label": "Êtes-vous sportif ?",
-                "isRequired": true
-            },
-            {
-                "type": "boolean",
-                "name": "Swim",
-                "label": "Savez-vous nager ?",
-                "isRequired": true
-            },
-            {
-                "name": "date",
-                "type": "datepicker",
-                "inputType": "date",
-                "title": "Your favorite date:",
-                "dateFormat": "mm/dd/yy",
-                "isRequired": true
             }
             ]
         },
@@ -292,7 +272,6 @@ export default function SurveryQuizz({user, relation}) {
     Survey.StylesManager.applyTheme("modern")
     // Create a modal
     const survey = new Survey.Model(questions)
-
     const [currentPage, setCurrentPage] = useState('agenda')
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
@@ -300,7 +279,7 @@ export default function SurveryQuizz({user, relation}) {
     const handleSelect = ( ranges ) =>{
         setStartDate(ranges.selection.startDate)
         setEndDate(ranges.selection.endDate)
-        setValue({
+        setValue({...value,
             start:ranges.selection.startDate,
             end:ranges.selection.endDate
         })
@@ -311,12 +290,19 @@ export default function SurveryQuizz({user, relation}) {
         endDate: endDate,
         key: 'selection'
     }
-
     
     const [value, setValue] = useState({
         start: new Date(),
         end: new Date(),
-        pseudo: ""
+        pseudo: "",
+        relationId: "",
+        healthIssue: relation.healthissue,
+        sportAddicted: relation.sportaddict,
+        swim: relation.swim,
+        mobility: relation.mobility,
+        vision: relation.vision,
+        language: relation.language,
+        audition: relation.audition
     });
     relation.experience.forEach(pro => {
         for (let d = pro.start; d <= pro.end; d.setDate(d.getDate() + 1)) {
@@ -326,46 +312,90 @@ export default function SurveryQuizz({user, relation}) {
     const [state, setstate] = useState([])
     const [datas, setDatas] = useState([])
     survey.onComplete.add(function (survey, options) {
+
         setstate([
-            survey.data.Areyousportaddict,
-            survey.data.Sante,
-            survey.data.Physique,
-            survey.data.Swim,
             survey.data.place,
             survey.data.accomodation,
             survey.data.mainTheme, 
             survey.data.secondThemeSport || survey.data.secondThemeCulturel || survey.data.secondThemeDetente || survey.data.secondThemeJeux, 
             survey.data.thirdTheme
-        
-
-            ])
+        ])
+        const fetchData = async () => {
+            const response = await fetch(`/api/quizz/getData`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ 
+                areas: survey.data.place,
+                accomodation: survey.data.accomodation,
+                healthIssue: value.healthIssue,
+                vision: value.vision,
+                mobility: value.mobility,
+                language: value.language,
+                audition: value.audition,
+                sportaddict: value.sportAddicted,
+                swim: value.swim,
+                mainTheme: survey.data.mainTheme,
+                secondTheme: survey.data.secondThemeTrip || survey.data.secondThemeSport || survey.data.secondThemeCulturel,
+                thirdTheme: survey.data.thirdTheme
+              }),
+            });
+            const json = await response.json()
+            setDatas(json)
+        }
+        setCurrentPage('result')
+        fetchData()
     });
 
     const handleChoose = ( choose ) =>{
-        console.log(value)
-        if(!value.pseudo || !value.start || !value.end){
+        if(!value.pseudo){
             alert('Choisir une relation et une date')
         }else{
             setCurrentPage(choose)
         }
     }
 
-    const handleSelectRelation = (pseudo) =>{
-        setValue({ ...value, pseudo:pseudo})
+    const handleSelectRelation = (pseudo, relationIdentity) =>{
+        setValue({ ...value, 
+            pseudo:pseudo,
+            relationId:relationIdentity
+        })
     }
     survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
 
+    const handleCreateExperience = async (key) =>{
+        const response = await fetch(`/api/quizz/createExperience`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+              name: datas[key].name,
+              place: datas[key].place,
+              start: value.start,
+              end: value.end,
+              long: datas[key].long,
+              lat: datas[key].lat,
+              currentUserPseudo: relation.pseudo,
+              relationPseudo: value.pseudo,
+              relationId: value.relationId
+            }),
+        });
+    }
+
+    console.log(value)
     useEffect(() =>{
     })
   return (
-    <div>
+    <SurverStyle>
         Agenda
         {currentPage == 'agenda' &&
             <>
                 Sélectionner un contact: 
                     {relation.relation.map((elt, i)=>(
-                        <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent.pseudo}`)}>
-                            {elt.grandparent.pseudo}
+                        <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}>
+                            {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
                         </p>
                     ))}
                 <DateRangePicker
@@ -383,17 +413,50 @@ export default function SurveryQuizz({user, relation}) {
         }
         {currentPage == 'infos' &&
             <>
-                <h3>Avez-vous des difficultés pour :</h3>
-                <p>La mobilité</p>
-                <p>La vision</p>
-                <p>L'audition</p>
-                <p>Le langage</p>
+                <div>
+                    <h3>Avez-vous des problèmes de santé*</h3>
+                    <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
+                    <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
+                </div>
+
+                <div>
+                    <h3>Avez-vous des difficultés pour :</h3>
+                    <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
+                    <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
+                    <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
+                    <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
+                </div>
+
+                <div>
+                    <h3>Êtes vous sportif ?*</h3>
+                    <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
+                    <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
+                </div>
+
+                <div>
+                    <h3>Savez-vous nager ?*</h3>
+                    <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
+                    <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
+                </div>
+
                 <Survey.Survey model={survey} />
                 <button onClick={() => handleChoose('agenda')}>
                     Retour
                 </button>
             </>
         }
-    </div>
+        {currentPage == 'result' && 
+            <>
+                {datas.length ? (
+                datas.map((data,i) =>(
+                    <div key={i}>
+                        <div>{data.place} <button onClick={() => handleCreateExperience(i)}>Choisir</button></div>
+                    </div>
+                ))) : (<>Aucune donnée</>) }
+                
+                
+            </>
+        }
+    </SurverStyle>
   )
 }

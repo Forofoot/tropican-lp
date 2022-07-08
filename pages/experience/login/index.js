@@ -333,7 +333,6 @@ export default function Index() {
                         <p>
                             <a> Mot de passe oublié ?</a>
                         </p>
-                        
                     </form>
                 )
                 }

@@ -29,6 +29,7 @@ export const getServerSideProps = async ({ req, res }) => {
             pseudo: parsedUser.pseudo
           },
           select:{
+            pseudo:true,
             experience:{
               select:{
                 start:true,
@@ -39,11 +40,19 @@ export const getServerSideProps = async ({ req, res }) => {
               select:{
                 grandparent:{
                   select:{
+                    id:true,
                     pseudo:true
                   }
                 }
               }
-            }
+            },
+            vision:true,
+            mobility:true,
+            language:true,
+            audition:true,
+            healthissue:true,
+            sportaddict:true,
+            swim:true,
           }
         })
         await prisma.$disconnect()
@@ -56,11 +65,12 @@ export const getServerSideProps = async ({ req, res }) => {
       }
 
       if(parsedUser.role == 'grandparent'){
-        const relation = await prisma.grandparent.findMany({
+        const relation = await prisma.grandparent.findUnique({
           where:{
-            pseudo: parsedUser.id
+            pseudo: parsedUser.pseudo
           },
           select:{
+            pseudo:true,
             experience:{
               select:{
                 start:true,
@@ -69,13 +79,21 @@ export const getServerSideProps = async ({ req, res }) => {
             },
             relation:{
               select:{
-                grandchildren:{
+                grandChildren:{
                   select:{
+                    id:true,
                     pseudo:true
                   }
                 }
               }
-            }
+            },
+            vision:true,
+            mobility:true,
+            language:true,
+            audition:true,
+            healthissue:true,
+            sportaddict:true,
+            swim:true,
           }
         })
         await prisma.$disconnect()
