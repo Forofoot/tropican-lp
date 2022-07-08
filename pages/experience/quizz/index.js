@@ -10,13 +10,9 @@ const SurveyComponent = dynamic(() => import("../../../components/survey/SurveyQ
 
 export default function Quizz({user, relation}) {
   return (
-<<<<<<< Updated upstream
     <div className='container'>
       <SurveyComponent user={user} relation={relation}/>
     </div>
-=======
-    <div><SurveyComponent user={user} relation={relation}/></div>
->>>>>>> Stashed changes
   )
 }
 
