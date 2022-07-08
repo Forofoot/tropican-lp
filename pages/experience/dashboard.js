@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import Router from 'next/router';
 import styled from 'styled-components';
 import { parseCookies } from "../../helpers/"
 import { useCookies } from "react-cookie"
-import { prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import Link from 'next/link';
 
 const DashboardStyle = styled.section`
     height: 100vh;
     h3{
       margin-top: 45px;
+    }
+    a{
+      color:#000;
     }
 `
 
@@ -20,39 +23,46 @@ const Dashboard = ({user, friendRequest}) => {
     }, [cookies.user])
 
     const handleCreateRelation = async( relationId ) =>{
-      const res = await fetch('/api/notification/accept', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            currentUserID: currentUser?.id,
-            relationID: relationId,
-            sender: currentUser?.role
-        }),
-    });
+      try{
+        const res = await fetch('/api/notification/accept', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              currentUserID: currentUser?.id,
+              relationID: relationId,
+              sender: currentUser?.role
+          }),
+      });
+      }catch(e){
+        console.log(e)
+      }
     }
 
     const handleDeleteRelation = async( relationId) => {
-      console.log(relationId)
-      const res = await fetch('/api/notification/reject', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          currentUserID: currentUser?.id,
-          relationID: relationId,
-          sender: currentUser?.role
-        }),
-    });
+      try{
+        const res = await fetch('/api/notification/reject', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentUserID: currentUser?.id,
+            relationID: relationId,
+            sender: currentUser?.role
+          }),
+      });
+      }catch(e){
+        console.log(e)
+      }
     }
 
 
     return (
         <DashboardStyle>
-            Expérience de {currentUser?.firstName}
 
+            <Link href="/experience/quizz"><a>Commencer le quizz</a></Link> 
             {friendRequest ? (
             <h3>Demande d&apos;amis de : {friendRequest.map((elt, i) =>(
                   <div key={i}>
@@ -77,59 +87,68 @@ export default Dashboard;
 
 
 export const getServerSideProps = async ({ req, res }) => {
-  const cookie = parseCookies(req)
-
-  if (res) {
-    if(cookie.user){
-      const parsedUser =  JSON.parse(cookie.user)
-      const prisma = new PrismaClient()
-      if(parsedUser.role == 'grandchildren'){
-        const friendRequest = await prisma.notification.findMany({
-          where:{
-            grandChildren_id: parsedUser.id
-          },
-          select:{
-            grandParent_id:true,
-            grandparent:{
+  try {
+        const cookie = parseCookies(req)
+        if (res) {
+        if(cookie.user){
+          const parsedUser =  JSON.parse(cookie.user)
+          const prisma = new PrismaClient()
+          if(parsedUser.role == 'grandchildren'){
+            const friendRequest = await prisma.notification.findMany({
+              where:{
+                grandChildren_id: parsedUser.id
+              },
               select:{
-                pseudo:true
+                grandParent_id:true,
+                grandparent:{
+                  select:{
+                    pseudo:true
+                  }
+                },
+                sender:true
               }
-            },
-            sender:true
+            })
+            await prisma.$disconnect()
+            return{
+              props:{
+                friendRequest,
+                user: parsedUser && parsedUser,
+              }
+            }
           }
-        })
-        await prisma.$disconnect()
-        return{
-          props:{
-            friendRequest,
-            user: parsedUser && parsedUser,
+
+          if(parsedUser.role == 'grandparent'){
+            const friendRequest = await prisma.notification.findMany({
+              where:{
+                grandParent_id: parsedUser.id
+              },
+              select:{
+                grandChildren_id:true,
+                grandChildren:{
+                  select:{
+                    pseudo:true
+                  }
+                },
+                sender:true
+              }
+            })
+            await prisma.$disconnect()
+            return{
+              props:{
+                friendRequest,
+                user: parsedUser && parsedUser,
+              }
+            }
           }
         }
       }
-
-      if(parsedUser.role == 'grandparent'){
-        const friendRequest = await prisma.notification.findMany({
-          where:{
-            grandParent_id: parsedUser.id
-          },
-          select:{
-            grandChildren_id:true,
-            grandChildren:{
-              select:{
-                pseudo:true
-              }
-            },
-            sender:true
-          }
-        })
-        await prisma.$disconnect()
-        return{
-          props:{
-            friendRequest,
-            user: parsedUser && parsedUser,
-          }
-        }
+  }catch(e){
+    console.log(e)
+    return{
+      redirect:{
+        destination:'/experience/login',
+        permanent:false
       }
     }
   }
-}
+}  

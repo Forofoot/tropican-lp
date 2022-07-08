@@ -22,7 +22,13 @@ model Grandparent {
   email         String
   password      String
   role          String          @default("grandparent")
-  grandChildren Grandchildren[]
+  healthissue   Boolean @default(false)
+  sportaddict   Boolean @default(false)
+  swim          Boolean @default(true)
+  vision        Boolean @default(false)
+  mobility      Boolean @default(false)
+  language      Boolean @default(false)
+  audition      Boolean @default(false)
   notifications Notification[]
   gallery       Image[]
   experience    Experience[]
@@ -41,7 +47,13 @@ model Grandchildren {
   email         String
   password      String
   role          String          @default("grandchildren")
-  grandParent   Grandparent[]
+  healthissue   Boolean @default(false)
+  sportaddict   Boolean @default(false)
+  swim          Boolean @default(true)
+  vision        Boolean @default(false)
+  mobility      Boolean @default(false)
+  language      Boolean @default(false)
+  audition      Boolean @default(false)
   notifications Notification[]
   gallery       Image[]
   experience    Experience[]
@@ -92,6 +104,17 @@ model Activity {
   updatedAt DateTime @updatedAt
   name      String
   place     String
+  areas     String
+  long      String
+  lat       String
+  healthissue  Boolean @default(false)
+  vision        Boolean @default(false)
+  mobility      Boolean @default(false)
+  language      Boolean @default(false)
+  audition      Boolean @default(false)
+  sportaddict  Boolean @default(false)
+  swim         Boolean @default(true)
+  accomodation String
   theme     Theme[]
 }
 
@@ -102,8 +125,7 @@ model Theme {
   mainTheme   String
   secondTheme String?
   thirdTheme  String?
-  activity    Activity @relation(fields: [activity_id], references: [id])
-  activity_id Int
+  activity    Activity[]
 }
 
 model Image {
