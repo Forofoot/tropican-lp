@@ -1,8 +1,8 @@
 import { createClient } from 'contentful'
 import Image from 'next/image'
-import { useRouter } from 'next/router';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useRouter } from 'next/router'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from 'styled-components';
 
 const ArticleStyle = styled.div`
