@@ -50,6 +50,7 @@ const SurverStyle = styled.section`
         border: 1px solid #F20D97;
         border-radius: 10px;
         padding: 20px;
+        max-width: 600px;
     }
     .recapContainer{
         display: flex;
