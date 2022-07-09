@@ -15,6 +15,9 @@ const AuthStyle = styled.section`
         line-height: 70px;
         margin-bottom: 10px;
         font-size: 3.5rem;
+        @media(max-width: 768px){
+            display: none;
+        }
     }
     h2{
         font-family: 'Sofia Pro';
@@ -22,6 +25,9 @@ const AuthStyle = styled.section`
         font-weight: 400;
         font-size: 1.375rem;
         margin-bottom: 50px;
+        @media(max-width: 768px){
+            display: none;
+        }
     }
     .loginLogo{
         display:flex;
