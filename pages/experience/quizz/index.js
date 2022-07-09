@@ -43,7 +43,8 @@ export const getServerSideProps = async ({ req, res }) => {
                 grandparent:{
                   select:{
                     id:true,
-                    pseudo:true
+                    pseudo:true,
+                    avatar:true
                   }
                 }
               }
@@ -84,7 +85,8 @@ export const getServerSideProps = async ({ req, res }) => {
                 grandChildren:{
                   select:{
                     id:true,
-                    pseudo:true
+                    pseudo:true,
+                    avatar:true
                   }
                 }
               }
