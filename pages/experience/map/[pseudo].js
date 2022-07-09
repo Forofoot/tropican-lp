@@ -14,6 +14,9 @@ const ProfileStyle = styled.section`
     figure{
         margin-bottom: 15px;
     }
+    .mapboxgl-map{
+        font-family: 'SofiaPRO', sans-serif;
+    }
     .blockExperience{
         display: flex;
         width: 280px;
