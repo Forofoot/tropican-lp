@@ -10,7 +10,6 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.12.1",
     "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@prisma/client": "^4.0.0",
     "babel-plugin-superjson-next": "^0.4.3",
