@@ -9,14 +9,14 @@ export default createGlobalStyle`
   }
   @font-face {
     font-family: "SofiaPRO";
-    src: url('./fonts/Sofia-Pro-Regular.woff') format('woff'); 
+    src: url('/fonts/Sofia-Pro-Regular.woff') format('woff'); 
     font-weight: 400;
     font-style: normal;
   }
 
   @font-face {
     font-family: "MarkPRO";
-    src: url('./fonts/Mark-Pro-Bold.woff') format('woff'); 
+    src: url('/fonts/Mark-Pro-Bold.woff') format('woff'); 
     font-weight: bold;
     font-style: normal;
   }
