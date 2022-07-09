@@ -42,8 +42,9 @@ function MyApp({ Component, pageProps }) {
       />
       
       <CookiesProvider>
+        
+        <GlobalCSS/>
         <Layout>
-          <GlobalCSS/>
           <Component {...pageProps} />
         </Layout>
       </CookiesProvider>
