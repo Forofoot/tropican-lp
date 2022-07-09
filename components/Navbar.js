@@ -37,10 +37,9 @@ const HeaderStyle = styled.header`
         @media (min-width:768px){
           display: none;
         }
-        padding-left: 0;
-        text-transform: uppercase;
+        padding: 0 30px;
         position: fixed;
-        width: 100%;
+        width: 75%;
         height: 100%;
         background-color: #F4F4F4;
         top: 0;
@@ -50,25 +49,34 @@ const HeaderStyle = styled.header`
         z-index: 5;
         display: flex;
         justify-content: center;
-        align-items: center;
         flex-direction: column;
-        font-size: 2rem;
+        font-size: 1rem;
         text-align: center;
-      li{
-        margin-bottom: 35px;
-        &:last-child{
-          margin-bottom: 0;
+        ul{
+          text-align: left;
+          li{
+          margin-bottom: 35px;
+          padding-bottom: 20px;
+          border-bottom: 2px solid #212F89;
+          &:last-child{
+            margin-bottom: 0;
+          }
+          a{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
         }
-      }
+        }
       &.opened{
         left: 0;
         transition: left .3s ease-in-out;
           .close{
           position: absolute;
           top:0;
-          width: 50px;
+          width: 80px;
           height: 50px;
-          right: 55px;
+          left: 30px;
           top: 30px;
           display: flex;
           align-items: center;
@@ -77,9 +85,9 @@ const HeaderStyle = styled.header`
             width: 100%;
             height: 2px;
             background-color: #7159AD ;
-            transform: rotate(45deg) translate(11px, -10px);
+            transform: rotate(45deg) translate(11px,-11px);
             &:last-child{
-              transform: rotate(-45deg) translate(-7px, -7px);
+              transform:rotate(-45deg) translate(-16px,-16px);
             }
           }
           &:hover{
@@ -199,25 +207,100 @@ export default function Navbar() {
                 <div className="closeline"></div>
                 <div className="closeline"></div>
               </div>
-              <ul >
-                <li>
-                  <Link href="#section1">
-                    <a onClick={() => setActive(!active)}>Tropican</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#section2">
-                    <a onClick={() => setActive(!active)}>Qui sommes-nous ?</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#section3">
-                    <a onClick={() => setActive(!active)}>Vos retours</a>
-                  </Link>
-                </li>
-              </ul>
+              {router.pathname == '/' ? (
+                <ul>
+                  <li>
+                    <Link href="#section1">
+                      <a onClick={() => setActive(!active)}>Tropican</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#section2">
+                      <a onClick={() => setActive(!active)}>Qui sommes-nous ?</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#section3">
+                      <a onClick={() => setActive(!active)}>Vos retours</a>
+                    </Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul>
+                  <li className={router.pathname == "/experience/profile/[pseudo]" || router.pathname == "/experience/profile/modify/[pseudo]" ? "active" : ""}>
+                    <Link href={`/experience/profile/${currentUser?.pseudo}`}>
+                      <a>
+                        <Image
+                          src={'/navbar/profile.webp'}
+                          alt={'Icon profile'}
+                          width={30}
+                          height={30}
+                        />
+                        Profil
+                      </a>
+                    </Link>
+                  </li>
+                  <li className={router.pathname == `/experience/map/[pseudo]` ? "active" : ""}>
+                    <Link href={`/experience/map/${currentUser?.pseudo}`}>
+                      <a>
+                        <Image
+                          src={'/navbar/map.webp'}
+                          alt={'Icon profile'}
+                          width={30}
+                          height={30}
+                        />
+                        Carte
+                      </a>
+                    </Link>
+                  </li>
+                  <li className={router.pathname == "/experience/dashboard" ? "active" : ""}>
+                    <Link href='/experience/dashboard'>
+                      <a>
+                        <Image
+                          src={'/navbar/album.webp'}
+                          alt={'Icon profile'}
+                          width={30}
+                          height={30}
+                        />
+                        Mes albums
+                      </a>
+                    </Link>
+                  </li>
+                  <li className={router.pathname == "/blog" ? "active" : ""}>
+                    <Link href='/blog'>
+                      <a>
+                        <Image
+                          src={'/navbar/blog.webp'}
+                          alt={'Icon profile'}
+                          width={30}
+                          height={30}
+                        />
+                        Le blog
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+              )}
           </aside>
-          {currentUser?.pseudo ? (
+          {router.pathname == '/' ? (
+          <ul className='desktopLinks'>
+            <li>
+              <Link href="#section1">
+                <a>Tropican</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="#section2">
+                <a>Qui sommes-nous ?</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="#section3">
+                <a>Vos retours</a>
+              </Link>
+            </li>
+          </ul>
+          ) : (
             <ul className='desktopLinks'>
               <li className={router.pathname == "/experience/profile/[pseudo]" || router.pathname == "/experience/profile/modify/[pseudo]" ? "active" : ""}>
                 <Link href={`/experience/profile/${currentUser?.pseudo}`}>
@@ -248,25 +331,7 @@ export default function Navbar() {
                 </Link>
               </li>
             </ul>
-          ) : (
-            
-            <ul className='desktopLinks'>
-            <li>
-              <Link href="#section1">
-                <a>Tropican</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="#section2">
-                <a>Qui sommes-nous ?</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="#section3">
-                <a>Vos retours</a>
-              </Link>
-            </li>
-          </ul>)
+            )
           }
         </nav>
         
