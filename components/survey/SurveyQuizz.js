@@ -9,7 +9,6 @@ import { DateRangePicker } from 'react-date-range';
 import Moment from 'react-moment';
 import 'moment/locale/fr';
 
-
 // Modern theme
 import "survey-react/modern.min.css"
 
@@ -46,11 +45,83 @@ const SurverStyle = styled.section`
     .selectRelationLabel{
         margin-bottom: 30px;
     }
+    .findRelation{
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 20px;
+        
+        p{
+            font-size: 1rem;
+            color: #313131;
+            border-bottom: 1px solid #F20D97;
+            padding-bottom: 15px;
+            width: 100%;
+        }
+        div{
+            width: 32px;
+            height: 32px;
+            background-color: #F20D97;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .arrow{
+                border: solid #f4f4f4;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 3px;
+                margin-bottom: 3px;
+                will-change: transform;
+                transform: rotate(45deg);
+                transition: transform ease-out .2s;
+                &.active{
+                    transform: rotate(-135deg); 
+                    margin-bottom: 0;
+                    margin-top: 3px;
+                }
+            }
+        }
+        
+    }
     .relationResult{ 
         border: 1px solid #F20D97;
         border-radius: 10px;
         padding: 20px;
         max-width: 600px;
+        display: none;
+        margin-bottom: 30px;
+        cursor: pointer;
+        div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            p{
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            .valid{
+                visibility: hidden;
+                will-change: opacity;
+                opacity: 0;
+                border-radius: unset;
+                transition: opacity linear .5s;
+            }
+            &.active{
+                .valid{
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            img{
+                border-radius: 50%;
+            }
+        }
+        &.show{
+            display: block;
+        }
+        
     }
     .recapContainer{
         display: flex;
@@ -435,7 +506,27 @@ export default function SurveryQuizz({user, relation}) {
     const [currentPage, setCurrentPage] = useState('agenda')
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
-    
+    const selectionRange = {
+        startDate: startDate,
+        endDate: endDate,
+        key: 'selection'
+    }
+    const [value, setValue] = useState({
+        start: new Date(),
+        end: new Date(),
+        pseudo: "",
+        relationId: "",
+        healthIssue: relation.healthissue,
+        sportAddicted: relation.sportaddict,
+        swim: relation.swim,
+        mobility: relation.mobility,
+        vision: relation.vision,
+        language: relation.language,
+        audition: relation.audition
+    });
+    const [state, setstate] = useState([])
+    const [datas, setDatas] = useState([])
+    const [view, setView] = useState(false)
     let q = survey.getAllQuestions();
     q.forEach(elt =>{
         elt.showLabel = 'aaa';
@@ -453,32 +544,11 @@ export default function SurveryQuizz({user, relation}) {
         })
     }
 
-    const selectionRange = {
-        startDate: startDate,
-        endDate: endDate,
-        key: 'selection'
-    }
-    
-    const [value, setValue] = useState({
-        start: new Date(),
-        end: new Date(),
-        pseudo: "",
-        relationId: "",
-        healthIssue: relation.healthissue,
-        sportAddicted: relation.sportaddict,
-        swim: relation.swim,
-        mobility: relation.mobility,
-        vision: relation.vision,
-        language: relation.language,
-        audition: relation.audition
-    });
     relation.experience.forEach(pro => {
         for (let d = pro.start; d <= pro.end; d.setDate(d.getDate() + 1)) {
             daysOfYear.push(new Date(d));
         }
     });
-    const [state, setstate] = useState([])
-    const [datas, setDatas] = useState([])
     survey.onComplete.add(function (survey, options) {
 
         setstate([
@@ -551,21 +621,41 @@ export default function SurveryQuizz({user, relation}) {
             }),
         });
     }
-
-    console.log(state)
   return (
     <SurverStyle>
         {currentPage == 'agenda' &&
             <>
                 <h2>Avec qui ?</h2>
                 <p className='selectRelationLabel'>Sélection de la relation :</p>
-                    <div className='relationResult'>
-                        {relation.relation.map((elt, i)=>(
-                            <p key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}>
+                <div className='findRelation'>
+                    <p>Cherchez votre relation</p> 
+                    <div onClick={() => setView(!view)}>
+                        <span className={`arrow ${view == true ? ('active') : ('')}`}></span>
+                    </div>
+                </div>
+                <div className={`relationResult ${view == true ? ('show') : ('')}`}>
+                    {relation.relation.map((elt, i)=>(
+                        <div onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)} key={i} className={`${value.pseudo == elt.grandparent?.pseudo || elt.grandChildren?.pseudo ? ('active') : ('')}`}>
+                            <p>
+                                <Image
+                                    src={`${elt.grandChildren?.avatar || elt.grandparent?.avatar}`}
+                                    alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
+                                    width={39}
+                                    height={39}
+                                    objectFit='cover'
+                                />
                                 {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
                             </p>
-                        ))}
-                    </div>
+                            <Image
+                                src={'/tools/valider.webp'}
+                                alt={'Icon valider'}
+                                width={28}
+                                height={28}
+                                className='valid'
+                            />
+                        </div>
+                    ))}
+                </div>
                 <h2>Quand ?</h2>
                 <p>Date de l&apos;expérience :</p>
                 <div className='dateRangeContainer'>
