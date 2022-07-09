@@ -9,8 +9,8 @@ import Link from 'next/dist/client/link';
 
 const ProfileStyle = styled.section`
     text-align: center;
-    padding-top: 50px;
     height: 100vh;
+    margin-bottom: 0;
     figure{
         margin-bottom: 15px;
     }
