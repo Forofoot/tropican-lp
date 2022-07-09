@@ -46,7 +46,7 @@ const ProfileStyle = styled.section`
         }
         &__actions{
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             flex-wrap: wrap;
             align-items: center;
             border-radius: 10px;
@@ -55,10 +55,10 @@ const ProfileStyle = styled.section`
                 display: flex;
                 justify-content: center;
                 flex-wrap:wrap ;
-                margin-bottom:15px;
+                margin-bottom: 15px;
                 background: #212F89;
-                width:100%;
-                padding: 10px 45px;
+                width:47%;
+                padding: 10px 35px;
                 border-radius: 25px;
                 a{
                     margin-left: 10px;
@@ -67,21 +67,6 @@ const ProfileStyle = styled.section`
                     font-weight: 700;
                     line-height: 150%;
                     color:#f4F4F4;
-                }
-                &:nth-child(2){
-                    width: 48%;
-                    padding: 10px 20px;
-                    margin-right: 15px;
-                    @media(min-width: 768px){
-                        width: 49%;
-                    }
-                }
-                &:nth-child(3){
-                    width: 48%;
-                    padding: 10px 20px;
-                    @media(min-width: 768px){
-                        width: 49%;
-                    }
                 }
             }
         }
@@ -128,12 +113,11 @@ export default function Profile({profile}) {
   }
   return (
     <ProfileStyle>
-        <button onClick={(e) => logout(e)}>Déconnexion</button>
 
         <div className='profil__photo'>
             
             <figure>
-                {profile.avatar ? (
+                {profile?.avatar ? (
                     <Image
                         src={profile?.avatar}
                         alt={profile?.pseudo}
@@ -168,20 +152,33 @@ export default function Profile({profile}) {
         <div className='profil__actions'>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/../public/profil/contact.png'}
+                    src={'/profil/contact.png'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
                 />
                 <Link href={`/experience/contact/addContact`}>
                     <a>
-                        Ajouter un contact
+                        Relation
                     </a>
                 </Link>
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/../public/profil/agenda.png'}
+                    src={'/profil/sante.png'}
+                    alt='logo icone contact'
+                    width={25}
+                    height={25} 
+                />
+                <Link href={`/experience/contact/addContact`}>
+                    <a>
+                        Santé
+                    </a>
+                </Link>
+            </div>
+            <div className='profil__actions--btn'>
+                <Image
+                    src={'/profil/agenda.png'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -194,7 +191,7 @@ export default function Profile({profile}) {
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/../public/profil/album.png'}
+                    src={'/profil/album.png'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -248,6 +245,7 @@ export default function Profile({profile}) {
                 ))}
             </div>
         </div>
+        <button onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
   )
 }
