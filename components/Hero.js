@@ -160,25 +160,13 @@ const HeroStyle = styled.section`
             const imageRef = useRef()
             let src = "/hero/image_banner.webp"
         useEffect(() => {
-            console.log(imageRef.current)
         
             firstStar.current.addEventListener('mouseenter', function(e){
                var source = this.id;
                var id = source.split('_');
-               console.log(imageRef)
                src = "banner_over_"+id[1]+".webp"
                imageRef.current.src=src;
             })
-    
-            /*document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
-                console.log('1');
-                var id = (event.target.id);
-                document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
-            })
-            document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
-                console.log('2');
-                document.querySelector(".image_banner img").src="/hero/image_banner.webp";
-            })*/
             
         },[src])
     return (

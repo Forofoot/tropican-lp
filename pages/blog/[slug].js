@@ -65,7 +65,6 @@ export async function getStaticProps({ params }) {
 
 export default function ArticleDetails({article}) {
     const router = useRouter()
-    console.log(article)
     const { titleArticle, articleCover, articleContent, publicationDate } = article.fields
 
     return (
