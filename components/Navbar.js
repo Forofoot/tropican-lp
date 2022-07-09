@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/router"
 
 const HeaderStyle = styled.header`
   //background:#42A0B6;
@@ -11,6 +12,11 @@ const HeaderStyle = styled.header`
   nav{
     display:flex;
     justify-content:space-between;
+    .active{
+      a{
+        color:#F20D97;
+      }
+    }
     .logoMobile{
       width: 53px;
       height: 53px;
@@ -156,6 +162,7 @@ export default function Navbar() {
     setCurrentUser(cookies.user)
   }, [cookies.user])
 
+  const router = useRouter();
   return (
     <HeaderStyle>
         <nav>
@@ -212,41 +219,29 @@ export default function Navbar() {
           </aside>
           {currentUser?.pseudo ? (
             <ul className='desktopLinks'>
-              <li>
+              <li className={router.pathname == "/experience/profile/[pseudo]" || router.pathname == "/experience/profile/modify/[pseudo]" ? "active" : ""}>
                 <Link href={`/experience/profile/${currentUser?.pseudo}`}>
                   <a>
                     Profil
                   </a>
                 </Link>
               </li>
-              <li>
-                <Link href={`/experience/planning/${currentUser?.pseudo}`}>
-                  <a>
-                    Calendrier
-                  </a>
-                </Link>
-              </li>
-              {/*<Link href='/experience/contact/addContact'>
-                <a>
-                  Ajouter un contact
-                </a>
-          </Link>*/}
-              <li>
+              <li className={router.pathname == `/experience/map/[pseudo]` ? "active" : ""}>
                 <Link href={`/experience/map/${currentUser?.pseudo}`}>
                   <a>
                     Carte
                   </a>
                 </Link>
               </li>
-              <li>
+              <li className={router.pathname == "/experience/dashboard" ? "active" : ""}>
                 <Link href='/experience/dashboard'>
                   <a>
                     Mes albums
                   </a>
                 </Link>
               </li>
-              <li>
-                <Link href='/'>
+              <li className={router.pathname == "/blog" ? "active" : ""}>
+                <Link href='/blog'>
                   <a>
                     Le blog
                   </a>
