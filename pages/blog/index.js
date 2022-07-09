@@ -29,7 +29,6 @@ export async function getStaticProps() {
 }
 
 export default function Articles({ article }) {
-    console.log(article)
     return (
         <IndexStyle>
         <div className="content_container">
