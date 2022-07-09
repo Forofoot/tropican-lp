@@ -9,6 +9,9 @@ import { useCookies } from "react-cookie";
 const ProfileStyle = styled.section`
     text-align: center;
     padding: 50px 20px 0;
+    @media(min-width: 768px){
+        padding: 50px 140px 0;
+    }
     .profil{
         &__photo{
             width: 100px;
@@ -20,6 +23,11 @@ const ProfileStyle = styled.section`
             margin-left: 50%;
             transform: translateX(-50%);
             margin-bottom: 20px;
+            @media(min-width: 768px){
+                display: block;
+                margin-left: 0;
+
+            }
         }
         &__name{
             font-family: 'Mark Pro';
@@ -45,6 +53,16 @@ const ProfileStyle = styled.section`
             }
         }
         &__actions{
+            @media(min-width: 768px){
+                justify-content: start;
+                &--btn{
+                    margin-right: 15px;
+                    width: 200px!important;
+                    &:nth-child(3), &:nth-child(4){
+                        display: none;
+                    }
+                }
+            }
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -82,12 +100,30 @@ const ProfileStyle = styled.section`
                 font-weight: 300;
                 font-style: normal;
             }
+            &--subtitle{
+                display: flex;
+                justify-content: space-between;
+                a{
+                    color: black;
+                }
+            }
             &--album{
                 display: flex;
-
-                Image{
-
+                justify-content: space-around;
+                div{
+                    flex-wrap: wrap;
+                    gap: 15px;
                 }
+                &-info{
+                    p{
+                        margin-right: 10px;
+                    }
+                    span{
+                        font-family: 'Sofia Pro';
+                        font-style: normal;
+                        font-weight: 300;
+                        }
+                    }
                 }
             }
         }
@@ -115,44 +151,44 @@ export default function Profile({profile}) {
     <ProfileStyle>
 
         <div className='profil__photo'>
-            
-            <figure>
-                {profile?.avatar ? (
-                    <Image
-                        src={profile?.avatar}
-                        alt={profile?.pseudo}
-                        width={125}
-                        height={125}
-                    />
-                ) : (
-                    <Image
-                        src={'/logo.webp'}
-                        alt={'photo de profil'}
-                        width={125}
-                        height={125}
-                    />
-                )} 
-            </figure>
-            <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
-                <a>
-                    Modifier
-                </a>
-            </Link>
-        </div>
-        
-        <p className='profil__name'>{profile?.firstName} {profile?.lastName}</p>
-        <div className='profil__pseudo'>
-            <p>{profile?.pseudo}</p>
-            <Link href={'#'}>
-                <a>
-                    Partager
-                </a>
-            </Link>
-        </div>
+                <div>
+                    <figure>
+                        {profile?.avatar ? (
+                            <Image
+                                src={profile?.avatar}
+                                alt={profile?.pseudo}
+                                width={125}
+                                height={125}
+                            />
+                        ) : (
+                            <Image
+                                src={'/logo.webp'}
+                                alt={'photo de profil'}
+                                width={125}
+                                height={125}
+                            />
+                        )} 
+                    </figure>
+                    <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                        <a>
+                            Modifier
+                        </a>
+                    </Link>
+                </div>
+            </div>  
+            <p className='profil__name'>{profile?.firstName} {profile?.lastName}</p>
+            <div className='profil__pseudo'>
+                <p>{profile?.pseudo}</p>
+                <Link href={'#'}>
+                    <a>
+                        Partager
+                    </a>
+                </Link>
+            </div>
         <div className='profil__actions'>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/profil/contact.png'}
+                    src={'/profil/contact.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -165,7 +201,7 @@ export default function Profile({profile}) {
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/profil/sante.png'}
+                    src={'/profil/sante.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -178,7 +214,7 @@ export default function Profile({profile}) {
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/profil/agenda.png'}
+                    src={'/profil/agenda.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -191,7 +227,7 @@ export default function Profile({profile}) {
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/profil/album.png'}
+                    src={'/profil/album.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -205,44 +241,60 @@ export default function Profile({profile}) {
         </div>
         <div className='profil__grid'>
             <p className='profil__grid--title'>Mes photos</p>
-            <p>Voyage avec Titouan </p>
-            <div className='profil__grid--album'>
-            {profile?.experience.map((exp,i) =>(
-                <figure key={i}>
-                    {exp?.image.map((img, index) =>(
-                        <figure key={index}>
-                            <Image
-                                src={img.image}
-                                alt='bamako'
-                                height={190}
-                                width={190}
-                            />
-                        </figure>
-                    ))}
-                    <p >{exp.name}</p>
-                </figure>
-                ))}
+            <div className='profil__grid--subtitle' >
+                <p>Voyage avec Titouan </p>
+                <p>
+                    <Link href={'#'}>
+                        <a>Voir plus</a>
+                    </Link>
+                </p>
+                
             </div>
-        </div>
-        <div className='profil__grid'>
-            <p className='profil__grid--title'>Mes photos</p>
-            <p>Voyage avec Titouan </p>
             <div className='profil__grid--album'>
-                {profile?.experience.map((exp,i) =>(
-                    <figure key={i}>
-                        {exp?.image.map((img, index) =>(
-                            <figure key={index}>
-                                <Image
-                                    src={img?.image}
-                                    alt='bamako'
-                                    height={180}
-                                    width={180}
-                                />
-                            </figure>
-                        ))}
-                        
+                <div>
+                    <figure>
+                        <Image
+                            src={"/profil/album_profil.png"}
+                            alt="image de fond album"
+                            width={165}
+                            height={165}
+                        />
                     </figure>
-                ))}
+                    <div className='profil__grid--album-info'>
+                    <p>
+                        <Image
+                            src={"/profil/mark-position.webp"}
+                            alt="logo localisation"
+                            width={15}
+                            height={15}
+                        />
+                        Massif Central<br></br>
+                        <span>23/06/22</span>
+                    </p>
+                    </div>
+                </div>
+                <div>
+                    <figure>
+                        <Image
+                            src={"/profil/album_profil.png"}
+                            alt="image de fond album"
+                            width={165}
+                            height={165}
+                        />
+                    </figure>
+                    <div className='profil__grid--album-info'>
+                    <p>
+                        <Image
+                            src={"/profil/mark-position.webp"}
+                            alt="logo localisation"
+                            width={15}
+                            height={15}
+                        />
+                        Massif Central<br></br>
+                        <span>23/06/22</span>
+                    </p>
+                    </div>
+                </div>
             </div>
         </div>
         <button onClick={(e) => logout(e)}>Déconnexion</button>
