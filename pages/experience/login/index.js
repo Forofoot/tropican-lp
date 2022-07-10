@@ -256,7 +256,7 @@ export default function Index() {
             maxAge: 3600, // Expires after 1hr
             sameSite: true,
         })
-        router.push('/experience/dashboard')
+        router.reload('/experience/dashboard')
     }else{  
         errormessage.current.classList.add('active')
         setError(data)

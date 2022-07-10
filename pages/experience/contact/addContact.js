@@ -37,10 +37,9 @@ export default function AddContact() {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          currentUser: currentUser.pseudo,
-          pseudo: inputedFriend.pseudo,
-          role: currentUser.role,
-          currentUserId: currentUser.id
+          currentUser: currentUser?.pseudo,
+          pseudo: inputedFriend?.pseudo,
+          role: currentUser?.role
       }),
   });
   }
