@@ -93,11 +93,9 @@ const AuthStyle = styled.section`
             border-radius: 10px;
             border: 1px solid #212F89;
             text-align: center;
-            &:hover{
-                border: 2px solid #212F89;
-            }
             &.active{
-                background-color: red;
+                border: 2px solid #212F89;
+                background-color: #2299dd36;
             }
         }
     }
