@@ -7,53 +7,81 @@ export default async function handler(
     req,
     res
 ) {
-    if (req.method === 'POST') {
+    try{
+        if (req.method === 'POST') {
 
-        const { currentUserID, relationID, sender } = req.body
+            const { currentUser, relationID, sender } = req.body
 
-        if(sender == 'grandchildren'){
-            let notificationGrandChildren = await prisma.notification.findUnique({
+            const letCheckCurrentUserGrandChildren = await prisma.grandchildren.findUnique({
                 where:{
-                    grandParent_id: relationID,
-                    grandChildren_id: currentUserID
+                    pseudo:currentUser
                 }
-            })
-           let deleteNotification = await prisma.notification.delete({
-                where: {
-                    id: notificationGrandChildren.id
-                }
-            }); 
-            let createRelation = await prisma.relation.create({
-                data:{
-                    grandParent_id: relationID,
-                    grandChildren_id: currentUserID
-                }
-            })
-            await prisma.$disconnect()
-            res.status(201).json({message: "demande d'amis refusé"})
-        }
+            }) 
 
-        if(sender == 'grandparent'){
-            let notificationGrandParent = await prisma.notification.findUnique({
+
+            const letCheckCurrentUserGrandParent = await prisma.grandparent.findUnique({
                 where:{
-                    grandParent_id: currentUserID,
-                    grandChildren_id: relationID
+                    pseudo:currentUser
                 }
-            })
-           let deleteNotification = await prisma.notification.delete({
-                where: {
-                    id: notificationGrandParent.id
-                }
-            });
+            })   
 
-            let createRelation = await prisma.relation.create({
-                data:{
-                    grandParent_id: currentUserID,
-                    grandChildren_id: relationID
+            if(letCheckCurrentUserGrandChildren){
+                if(sender == 'grandparent'){
+                    let notificationGrandChildren = await prisma.notification.findFirst({
+                        where:{
+                            grandParent_id: relationID,
+                            grandChildren_id: letCheckCurrentUserGrandChildren.id
+                        }
+                    })
+                    if(notificationGrandChildren){
+                        let deleteNotification = await prisma.notification.delete({
+                            where: {
+                                id: notificationGrandChildren.id,
+                            }
+                        }); 
+                        let createRelation = await prisma.relation.create({
+                            data:{
+                                grandParent_id: relationID,
+                                grandChildren_id: letCheckCurrentUserGrandChildren.id
+                            }
+                        })
+                        await prisma.$disconnect()
+                        res.status(201).json({message: "demande d'ami Accepté"})
+                    }                    
+                }else{
+                    res.status(500).json({message: "Erreur"})
                 }
-            })
-            await prisma.$disconnect()
-             res.status(201).json({message: "demande d'amis accepté"})
+            }
+            
+            if(letCheckCurrentUserGrandParent){
+                if(sender == 'grandchildren'){
+                    let notificationGrandParent = await prisma.notification.findFirst({
+                        where:{
+                            grandParent_id: letCheckCurrentUserGrandParent.id,
+                            grandChildren_id: relationID
+                        }
+                    })
+                    if(notificationGrandParent){
+                        let deleteNotification = await prisma.notification.delete({
+                            where: { 
+                                id: notificationGrandParent.id
+                            }
+                        });
+                        let createRelation = await prisma.relation.create({
+                            data:{
+                                grandParent_id: letCheckCurrentUserGrandParent.id,
+                                grandChildren_id: relationID
+                            }
+                        })
+                        await prisma.$disconnect()
+                        res.status(201).json({message: "demande d'ami Accepté"})
+                    }
+                }else{
+                    res.status(500).json({message: "Erreur"})
+                }
+            }
         }
+    }catch(e){
+        console.log(e)
     }
 }
