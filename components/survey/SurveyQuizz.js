@@ -95,13 +95,13 @@ const SurverStyle = styled.section`
     .relationResult{ 
         border: 1px solid #F20D97;
         border-radius: 10px;
-        padding: 20px;
         max-width: 600px;
         display: none;
         margin-bottom: 30px;
         background-color: #fefefe;
         cursor: pointer;
-        div{
+        .relationBlockResult{
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -126,6 +126,12 @@ const SurverStyle = styled.section`
             img{
                 border-radius: 50%;
             }
+        }
+        hr{
+            border-color: #F20D97;
+        }
+        hr:last-of-type{
+            display: none;
         }
         &.show{
             display: block;
@@ -841,15 +847,26 @@ export default function SurveryQuizz({user, relation}) {
                         </div>
                         <div className={`relationResult ${view == true ? ('show') : ('')}`}>
                             {relation.relation.map((elt, i)=>(
-                                <div onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)} key={i} className={`${value.pseudo == elt.grandparent?.pseudo || elt.grandChildren?.pseudo ? ('active') : ('')}`}>
+                                <>
+                                <div onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)} key={i} className={`relationBlockResult ${value.pseudo == elt.grandparent?.pseudo || elt.grandChildren?.pseudo ? ('active') : ('')}`}>
                                     <p>
-                                        <Image
-                                            src={`${elt.grandChildren?.avatar || elt.grandparent?.avatar}`}
-                                            alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
-                                            width={39}
-                                            height={39}
-                                            objectFit='cover'
-                                        />
+                                        {elt.grandChildren?.avatar || elt.grandparent?.avatar ? (
+                                            <Image
+                                                src={`${elt.grandChildren?.avatar || elt.grandparent?.avatar}`}
+                                                alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
+                                                width={39}
+                                                height={39}
+                                                objectFit='cover'
+                                            />
+                                            ) : (
+                                            <Image
+                                                src={`/logo.webp`}
+                                                alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
+                                                width={39}
+                                                height={39}
+                                                objectFit='cover'
+                                            />)
+                                        }
                                         {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
                                     </p>
                                     <Image
@@ -860,6 +877,8 @@ export default function SurveryQuizz({user, relation}) {
                                         className='valid'
                                     />
                                 </div>
+                                <hr></hr>
+                                </>
                             ))}
                         </div>
                     </div>
