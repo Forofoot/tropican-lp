@@ -126,7 +126,7 @@ export default createGlobalStyle`
 
   .btnPrimary{
     text-transform: none;
-    background-color: #7159AD;
+    background-color: #212F89;
     color: #F4F4F4;
     border: none;
   }
