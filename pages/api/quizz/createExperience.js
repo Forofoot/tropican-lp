@@ -56,7 +56,6 @@ export default async function handler(
     }
     if(!checkGrandChildren && !checkGrandParent){
         prisma.$disconnect()
-        console.log('teeee')
         return false
     }
  }

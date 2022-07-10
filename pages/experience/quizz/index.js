@@ -3,16 +3,21 @@ import dynamic from 'next/dynamic'
 //import { questions } from "./content/questions" // these are the survey question
 import { parseCookies } from "../../../helpers/"
 import { PrismaClient } from '@prisma/client'
+import styled from 'styled-components'
 
 const SurveyComponent = dynamic(() => import("../../../components/survey/SurveyQuizz"), {
     ssr: false,
   })
 
+const QuizzStyle = styled.section`
+  min-height: 95vh;
+`
+
 export default function Quizz({user, relation}) {
   return (
-    <div className='container'>
+    <QuizzStyle className='container'>
       <SurveyComponent user={user} relation={relation}/>
-    </div>
+    </QuizzStyle>
   )
 }
 
