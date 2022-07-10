@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
@@ -9,11 +9,30 @@ import { useCookies } from "react-cookie";
 const ProfileStyle = styled.section`
     text-align: center;
     padding: 50px 20px 0;
+    .profilChoiceBlock{
+        display: none;
+    }
     @media(min-width: 768px){
         padding: 50px 140px 0;
         .mobile{
             display: none!important;
         }
+        .profilChoiceBlock{
+        display:flex;
+        .profilChoice {
+            width: 50%;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #212F89;
+            color : #212F89;
+            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            &.active{
+                border-bottom: 3px solid #212F89;
+            }
+        }
+    }
     }
     .profil{
         &__desktop{
@@ -185,7 +204,7 @@ const ProfileStyle = styled.section`
 export default function Profile({profile}) {
     
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  
+  const [profilChoice, setProfilChoice] = useState('photo')
   const router = useRouter()
 
   useEffect(() => {
@@ -393,6 +412,38 @@ export default function Profile({profile}) {
                 </div>
             </div>
         </div>
+
+        <div className='profilChoiceBlock'>
+            <div className={`profilChoice ${profilChoice == 'photo' ? 'active' : ''}`} onClick={() => setProfilChoice('photo')}>
+                Mes Photos
+            </div>
+            <div className={`profilChoice ${profilChoice == 'agenda' ? 'active' : ''}`} onClick={() => setProfilChoice('agenda')}>
+                Mon agenda
+            </div>
+            <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
+                Ma Santé
+            </div>
+        </div>
+        <div className='display__desktop'>
+            {profilChoice == 'photo' && 
+                <>
+                    <h1>Mes Photos</h1>
+                </>
+            }
+            {profilChoice == 'agenda' && 
+                <>
+                    <h1>Mon agenda</h1>
+                </>
+            }
+            {profilChoice == 'sante' && 
+                <>
+                    <h1>Ma santé</h1>
+                </>
+            }
+            
+        </div>
+
+
         <button onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
   )
