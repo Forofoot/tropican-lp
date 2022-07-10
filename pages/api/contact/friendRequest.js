@@ -52,6 +52,7 @@ export default async function handler(
                       grandParent_id: resultGrandParent.id
                     },
                     select:{
+                        sender:true,
                         grandChildren_id:true,
                         grandChildren:{
                             select:{
@@ -76,5 +77,4 @@ export default async function handler(
         console.log('test')
     }
     //Only POST mothod is accepted
-    
 }

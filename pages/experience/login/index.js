@@ -257,7 +257,7 @@ export default function Index() {
             sameSite: true,
         })
         router.reload('/experience/dashboard')
-    }else{  
+    }else{
         errormessage.current.classList.add('active')
         setError(data)
     }
