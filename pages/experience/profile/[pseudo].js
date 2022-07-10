@@ -11,23 +11,72 @@ const ProfileStyle = styled.section`
     padding: 50px 20px 0;
     @media(min-width: 768px){
         padding: 50px 140px 0;
+        .mobile{
+            display: none!important;
+        }
     }
     .profil{
+        &__desktop{
+            display: none;
+            @media(min-width:768px){
+                display: flex;
+                margin-bottom: 30px;
+                align-items: center;
+                &--info{
+                    height: fit-content;
+                    .info--pseudo{
+                        font-family: 'Mark Pro';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 1.25rem;
+                        margin-bottom: 15px;
+                        p{
+                            text-align: start;
+                        }
+                    }
+                    .info--link{
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        p{
+                            padding:2px 20px;
+                            border: solid 1px #694BB5;
+                            border-radius: 25px;
+                            color: #694BB5;
+                            min-width: 120px;
+                        }
+                        a{
+                            padding:5px 20px;
+                            border: solid 1px #F20D97;
+                            border-radius: 25px;
+                            font-family: 'Sofia Pro';
+                            font-style: normal;
+                            font-weight: 400;
+                            color: #F20D97;
+                        }
+                        
+                    }
+                }
+                &--img{
+                    margin-right: 45px;
+                    position: relative;
+                    .modif{
+                        position: absolute;
+                        right: -20px;
+                        bottom: -20px;
+                    }
+                }
+            }
+        }
         &__photo{
             width: 100px;
             height: 100px;
             border-radius: 50px;
-            display: flex;
             align-items: stretch;
             overflow: hidden;
             margin-left: 50%;
             transform: translateX(-50%);
             margin-bottom: 20px;
-            @media(min-width: 768px){
-                display: block;
-                margin-left: 0;
-
-            }
         }
         &__name{
             font-family: 'Mark Pro';
@@ -58,7 +107,7 @@ const ProfileStyle = styled.section`
                 &--btn{
                     margin-right: 15px;
                     width: 200px!important;
-                    &:nth-child(3), &:nth-child(4){
+                    &:nth-child(3), &:nth-child(2){
                         display: none;
                     }
                 }
@@ -89,6 +138,9 @@ const ProfileStyle = styled.section`
             }
         }
         &__grid{
+            @media(min-width: 768px){
+                display: none;
+            }
             p{
                 text-align: start;
                 font-family: 'Mark Pro';
@@ -150,8 +202,7 @@ export default function Profile({profile}) {
   return (
     <ProfileStyle>
 
-        <div className='profil__photo'>
-                <div>
+        <div className='profil__photo mobile'>
                     <figure>
                         {profile?.avatar ? (
                             <Image
@@ -174,10 +225,9 @@ export default function Profile({profile}) {
                             Modifier
                         </a>
                     </Link>
-                </div>
             </div>  
-            <p className='profil__name'>{profile?.firstName} {profile?.lastName}</p>
-            <div className='profil__pseudo'>
+            <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
+            <div className='profil__pseudo mobile'>
                 <p>{profile?.pseudo}</p>
                 <Link href={'#'}>
                     <a>
@@ -185,6 +235,52 @@ export default function Profile({profile}) {
                     </a>
                 </Link>
             </div>
+
+        <div className='profil__desktop'>
+            <div className='profil__desktop--img'>
+                <figure>
+                        {profile?.avatar ? (
+                            <Image
+                                src={profile?.avatar}
+                                alt={profile?.pseudo}
+                                width={125}
+                                height={125}
+                            />
+                        ) : (
+                            <Image
+                                src={'/logo.webp'}
+                                alt={'photo de profil'}
+                                width={125}
+                                height={125}
+                            />
+                        )} 
+                </figure>
+                <div className='modif' >
+                    
+                    <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                    <Image 
+                        src={'/profil/edit.webp'}
+                        alt=""
+                        width={35}
+                        height={35} 
+                    />
+                    </Link>
+                </div>
+            </div>
+            <div className='profil__desktop--info'>
+                <div className='info--pseudo'>
+                    <p>{profile?.firstName} {profile?.lastName}</p>
+                </div>
+                <div className='info--link'>
+                    <p>{profile?.pseudo}</p>
+                    <Link href={'#'}>
+                        <a>Partager</a>
+                    </Link>
+                </div>
+            </div>
+        </div>
+
+
         <div className='profil__actions'>
             <div className='profil__actions--btn'>
                 <Image
