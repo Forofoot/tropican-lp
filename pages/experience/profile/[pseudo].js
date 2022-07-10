@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
@@ -9,12 +9,88 @@ import { useCookies } from "react-cookie";
 const ProfileStyle = styled.section`
     text-align: center;
     padding: 50px 20px 0;
+    .profilChoiceBlock{
+        display: none;
+    }
+    @media(min-width: 768px){
+        padding: 50px 140px 0;
+        .mobile{
+            display: none!important;
+        }
+        .profilChoiceBlock{
+        display:flex;
+        .profilChoice {
+            width: 50%;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #212F89;
+            color : #212F89;
+            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            &.active{
+                border-bottom: 3px solid #212F89;
+            }
+        }
+    }
+    }
     .profil{
+        &__desktop{
+            display: none;
+            @media(min-width:768px){
+                display: flex;
+                margin-bottom: 30px;
+                align-items: center;
+                &--info{
+                    height: fit-content;
+                    .info--pseudo{
+                        font-family: 'Mark Pro';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 1.25rem;
+                        margin-bottom: 15px;
+                        p{
+                            text-align: start;
+                        }
+                    }
+                    .info--link{
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        p{
+                            padding:2px 20px;
+                            border: solid 1px #694BB5;
+                            border-radius: 25px;
+                            color: #694BB5;
+                            min-width: 120px;
+                        }
+                        a{
+                            padding:5px 20px;
+                            border: solid 1px #F20D97;
+                            border-radius: 25px;
+                            font-family: 'Sofia Pro';
+                            font-style: normal;
+                            font-weight: 400;
+                            color: #F20D97;
+                        }
+                        
+                    }
+                }
+                &--img{
+                    margin-right: 45px;
+                    position: relative;
+                    .modif{
+                        position: absolute;
+                        right: -20px;
+                        bottom: -20px;
+                    }
+                }
+            }
+        }
         &__photo{
             width: 100px;
             height: 100px;
             border-radius: 50px;
-            display: flex;
             align-items: stretch;
             overflow: hidden;
             margin-left: 50%;
@@ -45,8 +121,18 @@ const ProfileStyle = styled.section`
             }
         }
         &__actions{
+            @media(min-width: 768px){
+                justify-content: start;
+                &--btn{
+                    margin-right: 15px;
+                    width: 200px!important;
+                    &:nth-child(3), &:nth-child(2){
+                        display: none;
+                    }
+                }
+            }
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             flex-wrap: wrap;
             align-items: center;
             border-radius: 10px;
@@ -55,10 +141,10 @@ const ProfileStyle = styled.section`
                 display: flex;
                 justify-content: center;
                 flex-wrap:wrap ;
-                margin-bottom:15px;
+                margin-bottom: 15px;
                 background: #212F89;
-                width:100%;
-                padding: 10px 45px;
+                width:47%;
+                padding: 10px 35px;
                 border-radius: 25px;
                 a{
                     margin-left: 10px;
@@ -68,24 +154,12 @@ const ProfileStyle = styled.section`
                     line-height: 150%;
                     color:#f4F4F4;
                 }
-                &:nth-child(2){
-                    width: 48%;
-                    padding: 10px 20px;
-                    margin-right: 15px;
-                    @media(min-width: 768px){
-                        width: 49%;
-                    }
-                }
-                &:nth-child(3){
-                    width: 48%;
-                    padding: 10px 20px;
-                    @media(min-width: 768px){
-                        width: 49%;
-                    }
-                }
             }
         }
         &__grid{
+            @media(min-width: 768px){
+                display: none;
+            }
             p{
                 text-align: start;
                 font-family: 'Mark Pro';
@@ -97,12 +171,30 @@ const ProfileStyle = styled.section`
                 font-weight: 300;
                 font-style: normal;
             }
+            &--subtitle{
+                display: flex;
+                justify-content: space-between;
+                a{
+                    color: black;
+                }
+            }
             &--album{
                 display: flex;
-
-                Image{
-
+                justify-content: space-around;
+                div{
+                    flex-wrap: wrap;
+                    gap: 15px;
                 }
+                &-info{
+                    p{
+                        margin-right: 10px;
+                    }
+                    span{
+                        font-family: 'Sofia Pro';
+                        font-style: normal;
+                        font-weight: 300;
+                        }
+                    }
                 }
             }
         }
@@ -112,7 +204,7 @@ const ProfileStyle = styled.section`
 export default function Profile({profile}) {
     
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  
+  const [profilChoice, setProfilChoice] = useState('photo')
   const router = useRouter()
 
   useEffect(() => {
@@ -128,60 +220,116 @@ export default function Profile({profile}) {
   }
   return (
     <ProfileStyle>
-        <button onClick={(e) => logout(e)}>Déconnexion</button>
 
-        <div className='profil__photo'>
-            
-            <figure>
-                {profile.avatar ? (
-                    <Image
-                        src={profile?.avatar}
-                        alt={profile?.pseudo}
-                        width={125}
-                        height={125}
+        <div className='profil__photo mobile'>
+                    <figure>
+                        {profile?.avatar ? (
+                            <Image
+                                src={profile?.avatar}
+                                alt={profile?.pseudo}
+                                width={125}
+                                height={125}
+                            />
+                        ) : (
+                            <Image
+                                src={'/logo.webp'}
+                                alt={'photo de profil'}
+                                width={125}
+                                height={125}
+                            />
+                        )} 
+                    </figure>
+                    <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                        <a>
+                            Modifier
+                        </a>
+                    </Link>
+            </div>  
+            <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
+            <div className='profil__pseudo mobile'>
+                <p>{profile?.pseudo}</p>
+                <Link href={'#'}>
+                    <a>
+                        Partager
+                    </a>
+                </Link>
+            </div>
+
+        <div className='profil__desktop'>
+            <div className='profil__desktop--img'>
+                <figure>
+                        {profile?.avatar ? (
+                            <Image
+                                src={profile?.avatar}
+                                alt={profile?.pseudo}
+                                width={125}
+                                height={125}
+                            />
+                        ) : (
+                            <Image
+                                src={'/logo.webp'}
+                                alt={'photo de profil'}
+                                width={125}
+                                height={125}
+                            />
+                        )} 
+                </figure>
+                <div className='modif' >
+                    
+                    <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                    <Image 
+                        src={'/profil/edit.webp'}
+                        alt=""
+                        width={35}
+                        height={35} 
                     />
-                ) : (
-                    <Image
-                        src={'/logo.webp'}
-                        alt={'photo de profil'}
-                        width={125}
-                        height={125}
-                    />
-                )} 
-            </figure>
-            <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
-                <a>
-                    Modifier
-                </a>
-            </Link>
+                    </Link>
+                </div>
+            </div>
+            <div className='profil__desktop--info'>
+                <div className='info--pseudo'>
+                    <p>{profile?.firstName} {profile?.lastName}</p>
+                </div>
+                <div className='info--link'>
+                    <p>{profile?.pseudo}</p>
+                    <Link href={'#'}>
+                        <a>Partager</a>
+                    </Link>
+                </div>
+            </div>
         </div>
-        
-        <p className='profil__name'>{profile?.firstName} {profile?.lastName}</p>
-        <div className='profil__pseudo'>
-            <p>{profile?.pseudo}</p>
-            <Link href={'#'}>
-                <a>
-                    Partager
-                </a>
-            </Link>
-        </div>
+
+
         <div className='profil__actions'>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/../public/profil/contact.png'}
+                    src={'/profil/contact.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
                 />
                 <Link href={`/experience/contact/addContact`}>
                     <a>
-                        Ajouter un contact
+                        Relation
                     </a>
                 </Link>
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/../public/profil/agenda.png'}
+                    src={'/profil/sante.webp'}
+                    alt='logo icone contact'
+                    width={25}
+                    height={25} 
+                />
+                <Link href={`/experience/contact/addContact`}>
+                    <a>
+                        Santé
+                    </a>
+                </Link>
+            </div>
+            <div className='profil__actions--btn'>
+                <Image
+                    src={'/profil/agenda.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -194,7 +342,7 @@ export default function Profile({profile}) {
             </div>
             <div className='profil__actions--btn'>
                 <Image
-                    src={'/../public/profil/album.png'}
+                    src={'/profil/album.webp'}
                     alt='logo icone contact'
                     width={25}
                     height={25} 
@@ -208,46 +356,95 @@ export default function Profile({profile}) {
         </div>
         <div className='profil__grid'>
             <p className='profil__grid--title'>Mes photos</p>
-            <p>Voyage avec Titouan </p>
-            <div className='profil__grid--album'>
-            {profile?.experience.map((exp,i) =>(
-                <figure key={i}>
-                    {exp?.image.map((img, index) =>(
-                        <figure key={index}>
-                            <Image
-                                src={img.image}
-                                alt='bamako'
-                                height={190}
-                                width={190}
-                            />
-                        </figure>
-                    ))}
-                    <p >{exp.name}</p>
-                </figure>
-                ))}
+            <div className='profil__grid--subtitle' >
+                <p>Voyage avec Titouan </p>
+                <p>
+                    <Link href={'#'}>
+                        <a>Voir plus</a>
+                    </Link>
+                </p>
+                
             </div>
-        </div>
-        <div className='profil__grid'>
-            <p className='profil__grid--title'>Mes photos</p>
-            <p>Voyage avec Titouan </p>
             <div className='profil__grid--album'>
-                {profile?.experience.map((exp,i) =>(
-                    <figure key={i}>
-                        {exp?.image.map((img, index) =>(
-                            <figure key={index}>
-                                <Image
-                                    src={img?.image}
-                                    alt='bamako'
-                                    height={180}
-                                    width={180}
-                                />
-                            </figure>
-                        ))}
-                        
+                <div>
+                    <figure>
+                        <Image
+                            src={"/profil/album_profil.png"}
+                            alt="image de fond album"
+                            width={165}
+                            height={165}
+                        />
                     </figure>
-                ))}
+                    <div className='profil__grid--album-info'>
+                    <p>
+                        <Image
+                            src={"/profil/mark-position.webp"}
+                            alt="logo localisation"
+                            width={15}
+                            height={15}
+                        />
+                        Massif Central<br></br>
+                        <span>23/06/22</span>
+                    </p>
+                    </div>
+                </div>
+                <div>
+                    <figure>
+                        <Image
+                            src={"/profil/album_profil.png"}
+                            alt="image de fond album"
+                            width={165}
+                            height={165}
+                        />
+                    </figure>
+                    <div className='profil__grid--album-info'>
+                    <p>
+                        <Image
+                            src={"/profil/mark-position.webp"}
+                            alt="logo localisation"
+                            width={15}
+                            height={15}
+                        />
+                        Massif Central<br></br>
+                        <span>23/06/22</span>
+                    </p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div className='profilChoiceBlock'>
+            <div className={`profilChoice ${profilChoice == 'photo' ? 'active' : ''}`} onClick={() => setProfilChoice('photo')}>
+                Mes Photos
+            </div>
+            <div className={`profilChoice ${profilChoice == 'agenda' ? 'active' : ''}`} onClick={() => setProfilChoice('agenda')}>
+                Mon agenda
+            </div>
+            <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
+                Ma Santé
+            </div>
+        </div>
+        <div className='display__desktop'>
+            {profilChoice == 'photo' && 
+                <>
+                    <h1>Mes Photos</h1>
+                </>
+            }
+            {profilChoice == 'agenda' && 
+                <>
+                    <h1>Mon agenda</h1>
+                </>
+            }
+            {profilChoice == 'sante' && 
+                <>
+                    <h1>Ma santé</h1>
+                </>
+            }
+            
+        </div>
+
+
+        <button onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
   )
 }
