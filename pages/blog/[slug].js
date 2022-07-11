@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from 'styled-components';
+import Head from 'next/head'
 
 const ArticleStyle = styled.div`
 padding: 0 20px;
@@ -69,6 +70,15 @@ export default function ArticleDetails({article}) {
 
     return (
 
+        <>
+        <Head>
+        <title>Leste - Blog</title>
+        <meta
+          name="description"
+          content="Page du blog du dispositif Leste"
+        />
+      </Head>
+
         <ArticleStyle>
             <div>
             <p className="back" onClick={() => router.back()}>
@@ -91,5 +101,5 @@ export default function ArticleDetails({article}) {
             </p>
         </div>
         </ArticleStyle>
-    )
+    </>)
 }

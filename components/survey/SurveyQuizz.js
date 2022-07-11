@@ -272,10 +272,26 @@ const SurverStyle = styled.section`
         .rdrDateRangePickerWrapper,
         .rdrCalendarWrapper,
         .rdrMonth{
-            width: 100%;
-            max-width: 650px;
+            width: 100%!important;
         }
     }
+    .rdrWeekDays,.rdrDays{
+    width: 95%;
+    }
+    .rdrMonthAndYearWrapper {
+    width: 91%; 
+    }
+    .rdrCalendarWrapper.rdrDateRangeWrapper {
+    width: 100%;
+    }
+    .rdrDefinedRangesWrapper {
+    width: 100%;
+    }
+    .rdrDateRangePickerWrapper, .rdrMonth {
+        width: 100%;
+}
+
+}
     .infosQuestion{
         max-width:510px;
         margin: auto;
@@ -332,6 +348,7 @@ const SurverStyle = styled.section`
         display: flex;
         flex-direction: column;
         background: none;
+        width: 100%;
         .rdrDateDisplayWrapper{
             order: 3;
             margin-top: 20px;
@@ -367,6 +384,7 @@ const SurverStyle = styled.section`
         .rdrMonthAndYearWrapper,
         .rdrMonths{
             background-color: #ffffff;
+            width: 100%!important;
         }
     }
     .desktopInfosDescription{

@@ -10,17 +10,13 @@ const VideoStyle = styled.div`
             text-align: center;
         }
     }
-    .containerVideo{
-        margin-bottom:100px;
-            .video{
+    .video{
         max-width: 800px;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    }
-
 `
 export default function Video() {
     return (

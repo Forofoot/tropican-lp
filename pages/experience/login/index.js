@@ -4,10 +4,11 @@ import { Cookies, useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import toast, { Toaster } from 'react-hot-toast';
+import Head from 'next/head'
 
 const AuthStyle = styled.section`
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
     position: relative;
     h1{
@@ -273,6 +274,16 @@ export default function Index() {
   }
 
   return (
+
+    <>
+        <Head>
+        <title>Leste - Connexion ou Inscription</title>
+        <meta
+          name="description"
+          content="Page d'inscription ou de connexion a la plateforme Leste"
+        />
+      </Head>
+
     <AuthStyle>
         <Toaster/>
         <div className='loginLogo'>
@@ -289,8 +300,8 @@ export default function Index() {
                 <Image
                     src={'/profil/photo_login.webp'}
                     alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
-                    width={540}
-                    height={768}
+                    width={720}
+                    height={1024}
                 
                 />
             </div>
@@ -372,5 +383,5 @@ export default function Index() {
             </div>
         </div>
     </AuthStyle>
-  )
+  </>)
 }
