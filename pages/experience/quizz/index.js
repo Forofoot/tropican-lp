@@ -5,10 +5,10 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 const PreQuizzStyle = styled.section`
-  min-height: 95vh;
   padding-top:30px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   @media(min-width: 1024px){
     flex-direction: row-reverse;    
     gap: 80px;

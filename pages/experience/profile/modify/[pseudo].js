@@ -147,6 +147,8 @@ export default function Modify({profile}) {
   useEffect(() => {
     if(!cookies.user){
         router.push('/experience/login')
+    }else if(cookies.user.pseudo != profile?.pseudo){
+        router.push('/experience/')
     }
   },)
 
