@@ -291,7 +291,6 @@ const SurverStyle = styled.section`
         width: 100%;
 }
 
-}
     .infosQuestion{
         max-width:510px;
         margin: auto;
@@ -1004,7 +1003,7 @@ export default function SurveryQuizz({user, relation}) {
                     <div className='recapBlock'>
                         <Image
                             src={'/quizz/recap/date.webp'}
-                            alt='Image'
+                            alt='icon calendrier'
                             width={50}
                             height={50}
                             layout='raw'
@@ -1017,7 +1016,7 @@ export default function SurveryQuizz({user, relation}) {
                      <div className='recapBlock'>
                         <Image
                             src={'/quizz/recap/location.webp'}
-                            alt='Image'
+                            alt='Icon localisation'
                             width={50}
                             height={50}
                             layout='raw'
@@ -1030,7 +1029,7 @@ export default function SurveryQuizz({user, relation}) {
                      <div className='recapBlock'>
                         <Image
                             src={'/quizz/recap/office.webp'}
-                            alt='Image'
+                            alt='Icon batiment bureau'
                             width={50}
                             height={50}
                             layout='raw'
@@ -1043,7 +1042,7 @@ export default function SurveryQuizz({user, relation}) {
                      <div className='recapBlock'>
                         <Image
                             src={'/quizz/recap/bowling.webp'}
-                            alt='Image'
+                            alt='Icon Bowling'
                             width={50}
                             height={50}
                             layout='raw'
@@ -1056,7 +1055,7 @@ export default function SurveryQuizz({user, relation}) {
                      <div className='recapBlock'>
                         <Image
                             src={'/quizz/recap/notepencil.webp'}
-                            alt='Image'
+                            alt='Icon bloc note'
                             width={50}
                             height={50}
                             layout='raw'
