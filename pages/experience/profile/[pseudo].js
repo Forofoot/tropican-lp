@@ -112,7 +112,6 @@ const ProfileStyle = styled.section`
             }
         }
     }
-    }
     .profil{
         &__desktop{
             display: none;
@@ -298,40 +297,42 @@ const ProfileStyle = styled.section`
             margin: auto;
             margin-bottom: 30px;
             .infosQuestion{
-            background-color:rgba(131, 215, 220, 0.4);
-            padding: 55px 80px;
-            border-radius: 20px;
-            width:100%;
-            margin: auto;
-            h2{
-                display: none;
-            }
-            .answer{
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            }
-        .choice{
-            padding: 10px 0 ;
-            max-width: 165px;
-            width: 100%;
-            border: 1px solid #212F89;
-            border-radius: 10px;
-            text-align: center;
-            display: inline-block;
-            font-size: 1rem;
-            &:last-of-type{
-                margin-bottom   : 0;
-            }
-            &:hover{
-                cursor: pointer;
-            }
-            &.active{
-                background: pink;
-            }
+                    background-color:rgba(131, 215, 220, 0.4);
+                    padding: 55px 80px;
+                    border-radius: 20px;
+                    width:100%;
+                    margin: auto;
+                    h2{
+                        display: none;
+                    }
+                .answer{
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 15px;
+                    }
+                .choice{
+                    padding: 10px 0 ;
+                    max-width: 165px;
+                    width: 100%;
+                    border: 1px solid #212F89;
+                    border-radius: 10px;
+                    text-align: center;
+                    display: inline-block;
+                    font-size: 1rem;
+                    &:last-of-type{
+                        margin-bottom   : 0;
+                    }
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    &.active{
+                        background: pink;
+                    }
 
+                }
+            }
         }
         .questionBlock{
             margin-bottom: 30px;
@@ -339,7 +340,6 @@ const ProfileStyle = styled.section`
                 margin-bottom: 15px;
             }
         }
- 
         
         .desktopInfosDescription{
             display: block;
@@ -347,9 +347,6 @@ const ProfileStyle = styled.section`
             color: #313131;
             margin-bottom: 40px;
         }
-
-    }
-     
 `
 let daysOfYear = [];
 
