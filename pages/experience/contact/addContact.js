@@ -145,6 +145,7 @@ export default function AddContact({friendRequest}) {
       toast.success('Demande d\'ami envoyée')
       cardUser.current.classList.add('active')
     }else{
+      toast.remove()
       toast.error('Erreur lors de l\'envoi de la demande')
     }
   }
