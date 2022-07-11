@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { parseCookies } from "../../../helpers"
 import { PrismaClient } from '@prisma/client'
 import toast, { Toaster } from 'react-hot-toast';
+import Head from 'next/head'
+
 
 const AddContactStyle = styled.section`
     text-align: center;
@@ -171,6 +173,16 @@ export default function AddContact({friendRequest}) {
     }
   }
   return (
+
+    <>
+        <Head>
+        <title>Leste - Ajouter un contact</title>
+        <meta
+          name="description"
+          content="Page du blog du dispositif Leste"
+        />
+      </Head>
+
     <AddContactStyle className='container'>
         <Toaster />
         <h1>Recherche relation</h1>
@@ -247,7 +259,7 @@ export default function AddContact({friendRequest}) {
             </div>
           ))}
     </AddContactStyle>
-  )
+  </>)
 }
 
 export const getServerSideProps = async ({ req, res }) => {

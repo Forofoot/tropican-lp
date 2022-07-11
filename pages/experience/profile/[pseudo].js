@@ -7,22 +7,59 @@ import Link from 'next/link';
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from 'react-hot-toast';
 
-import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; //
+import { DateRangePicker } from 'react-date-range'; 
 
 import moment from 'moment';
 import 'moment/locale/fr';
 
+import Head from 'next/head';
 
 const ProfileStyle = styled.section`
-
-
     text-align: center;
     padding: 50px 20px 0;
-    .display__desktop{
+    @media(min-width: 768px){
+            .profil__icone{
+                display: none!important;
+            }
+        }
+    @media(max-width:768px){
+        .profilChoiceBlock{
+        display: flex;
+        flex-wrap: wrap!important;
+        justify-content: space-between;
+    }
+    .profilChoice{
+        display:flex;
+        gap: 15px;
+        width: 45%;
+        background: #212F89;
+        border-radius: 25px;
+        margin-bottom: 30px;
+        padding: 10px 19px;
+        color: white;
+        justify-content: center;
+        .profil__icone{
+            display: block;
+            text-align: center;
+        }
+    }
+
+}
+   
+    .deco{
+        margin: 30px 0;
+        color: #212F89;
+        padding: 10px 35px;
+        border-radius: 25px;
+        border: 1px solid #212F89;
+    }
+    .rdrDefinedRangesWrapper{
         display: none;
     }
-    .profilChoiceBlock{
-        display: none;
+    .rdrDateRangePickerWrapper{
+        margin-bottom: 45px;
     }
     @media(min-width: 768px){
         padding: 50px 140px 0;
@@ -32,22 +69,21 @@ const ProfileStyle = styled.section`
         .display__desktop{
             display: flex;
             .experienceBlock{
-        display: flex;
-        flex-direction:column;
-        gap: 30px;
-        padding-top: 25px;
-    }
-    .rdrDateRangePickerWrapper,
-    .rdrMonth{
-        width: 600px;
-    }
-    .rdrDefinedRangesWrapper{
-        display: none;
-    }
+                display: flex;
+                flex-direction:column;
+                gap: 30px;
+                padding-top: 25px;
+            }
+            .rdrDateRangePickerWrapper,
+            .rdrMonth{
+                width: 600px;
+            }
         }
 
         .profilChoiceBlock{
         display:flex;
+        flex-wrap: nowrap;
+        
         .profilChoice {
             width: 50%;
             text-align: center;
@@ -59,6 +95,9 @@ const ProfileStyle = styled.section`
             font-size: 1.1rem;
             &.active{
                 border-bottom: 3px solid #212F89;
+            }
+            &:nth-child(4){
+                display: none;
             }
         }
     }
@@ -234,6 +273,9 @@ const ProfileStyle = styled.section`
                 &-title{
                     text-align: start;
                     margin-bottom: 20px;
+                    font-weight: 700;
+                    font-family: 'Mark Pro';
+                    font-size: 1.125rem;
                 }
                 &-subtitle{
                     display: flex;
@@ -257,10 +299,78 @@ const ProfileStyle = styled.section`
                 }
             }
         }
+        @media(max-width: 768px){
+            .album__card{
+                &:nth-child(3), &:nth-child(4){
+                    display: none;
+                }
+            }
+        }
+        .sante__container{
+            @media(max-width:768px){
+                .infosQuestion{
+                    padding: 55px!important;
+                }
+            }
+            margin: auto;
+            margin-bottom: 30px;
+            .infosQuestion{
+            background-color:rgba(131, 215, 220, 0.4);
+            padding: 55px 80px;
+            border-radius: 20px;
+            width:100%;
+            margin: auto;
+            h2{
+                display: none;
+            }
+            .answer{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .choice{
+            padding: 10px 0 ;
+            max-width: 165px;
+            width: 100%;
+            border: 1px solid #212F89;
+            border-radius: 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            &:last-of-type{
+                margin-bottom   : 0;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+            &.active{
+                background: pink;
+            }
+        }
+        }
+        .questionBlock{
+            margin-bottom: 30px;
+            .question{
+                margin-bottom: 15px;
+            }
+        }
+ 
+        
+        .desktopInfosDescription{
+            display: block;
+            text-align:center;
+            color: #313131;
+            margin-bottom: 40px;
+        }
+
+        }
+        
 `
 let daysOfYear = [];
 
-export default function Profile({profile, date}) {
+export default function Profile({profile, date, relation}) {
 
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
@@ -298,9 +408,31 @@ export default function Profile({profile, date}) {
     router.push('/experience/login')
     toast.success('Déconnecté')
   }
+  const [value, setValue] = useState({
+    start: new Date(),
+    end: new Date(),
+    pseudo: "",
+    relationId: "",
+    healthIssue: relation?.healthissue,
+    sportAddicted: relation?.sportaddict,
+    swim: relation?.swim,
+    mobility: relation?.mobility,
+    vision: relation?.vision,
+    language: relation?.language,
+    audition: relation?.audition
+});
 
 
   return (
+
+    <>
+        <Head>
+        <title>Leste - Profil</title>
+        <meta
+          name="description"
+          content="Page profil du dispositif Leste, ici vous pouvez modifier vos infos utilisateur, regarder vos prochains voyages et vos dernières photos."
+        />
+      </Head>
     <ProfileStyle>
         <Toaster />
         <div className='profil__photo mobile'>
@@ -326,7 +458,7 @@ export default function Profile({profile, date}) {
                             Modifier
                         </a>
                     </Link>
-            </div>  
+        </div>  
             <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
             <div className='profil__pseudo mobile'>
                 <p>{profile?.pseudo}</p>
@@ -373,139 +505,68 @@ export default function Profile({profile, date}) {
                     <p>{profile?.firstName} {profile?.lastName}</p>
                 </div>
                 <div className='info--link'>
+                    <div>
                     <p>{profile?.pseudo}</p>
                     <Link href={'#'}>
                         <a>Partager</a>
                     </Link>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        <div className='profil__actions'>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/contact.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={`/experience/contact/addContact`}>
-                    <a>
-                        Relation
-                    </a>
-                </Link>
-            </div>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/sante.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={`/experience/contact/addContact`}>
-                    <a>
-                        Santé
-                    </a>
-                </Link>
-            </div>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/agenda.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={`/experience/planning/${profile?.pseudo}`}>
-                    <a>
-                        Agenda
-                    </a>
-                </Link>
-            </div>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/album.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={'#'}>
-                    <a>
-                        Album
-                    </a>
-                </Link>
-            </div>
-        </div>
-        <div className='profil__grid'>
-            <p className='profil__grid--title'>Mes photos</p>
-            <div className='profil__grid--subtitle' >
-                <p>Voyage avec Titouan </p>
-                <p>
-                    <Link href={'#'}>
-                        <a>Voir plus</a>
-                    </Link>
-                </p>
-                
-            </div>
-            <div className='profil__grid--album'>
-                <div>
-                    <figure>
-                        <Image
-                            src={"/profil/album_profil.png"}
-                            alt="image de fond album"
-                            width={165}
-                            height={165}
-                        />
-                    </figure>
-                    <div className='profil__grid--album-info'>
-                    <p>
-                        <Image
-                            src={"/profil/mark-position.webp"}
-                            alt="logo localisation"
-                            width={15}
-                            height={15}
-                        />
-                        Massif Central<br></br>
-                        <span>23/06/22</span>
-                    </p>
-                    </div>
-                </div>
-                <div>
-                    <figure>
-                        <Image
-                            src={"/profil/album_profil.png"}
-                            alt="image de fond album"
-                            width={165}
-                            height={165}
-                        />
-                    </figure>
-                    <div className='profil__grid--album-info'>
-                    <p>
-                        <Image
-                            src={"/profil/mark-position.webp"}
-                            alt="logo localisation"
-                            width={15}
-                            height={15}
-                        />
-                        Massif Central<br></br>
-                        <span>23/06/22</span>
-                    </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div className='profilChoiceBlock'>
             <div className={`profilChoice ${profilChoice == 'photo' ? 'active' : ''}`} onClick={() => setProfilChoice('photo')}>
-                Mes Photos
+            <div className='profil__icone' >
+                    <Image
+                        src={'/profil/album.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Photos
             </div>
             <div className={`profilChoice ${profilChoice == 'agenda' ? 'active' : ''}`} onClick={() => setProfilChoice('agenda')}>
-                Mon agenda
+                <div className='profil__icone' >
+                    <Image
+                        src={'/profil/agenda.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Agenda
             </div>
             <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
-                Ma Santé
+            <div className='profil__icone' >
+                    <Image
+                        src={'/profil/sante.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Santé
+            </div>
+            <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
+            <div className='profil__icone' >
+                    <Image
+                        src={'/profil/contact.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Relation
             </div>
         </div>
+
+
+
         <div className='display__desktop'>
             {profilChoice == 'photo' && 
                 <>
@@ -607,14 +668,15 @@ export default function Profile({profile, date}) {
             {profilChoice == 'agenda' && 
            
                 <>
-                 <DateRangePicker
-            ranges={[]}
-            minDate={new Date()}
-            rangeColors={["#F885CA"]}
-            onChange={handleSelect}
-            inputRanges={[]}
-            disabledDates={daysOfYear}
-        />
+
+                <DateRangePicker
+                    ranges={[]}
+                    minDate={new Date()}
+                    rangeColors={["#F885CA"]}
+                    onChange={handleSelect}
+                    inputRanges={[]}
+                    disabledDates={daysOfYear}
+                />
                     <div className='experienceBlock'>
                         {profile?.experience.map((exp,i) =>(
                         <div key={i}>
@@ -631,16 +693,56 @@ export default function Profile({profile, date}) {
             }
             {profilChoice == 'sante' && 
                 <>
-                
+                <div className='sante__container'>
+                    <h2>Mes informations</h2>
+                        
+                    <p className='desktopInfosDescription'>Lors du questionnaire, nous avons récolté ces données sur vous : </p>
+
+                    
+                    <div className='infosQuestion'>
+                        <h2 className='titleCenter'>Questions sur <br></br>les conditions générales</h2>
+                        <div className='questionBlock'>
+                            <p className='question'>Avez-vous des problèmes de santé*</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
+                                <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
+                            </div>
+                        </div>
+
+                        <div className='questionBlock'>
+                            <p className='question'>Avez-vous des difficultés pour :</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
+                                <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
+                                <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
+                                <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
+                            </div>
+                        </div>
+
+                        <div className='questionBlock'>
+                            <p className='question'>Êtes vous sportif ?*</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
+                                <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
+                            </div>
+                        </div>
+
+                        <div className='questionBlock'>
+                            <p className='question'>Savez-vous nager ?*</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
+                                <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </>
             }
             
         </div>
-
-
-        <button onClick={(e) => logout(e)}>Déconnexion</button>
+        <button className="deco" onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
-  )
+  </>)
 }
 
 export const getServerSideProps = async ({query}) => {
