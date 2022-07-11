@@ -493,7 +493,7 @@ export default function Profile({profile, date, relation}) {
                     <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
                     <Image 
                         src={'/profil/edit.webp'}
-                        alt=""
+                        alt="icon crayon"
                         width={35}
                         height={35} 
                     />
@@ -584,7 +584,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
@@ -604,7 +604,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
@@ -624,7 +624,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
@@ -644,7 +644,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />

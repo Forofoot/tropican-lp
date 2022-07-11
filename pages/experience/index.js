@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsCalendarDate } from 'react-icons/bs';
 import { FaSwimmer } from 'react-icons/fa';
+import { AiOutlineRight } from 'react-icons/ai';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { GiHealthNormal } from 'react-icons/gi';
 import { MdSportsBasketball } from 'react-icons/md';
 import Brands from '../../components/Brands';
 import { useRouter } from 'next/router'
+import moment from 'moment';
 import 'moment/locale/fr'
 import Image from 'next/image';
 import Head from 'next/head';
@@ -96,14 +98,20 @@ p{
         background-color: #F20D97;
         border-radius:10px;
         display: flex;
+        justify-content:space-between;
         align-items:center;
         padding:10px 20px;
         font-weight: 600;
         margin-bottom:20px;
         margin:auto;
+        color:#fff;
+
+        >div{
+            display: flex;
+            align-items:center;
+        }
 
         .icon{
-            color:#fff;
             font-size:3em;
             margin-right:25px;
         }
@@ -250,7 +258,7 @@ export default function Home({ profile }) {
             router.push('/experience/login')
         }
     })
-console.log(profile)
+    console.log(profile)
     const [swim, setswim] = useState('nager')
     const [vision, setvision] = useState('vois')
     const [health, sethealth] = useState('sante')
@@ -258,154 +266,157 @@ console.log(profile)
     return (
 
         <>
-        <Head>
-        <title>Leste</title>
-        <meta
-          name="description"
-          content="Voici la home de Leste, créez vous une nouvelle expérience"
-        />
-      </Head>
-        <HomeStyle>
-            <div>
-                <div className="square">
-                    <h1>Leste, la légereté exaltée !</h1>
-                </div>
-                <p>Leste vous permet de renforcer vos magnifiques liens avec vos petits-enfants, en vous proposant des expériences extraordinaires à votre images.</p>
-
-
-                <div className="btn">
-                    <Link href="/experience/quizz"><a>Nouvelle expérience <span className="add"><AiOutlinePlus /></span></a></Link>
-                </div>
-
-                <h2>Expériences prévues</h2>
-                <div className="cardsContainer">
-                    {profile?.experience.map((exp, i) => (
-                        <div key={i} className="cardExperience">
-                            <div className="icon">
-                                <BsCalendarDate />
-                            </div>
-                            <div className="cardContent">
-                                <p className="date">Date</p>
-                                {profile?.role !== 'grandparent' ? (
-                                <>
-                                    <p className="participant">Evènement prévu avec {exp.grandParent.firstName} </p>
-                                </>
-                            ) : (
-                                <>
-                                    <p className="participant">Evènement prévu avec {exp.grandChildren.firstName}</p>
-                                </>
-                            )}
-                            </div>
-                        </div>
-                    ))}
-
-                </div>
-
-
-
-                <h2>Rappel de vos informations</h2>
-                <div className="healthCardsContainer">
-
-                    <div className="cardHealth">
-                        <div className="iconImg">
-                            <FaSwimmer />
-                        </div>
-                        <div className="cardContent">
-                            {profile?.swim !== 'nager' ? (
-                                <>
-                                    <p>Sait nager</p>
-                                </>
-                            ) : (
-                                <>
-                                    <p>Ne sait pas nager</p>
-                                </>
-                            )}
-                        </div>
+            <Head>
+                <title>Leste</title>
+                <meta
+                    name="description"
+                    content="Voici la home de Leste, créez vous une nouvelle expérience"
+                />
+            </Head>
+            <HomeStyle>
+                <div>
+                    <div className="square">
+                        <h1>Leste, la légereté exaltée !</h1>
                     </div>
+                    <p>Leste vous permet de renforcer vos magnifiques liens avec vos petits-enfants, en vous proposant des expériences extraordinaires à votre images.</p>
 
-
-                    <div className="cardHealth">
-                        <div className="iconImg">
-                            <BsFillEyeFill />
-                        </div>
-                        <div className="cardContent">
-                            {profile?.vision !== 'vois' ? (
-                                <>
-                                    <p>n&apos; a pas de problème de vue</p>
-                                </>
-                            ) : (
-                                <>
-                                    <p>a des problèmes de vue</p>
-                                </>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className="cardHealth">
-                        <div className="iconImg">
-                            <GiHealthNormal />
-                        </div>
-                        <div className="cardContent">
-                            {profile?.health !== 'sante' ? (
-                                <>
-                                    <p>n&apos; a pas de problème de santé</p>
-                                </>
-                            ) : (
-                                <>
-                                    <p>a des problèmes de santé</p>
-                                </>
-                            )}
-                        </div>
-                    </div>
-
-
-                    <div className="cardHealth">
-                        <div className="iconImg">
-                            <MdSportsBasketball />
-                        </div>
-                        <div className="cardContent">
-                            {profile?.sport !== 'sportif' ? (
-                                <>
-                                    <p>n&apos; est pas sortif</p>
-                                </>
-                            ) : (
-                                <>
-                                    <p>est plutôt sportif</p>
-                                </>
-                            )}
-                        </div>
-                    </div>
 
                     <div className="btn">
-                    <Link href="/experience/profile/modify/[pseudo].js"><a>Modifer</a></Link>
-                </div>
-
-                </div>
-                <h2>Pourquoi nous ?</h2>
-                <div className="aboutContainer">
-                    <div className="aboutCard">
-                        <h3>Qui sommes-nous ?</h3>
-                        <p>Leste est un dispositif incroyable ! Nous vous organisons différentes expériences de voyages et d&apos;activités entre vous et vos petits-enfants, qui seront inoubliables.</p>
+                        <Link href="/experience/quizz"><a>Nouvelle expérience <span className="add"><AiOutlinePlus /></span></a></Link>
                     </div>
-                    <div className="aboutCard">
-                        <h3>Nos valeurs</h3>
-                        <p>La découverte, l&apos;amour et le rapprochement sont nos trois merveilleuses valeurs que nous prônons.</p>
-                    </div>
-                    <div className="aboutCard">
-                        <h3>Nos valeurs</h3>
-                        <p>Avec la participation de nos admirables partenaires tels que la SNCF ou Easyjet, Leste se charge de toute l&apos;organisation et l&apos;accompagnement de votre extraordinaire expérience. </p>
-                    </div>
-                </div>
 
-                <div className="stats">
-                    <h2>98%</h2>
-                    <p>des grands-parents et des petits-enfants ont fini leur formidable première expérience satisfaits.</p>
-                </div>
+                    <h2>Expériences prévues</h2>
+                    <div className="cardsContainer">
+                        {profile?.experience.map((exp, i) => (
+                            <div key={i} className="cardExperience">
+                                <div>
+                                    <div className="icon">
+                                        <BsCalendarDate />
+                                    </div>
+                                    <div className="cardContent">
+                                        <p className="date">{moment(`${exp.start}`).format('ll')}</p>
+                                        {profile?.role !== 'grandparent' ? (
+                                            <>
+                                                <p className="participant">Evènement prévu avec {exp.grandParent.firstName} </p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <p className="participant">Evènement prévu avec {exp.grandChildren.firstName}</p>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                                <Link href="#"><a>Voir plus <AiOutlineRight /></a></Link>
+                            </div>
+                        ))}
 
-                <Brands />
-            </div>
-        </HomeStyle>
-    </>);
+                    </div>
+
+
+
+                    <h2>Rappel de vos informations</h2>
+                    <div className="healthCardsContainer">
+
+                        <div className="cardHealth">
+                            <div className="iconImg">
+                                <FaSwimmer />
+                            </div>
+                            <div className="cardContent">
+                                {profile?.swim !== 'nager' ? (
+                                    <>
+                                        <p>Sait nager</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>Ne sait pas nager</p>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
+
+                        <div className="cardHealth">
+                            <div className="iconImg">
+                                <BsFillEyeFill />
+                            </div>
+                            <div className="cardContent">
+                                {profile?.vision !== 'vois' ? (
+                                    <>
+                                        <p>n&apos; a pas de problème de vue</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>a des problèmes de vue</p>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="cardHealth">
+                            <div className="iconImg">
+                                <GiHealthNormal />
+                            </div>
+                            <div className="cardContent">
+                                {profile?.health !== 'sante' ? (
+                                    <>
+                                        <p>n&apos; a pas de problème de santé</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>a des problèmes de santé</p>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
+
+                        <div className="cardHealth">
+                            <div className="iconImg">
+                                <MdSportsBasketball />
+                            </div>
+                            <div className="cardContent">
+                                {profile?.sport !== 'sportif' ? (
+                                    <>
+                                        <p>n&apos; est pas sortif</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>est plutôt sportif</p>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="btn">
+                            <Link href="/experience/profile/modify/[pseudo].js"><a>Modifer</a></Link>
+                        </div>
+
+                    </div>
+                    <h2>Pourquoi nous ?</h2>
+                    <div className="aboutContainer">
+                        <div className="aboutCard">
+                            <h3>Qui sommes-nous ?</h3>
+                            <p>Leste est un dispositif incroyable ! Nous vous organisons différentes expériences de voyages et d&apos;activités entre vous et vos petits-enfants, qui seront inoubliables.</p>
+                        </div>
+                        <div className="aboutCard">
+                            <h3>Nos valeurs</h3>
+                            <p>La découverte, l&apos;amour et le rapprochement sont nos trois merveilleuses valeurs que nous prônons.</p>
+                        </div>
+                        <div className="aboutCard">
+                            <h3>Nos valeurs</h3>
+                            <p>Avec la participation de nos admirables partenaires tels que la SNCF ou Easyjet, Leste se charge de toute l&apos;organisation et l&apos;accompagnement de votre extraordinaire expérience. </p>
+                        </div>
+                    </div>
+
+                    <div className="stats">
+                        <h2>98%</h2>
+                        <p>des grands-parents et des petits-enfants ont fini leur formidable première expérience satisfaits.</p>
+                    </div>
+
+                    <Brands />
+                </div>
+            </HomeStyle>
+        </>);
 }
 
 
