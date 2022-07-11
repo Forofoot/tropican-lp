@@ -6,11 +6,18 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router"
 import toast, { Toaster } from 'react-hot-toast';
 
+
+
 const HeaderStyle = styled.header`
   //background:#42A0B6;
   padding: 30px 55px;
   background-color: #fff;
   //border-radius: 0 0 25px 25px;
+  ul{
+    &.hide{
+      display: none!important;;
+    }
+  }
   .close{
       position: absolute;
       top:0;
@@ -24,7 +31,7 @@ const HeaderStyle = styled.header`
       .closeline{
         width: 100%;
         height: 2px;
-        background-color: #7159AD ;
+        background-color: #212F89 ;
         transform: rotate(45deg) translate(11px,-11px);
         &:last-child{
           transform:rotate(-45deg) translate(-16px,-16px);
@@ -62,7 +69,7 @@ const HeaderStyle = styled.header`
       .closeline{
         transform: rotate(45deg) translate(-14px,15px);
         &:last-child{
-          transform:rotate(-45deg) translate(-16px,-16px);
+          transform:rotate(-45deg) translate(-15px,-16px);
         }
       }
     }
@@ -150,6 +157,12 @@ const HeaderStyle = styled.header`
           right: 0;
         }
       }
+      &.mobile{
+        display: flex;
+        @media (min-width: 1024px) {
+          display: none;
+        }
+      }
     }
     .logoMobile{
       width: 53px;
@@ -218,7 +231,7 @@ const HeaderStyle = styled.header`
           .closeline{
             width: 100%;
             height: 2px;
-            background-color: #7159AD ;
+            background-color: #212F89 ;
             transform: rotate(45deg) translate(11px,-11px);
             &:last-child{
               transform:rotate(-45deg) translate(-16px,-16px);
@@ -237,6 +250,12 @@ const HeaderStyle = styled.header`
       @media (min-width: 768px){
         display: none;
       }
+      &.experience{
+        display: flex;
+        @media (min-width: 1024px){
+          display: none;
+        }
+      }
     }
 
     .burgerContainer {
@@ -250,7 +269,7 @@ const HeaderStyle = styled.header`
     .burgerline {
       width: 30px;
       height: 2px;
-      background-color: #7159AD;
+      background-color: #212F89;
       margin-top: 2.5px;
       margin-bottom: 2.5px;
       will-change: transform;
@@ -282,9 +301,34 @@ const HeaderStyle = styled.header`
         align-items: center;
       }
     }
+    .desktopLinks{
+      &.experience{
+      display: none;
+        @media (min-width: 1024px){
+        gap: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      }
+    }
     a{
       color:#313131;
     }
+  }
+  .navLinks{
+    &.experience{
+      display: flex;
+      @media (min-width:1024px){
+        display: none;
+      }
+    }
+  }
+  .iconAside{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
   }
 `
 
@@ -377,14 +421,16 @@ export default function Navbar() {
     <HeaderStyle>
       <Toaster />
         <nav>
-          <div onClick={() => setActive(!active)} className="burger">
+          <div onClick={() => setActive(!active)} className={`burger ${router.pathname == '/experience' ? ('experience') : ('')}`}>
             <div className="burgerContainer">
               <span className="burgerline"></span>
               <span className="burgerline"></span>
               <span className="burgerline"></span>
             </div>
           </div>
-          <Link href="#">
+          {router.pathname == '/' ? (
+            <>
+          <Link href="/">
             <a className="logoMobile">
               <Image
                 src="/logo.webp"
@@ -395,7 +441,7 @@ export default function Navbar() {
             </a> 
           </Link>
 
-          <Link href="#">
+          <Link href="/">
             <a className="logoDesktop">
               <Image
                 src="/logo-full.webp"
@@ -405,7 +451,46 @@ export default function Navbar() {
               />
             </a>  
           </Link> 
-          <aside className={`navLinks ${active ? "opened" : ""}`}>
+          </>
+          ) : (
+            <>
+              <Link href="/experience/">
+              <a className="logoMobile">
+                <Image
+                  src="/logo.webp"
+                  alt="Logo"
+                  layout='fill'
+                  objectFit='contain'
+                />
+              </a> 
+            </Link>
+
+            <Link href="/experience/">
+              <a className="logoDesktop">
+                <Image
+                  src="/logo-full.webp"
+                  alt="Logo"
+                  layout='fill'
+                  objectFit='contain'
+                />
+              </a>  
+            </Link>
+            
+            <li className={`notificationIcon mobile ${datas.length ? (
+                'active'
+              ) : (
+                ''
+              )}`} onClick={() => setNotificationPopUp(!notificationPopUp)}>
+                <Image
+                  src={'/navbar/notification.webp'}
+                  alt={'Icon notification'}
+                  width={20}
+                  height={22}
+                />
+            </li>
+            </>
+          )}
+          <aside className={`navLinks ${router.pathname == '/experience' ? ('experience') : ('')} ${active ? "opened" : ""}`}>
               <div className="close" onClick={() => setActive(!active)}>
                 <div className="closeline"></div>
                 <div className="closeline"></div>
@@ -429,16 +514,33 @@ export default function Navbar() {
                   </li>
                 </ul>
               ) : (
-                <ul>
+                <ul className={`${currentUser?.pseudo ? ('show') : ('hide')}`}>
+                  <li className={router.pathname == "/experience" ? "active" : ""}>
+                    <Link href={`/experience/`}>
+                      <a>
+                        <div className='iconAside'>
+                          <Image
+                            src={'/navbar/home.webp'}
+                            alt={'Icon profile'}
+                            width={27}
+                            height={25}
+                          />
+                        </div>
+                        Accueil
+                      </a>
+                    </Link>
+                  </li>
                   <li className={router.pathname == "/experience/profile/[pseudo]" || router.pathname == "/experience/profile/modify/[pseudo]" ? "active" : ""}>
                     <Link href={`/experience/profile/${currentUser?.pseudo}`}>
                       <a>
-                        <Image
-                          src={'/navbar/profile.webp'}
-                          alt={'Icon profile'}
-                          width={30}
-                          height={30}
-                        />
+                        <div className='iconAside'>
+                          <Image
+                            src={'/navbar/profile.webp'}
+                            alt={'Icon profile'}
+                            width={30}
+                            height={30}
+                          />
+                        </div>
                         Profil
                       </a>
                     </Link>
@@ -446,25 +548,29 @@ export default function Navbar() {
                   <li className={router.pathname == `/experience/map/[pseudo]` ? "active" : ""}>
                     <Link href={`/experience/map/${currentUser?.pseudo}`}>
                       <a>
-                        <Image
-                          src={'/navbar/map.webp'}
-                          alt={'Icon profile'}
-                          width={30}
-                          height={30}
-                        />
+                        <div className='iconAside'>
+                          <Image
+                            src={'/navbar/map.webp'}
+                            alt={'Icon profile'}
+                            width={20}
+                            height={27}
+                          />
+                        </div>
                         Carte
                       </a>
                     </Link>
                   </li>
-                  <li className={router.pathname == "/experience/" ? "active" : ""}>
-                    <Link href='/experience/'>
+                  <li>
+                    <Link href={`/experience/profile/${currentUser?.pseudo}`}>
                       <a>
-                        <Image
-                          src={'/navbar/album.webp'}
-                          alt={'Icon profile'}
-                          width={30}
-                          height={30}
-                        />
+                        <div className='iconAside'>
+                          <Image
+                            src={'/navbar/album.webp'}
+                            alt={'Icon profile'}
+                            width={24}
+                            height={27}
+                          />
+                        </div>
                         Mes albums
                       </a>
                     </Link>
@@ -472,12 +578,15 @@ export default function Navbar() {
                   <li className={router.pathname == "/blog" ? "active" : ""}>
                     <Link href='/blog'>
                       <a>
-                        <Image
-                          src={'/navbar/blog.webp'}
-                          alt={'Icon profile'}
-                          width={30}
-                          height={30}
-                        />
+                        <div className='iconAside'>
+                          <Image
+                            src={'/navbar/blog.webp'}
+                            alt={'Icon profile'}
+                            width={24}
+                            height={27}
+                          />
+                        </div>
+                        
                         Le blog
                       </a>
                     </Link>
@@ -504,7 +613,14 @@ export default function Navbar() {
             </li>
           </ul>
           ) : (
-            <ul className='desktopLinks'>
+            <ul className={`desktopLinks experience ${currentUser?.pseudo ? ('show') : ('hide')}`}>
+              <li className={router.pathname == "/experience" ? "active" : ""}>
+                <Link href={`/experience/`}>
+                  <a>
+                    Accueil
+                  </a>
+                </Link>
+              </li>
               <li className={router.pathname == "/experience/profile/[pseudo]" || router.pathname == "/experience/profile/modify/[pseudo]" ? "active" : ""}>
                 <Link href={`/experience/profile/${currentUser?.pseudo}`}>
                   <a>
@@ -519,8 +635,8 @@ export default function Navbar() {
                   </a>
                 </Link>
               </li>
-              <li className={router.pathname == "/experience/" ? "active" : ""}>
-                <Link href='/experience/'>
+              <li>
+                <Link href={`/experience/profile/${currentUser?.pseudo}`}>
                   <a>
                     Mes albums
                   </a>
