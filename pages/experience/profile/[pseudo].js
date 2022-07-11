@@ -18,6 +18,7 @@ import Head from 'next/head';
 const ProfileStyle = styled.section`
     text-align: center;
     padding: 50px 20px 0;
+
     @media(min-width: 768px){
             .profil__icone{
                 display: none!important;
@@ -32,21 +33,22 @@ const ProfileStyle = styled.section`
     .profilChoice{
         display:flex;
         gap: 15px;
-        width: 45%;
+        width: 45%!important;
         background: #212F89;
         border-radius: 25px;
         margin-bottom: 30px;
-        padding: 10px 19px;
-        color: white;
+        padding: 10px 19px!important;
+        color: white!important;
         justify-content: center;
         .profil__icone{
             display: block;
             text-align: center;
+
         }
     }
 
 }
-   
+
     .deco{
         margin: 30px 0;
         color: #212F89;
@@ -90,7 +92,9 @@ const ProfileStyle = styled.section`
                 width: 600px;
             }
         }
-
+        .profil__name{
+            margin-bottom: 20px;
+        }
         .profilChoiceBlock{
         display:flex;
         flex-wrap: nowrap;
@@ -107,9 +111,12 @@ const ProfileStyle = styled.section`
             &.active{
                 border-bottom: 3px solid #212F89;
             }
-            &:nth-child(4){
+            @media(min-width: 768px){
+                &:nth-child(4){
                 display: none;
             }
+            }
+            
         }
     }
     .profil{
@@ -171,7 +178,8 @@ const ProfileStyle = styled.section`
             margin-left: 50%;
             transform: translateX(-50%);
             margin-bottom: 20px;
-        }
+            }
+
         &__pseudo{
             display: flex;
             justify-content: center;
@@ -424,28 +432,34 @@ export default function Profile({profile, date, relation}) {
     <ProfileStyle>
         <Toaster />
         <div className='profil__photo mobile'>
-                    <figure>
-                        {profile?.avatar ? (
-                            <Image
-                                src={profile?.avatar}
-                                alt={profile?.pseudo}
-                                width={125}
-                                height={125}
-                            />
-                        ) : (
-                            <Image
-                                src={'/logo.webp'}
-                                alt={'photo de profil'}
-                                width={125}
-                                height={125}
-                            />
-                        )} 
-                    </figure>
+            <figure>
+                {profile?.avatar ? (
+                    <Image
+                        src={profile?.avatar}
+                        alt={profile?.pseudo}
+                        width={125}
+                        height={125}
+                    />
+                ) : (
+                    <Image
+                        src={'/logo.webp'}
+                        alt={'photo de profil'}
+                        width={125}
+                        height={125}
+                    />
+                )} 
+            </figure>
+            <div className='modif' >
+                    
                     <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
-                        <a>
-                            Modifier
-                        </a>
+                    <Image 
+                        src={'/profil/edit.webp'}
+                        alt="icon crayon"
+                        width={35}
+                        height={35} 
+                    />
                     </Link>
+                </div>
         </div>  
             <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
             <div className='profil__pseudo mobile'>
@@ -534,8 +548,8 @@ export default function Profile({profile, date, relation}) {
                 </div>
                 Santé
             </div>
-            <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
-            <div className='profil__icone' >
+            <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`}>
+            <div className='profil__icone'>
                     <Image
                         src={'/profil/contact.webp'}
                         alt="icone"
@@ -543,7 +557,10 @@ export default function Profile({profile, date, relation}) {
                         height={20}
                     />
                 </div>
-                Relation
+                <a href='/experience/contact/addContact.js'>
+                    Relation
+                </a>
+                
             </div>
         </div>
 
@@ -565,7 +582,7 @@ export default function Profile({profile, date, relation}) {
                         <div className='profil__grid--desktop-album'>
                             <div className='album__card'>
                                 <Image
-                                    src={'/profil/album_profil.png'}
+                                    src={'/profil/image-profil3.webp'}
                                     alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
