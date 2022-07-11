@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 const HeaderStyle = styled.header`
   //background:#42A0B6;
   padding: 30px 55px;
+  background-color: #fff;
   //border-radius: 0 0 25px 25px;
   .close{
       position: absolute;

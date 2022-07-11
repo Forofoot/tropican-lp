@@ -263,6 +263,7 @@ const SurverStyle = styled.section`
         width: 100%;
         text-align: center;
         margin-bottom: 45px;
+        margin-top: 15px;
         .rdrDateRangePickerWrapper,
         .rdrCalendarWrapper,
         .rdrMonth{
@@ -423,6 +424,7 @@ const SurverStyle = styled.section`
             background-color: rgba(131, 215, 220, 0.4);
             padding: 55px 80px;
             border-radius: 20px ;
+            gap: 15px;
             h2{
                 font-size: 1.875em;
             }
