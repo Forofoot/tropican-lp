@@ -93,11 +93,9 @@ const AuthStyle = styled.section`
             border-radius: 10px;
             border: 1px solid #212F89;
             text-align: center;
-            &:hover{
-                border: 2px solid #212F89;
-            }
             &.active{
-                background-color: red;
+                border: 2px solid #212F89;
+                background-color: #2299dd36;
             }
         }
     }
@@ -136,9 +134,6 @@ const AuthStyle = styled.section`
             background: #212F89;
             border-radius: 25px;
             color: #F4F4F4;
-            font-family: 'Sofia Pro';
-            font-style: normal;
-            font-weight: 700;
             display: block;
             margin: auto;
             margin-bottom: 20px;
@@ -256,8 +251,8 @@ export default function Index() {
             maxAge: 3600, // Expires after 1hr
             sameSite: true,
         })
-        router.push('/experience/dashboard')
-    }else{  
+        router.reload('/experience/dashboard')
+    }else{
         errormessage.current.classList.add('active')
         setError(data)
     }
@@ -324,7 +319,7 @@ export default function Index() {
                         <label>Pseudo</label>
                         <input type="text" value={inputedGrandChildren.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
-                        <input type="text"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
+                        <input type="password"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
                         <button type='submit'>S&apos;inscrire</button>
                     </form>
                     }
@@ -340,7 +335,7 @@ export default function Index() {
                             <label>Pseudo</label>
                             <input type="text" value={inputedGrandParent.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, pseudo:e.target.value })}/>
                             <label>Mot de passe</label>
-                            <input type="text"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
+                            <input type="password"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
                             <button type='submit'>S&apos;inscrire</button>
                         </form>
                     }
@@ -353,7 +348,7 @@ export default function Index() {
                         <label>Nom d&apos;utilisateur</label>
                         <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
-                        <input type="text"  value={inputedUser.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
+                        <input type="password"  value={inputedUser.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
                         <button type='submit'>Se connecter</button>
                         <p>
                             <a> Mot de passe oublié ?</a>

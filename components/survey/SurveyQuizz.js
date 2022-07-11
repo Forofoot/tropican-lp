@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import * as Survey from "survey-react" // import surveyjs
 import styled from 'styled-components';
-//import { questions } from "./content/questions" // these are the survey question
 import Image from 'next/dist/client/image';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 import Moment from 'react-moment';
 import 'moment/locale/fr';
+import Link from 'next/link';
 
 // Modern theme
 import "survey-react/modern.min.css"
@@ -16,6 +16,11 @@ const daysOfYear = []
 
 const SurverStyle = styled.section`
     position: relative;
+    min-height: 95vh;
+    h1{
+        display: none;
+        margin-bottom: 35px;
+    }
     h2{
         margin-bottom: 15px;
     }
@@ -35,6 +40,9 @@ const SurverStyle = styled.section`
     p{
         color: #212F89;
         font-weight: 100;
+    }
+    .agendaSection{
+        width: 100%;
     }
     .questionBlock{
         margin-bottom: 30px;
@@ -87,12 +95,13 @@ const SurverStyle = styled.section`
     .relationResult{ 
         border: 1px solid #F20D97;
         border-radius: 10px;
-        padding: 20px;
         max-width: 600px;
         display: none;
         margin-bottom: 30px;
+        background-color: #fefefe;
         cursor: pointer;
-        div{
+        .relationBlockResult{
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -118,6 +127,12 @@ const SurverStyle = styled.section`
                 border-radius: 50%;
             }
         }
+        hr{
+            border-color: #F20D97;
+        }
+        hr:last-of-type{
+            display: none;
+        }
         &.show{
             display: block;
         }
@@ -130,7 +145,8 @@ const SurverStyle = styled.section`
         padding: 25px 30px;
         border: 1px solid #212F89;
         border-radius: 10px;
-        margin-bottom: 40px;
+        max-width: 510px;
+        margin: auto auto 40px auto;
         .recapBlock{
             display: flex;
             align-items: center;
@@ -174,15 +190,15 @@ const SurverStyle = styled.section`
     }
 
     .back{
+        all: unset;
         position: absolute;
         top: 0;
+        left: 0;
         width: 35px;
         height: 35px;
         background-image: url('/quizz/arrow-left.webp');
         background-repeat: no-repeat;
-        &.quizz{
-            top: 45px;
-        }
+        cursor: pointer;
     }
     .sv-question__title{
         color: #212F89;
@@ -212,11 +228,21 @@ const SurverStyle = styled.section`
         }
     }
     .sv-imagepicker__item{
-        opacity: .5;
         margin-right: 0;
     }
     .sv-imagepicker__item--checked{
-        opacity: 1;
+        position: relative;
+        &::before{
+            content: '';
+            background-image: url('/tools/valid.webp');
+            background-size: 70px;
+            background-position: center;
+            background-color: rgba(33,47,137, 0.75);
+            background-repeat: no-repeat;
+            position: absolute;
+            height: 165px;
+            width: 165px;
+        }
     }
 
     .sv-imagepicker__image{
@@ -237,6 +263,7 @@ const SurverStyle = styled.section`
         width: 100%;
         text-align: center;
         margin-bottom: 45px;
+        margin-top: 15px;
         .rdrDateRangePickerWrapper,
         .rdrCalendarWrapper,
         .rdrMonth{
@@ -244,25 +271,37 @@ const SurverStyle = styled.section`
             max-width: 650px;
         }
     }
-    .choice{
-        padding: 10px 0 ;
-        width: 100%;
-        border: 1px solid #212F89;
-        border-radius: 10px;
-        text-align: center;
-        display: inline-block;
-        margin-bottom: 15px;
-        font-size: 1rem;
-        &:last-of-type{
-            margin-bottom   : 0;
+    .infosQuestion{
+        max-width:510px;
+        margin: auto;
+        .answer{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
-        &:hover{
-            cursor: pointer;
-        }
-        &.active{
-            background: pink;
+        .choice{
+            padding: 10px 0 ;
+            max-width: 165px;
+            width: 100%;
+            border: 1px solid #212F89;
+            border-radius: 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            &:last-of-type{
+                margin-bottom   : 0;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+            &.active{
+                background: pink;
+            }
         }
     }
+    
     .rdrDefinedRangesWrapper{
         display: none;
     }
@@ -270,6 +309,175 @@ const SurverStyle = styled.section`
         display: block;
         margin: auto;
     }
+    .rdrNextPrevButton{
+        background: #212F89;
+    }
+    .rdrNextButton{
+        i{
+            border-color: transparent transparent transparent #f4f4f4;
+        }
+    }
+    .rdrPprevButton{
+        i{
+            border-color: transparent #f4f4f4 transparent transparent;
+        }
+    }
+    
+    .rdrCalendarWrapper{
+        display: flex;
+        flex-direction: column;
+        background: none;
+        .rdrDateDisplayWrapper{
+            order: 3;
+            margin-top: 20px;
+            background: none;
+            max-width: 350px;
+            .rdrDateDisplay{
+                margin: 0;
+                border: 1px solid #F20D97;
+                border-radius: 10px;
+                padding: 15px 20px;
+                .rdrDateDisplayItem{
+                    background:none;
+                    border: none;
+                    box-shadow: none;
+                    position: relative;
+                    input{
+                        color: #F20D97;
+                    }
+                    &:first-child{
+                        &::after{
+                            content: '';
+                            right: 0;
+                            top:0;
+                            height: 30px;
+                            width: 2px;
+                            background-color: #F20D97;
+                            position: absolute;
+                        }
+                    }
+                }
+            }
+        }
+        .rdrMonthAndYearWrapper,
+        .rdrMonths{
+            background-color: #ffffff;
+        }
+    }
+    .desktopInfosDescription{
+        display: none;
+    }
+
+    .notFoundInfos{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 650px;
+        margin: auto;
+        align-items: center;
+        background-color: rgba(131, 215, 220, 0.4);
+        padding: 55px 80px;
+        border-radius: 20px ;
+        h2{
+            font-size: 1em;
+            font-weight: bold;
+            color: #212F89;
+            font-size: 1.25em;
+            text-transform: uppercase;
+        }
+        p{
+            margin-bottom: 40px;
+            text-align: center;
+        }
+    }
+    .gotoHome{
+        text-align: center;
+        margin-top: 25px;
+        text-decoration: underline;
+        a{
+            margin: auto;
+            color: #313131;
+        }
+    }
+
+    @media (min-width: 1024px){
+        padding: 0 140px;
+        h1{
+            display: block;
+            text-align: center;
+        }
+        h5{
+            text-align: center;
+            .sv-question__num{
+                font-size: 1.875em;
+            }
+        }
+        .recapSection{
+            h2{
+                text-align: center;
+                font-size: 1.875em;
+                margin-bottom: 40px;
+            }
+        }
+        .agendaSection{
+            display: flex;
+            background-color: rgba(131, 215, 220, 0.4);
+            padding: 55px 80px;
+            border-radius: 20px ;
+            gap: 15px;
+            h2{
+                font-size: 1.875em;
+            }
+            .dateSection{
+                order: 1;
+                width: 70%;
+                .dateRangeContainer{
+                    text-align: left;
+                }
+            }
+            .relationSection{
+                order: 2;
+                width: 30%;
+            }
+        }
+        .infosQuestion{
+            background-color:rgba(131, 215, 220, 0.4);
+            padding: 55px 80px;
+            border-radius: 20px;
+            h2{
+                display: none;
+            }
+        }
+        
+        .desktopInfosDescription{
+            display: block;
+            text-align:center;
+            color: #313131;
+            margin-bottom: 40px;
+        }
+        .back{
+            left: 135px;
+        }
+        .sv-progress{
+            position: absolute;
+            bottom: 55px;
+            left: 50%;
+            width: 415px;
+            transform: translateX(-50%);
+        }
+        .sv-imagepicker__image{
+            width: 215px;
+            height: 215px;
+        }
+        .sv-imagepicker__item--checked{
+            &::before{
+                width: 215px;
+                height: 215px;
+                background-size: 110px;
+            }
+        }
+    } 
+
 `
 
 export default function SurveryQuizz({user, relation}) {
@@ -525,13 +733,12 @@ export default function SurveryQuizz({user, relation}) {
         audition: relation.audition
     });
     const [state, setstate] = useState([])
-    const [datas, setDatas] = useState([])
+    const [datas, setDatas] = useState()
     const [view, setView] = useState(false)
     let q = survey.getAllQuestions();
     q.forEach(elt =>{
         elt.showLabel = 'aaa';
     })
-
     survey.pageNextText = 'Suivant'
     survey.pagePrevText = 'a'
 
@@ -568,6 +775,7 @@ export default function SurveryQuizz({user, relation}) {
                 areas: survey.data.place,
                 accomodation: survey.data.accomodation,
                 healthIssue: value.healthIssue,
+                currentUserPseudo: relation.pseudo,
                 vision: value.vision,
                 mobility: value.mobility,
                 language: value.language,
@@ -580,10 +788,14 @@ export default function SurveryQuizz({user, relation}) {
               }),
             });
             const json = await response.json()
-            setDatas(json)
+            if(response.ok){
+                setDatas(json)
+                setCurrentPage('recap')
+            }else{
+                setCurrentPage('notFound')
+            }
         }
         fetchData()
-        setCurrentPage('recap')
     });
 
     const handleChoose = ( choose ) =>{
@@ -601,7 +813,6 @@ export default function SurveryQuizz({user, relation}) {
         })
     }
     //survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
-
     const handleCreateExperience = async (key) =>{
         const response = await fetch(`/api/quizz/createExperience`, {
             method: "POST",
@@ -609,12 +820,12 @@ export default function SurveryQuizz({user, relation}) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ 
-              name: datas[key].name,
-              place: datas[key].place,
+              name: datas.name,
+              place: datas.place,
               start: value.start,
               end: value.end,
-              long: datas[key].long,
-              lat: datas[key].lat,
+              long: datas.long,
+              lat: datas.lat,
               currentUserPseudo: relation.pseudo,
               relationPseudo: value.pseudo,
               relationId: value.relationId
@@ -625,99 +836,140 @@ export default function SurveryQuizz({user, relation}) {
     <SurverStyle>
         {currentPage == 'agenda' &&
             <>
-                <h2>Avec qui ?</h2>
-                <p className='selectRelationLabel'>Sélection de la relation :</p>
-                <div className='findRelation'>
-                    <p>Cherchez votre relation</p> 
-                    <div onClick={() => setView(!view)}>
-                        <span className={`arrow ${view == true ? ('active') : ('')}`}></span>
+                <h1>Durée de votre magnifique expérience</h1>
+                <div className='agendaSection'>
+                    <div className='relationSection'>
+                        <h2>Avec qui ?</h2>
+                        <p className='selectRelationLabel'>Sélection de la relation :</p>
+                        <div className='findRelation'>
+                            <p>Cherchez votre relation</p> 
+                            <div onClick={() => setView(!view)}>
+                                <span className={`arrow ${view == true ? ('active') : ('')}`}></span>
+                            </div>
+                        </div>
+                        <div className={`relationResult ${view == true ? ('show') : ('')}`}>
+                            {relation.relation.map((elt, i)=>(
+                                <>
+                                <div key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}  className={`relationBlockResult ${value.pseudo == elt.grandparent?.pseudo || value.pseudo == elt.grandChildren?.pseudo ? ('active') : ('')}`}>
+                                    <p>
+                                        {elt.grandChildren?.avatar || elt.grandparent?.avatar ? (
+                                            <Image
+                                                src={`${elt.grandChildren?.avatar || elt.grandparent?.avatar}`}
+                                                alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
+                                                width={39}
+                                                height={39}
+                                                objectFit='cover'
+                                            />
+                                            ) : (
+                                            <Image
+                                                src={`/logo.webp`}
+                                                alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
+                                                width={39}
+                                                height={39}
+                                                objectFit='cover'
+                                            />)
+                                        }
+                                        {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
+                                    </p>
+                                    <Image
+                                        src={'/tools/valider.webp'}
+                                        alt={'Icon valider'}
+                                        width={28}
+                                        height={28}
+                                        className='valid'
+                                    />
+                                </div>
+                                <hr></hr>
+                                </>
+                            ))}
+                        </div>
                     </div>
-                </div>
-                <div className={`relationResult ${view == true ? ('show') : ('')}`}>
-                    {relation.relation.map((elt, i)=>(
-                        <div onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)} key={i} className={`${value.pseudo == elt.grandparent?.pseudo || elt.grandChildren?.pseudo ? ('active') : ('')}`}>
-                            <p>
-                                <Image
-                                    src={`${elt.grandChildren?.avatar || elt.grandparent?.avatar}`}
-                                    alt={`Avatar de ${elt.grandChildren?.pseudo || elt.grandparent?.pseudo}`}
-                                    width={39}
-                                    height={39}
-                                    objectFit='cover'
-                                />
-                                {elt.grandparent?.pseudo || elt.grandChildren?.pseudo}
-                            </p>
-                            <Image
-                                src={'/tools/valider.webp'}
-                                alt={'Icon valider'}
-                                width={28}
-                                height={28}
-                                className='valid'
+                    <div className='dateSection'>
+                        <h2>Quand ?</h2>
+                        <p>Date de l&apos;expérience :</p>
+                        <div className='dateRangeContainer'>
+                            <DateRangePicker
+                                ranges={[selectionRange]}
+                                minDate={new Date()}
+                                rangeColors={["#F885CA"]}
+                                onChange={handleSelect}
+                                inputRanges={[]}
+                                disabledDates={daysOfYear}
                             />
                         </div>
-                    ))}
+                        <button className='btnPrimary' onClick={() => handleChoose('infos')}>
+                            Valider
+                        </button>
+                    </div>
+                    
                 </div>
-                <h2>Quand ?</h2>
-                <p>Date de l&apos;expérience :</p>
-                <div className='dateRangeContainer'>
-                    <DateRangePicker
-                        ranges={[selectionRange]}
-                        minDate={new Date()}
-                        rangeColors={["#F885CA"]}
-                        onChange={handleSelect}
-                        inputRanges={[]}
-                        disabledDates={daysOfYear}
-                    />
-                </div>
-                <button className='btnPrimary' onClick={() => handleChoose('infos')}>
-                    Valider
-                </button>
             </>
         }
         {currentPage == 'infos' &&
             <>
-                <h2 className='titleCenter'>Questions sur <br></br>les conditions générales</h2>
-                <div className='questionBlock'>
-                    <p className='question'>Avez-vous des problèmes de santé*</p>
-                    <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
-                    <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
-                </div>
+                <h1>Question sur les conditions générales</h1>
+                <p className='desktopInfosDescription'>Les questions ne vous seront plus posées une fois que vous aurez validé les réponses.<br></br> Vous pourrez toujours modifier vos réponses si elles changent dans la parties profil.</p>
+                <div className='infosQuestion'>
+                    <h2 className='titleCenter'>Questions sur <br></br>les conditions générales</h2>
+                    <div className='questionBlock'>
+                        <p className='question'>Avez-vous des problèmes de santé*</p>
+                        <div className='answer'>
+                            <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
+                            <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
+                        </div>
+                    </div>
 
-                <div className='questionBlock'>
-                    <p className='question'>Avez-vous des difficultés pour :</p>
-                    <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
-                    <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
-                    <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
-                    <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
-                </div>
+                    <div className='questionBlock'>
+                        <p className='question'>Avez-vous des difficultés pour :</p>
+                        <div className='answer'>
+                            <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
+                            <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
+                            <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
+                            <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
+                        </div>
+                    </div>
 
-                <div className='questionBlock'>
-                    <p className='question'>Êtes vous sportif ?*</p>
-                    <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
-                    <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
-                </div>
+                    <div className='questionBlock'>
+                        <p className='question'>Êtes vous sportif ?*</p>
+                        <div className='answer'>
+                            <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
+                            <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
+                        </div>
+                    </div>
 
-                <div className='questionBlock'>
-                    <p className='question'>Savez-vous nager ?*</p>
-                    <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
-                    <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
-                </div>
+                    <div className='questionBlock'>
+                        <p className='question'>Savez-vous nager ?*</p>
+                        <div className='answer'>
+                            <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
+                            <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
+                        </div>
+                    </div>
 
-                <button className='back' onClick={() => handleChoose('agenda')}></button>
-                <button className='btnPrimary' onClick={() => handleChoose('quizz')}>
-                    Valider
-                </button>
+                    <button className='back' onClick={() => handleChoose('agenda')}></button>
+                    <button className='btnPrimary' onClick={() => handleChoose('quizz')}>
+                        Valider
+                    </button>
+                </div>
             </>
         }
 
         {currentPage == 'quizz' && 
             <>
-                <a id="surveyPrev" href="#" className='back quizz' onClick={() => survey.prevPage()}></a>
+                <a id="surveyPrev" href="#" className='back quizz sv-btn--navigation' 
+                onClick={() => survey.prevPage()}></a>
                 <Survey.Survey model={survey} />
+                <p className='gotoHome'>
+                    <Link href='/experience/dashboard' title="Retour à l'accueil">
+                        <a>
+                            Retour à l&apos;accueil
+                        </a>
+                    </Link>
+                </p>
             </>
         }
     
         {currentPage == 'recap' &&
-            <>
+            <div className='recapSection'>
                 <h2>Résultat de vos brillantes réponses</h2>
                 <div className='recapContainer'>
                     <div className='recapBlock'>
@@ -743,7 +995,7 @@ export default function SurveryQuizz({user, relation}) {
                         />
                         <div>
                             <h3>Lieu</h3>
-                            <p>{state[0]}</p>
+                            <p>{datas?.place}</p>
                         </div>
                      </div>
                      <div className='recapBlock'>
@@ -786,21 +1038,33 @@ export default function SurveryQuizz({user, relation}) {
                         </div>
                      </div>
                 </div>
-                <button className='btnPrimary' onClick={() => handleChoose('result')}>Valider</button>
+                <button className='btnPrimary' onClick={() => handleCreateExperience()}>Valider</button>
                 <button className='btnDefault' onClick={() => handleChoose('agenda')}>Annuler</button>
-            </>
+            </div>
         }
+        
 
-        {currentPage == 'result' && 
+        {currentPage == 'notFound' &&
             <>
-                {datas.length ? (
-                datas.map((data,i) =>(
-                    <div key={i}>
-                        <div>{data.place} <button onClick={() => handleCreateExperience(i)}>Choisir</button></div>
-                    </div>
-                ))) : (<>Aucune donnée</>) }
-                
-                
+                <div className='notFoundInfos'>
+                    <h2>Oh non !</h2>
+                    <p>
+                        Nous ne trouvons aucune expérience en fonction de vos choix...
+                    </p>
+                    <Image
+                        src={'/quizz/error.webp'}
+                        alt='Aucune expérience trouvée'
+                        width={68}
+                        height={164}
+                    />
+                </div>
+                <p className='gotoHome'>
+                    <Link href='/experience/dashboard' title="Retour à l'accueil">
+                        <a>
+                            Retour à l&apos;accueil
+                        </a>
+                    </Link>
+                </p>
             </>
         }
     </SurverStyle>

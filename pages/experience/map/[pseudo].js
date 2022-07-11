@@ -87,9 +87,9 @@ export default function Map({profile, country}) {
     
     const [selectedLocation, setSelectedLocation] = useState({})
     const [viewState, setViewState] = useState({
-        longitude: profile.experience[0].long,
-        latitude:profile.experience[0].lat,
-        zoom: 3.5
+        longitude: '2.333333',
+        latitude:'48.866667',
+        zoom: 5
     });
   return (
     <ProfileStyle>
@@ -134,7 +134,7 @@ export default function Map({profile, country}) {
                                 )}
                             </div>
                             <div className='detailExperience'>
-                                <h2>{result.name}</h2>
+                                <h2>{result.place}</h2>
                                 <p>avec {result.grandChildren?.firstName || result.grandParent?.firstName}</p>
                                 {moment(result.end) < new Date(
                                 ) ? (
@@ -180,6 +180,7 @@ export const getServerSideProps = async ({query}) => {
                     long:true,
                     lat:true,
                     end:true,
+                    place:true,
                     image:{
                         select:{
                             image: true
@@ -212,6 +213,7 @@ export const getServerSideProps = async ({query}) => {
                     long:true,
                     lat:true,
                     end:true,
+                    place:true,
                     image:{
                         select:{
                             image: true

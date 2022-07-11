@@ -5,11 +5,70 @@ import styled from 'styled-components';
 import { useCookies } from "react-cookie";
 
 const ModifyStyle = styled.section`
-    max-width: 600px;
-    margin: auto;
+    min-height: 95vh;
+    h1{
+        text-align: center;
+        margin-bottom: 40px;
+    }
     form{
         display: flex;
         flex-direction: column;
+        width: 100%;
+        margin: auto;
+        background-color: none;
+        padding:0;
+        @media (min-width: 768px) {
+            background-color: rgba(131,215,220, 0.4);
+            padding: 30px 70px;
+        }
+        border-radius:20px;
+        max-width: 700px;
+        label{
+            width: 100%;
+            color: #212F89;
+            font-weight: bold;
+            font-size: 1rem;
+            @media (min-width: 768px) {
+                width: 30%;
+            }
+        }
+        .input{
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 25px;
+            @media (min-width: 768px) {
+                flex-direction: row;
+                gap: 25px;
+                align-items: center;
+            }
+        }
+        input{
+            all:unset;
+            width: 100%;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #fefefe;
+            border: 1px solid #212F89;
+            color: #212F89;
+            @media (min-width: 768px) {
+                width: 70%;
+            }
+        }
+        #file-input{
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        #file-input::-webkit-file-upload-button {
+            visibility: hidden;
+            user-select: none;
+        }
+        .btnPrimary{
+            margin: auto;
+        }
     }
 
 `
@@ -22,6 +81,13 @@ export default function Modify({profile}) {
   
   const router = useRouter()
 
+  const [inputedUser, setInputedUser] = useState({
+    email: profile.email,
+    pseudo: profile.pseudo,
+    phone: profile.phone,
+    city: profile.city,
+    password: "",
+    })
 
   const handleChange = (event) => {
     setImageUploaded(event.target.files[0]);
@@ -30,18 +96,25 @@ export default function Modify({profile}) {
   const submitData = async (e) => {
     e.preventDefault();
 
-    if (!imageUploaded) {
-      return;
+    if (!inputedUser.email.includes('@') ) {
+        alert('Invalid details');
+        return;
     }
 
     try {
         const formData = new FormData();
         formData.append("image", imageUploaded);
-        formData.append("userId", profile?.id)
-        formData.append("currentAvatar", profile?.avatar_publicId)
-        formData.append("currentPseudo", profile?.pseudo)
+        formData.append("userId", profile.id)
+        formData.append("currentAvatar", profile.avatar_publicId)
+        formData.append("currentPseudo", profile.pseudo)
 
-        const res = await fetch("../../../api/profile/modify", {
+        formData.append("pseudo", inputedUser.pseudo)
+        formData.append("email", inputedUser.email)
+        formData.append("phone", inputedUser.phone)
+        formData.append("city", inputedUser.city)
+        formData.append("password", inputedUser.password)
+
+        const res = await fetch("/api/profile/modify", {
             method: "POST",
             body: formData,
         });
@@ -55,7 +128,7 @@ export default function Modify({profile}) {
                 sameSite: true,
             })
 
-            router.push(`/experience/profile/${profile.pseudo}`)
+            router.push(`/experience/profile/${data.pseudo}`)
         }else{
             alert(data)
         }
@@ -74,26 +147,47 @@ export default function Modify({profile}) {
   },)
 
   return (
-    <ModifyStyle>
+    <ModifyStyle className='container'>
+        <h1>Modifier le profil</h1>
+
         <form onSubmit={submitData}>
-            <label htmlFor='avatar'>Avatar</label>
-            <input
-                onChange={handleChange}
-                accept=".jpg, .png, .gif, .jpeg"
-                type="file"
-                name="avatar"
-            ></input>
-            <label htmlFor='pseudo'>Pseudo</label>
-            <input type='text' name="pseudo" value={profile?.pseudo}/>
-            <label htmlFor='firstname'>Prénom</label>
-            <input type='text' name="firstname" value={profile?.firstName}/>
-            <label htmlFor='name'>Nom</label>
-            <input type='text' name="name" value={profile?.lastName}/>
-            <label htmlFor='email'>Email</label>
-            <input type='text' name="email" value={profile?.email}/>
-            <label htmlFor='password'>Mot de passe</label>
-            <input type='password' name="pseudo" value={''}/>
-            <button type='submit'>Modifier</button>
+            <div className='input'>
+                <label htmlFor='avatar'>Avatar</label>
+                <input
+                    onChange={handleChange}
+                    accept=".jpg, .png, .gif, .jpeg"
+                    type="file"
+                    id='file-input'
+                    name="avatar"
+                ></input>
+            </div>
+
+            <div className='input'>
+                <label htmlFor='pseudo'>Nom d&apos;utilisateur</label>
+                <input type='text' name="pseudo" value={inputedUser.pseudo || ''} placeholder="nom d'utilisateur" onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
+            </div>
+
+            <div className='input'>
+                <label htmlFor='mobile'>Téléphone mobile</label>
+                <input type='tel' pattern='[0-9]{10}' name="mobile" value={inputedUser.phone || ''} placeholder="Téléphone mobile" onChange={(e) => setInputedUser({ ...inputedUser, phone:e.target.value })}/>
+            </div>
+
+            <div className='input'>
+                <label htmlFor='email'>Email</label>
+                <input type='text' name="email" value={inputedUser.email || ''} placeholder="email" onChange={(e) => setInputedUser({ ...inputedUser, email:e.target.value })}/>
+            </div>
+
+            <div className='input'>
+                <label htmlFor='city'>Ville</label>
+                <input type='text' name="city" value={inputedUser.city || ''} placeholder="Ville" onChange={(e) => setInputedUser({ ...inputedUser, city:e.target.value })}/>
+            </div>
+
+            <div className='input'>
+                <label htmlFor='password'>Mot de passe</label>
+                <input type='password' name="password" placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
+            </div>
+            
+            <button className='btnPrimary' type='submit'>Valider</button>
         </form>
     </ModifyStyle>
   )
@@ -117,12 +211,12 @@ export const getServerSideProps = async ({query}) => {
             },
             select:{
                     id:true,
-                    firstName:true,
-                    lastName: true,
                     pseudo:true,
                     avatar:true,
                     avatar_publicId:true,
                     email:true,
+                    city:true,
+                    phone:true,
                 }
             })
             await prisma.$disconnect()
@@ -137,12 +231,13 @@ export const getServerSideProps = async ({query}) => {
                 pseudo:currentPseudo
             },
             select:{
-                firstName:true,
-                lastName: true,
+                id:true,
                 pseudo:true,
                 avatar:true,
                 avatar_publicId:true,
                 email:true,
+                city:true,
+                phone:true,
             }
         })
         await prisma.$disconnect()
