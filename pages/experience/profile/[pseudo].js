@@ -583,7 +583,7 @@ export default function Profile({profile, date, relation}) {
                         <div className='profil__grid--desktop-album'>
                             <div className='album__card'>
                                 <Image
-                                    src={'/profil/album_profil.png'}
+                                    src={'/profil/image-profil6.webp'}
                                     alt=""
                                     height={270}
                                     width={270} 
@@ -603,7 +603,7 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-                                    src={'/profil/album_profil.png'}
+                                    src={'/profil/image-profil7.webp'}
                                     alt=""
                                     height={270}
                                     width={270} 
@@ -623,7 +623,7 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-                                    src={'/profil/album_profil.png'}
+                                    src={'/profil/image-profil5.webp'}
                                     alt=""
                                     height={270}
                                     width={270} 
@@ -643,7 +643,7 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-                                    src={'/profil/album_profil.png'}
+                                    src={'/profil/image-profil2.webp'}
                                     alt=""
                                     height={270}
                                     width={270} 
@@ -662,7 +662,9 @@ export default function Profile({profile, date, relation}) {
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
+                    
                 </>
             }
             {profilChoice == 'agenda' && 
@@ -681,9 +683,9 @@ export default function Profile({profile, date, relation}) {
                         {profile?.experience.map((exp,i) =>(
                         <div key={i}>
                         {exp.start == exp.end ? (
-                        <h3>Le {exp.end}</h3>
+                        <h3>Du {moment(`${exp.end}`).format('ll')}</h3>
                         ) : (
-                        <h3>Du {exp.start} au {exp.end}</h3>
+                        <h3>Du {moment(`${exp.start}`).format('ll')} au {moment(`${exp.end}`)}</h3>
                         )}
                         <p>Expérience avec {exp.grandParent?.firstName || exp.grandChildren?.firstName} à {exp.place}</p>
                         </div>
