@@ -70,6 +70,16 @@ p{
     border-radius: 50px;
     margin:auto;
     margin-bottom:50px;
+    &:hover{
+        border: 1px solid #212F89;
+        cursor: pointer;
+        background-color: transparent;
+        color: #212F89;
+  
+        a{
+          color: #212F89; 
+        }
+      }
 
     
 

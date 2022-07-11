@@ -70,6 +70,7 @@ const AuthStyle = styled.section`
             margin-bottom: 40px;
             font-weight: 700;
             font-size: 1.1rem;
+            cursor:pointer;
             &.active{
                 border-bottom: 3px solid #212F89;
             }
@@ -96,6 +97,7 @@ const AuthStyle = styled.section`
             border-radius: 10px;
             border: 1px solid #212F89;
             text-align: center;
+            cursor:pointer;
             &.active{
                 border: 2px solid #212F89;
                 background-color: #2299dd36;
@@ -372,7 +374,7 @@ export default function Index() {
                         <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
                         <input type="password"  value={inputedUser.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
-                        <button type='submit'>Se connecter</button>
+                        <button type='submit' className=" hoverEffect">Se connecter</button>
                         <p>
                             <a> Mot de passe oublié ?</a>
                         </p>
