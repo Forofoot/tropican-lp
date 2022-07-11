@@ -12,12 +12,12 @@ import { GiHealthNormal } from 'react-icons/gi';
 import { MdSportsBasketball } from 'react-icons/md';
 import Brands from '../../components/Brands';
 import { useRouter } from 'next/router'
-import Image from 'next/image';
+import 'moment/locale/fr'
 
 const HomeStyle = styled.section`
 padding: 30px 15px 0px;
 h2{
-    margin-bottom:20px;
+    margin-bottom:50px;
     text-align:center;
     color:#212F89;
 }
@@ -34,6 +34,7 @@ h2{
     align-items:center;
     margin:auto;
     margin-bottom:30px;
+    justify-content: center;
 
     h1{
         color:#212F89;
@@ -57,7 +58,7 @@ p{
 }
 
 .btn{
-    background-color: #7159AD;
+    background-color: #212F89;
     color: #F4F4F4;
     width:fit-content;
     padding: 15px 30px;
@@ -97,6 +98,7 @@ p{
         padding:10px 20px;
         font-weight: 600;
         margin-bottom:20px;
+        margin:auto;
 
         .icon{
             color:#fff;
@@ -114,10 +116,18 @@ p{
 }
 
 .healthCardsContainer{
+
     display:flex;
     flex-wrap:wrap;
     justify-content:space-around;
     margin-bottom:30px;
+
+    @media (min-width:724px){
+        border: dashed 4px #F20D97;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom:70px;
+    }
 
     .cardHealth{
         width:43vw;
@@ -127,6 +137,11 @@ p{
         background-color:rgba(107, 134, 255, 0.6);
         border-radius:10px;
         margin-bottom:15px;
+
+        @media (min-width:724px){
+          width:23vw;
+          margin-bottom:30px;
+        }
 
         .iconImg{
             width:50px;
@@ -147,10 +162,18 @@ p{
     text-align: center;
     padding: 15px 10px;
     margin-bottom: 50px;
+
+    @media (min-width:724px){
+        width:fit-content;
+        border-radius:80px;
+        margin:auto;
+        margin-bottom: 80px;
+        padding: 25px;
+    }
 }
 
 .aboutContainer{
-margin-bottom:30px;
+margin-bottom:70px;
     .aboutCard{
         color:#fff;
         border-radius:10px;
@@ -174,6 +197,38 @@ margin-bottom:30px;
         h2{
             color:#fff;
         }
+        @media (min-width:724px){
+            border-radius: 85px;
+            display: flex;
+            justify-content: space-between;
+
+            h3{
+                background-color:#fff;
+                border-radius: 80px;
+                height: 120px;
+                width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            :first-child h3{
+                color: #694BB5;
+            }
+            :nth-child(2) h3{
+                color: rgba(242, 13, 151, 0.6);;
+            }
+            :last-child h3{
+                color: #6B86FF;;
+            }
+
+            p{
+                width:78%;
+                text-align:left;
+                display: flex;
+                align-items: center;
+                padding:0 50px 0 0;
+            }
+        }
 }
 
 }
@@ -193,8 +248,11 @@ export default function Home({ profile }) {
             router.push('/experience/login')
         }
     })
-
+console.log(profile)
     const [swim, setswim] = useState('nager')
+    const [vision, setvision] = useState('vois')
+    const [health, sethealth] = useState('sante')
+    const [sport, setsport] = useState('sportif')
     return (
         <HomeStyle>
             <div>
@@ -216,8 +274,16 @@ export default function Home({ profile }) {
                                 <BsCalendarDate />
                             </div>
                             <div className="cardContent">
-                                <p className="date">{exp.date}</p>
-                                <p className="participant">Evènement prévu avec </p>
+                                <p className="date">Date</p>
+                                {profile?.role !== 'grandparent' ? (
+                                <>
+                                    <p className="participant">Evènement prévu avec {exp.grandParent.firstName} </p>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="participant">Evènement prévu avec {exp.grandChildren.firstName}</p>
+                                </>
+                            )}
                             </div>
                         </div>
                     ))}
@@ -246,38 +312,62 @@ export default function Home({ profile }) {
                         </div>
                     </div>
 
-                    {/* {profile.map((elt, i) => ( */}
+
                     <div className="cardHealth">
                         <div className="iconImg">
                             <BsFillEyeFill />
                         </div>
                         <div className="cardContent">
-                            <p className="date">Date</p>
+                            {profile?.vision !== 'vois' ? (
+                                <>
+                                    <p>n&apos; a pas de problème de vue</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p>a des problèmes de vue</p>
+                                </>
+                            )}
                         </div>
                     </div>
-                    {/* ))} */}
 
-                    {/* {profile.map((elt, i) => ( */}
                     <div className="cardHealth">
                         <div className="iconImg">
                             <GiHealthNormal />
                         </div>
                         <div className="cardContent">
-                            <p className="date">Date</p>
+                            {profile?.health !== 'sante' ? (
+                                <>
+                                    <p>n&apos; a pas de problème de santé</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p>a des problèmes de santé</p>
+                                </>
+                            )}
                         </div>
                     </div>
-                    {/* ))} */}
 
-                    {/* {profile.map((elt, i) => ( */}
+
                     <div className="cardHealth">
                         <div className="iconImg">
                             <MdSportsBasketball />
                         </div>
                         <div className="cardContent">
-                            <p className="date">Date</p>
+                            {profile?.sport !== 'sportif' ? (
+                                <>
+                                    <p>n&apos; est pas sortif</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p>est plutôt sportif</p>
+                                </>
+                            )}
                         </div>
                     </div>
-                    {/* ))} */}
+
+                    <div className="btn">
+                    <Link href="/experience/profile/modify/[pseudo].js"><a>Modifer</a></Link>
+                </div>
 
                 </div>
                 <h2>Pourquoi nous ?</h2>
@@ -340,7 +430,7 @@ export const getServerSideProps = async ({ req, res }) => {
                                     }
                                 }
                             }
-                        }
+                        }, take:3
                     })
                     await prisma.$disconnect()
                     return {
@@ -373,7 +463,7 @@ export const getServerSideProps = async ({ req, res }) => {
                                     }
                                 }
                             }
-                        }
+                        }, take:3
                     })
                     await prisma.$disconnect()
                     return {
