@@ -54,6 +54,7 @@ const ProfileStyle = styled.section`
         padding: 10px 35px;
         border-radius: 25px;
         border: 1px solid #212F89;
+        cursor:pointer;
     }
     .rdrDefinedRangesWrapper{
         display: none;
@@ -93,6 +94,7 @@ const ProfileStyle = styled.section`
             margin-bottom: 40px;
             font-weight: 700;
             font-size: 1.1rem;
+            cursor:pointer;
             &.active{
                 border-bottom: 3px solid #212F89;
             }
@@ -400,6 +402,9 @@ export default function Profile({profile, date, relation}) {
     if(!cookies.user){
         router.push('/experience/login')
     }
+    if(cookies.user.pseudo != profile?.pseudo){
+        router.push('/experience/')
+    }
   },)
 
   const logout = (e) => {
@@ -493,7 +498,7 @@ export default function Profile({profile, date, relation}) {
                     <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
                     <Image 
                         src={'/profil/edit.webp'}
-                        alt=""
+                        alt="icon crayon"
                         width={35}
                         height={35} 
                     />
@@ -583,8 +588,13 @@ export default function Profile({profile, date, relation}) {
                         <div className='profil__grid--desktop-album'>
                             <div className='album__card'>
                                 <Image
+<<<<<<< HEAD
                                     src={'/profil/image-profil6.webp'}
                                     alt=""
+=======
+                                    src={'/profil/album_profil.png'}
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
+>>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -603,8 +613,13 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
+<<<<<<< HEAD
                                     src={'/profil/image-profil7.webp'}
                                     alt=""
+=======
+                                    src={'/profil/album_profil.png'}
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
+>>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -623,8 +638,13 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
+<<<<<<< HEAD
                                     src={'/profil/image-profil5.webp'}
                                     alt=""
+=======
+                                    src={'/profil/album_profil.png'}
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
+>>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -643,8 +663,13 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
+<<<<<<< HEAD
                                     src={'/profil/image-profil2.webp'}
                                     alt=""
+=======
+                                    src={'/profil/album_profil.png'}
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
+>>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
