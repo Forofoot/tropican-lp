@@ -959,7 +959,7 @@ export default function SurveryQuizz({user, relation}) {
                 onClick={() => survey.prevPage()}></a>
                 <Survey.Survey model={survey} />
                 <p className='gotoHome'>
-                    <Link href='/experience/dashboard' title="Retour à l'accueil">
+                    <Link href='/experience/' title="Retour à l'accueil">
                         <a>
                             Retour à l&apos;accueil
                         </a>
@@ -1059,7 +1059,7 @@ export default function SurveryQuizz({user, relation}) {
                     />
                 </div>
                 <p className='gotoHome'>
-                    <Link href='/experience/dashboard' title="Retour à l'accueil">
+                    <Link href='/experience/' title="Retour à l'accueil">
                         <a>
                             Retour à l&apos;accueil
                         </a>
