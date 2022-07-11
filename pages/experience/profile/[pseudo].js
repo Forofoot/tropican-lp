@@ -6,7 +6,9 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useCookies } from "react-cookie";
 
-import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; //
+import { DateRangePicker } from 'react-date-range'; 
 
 import moment from 'moment';
 import 'moment/locale/fr';
@@ -22,6 +24,13 @@ const ProfileStyle = styled.section`
     }
     .profilChoiceBlock{
         display: none;
+    }
+    .deco{
+        margin: 30px 0;
+        color: #212F89;
+        padding: 10px 35px;
+        border-radius: 25px;
+        border: 1px solid #212F89;
     }
     @media(min-width: 768px){
         padding: 50px 140px 0;
@@ -256,10 +265,66 @@ const ProfileStyle = styled.section`
                 }
             }
         }
+        .sante__container{
+            margin: auto;
+            margin-bottom: 30px;
+            .infosQuestion{
+            background-color:rgba(131, 215, 220, 0.4);
+            padding: 55px 80px;
+            border-radius: 20px;
+            width:100%;
+            margin: auto;
+            h2{
+                display: none;
+            }
+            .answer{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .choice{
+            padding: 10px 0 ;
+            max-width: 165px;
+            width: 100%;
+            border: 1px solid #212F89;
+            border-radius: 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            &:last-of-type{
+                margin-bottom   : 0;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+            &.active{
+                background: pink;
+            }
+        }
+        }
+        .questionBlock{
+            margin-bottom: 30px;
+            .question{
+                margin-bottom: 15px;
+            }
+        }
+ 
+        
+        .desktopInfosDescription{
+            display: block;
+            text-align:center;
+            color: #313131;
+            margin-bottom: 40px;
+        }
+
+        }
+        
 `
 let daysOfYear = [];
 
-export default function Profile({profile, date}) {
+export default function Profile({profile, date, relation}) {
 
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
@@ -296,6 +361,19 @@ export default function Profile({profile, date}) {
     removeCookie("user",  {path: '/'})
     router.push('/experience/login')
   }
+  const [value, setValue] = useState({
+    start: new Date(),
+    end: new Date(),
+    pseudo: "",
+    relationId: "",
+    healthIssue: relation?.healthissue,
+    sportAddicted: relation?.sportaddict,
+    swim: relation?.swim,
+    mobility: relation?.mobility,
+    vision: relation?.vision,
+    language: relation?.language,
+    audition: relation?.audition
+});
 
 
   return (
@@ -370,10 +448,12 @@ export default function Profile({profile, date}) {
                     <p>{profile?.firstName} {profile?.lastName}</p>
                 </div>
                 <div className='info--link'>
+                    <div>
                     <p>{profile?.pseudo}</p>
                     <Link href={'#'}>
                         <a>Partager</a>
                     </Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -400,7 +480,7 @@ export default function Profile({profile, date}) {
                     width={25}
                     height={25} 
                 />
-                <Link href={`/experience/contact/addContact`}>
+                <Link href={`/components/survey/SurveyQuizz.js`}>
                     <a>
                         Santé
                     </a>
@@ -433,64 +513,7 @@ export default function Profile({profile, date}) {
                 </Link>
             </div>
         </div>
-        <div className='profil__grid'>
-            <p className='profil__grid--title'>Mes photos</p>
-            <div className='profil__grid--subtitle' >
-                <p>Voyage avec Titouan </p>
-                <p>
-                    <Link href={'#'}>
-                        <a>Voir plus</a>
-                    </Link>
-                </p>
-                
-            </div>
-            <div className='profil__grid--album'>
-                <div>
-                    <figure>
-                        <Image
-                            src={"/profil/album_profil.png"}
-                            alt="image de fond album"
-                            width={165}
-                            height={165}
-                        />
-                    </figure>
-                    <div className='profil__grid--album-info'>
-                    <p>
-                        <Image
-                            src={"/profil/mark-position.webp"}
-                            alt="logo localisation"
-                            width={15}
-                            height={15}
-                        />
-                        Massif Central<br></br>
-                        <span>23/06/22</span>
-                    </p>
-                    </div>
-                </div>
-                <div>
-                    <figure>
-                        <Image
-                            src={"/profil/album_profil.png"}
-                            alt="image de fond album"
-                            width={165}
-                            height={165}
-                        />
-                    </figure>
-                    <div className='profil__grid--album-info'>
-                    <p>
-                        <Image
-                            src={"/profil/mark-position.webp"}
-                            alt="logo localisation"
-                            width={15}
-                            height={15}
-                        />
-                        Massif Central<br></br>
-                        <span>23/06/22</span>
-                    </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div className='profilChoiceBlock'>
             <div className={`profilChoice ${profilChoice == 'photo' ? 'active' : ''}`} onClick={() => setProfilChoice('photo')}>
@@ -604,14 +627,15 @@ export default function Profile({profile, date}) {
             {profilChoice == 'agenda' && 
            
                 <>
-                 <DateRangePicker
-            ranges={[]}
-            minDate={new Date()}
-            rangeColors={["#F885CA"]}
-            onChange={handleSelect}
-            inputRanges={[]}
-            disabledDates={daysOfYear}
-        />
+
+                <DateRangePicker
+                    ranges={[]}
+                    minDate={new Date()}
+                    rangeColors={["#F885CA"]}
+                    onChange={handleSelect}
+                    inputRanges={[]}
+                    disabledDates={daysOfYear}
+                />
                     <div className='experienceBlock'>
                         {profile?.experience.map((exp,i) =>(
                         <div key={i}>
@@ -628,14 +652,54 @@ export default function Profile({profile, date}) {
             }
             {profilChoice == 'sante' && 
                 <>
-                
+                <div className='sante__container'>
+                    <h2>Mes informations</h2>
+                        
+                    <p className='desktopInfosDescription'>Lors du questionnaire, nous avons récolté ces données sur vous : </p>
+
+                    
+                    <div className='infosQuestion'>
+                        <h2 className='titleCenter'>Questions sur <br></br>les conditions générales</h2>
+                        <div className='questionBlock'>
+                            <p className='question'>Avez-vous des problèmes de santé*</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.healthIssue == true && 'active'}`} onClick={() => setValue({...value, healthIssue: true})}>Oui</p>
+                                <p className={`choice ${value.healthIssue == false && 'active'}`} onClick={() => setValue({...value, healthIssue: false})}>Non</p>
+                            </div>
+                        </div>
+
+                        <div className='questionBlock'>
+                            <p className='question'>Avez-vous des difficultés pour :</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.mobility == true && 'active'}`} onClick={() => setValue({ ...value, mobility: !value.mobility})}>La mobilité</p>
+                                <p className={`choice ${value.vision == true && 'active'}`} onClick={() => setValue({...value, vision: !value.vision})}>La vision</p>
+                                <p className={`choice ${value.language == true && 'active'}`} onClick={() => setValue({...value, language: !value.language})}>Le langage</p>
+                                <p className={`choice ${value.audition == true && 'active'}`} onClick={() => setValue({...value, audition: !value.audition})}>L&apos;audition</p>
+                            </div>
+                        </div>
+
+                        <div className='questionBlock'>
+                            <p className='question'>Êtes vous sportif ?*</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.sportAddicted == true && 'active'}`} onClick={() => setValue({...value, sportAddicted: true})}>Oui</p>
+                                <p className={`choice ${value.sportAddicted == false && 'active'}`} onClick={() => setValue({...value, sportAddicted: false})}>Non</p>
+                            </div>
+                        </div>
+
+                        <div className='questionBlock'>
+                            <p className='question'>Savez-vous nager ?*</p>
+                            <div className='answer'>
+                                <p className={`choice ${value.swim == true && 'active'}`} onClick={() => setValue({...value, swim: true})}>Oui</p>
+                                <p className={`choice ${value.swim == false && 'active'}`} onClick={() => setValue({...value, swim: false})}>Non</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </>
             }
             
         </div>
-
-
-        <button onClick={(e) => logout(e)}>Déconnexion</button>
+        <button className="deco" onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
   )
 }

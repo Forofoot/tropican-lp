@@ -275,8 +275,8 @@ export default function Index() {
                 <Image
                     src={'/profil/photo_login.webp'}
                     alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
-                    width={540}
-                    height={768}
+                    width={720}
+                    height={1024}
                 
                 />
             </div>
