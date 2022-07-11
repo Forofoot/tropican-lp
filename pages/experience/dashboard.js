@@ -83,7 +83,6 @@ export default Dashboard;
 
 export const getServerSideProps = async ({ req, res }) => {
   try {
-      const cookie = parseCookies(req)
       if (res) {
         if(cookie.user){
           const parsedUser =  JSON.parse(cookie.user)
