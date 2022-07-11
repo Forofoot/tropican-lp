@@ -850,7 +850,7 @@ export default function SurveryQuizz({user, relation}) {
                         <div className={`relationResult ${view == true ? ('show') : ('')}`}>
                             {relation.relation.map((elt, i)=>(
                                 <>
-                                <div onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)} key={i} className={`relationBlockResult ${value.pseudo == elt.grandparent?.pseudo || elt.grandChildren?.pseudo ? ('active') : ('')}`}>
+                                <div key={i} onClick={() => handleSelectRelation(`${elt.grandparent?.pseudo || elt.grandChildren?.pseudo}`, `${elt.grandparent?.id || elt.grandChildren?.id}`)}  className={`relationBlockResult ${value.pseudo == elt.grandparent?.pseudo || value.pseudo == elt.grandChildren?.pseudo ? ('active') : ('')}`}>
                                     <p>
                                         {elt.grandChildren?.avatar || elt.grandparent?.avatar ? (
                                             <Image

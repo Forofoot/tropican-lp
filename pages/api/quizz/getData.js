@@ -9,6 +9,7 @@ export default async function handler(
 ) {
   try{
   let currentExperience = []
+  let selectedExperience = []
   const {areas, accomodation, healthIssue, vision, mobility, language, audition, sportaddict, swim, mainTheme, secondTheme, thirdTheme, currentUserPseudo} = req.body
 
   const currentChildren = await prisma.grandchildren.findUnique({
@@ -52,17 +53,19 @@ export default async function handler(
           }
       }
     })
-    filteredActivity.forEach(element => {
-      mycurrentActivity.forEach(elt => {
-        if(elt.name.includes(element.name) !== true){
-          currentExperience.push(element.id)
-        }
-      })
+    mycurrentActivity.forEach(element => {
+          currentExperience.push(element.name)
     })
-    if(currentExperience.length){
+
+    filteredActivity.forEach(element => {
+      if(currentExperience.includes(element.name) !== true){
+        selectedExperience.push(element.id)
+      }
+    })
+    if(selectedExperience.length){
       const getData = await prisma.activity.findFirst({
         where:{
-          id: currentExperience[Math.floor(Math.random() * currentExperience.length)]
+          id: selectedExperience[Math.floor(Math.random() * selectedExperience.length)]
         }
       })
       const updateUser = await prisma.grandchildren.update({
@@ -90,7 +93,7 @@ export default async function handler(
   if(currentParent){
     const mycurrentActivity = await prisma.experience.findMany({
       where:{
-        grandChildren:{
+        grandParent:{
           is:{
             pseudo:currentUserPseudo
           }
@@ -117,17 +120,34 @@ export default async function handler(
           }
       }
     })
-    filteredActivity.forEach(element => {
-      mycurrentActivity.forEach(elt => {
-        if(elt.name.includes(element.name) !== true){
-          currentExperience.push(element.id)
-        }
-      })
+    mycurrentActivity.forEach(element => {
+      currentExperience.push(element.name)
     })
-    if(currentExperience.length){
+
+    filteredActivity.forEach(element => {
+      if(currentExperience.includes(element.name) !== true){
+        selectedExperience.push(element.id)
+      }
+    })
+    
+    if(selectedExperience.length){
       const getData = await prisma.activity.findFirst({
         where:{
-          id: currentExperience[Math.floor(Math.random() * currentExperience.length)]
+          id: selectedExperience[Math.floor(Math.random() * selectedExperience.length)]
+        }
+      })
+      const updateUser = await prisma.grandparent.update({
+        where:{
+          pseudo: currentUserPseudo
+        },
+        data:{
+          healthissue: healthIssue,
+          sportaddict,
+          swim,
+          vision,
+          mobility,
+          language,
+          audition
         }
       })
       prisma.$disconnect()

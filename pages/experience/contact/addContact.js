@@ -160,7 +160,9 @@ export default function AddContact({friendRequest}) {
     if(res.ok){
       setDatas(data)
       errormessage.current.classList.remove('active')
-      cardUser.current.classList.remove('active')
+      if(cardUser.current){
+        cardUser.current.classList.remove('active')
+      }
     }else{
       errormessage.current.classList.add('active')
       setError(data)
