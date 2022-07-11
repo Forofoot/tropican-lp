@@ -13,6 +13,7 @@ import { MdSportsBasketball } from 'react-icons/md';
 import Brands from '../../components/Brands';
 import { useRouter } from 'next/router'
 import Image from 'next/image';
+import Head from 'next/head';
 
 const HomeStyle = styled.section`
 padding: 30px 15px 0px;
@@ -196,6 +197,15 @@ export default function Home({ profile }) {
 
     const [swim, setswim] = useState('nager')
     return (
+
+        <>
+        <Head>
+        <title>Leste</title>
+        <meta
+          name="description"
+          content="Voici la home de Leste, créez vous une nouvelle expérience"
+        />
+      </Head>
         <HomeStyle>
             <div>
                 <div className="square">
@@ -304,7 +314,7 @@ export default function Home({ profile }) {
                 <Brands />
             </div>
         </HomeStyle>
-    );
+    </>);
 }
 
 

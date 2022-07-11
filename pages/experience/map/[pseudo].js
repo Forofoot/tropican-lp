@@ -6,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import Image from 'next/dist/client/image';
 import moment from 'moment'
 import Link from 'next/dist/client/link';
+import Head from 'next/head';
 
 const ProfileStyle = styled.section`
     text-align: center;
@@ -92,6 +93,16 @@ export default function Map({profile, country}) {
         zoom: 5
     });
   return (
+
+    <>
+        <Head>
+        <title>Leste - Map </title>
+        <meta
+          name="description"
+          content="Décrouvez ici via notre map vos différentes expériences"
+        />
+      </Head>
+
     <ProfileStyle>
         <ReactMapGL
         mapStyle="mapbox://styles/forofoot/cl4y8ihq0005p15ob6thacpx7"
@@ -155,7 +166,7 @@ export default function Map({profile, country}) {
 
         </ReactMapGL>
     </ProfileStyle>
-  )
+  </>)
 }
 
 export const getServerSideProps = async ({query}) => {
