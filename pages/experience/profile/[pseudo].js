@@ -61,6 +61,11 @@ const ProfileStyle = styled.section`
     }
     .rdrDateRangePickerWrapper{
         margin-bottom: 45px;
+        margin-right: 40px;
+    }
+    .rdrCalendarWrapper{
+        border: 1px solid #212F89;
+        border-radius: 20px;
     }
     @media(min-width: 768px){
         padding: 50px 140px 0;
@@ -74,6 +79,12 @@ const ProfileStyle = styled.section`
                 flex-direction:column;
                 gap: 30px;
                 padding-top: 25px;
+                height: max-content;
+                padding: 150px 50px 25px;
+                h3{
+                    text-align: start;
+                }
+}
             }
             .rdrDateRangePickerWrapper,
             .rdrMonth{
@@ -588,13 +599,8 @@ export default function Profile({profile, date, relation}) {
                         <div className='profil__grid--desktop-album'>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
                                     src={'/profil/image-profil6.webp'}
                                     alt=""
-=======
-                                    src={'/profil/album_profil.png'}
-                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -613,13 +619,8 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
                                     src={'/profil/image-profil7.webp'}
                                     alt=""
-=======
-                                    src={'/profil/album_profil.png'}
-                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -638,13 +639,8 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
                                     src={'/profil/image-profil5.webp'}
                                     alt=""
-=======
-                                    src={'/profil/album_profil.png'}
-                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -663,13 +659,8 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
                                     src={'/profil/image-profil2.webp'}
                                     alt=""
-=======
-                                    src={'/profil/album_profil.png'}
-                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -705,6 +696,12 @@ export default function Profile({profile, date, relation}) {
                     disabledDates={daysOfYear}
                 />
                     <div className='experienceBlock'>
+                        <Image
+                            src={'/profil/fond.png'}
+                            alt=""
+                            width={150}
+                            height={75}
+                        />
                         {profile?.experience.map((exp,i) =>(
                         <div key={i}>
                         {exp.start == exp.end ? (
