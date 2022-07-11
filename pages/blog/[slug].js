@@ -64,42 +64,43 @@ export async function getStaticProps({ params }) {
     }
 }
 
-export default function ArticleDetails({article}) {
+export default function ArticleDetails({ article }) {
     const router = useRouter()
     const { titleArticle, articleCover, articleContent, publicationDate } = article.fields
 
     return (
 
         <>
-        <Head>
-        <title>Leste - Blog</title>
-        <meta
-          name="description"
-          content="Page du blog du dispositif Leste"
-        />
-      </Head>
-
-        <ArticleStyle>
-            <div>
-            <p className="back" onClick={() => router.back()}>
-                <AiOutlineArrowLeft /> Retour
-            </p>
-            <div className="banner">
-                <Image
-                    src={'https:' + articleCover.fields.file.url}
-                    objectFit='cover'
-                    height={articleCover.fields.file.details.image.height}
-                    width={articleCover.fields.file.details.image.width}
+            <Head>
+                <title>Leste - Blog</title>
+                <meta
+                    name="description"
+                    content="Page du blog du dispositif Leste"
                 />
-            </div>
-            <div className="content">
-                {documentToReactComponents(articleContent)}
+            </Head>
 
-            </div>
-            <p className="back" onClick={() => router.back()}>
-                <AiOutlineArrowLeft /> Retour
-            </p>
-        </div>
-        </ArticleStyle>
-    </>)
+            <ArticleStyle>
+                <div>
+                    <p className="back" onClick={() => router.back()}>
+                        <AiOutlineArrowLeft /> Retour
+                    </p>
+                    <div className="banner">
+                        <Image
+                            alt={'couverture article '+titleArticle}
+                            src={'https:' + articleCover.fields.file.url}
+                            objectFit='cover'
+                            height={articleCover.fields.file.details.image.height}
+                            width={articleCover.fields.file.details.image.width}
+                        />
+                    </div>
+                    <div className="content">
+                        {documentToReactComponents(articleContent)}
+
+                    </div>
+                    <p className="back" onClick={() => router.back()}>
+                        <AiOutlineArrowLeft /> Retour
+                    </p>
+                </div>
+            </ArticleStyle>
+        </>)
 }
