@@ -259,7 +259,7 @@ console.log(profile)
 
         <>
         <Head>
-        <title>Leste</title>
+        <title>Leste - Home</title>
         <meta
           name="description"
           content="Voici la home de Leste, créez vous une nouvelle expérience"
