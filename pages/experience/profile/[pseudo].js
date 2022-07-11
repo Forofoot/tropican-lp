@@ -54,6 +54,7 @@ const ProfileStyle = styled.section`
         padding: 10px 35px;
         border-radius: 25px;
         border: 1px solid #212F89;
+        cursor:pointer;
     }
     .rdrDefinedRangesWrapper{
         display: none;
@@ -93,6 +94,7 @@ const ProfileStyle = styled.section`
             margin-bottom: 40px;
             font-weight: 700;
             font-size: 1.1rem;
+            cursor:pointer;
             &.active{
                 border-bottom: 3px solid #212F89;
             }
