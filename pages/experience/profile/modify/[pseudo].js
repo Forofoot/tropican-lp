@@ -148,6 +148,9 @@ export default function Modify({profile}) {
     if(!cookies.user){
         router.push('/experience/login')
     }
+    if(cookies.user.pseudo != profile?.pseudo){
+        router.push('/experience/')
+    }
   },)
 
   return (
