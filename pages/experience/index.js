@@ -441,7 +441,7 @@ export const getServerSideProps = async ({ req, res }) => {
                                     }
                                 }
                             }
-                        }, take:3
+                        }
                     })
                     await prisma.$disconnect()
                     return {
@@ -474,7 +474,7 @@ export const getServerSideProps = async ({ req, res }) => {
                                     }
                                 }
                             }
-                        }, take:3
+                        }
                     })
                     await prisma.$disconnect()
                     return {
