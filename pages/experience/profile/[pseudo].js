@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from 'react-hot-toast';
-
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; //
 import { DateRangePicker } from 'react-date-range'; 
@@ -92,7 +91,6 @@ const ProfileStyle = styled.section`
             border-bottom: 1px solid #212F89;
             color : #212F89;
             margin-bottom: 40px;
-            font-weight: 700;
             font-size: 1.1rem;
             cursor:pointer;
             &.active{
@@ -114,9 +112,6 @@ const ProfileStyle = styled.section`
                 &--info{
                     height: fit-content;
                     .info--pseudo{
-                        font-family: 'Mark Pro';
-                        font-style: normal;
-                        font-weight: 700;
                         font-size: 1.25rem;
                         margin-bottom: 15px;
                         p{
@@ -128,20 +123,20 @@ const ProfileStyle = styled.section`
                         align-items: center;
                         gap: 8px;
                         p{
+                            display: inline-block;
                             padding:2px 20px;
                             border: solid 1px #694BB5;
                             border-radius: 25px;
                             color: #694BB5;
                             min-width: 120px;
+                            margin-right: 8px;
                         }
-                        a{
+                        p:last-of-type{
                             padding:5px 20px;
                             border: solid 1px #F20D97;
                             border-radius: 25px;
-                            font-family: 'Sofia Pro';
-                            font-style: normal;
-                            font-weight: 400;
                             color: #F20D97;
+                            cursor: pointer;
                         }
                         
                     }
@@ -167,11 +162,6 @@ const ProfileStyle = styled.section`
             transform: translateX(-50%);
             margin-bottom: 20px;
         }
-        &__name{
-            font-family: 'Mark Pro';
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
         &__pseudo{
             display: flex;
             justify-content: center;
@@ -181,13 +171,13 @@ const ProfileStyle = styled.section`
                 border-radius: 25px 0px 0px 25px;
                 border: 1px solid #694BB5;
                 color: #694BB5;
-                font-weight: 800;
             }
-            a{
+            p:last-of-type{
                 background: #694BB5;
                 padding: 5px 18px 5px 12px;
                 border-radius: 0px 25px 25px 0px;
                 color: white;
+                cursor: pointer;
             }
         }
         &__actions{
@@ -218,9 +208,6 @@ const ProfileStyle = styled.section`
                 border-radius: 25px;
                 a{
                     margin-left: 10px;
-                    font-family: 'Sofia Pro';
-                    font-style: normal;
-                    font-weight: 700;
                     line-height: 150%;
                     color:#f4F4F4;
                 }
@@ -232,14 +219,7 @@ const ProfileStyle = styled.section`
             }
             p{
                 text-align: start;
-                font-family: 'Mark Pro';
-                font-weight: 700;
                 margin-bottom: 30px;
-            }
-            &--title{
-                font-family: 'Sofia Pro';
-                font-weight: 300;
-                font-style: normal;
             }
             &--subtitle{
                 display: flex;
@@ -259,11 +239,6 @@ const ProfileStyle = styled.section`
                     p{
                         margin-right: 10px;
                     }
-                    span{
-                        font-family: 'Sofia Pro';
-                        font-style: normal;
-                        font-weight: 300;
-                        }
                     }
                 }
             }
@@ -275,8 +250,6 @@ const ProfileStyle = styled.section`
                 &-title{
                     text-align: start;
                     margin-bottom: 20px;
-                    font-weight: 700;
-                    font-family: 'Mark Pro';
                     font-size: 1.125rem;
                 }
                 &-subtitle{
@@ -284,9 +257,6 @@ const ProfileStyle = styled.section`
                     justify-content: space-between;
                     color: #212F89;
                     margin-bottom: 15px;
-                    font-family: 'Sofia Pro';
-                    font-style: normal;
-                    font-weight: 300;
                     a{
                         color: #212F89;
                     }
@@ -373,7 +343,7 @@ const ProfileStyle = styled.section`
 let daysOfYear = [];
 
 export default function Profile({profile, date, relation}) {
-
+    const getpseudo = useRef(null)
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     
@@ -401,12 +371,16 @@ export default function Profile({profile, date, relation}) {
   useEffect(() => {
     if(!cookies.user){
         router.push('/experience/login')
-    }
-    if(cookies.user.pseudo != profile?.pseudo){
+    }else if(cookies.user.pseudo != profile?.pseudo){
         router.push('/experience/')
     }
   },)
 
+  const copyToClipboard = (e) => {
+    e.preventDefault()
+    navigator.clipboard.writeText(getpseudo.current.innerHTML)
+    toast.success('Copié')
+}
   const logout = (e) => {
     e.preventDefault()
     removeCookie("user",  {path: '/'})
@@ -426,6 +400,7 @@ export default function Profile({profile, date, relation}) {
     language: relation?.language,
     audition: relation?.audition
 });
+
 
 
   return (
@@ -466,12 +441,8 @@ export default function Profile({profile, date, relation}) {
         </div>  
             <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
             <div className='profil__pseudo mobile'>
-                <p>{profile?.pseudo}</p>
-                <Link href={'#'}>
-                    <a>
-                        Partager
-                    </a>
-                </Link>
+                <p ref={getpseudo}>{profile?.pseudo}</p>
+                <p onClick={(e) => copyToClipboard(e)}>Partager</p>
             </div>
 
         <div className='profil__desktop'>
@@ -512,9 +483,7 @@ export default function Profile({profile, date, relation}) {
                 <div className='info--link'>
                     <div>
                     <p>{profile?.pseudo}</p>
-                    <Link href={'#'}>
-                        <a>Partager</a>
-                    </Link>
+                    <p onClick={(e) => copyToClipboard(e)}>Partager</p>
                     </div>
                 </div>
             </div>
