@@ -8,6 +8,8 @@ import { DateRangePicker } from 'react-date-range';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+import Head from 'next/head';
+
 const PlanningStyle = styled.section`
     padding-top: 50px;
     height: 100vh;
@@ -57,6 +59,16 @@ export default function Map({profile, date}) {
         aa.end = moment(aa.end).format('l')
     })
   return (
+
+    <>
+        <Head>
+        <title>Leste - Planning</title>
+        <meta
+          name="description"
+          content="Page du blog du dispositif Leste"
+        />
+      </Head>
+
     <PlanningStyle>
         <DateRangePicker
             ranges={[]}
@@ -80,7 +92,7 @@ export default function Map({profile, date}) {
             ))}
         </div>
     </PlanningStyle>
-  )
+  </>)
 }
 
 export const getServerSideProps = async ({query}) => {

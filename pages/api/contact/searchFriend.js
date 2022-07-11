@@ -110,6 +110,9 @@ export default async function handler(
                     res.status(500).json('Aucun Grandparent ne possède ce pseudo')
                 }
             }
+            if(!resultGrandChildren || !resultGrandParent){
+                res.status(500).json('Aucun résultat trouvé')
+            }
         }
     }catch(e) {
         //Response for other than POST method

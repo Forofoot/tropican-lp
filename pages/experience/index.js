@@ -13,6 +13,8 @@ import { MdSportsBasketball } from 'react-icons/md';
 import Brands from '../../components/Brands';
 import { useRouter } from 'next/router'
 import 'moment/locale/fr'
+import Image from 'next/image';
+import Head from 'next/head';
 
 const HomeStyle = styled.section`
 padding: 30px 15px 0px;
@@ -254,6 +256,15 @@ console.log(profile)
     const [health, sethealth] = useState('sante')
     const [sport, setsport] = useState('sportif')
     return (
+
+        <>
+        <Head>
+        <title>Leste</title>
+        <meta
+          name="description"
+          content="Voici la home de Leste, créez vous une nouvelle expérience"
+        />
+      </Head>
         <HomeStyle>
             <div>
                 <div className="square">
@@ -394,7 +405,7 @@ console.log(profile)
                 <Brands />
             </div>
         </HomeStyle>
-    );
+    </>);
 }
 
 

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import React, { useState, useEffect, useCallback } from 'react'
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router"
+import toast, { Toaster } from 'react-hot-toast';
 
 const HeaderStyle = styled.header`
   //background:#42A0B6;
@@ -328,6 +329,7 @@ export default function Navbar() {
 
   const handleCreateRelation = async( relationId, sender ) =>{
     try{
+      toast.loading('Chargement en cours...')
       fetchData()
       const res = await fetch('/api/notification/accept', {
         method: 'POST',
@@ -340,6 +342,12 @@ export default function Navbar() {
           currentUser: currentUser?.pseudo
         }),
     });
+    if(res.ok){
+      toast.remove()
+      toast.success('Demande acceptée')
+    }else{
+      toast.error('Erreur lors de l\'ajout')
+    }
     fetchData()
     }catch(e){
       console.log(e)
@@ -366,6 +374,7 @@ export default function Navbar() {
   }
   return (
     <HeaderStyle>
+      <Toaster />
         <nav>
           <div onClick={() => setActive(!active)} className="burger">
             <div className="burgerContainer">

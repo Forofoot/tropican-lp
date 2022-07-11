@@ -64,6 +64,10 @@ export default async function handler(
                     }
                 }
             }
+
+            if(!letCheckCurrentUserGrandParent || !letCheckCurrentUserGrandChildren){
+                res.status(500).json('Aucun utilisateur trouvé')
+            }
         }catch(e){
             console.log(e)
         }

@@ -3,11 +3,14 @@ import styled from 'styled-components'
 import { Cookies, useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import toast, { Toaster } from 'react-hot-toast';
+import Head from 'next/head'
 
 const AuthStyle = styled.section`
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
+    position: relative;
     h1{
         font-family: 'Mark Pro';
         font-style: normal;
@@ -186,45 +189,55 @@ export default function Index() {
   const handleCreateGrandParent = async (e) => {
     e.preventDefault();
     if (!inputedGrandParent.email || !inputedGrandParent.email.includes('@') || !inputedGrandParent.password || !inputedGrandParent.firstName || !inputedGrandParent.lastName || !inputedGrandParent.pseudo) {
-        alert('Invalid details');
-        return;
+        toast.error('Informations incorrectes')
+    }else{
+        //POST form values
+        const res = await fetch('/api/auth/signup/grandParent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: inputedGrandParent.email,
+                firstName: inputedGrandParent.firstName,
+                lastName: inputedGrandParent.lastName,
+                pseudo: inputedGrandParent.pseudo,
+                password: inputedGrandParent.password,
+            }),
+        });
+        if(res.ok){
+            toast.success('Compte créé')
+        }else{
+            toast.error('Erreur lors de la création du compte')
+        }
     }
-    //POST form values
-    const res = await fetch('/api/auth/signup/grandParent', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: inputedGrandParent.email,
-            firstName: inputedGrandParent.firstName,
-            lastName: inputedGrandParent.lastName,
-            pseudo: inputedGrandParent.pseudo,
-            password: inputedGrandParent.password,
-        }),
-    });
   };
 
   const handleCreateGrandChildren = async (e) => {
     e.preventDefault();
     if (!inputedGrandChildren.email || !inputedGrandChildren.email.includes('@') || !inputedGrandChildren.password || !inputedGrandChildren.firstName || !inputedGrandChildren.lastName  || !inputedGrandChildren.pseudo ) {
-        alert('Invalid details');
-        return;
+        toast.error('Informations incorrectes')
+    }else{
+        //POST form values
+        const res = await fetch('/api/auth/signup/grandChildren', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: inputedGrandChildren.email,
+                firstName: inputedGrandChildren.firstName,
+                lastName: inputedGrandChildren.lastName,
+                pseudo: inputedGrandChildren.pseudo,
+                password: inputedGrandChildren.password,
+            }),
+        });
+        if(res.ok){
+            toast.success('Compte créé')
+        }else{
+            toast.error('Erreur lors de la création du compte')
+        }
     }
-    //POST form values
-    const res = await fetch('/api/auth/signup/grandChildren', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: inputedGrandChildren.email,
-            firstName: inputedGrandChildren.firstName,
-            lastName: inputedGrandChildren.lastName,
-            pseudo: inputedGrandChildren.pseudo,
-            password: inputedGrandChildren.password,
-        }),
-    });
   };
 
   
@@ -232,7 +245,7 @@ export default function Index() {
 
   const handleSignin = async (e) => {
     e.preventDefault()
-
+    toast.loading('Connexion en cours ...')
     const res = await fetch('/api/auth/signin/signin', {
         method: 'POST',
         headers: {
@@ -252,15 +265,27 @@ export default function Index() {
             sameSite: true,
         })
         router.reload('/experience/')
+        toast.success('Connecté')
     }else{
-        errormessage.current.classList.add('active')
         setError(data)
+        toast.remove()
+        toast.error(`${data}`)
     }
   }
 
   return (
+
+    <>
+        <Head>
+        <title>Leste - Connexion ou Inscription</title>
+        <meta
+          name="description"
+          content="Page d'inscription ou de connexion a la plateforme Leste"
+        />
+      </Head>
+
     <AuthStyle>
-        <p className='error' ref={errormessage}>{error}</p>
+        <Toaster/>
         <div className='loginLogo'>
             <Image
                 src={"/logo.webp"}
@@ -270,27 +295,25 @@ export default function Index() {
                 priority
             />
         </div>
-        <div className='container__login' >
+        <div className='container__login'>
             <div className='loginPhoto'>
                 <Image
                     src={'/profil/photo_login.webp'}
                     alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
-                    width={540}
-                    height={768}
+                    width={720}
+                    height={1024}
                 
                 />
             </div>
             <div className='container__login--form'>
-
-            
-            <div className='loginChoiceBlock'>
-                <div className={`loginChoice ${loginChoice == 'signin' ? 'active' : ''}`} onClick={() => setLoginChoice('signin')}>
-                    Se connecter
+                <div className='loginChoiceBlock'>
+                    <div className={`loginChoice ${loginChoice == 'signin' ? 'active' : ''}`} onClick={() => setLoginChoice('signin')}>
+                        Se connecter
+                    </div>
+                    <div className={`loginChoice ${loginChoice == 'signup' ? 'active' : ''}`} onClick={() => setLoginChoice('signup')}>
+                        S&apos;inscrire
+                    </div>
                 </div>
-                <div className={`loginChoice ${loginChoice == 'signup' ? 'active' : ''}`} onClick={() => setLoginChoice('signup')}>
-                    S&apos;inscrire
-                </div>
-            </div>
                 <h1>Bienvenue</h1>
 
                 { loginChoice == 'signup' ? (
@@ -360,5 +383,5 @@ export default function Index() {
             </div>
         </div>
     </AuthStyle>
-  )
+  </>)
 }

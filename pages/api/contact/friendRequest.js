@@ -27,7 +27,8 @@ export default async function handler(
             if(resultGrandChildren){
                 const friendRequest = await prisma.notification.findMany({
                     where:{
-                      grandChildren_id: resultGrandChildren.id
+                      grandChildren_id: resultGrandChildren.id,
+                      sender: 'grandparent'
                     },
                     select:{
                         sender:true,
@@ -47,7 +48,8 @@ export default async function handler(
             if(resultGrandParent){
                 const friendRequest = await prisma.notification.findMany({
                     where:{
-                      grandParent_id: resultGrandParent.id
+                      grandParent_id: resultGrandParent.id,
+                      sender: 'grandchildren'
                     },
                     select:{
                         sender:true,

@@ -13,8 +13,7 @@ export default async function handler(
             const { pseudo, role, currentUser } = req.body
             //Validate
             if (!pseudo) {
-                res.status(422).json({ message: 'Invalid Data' })
-                return
+                res.status(500).json({ message: 'Invalid Data' })
             }
     
             let resultGrandParent = await prisma.grandparent.findUnique({
