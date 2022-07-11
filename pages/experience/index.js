@@ -277,7 +277,6 @@ export default function Home({ profile }) {
     return (
 
         <>
-<<<<<<< HEAD
         <Head>
         <title>Leste - Home</title>
         <meta
@@ -290,24 +289,7 @@ export default function Home({ profile }) {
                 <div className="square">
                     <h1>Leste, la légereté exaltée !</h1>
                 </div>
-                <p>Leste vous permet de renforcer vos magnifiques liens avec vos petits-enfants, en vous proposant des expériences extraordinaires à votre images.</p>
-=======
-            <Head>
-                <title>Leste</title>
-                <meta
-                    name="description"
-                    content="Voici la home de Leste, créez vous une nouvelle expérience"
-                />
-            </Head>
-            <HomeStyle>
-                <div>
-                    <div className="square">
-                        <h1>Leste, la légereté exaltée !</h1>
-                    </div>
-                    <p>Leste vous permet de renforcer vos magnifiques liens avec vos petits-enfants, en vous proposant des expériences extraordinaires à votre images.</p>
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
-
-
+                <p>Leste vous permet de renforcer vos magnifiques liens avec vos petits-enfants, en vous proposant des expériences extraordinaires à votre image.</p>
                     <div className="btn">
                         <Link href="/experience/quizz"><a>Nouvelle expérience <span className="add"><AiOutlinePlus /></span></a></Link>
                     </div>
