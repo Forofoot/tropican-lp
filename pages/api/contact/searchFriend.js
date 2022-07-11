@@ -56,7 +56,6 @@ export default async function handler(
                 })
 
                 if(!mycurrentRelation.length){
-                    console.log(mycurrentRelation)
                     const resultSearch = await prisma.grandchildren.findMany({
                         where:{
                             pseudo:{
@@ -98,7 +97,6 @@ export default async function handler(
                     }
                 })
                 if(!mycurrentRelation.length){
-                    console.log(mycurrentRelation)
                     const resultSearch = await prisma.grandparent.findMany({
                         where:{
                             pseudo:{

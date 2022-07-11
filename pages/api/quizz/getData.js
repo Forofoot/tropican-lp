@@ -161,7 +161,7 @@ export default async function handler(
   }catch(e){
     console.log(e)
     return{
-        redirect: '/experience/dashboard',
+        redirect: '/experience/',
         permanent:false
     }
   }

@@ -31,7 +31,7 @@ export default function Home({ infos, cards }) {
               width:120px;
             }
           `}</style>
-          <Link href="/home/">
+          <Link href="/experience/login">
             <a className='btn'>
               Voir plus
             </a>

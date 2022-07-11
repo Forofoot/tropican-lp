@@ -1,9 +1,7 @@
-import Link from 'next/link'
-import Image from 'next/image'
 import styled from 'styled-components'
-import { BsFillCalendar2DateFill } from 'react-icons/bs';
-import moment from 'moment';
 import 'moment/locale/fr'
+import { BsFacebook } from 'react-icons/bs';
+import { AiFillInstagram } from 'react-icons/ai';
 
 const ExperienceCardStyle = styled.div`
 `
