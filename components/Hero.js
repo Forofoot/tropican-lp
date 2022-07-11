@@ -108,18 +108,18 @@ const HeroStyle = styled.section`
         }
 
         #over_1{
-            top: 30px;
-            right:100px;
+            top: 50px;
+            right:180px;
             fill: #147543;
         }
         #over_2{
-            top: 170px;
-            right:120px;
+            top: 200px;
+            right:250px;
             fill: #F20D97;
         }
         #over_3{
             top: 150px;
-            left:100px;
+            left:200px;
             fill: #212F89;
         }
     }
@@ -154,38 +154,42 @@ const HeroStyle = styled.section`
 `
  
     export default function Hero (){
+        const [src, setSrc] = useState("/hero/image_banner.webp")
         const firstStar = useRef()
             const secondStar = useRef()
             const thirdStar = useRef()
             const imageRef = useRef()
-            let src = "/hero/image_banner.webp"
+
         useEffect(() => {
-            console.log(imageRef.current)
         
             firstStar.current.addEventListener('mouseenter', function(e){
-               var source = this.id;
-               var id = source.split('_');
-               console.log(imageRef)
-               src = "banner_over_"+id[1]+".webp"
-               imageRef.current.src=src;
+                setSrc("/hero/banner_hover_1.webp")
             })
-    
-            /*document.getElementsByClassName('star').addEventListener("mouseenter", function( event ) {
-                console.log('1');
-                var id = (event.target.id);
-                document.querySelector(".image_banner img").src="banner_over_"+id+".webp";
+
+            firstStar.current.addEventListener('mouseleave', function(e){
+                setSrc("/hero/image_banner.webp")
             })
-            document.getElementsByClassName('star').addEventListener("mouseleave", function( event ) {
-                console.log('2');
-                document.querySelector(".image_banner img").src="/hero/image_banner.webp";
-            })*/
+
+            secondStar.current.addEventListener('mouseenter', function(e){
+                setSrc("/hero/banner_hover_2.webp")
+            })
+            secondStar.current.addEventListener('mouseleave', function(e){
+                setSrc("/hero/image_banner.webp")
+            })
+
+            thirdStar.current.addEventListener('mouseenter', function(e){
+                setSrc("/hero/banner_hover_3.webp")
+            })
+            thirdStar.current.addEventListener('mouseleave', function(e){
+                setSrc("/hero/image_banner.webp")
+            })
             
         },[src])
     return (
         <HeroStyle id="section1">
             <div className='star' id="over_1" ref={firstStar}>
                 <Image
-                    src={"/star.svg"}
+                    src={"/hero/star_1.webp"}
                     alt="étoile"
                     width='35px'
                     height='35px'
@@ -195,7 +199,7 @@ const HeroStyle = styled.section`
             </div>
             <div className='star' id="over_2" ref={secondStar}>
                 <Image
-                    src={"/star.svg"}
+                    src={"/hero/star_2.webp"}
                     alt="étoile"
                     width='20px'
                     height='20px'
@@ -204,7 +208,7 @@ const HeroStyle = styled.section`
             </div>
             <div className='star' id="over_3" ref={thirdStar}>
                 <Image
-                    src={"/star.svg"}
+                    src={"/hero/star_3.webp"}
                     alt="étoile"
                     width='25px'
                     height='25px'
@@ -229,7 +233,7 @@ const HeroStyle = styled.section`
             <div className='btnPrimary'>
                 <Link href="/experience/login">
                     <a className='btn'>
-                        Découvrir
+                        Découvrir nos services
                     </a>
                 </Link>
             </div>

@@ -66,7 +66,9 @@ const BrandsStyle = styled.section`
         }
     }
 `
-export default function Brands({brands}) {
+
+export default function Brands() {
+    
     useEffect(() => {
         let brands = document.querySelectorAll('[data-brand]')
         let brandslideIndicator = document.querySelectorAll('[data-brand-slide-indicator]')
@@ -89,6 +91,40 @@ export default function Brands({brands}) {
             containerio.observe(elt)
         });
     }, []);
+
+          
+    let brands = [
+        {
+            img: '/brands/easyjet-logo.webp',
+            title: 'Easyjet',
+            width: 124,
+            height: 31
+        },
+        {
+            img: '/brands/decathlon-logo.webp',
+            title: 'Decathlon',
+            width: 126,
+            height: 31
+        },
+        {
+            img: '/brands/flixbus-logo.webp',
+            title: 'Flixbus',
+            width: 114,
+            height: 60
+        },
+        {
+            img: '/brands/centerpark-logo.webp',
+            title: 'CenterParcs',
+            width: 96,
+            height: 96
+        },
+        {
+            img: '/brands/sncf-logo.webp',
+            title: 'SNCF',
+            width: 73,
+            height: 39
+        }
+    ]
     return (
         <BrandsStyle id="section3">
             <h2 className="titleStyled"><span>Nos</span> <span>partenaires</span></h2>
@@ -115,13 +151,6 @@ export default function Brands({brands}) {
                     <Link href={'#brand-4'}>
                         <a>
                             <div className="slideIndicator" data-brand-slide-number='4' data-brand-slide-indicator="true"></div>
-                        </a>
-                    </Link>
-                </div>
-                <div className='btnPrimary'>
-                    <Link href="#">
-                        <a className='btn'>
-                            En savoir plus
                         </a>
                     </Link>
                 </div>
