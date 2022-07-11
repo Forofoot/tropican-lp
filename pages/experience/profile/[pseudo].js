@@ -13,6 +13,7 @@ import { DateRangePicker } from 'react-date-range';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+import Head from 'next/head';
 
 const ProfileStyle = styled.section`
     text-align: center;
@@ -421,6 +422,15 @@ export default function Profile({profile, date, relation}) {
 
 
   return (
+
+    <>
+        <Head>
+        <title>Leste - Profil</title>
+        <meta
+          name="description"
+          content="Page profil du dispositif Leste, ici vous pouvez modifier vos infos utilisateur, regarder vos prochains voyages et vos dernières photos."
+        />
+      </Head>
     <ProfileStyle>
         <div className='profil__photo mobile'>
                     <figure>
@@ -729,7 +739,7 @@ export default function Profile({profile, date, relation}) {
         </div>
         <button className="deco" onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
-  )
+  </>)
 }
 
 export const getServerSideProps = async ({query}) => {

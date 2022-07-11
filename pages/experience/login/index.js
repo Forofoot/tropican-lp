@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { Cookies, useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Head from 'next/head'
 
 const AuthStyle = styled.section`
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
     h1{
         font-family: 'Mark Pro';
@@ -259,6 +260,16 @@ export default function Index() {
   }
 
   return (
+
+    <>
+        <Head>
+        <title>Leste - Connexion ou Inscription</title>
+        <meta
+          name="description"
+          content="Page d'inscription ou de connexion a la plateforme Leste"
+        />
+      </Head>
+
     <AuthStyle>
         <p className='error' ref={errormessage}>{error}</p>
         <div className='loginLogo'>
@@ -360,5 +371,5 @@ export default function Index() {
             </div>
         </div>
     </AuthStyle>
-  )
+  </>)
 }

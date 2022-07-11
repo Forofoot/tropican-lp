@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie'
 import Image from 'next/image'
 import { parseCookies } from "../../../helpers"
 import { PrismaClient } from '@prisma/client'
+import Head from 'next/head'
 
 
 const AddContactStyle = styled.section`
@@ -169,6 +170,16 @@ export default function AddContact({friendRequest}) {
     }
   }
   return (
+
+    <>
+        <Head>
+        <title>Leste - Ajouter un contact</title>
+        <meta
+          name="description"
+          content="Page du blog du dispositif Leste"
+        />
+      </Head>
+
     <AddContactStyle className='container'>
         <h1>Recherche relation</h1>
 
@@ -246,7 +257,7 @@ export default function AddContact({friendRequest}) {
             </div>
           ))}
     </AddContactStyle>
-  )
+  </>)
 }
 
 export const getServerSideProps = async ({ req, res }) => {
