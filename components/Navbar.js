@@ -346,6 +346,7 @@ export default function Navbar() {
       toast.remove()
       toast.success('Demande acceptée')
     }else{
+      toast.remove()
       toast.error('Erreur lors de l\'ajout')
     }
     fetchData()

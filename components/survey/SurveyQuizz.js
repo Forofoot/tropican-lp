@@ -291,7 +291,6 @@ const SurverStyle = styled.section`
         width: 100%;
 }
 
-}
     .infosQuestion{
         max-width:510px;
         margin: auto;
