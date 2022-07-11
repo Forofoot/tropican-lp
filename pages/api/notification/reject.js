@@ -53,7 +53,6 @@ export default async function handler(
                             grandChildren_id:relationID
                         }
                     })
-                    console.log(notificationGrandParent)
                     if(notificationGrandParent){
                         let deleteNotification = await prisma.notification.delete({
                             where: {
