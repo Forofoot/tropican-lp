@@ -54,6 +54,7 @@ const ProfileStyle = styled.section`
         padding: 10px 35px;
         border-radius: 25px;
         border: 1px solid #212F89;
+        cursor:pointer;
     }
     .rdrDefinedRangesWrapper{
         display: none;
@@ -93,6 +94,7 @@ const ProfileStyle = styled.section`
             margin-bottom: 40px;
             font-weight: 700;
             font-size: 1.1rem;
+            cursor:pointer;
             &.active{
                 border-bottom: 3px solid #212F89;
             }
@@ -493,7 +495,7 @@ export default function Profile({profile, date, relation}) {
                     <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
                     <Image 
                         src={'/profil/edit.webp'}
-                        alt=""
+                        alt="icon crayon"
                         width={35}
                         height={35} 
                     />
@@ -584,7 +586,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
@@ -604,7 +606,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
@@ -624,7 +626,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
@@ -644,7 +646,7 @@ export default function Profile({profile, date, relation}) {
                             <div className='album__card'>
                                 <Image
                                     src={'/profil/album_profil.png'}
-                                    alt=""
+                                    alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
                                     height={270}
                                     width={270} 
                                 />
