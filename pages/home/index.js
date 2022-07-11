@@ -213,7 +213,7 @@ export default function Home({ profile }) {
                 <h2>Expériences prévues</h2>
                 <div className="cardsContainer">
                     {profile?.experience.map((exp, i) => (
-                        <div className="cardExperience">
+                        <div key={i} className="cardExperience">
                             <div className="icon">
                                 <BsCalendarDate />
                             </div>
