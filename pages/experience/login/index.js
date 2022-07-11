@@ -319,7 +319,7 @@ export default function Index() {
                         <label>Pseudo</label>
                         <input type="text" value={inputedGrandChildren.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
-                        <input type="text"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
+                        <input type="password"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
                         <button type='submit'>S&apos;inscrire</button>
                     </form>
                     }
@@ -335,7 +335,7 @@ export default function Index() {
                             <label>Pseudo</label>
                             <input type="text" value={inputedGrandParent.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, pseudo:e.target.value })}/>
                             <label>Mot de passe</label>
-                            <input type="text"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
+                            <input type="password"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
                             <button type='submit'>S&apos;inscrire</button>
                         </form>
                     }
@@ -348,7 +348,7 @@ export default function Index() {
                         <label>Nom d&apos;utilisateur</label>
                         <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
-                        <input type="text"  value={inputedUser.password || ""} placeholder='Mot de passe' onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
+                        <input type="password"  value={inputedUser.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
                         <button type='submit'>Se connecter</button>
                         <p>
                             <a> Mot de passe oublié ?</a>
