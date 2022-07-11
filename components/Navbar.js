@@ -299,9 +299,6 @@ export default function Navbar() {
   const router = useRouter();
 
 
-
-  console.log(cookies.user)
-
   const fetchData = useCallback(async () => {
     if(cookies.user){
       const response = await fetch(`/api/contact/friendRequest`, {
@@ -449,8 +446,8 @@ export default function Navbar() {
                       </a>
                     </Link>
                   </li>
-                  <li className={router.pathname == "/experience/dashboard" ? "active" : ""}>
-                    <Link href='/experience/dashboard'>
+                  <li className={router.pathname == "/experience/" ? "active" : ""}>
+                    <Link href='/experience/'>
                       <a>
                         <Image
                           src={'/navbar/album.webp'}
@@ -512,8 +509,8 @@ export default function Navbar() {
                   </a>
                 </Link>
               </li>
-              <li className={router.pathname == "/experience/dashboard" ? "active" : ""}>
-                <Link href='/experience/dashboard'>
+              <li className={router.pathname == "/experience/" ? "active" : ""}>
+                <Link href='/experience/'>
                   <a>
                     Mes albums
                   </a>

@@ -35,6 +35,25 @@ const ReviewStyle = styled.section`
             align-items: center;
             min-width: 100%;
             padding: 30px 10px;
+
+            :nth-child(2n+1) .cardTestimony{
+                background-color:#6B86FF;
+                .title{
+                    h2{
+                        color:#fff;
+                    }
+                }
+            }
+
+            :nth-child(2n+2) .cardTestimony{
+                background-color:#212F89;
+                .title{
+                    h2{
+                        color:#fff;
+                    }
+                }
+            }
+
             @media (min-width:1024px){
                 display: block;
                 min-width: auto;
@@ -42,6 +61,7 @@ const ReviewStyle = styled.section`
             .cardTestimony{
             width: 98%;
             min-height: 100%;
+            color:#fff;
             @media (min-width:1024px){
                 min-height: 300px;
                 max-width: 450px;

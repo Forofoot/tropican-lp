@@ -20,11 +20,22 @@ const ProfileStyle = styled.section`
     text-align: center;
     padding: 50px 20px 0;
     .display__desktop{
-        display: none;
+     
+            .profilChoiceBlock{
+        display: flex;
+        flex-wrap: wrap!important;
+        justify-content: space-between;
     }
-    .profilChoiceBlock{
-        display: none;
+    .profilChoice{
+        width: 45%;
+        background: blue;
+        border-radius: 25px;
+        margin-bottom: 30px;
+        padding: 10px 19px;
     }
+        
+    }
+    
     .deco{
         margin: 30px 0;
         color: #212F89;
@@ -56,6 +67,7 @@ const ProfileStyle = styled.section`
 
         .profilChoiceBlock{
         display:flex;
+        flex-wrap: nowrap;
         .profilChoice {
             width: 50%;
             text-align: center;
@@ -67,6 +79,9 @@ const ProfileStyle = styled.section`
             font-size: 1.1rem;
             &.active{
                 border-bottom: 3px solid #212F89;
+            }
+            &:nth-child(4){
+                display: none;
             }
         }
     }
@@ -401,7 +416,7 @@ export default function Profile({profile, date, relation}) {
                             Modifier
                         </a>
                     </Link>
-            </div>  
+        </div>  
             <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
             <div className='profil__pseudo mobile'>
                 <p>{profile?.pseudo}</p>
@@ -459,60 +474,6 @@ export default function Profile({profile, date, relation}) {
         </div>
 
 
-        <div className='profil__actions'>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/contact.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={`/experience/contact/addContact`}>
-                    <a>
-                        Relation
-                    </a>
-                </Link>
-            </div>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/sante.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={`/components/survey/SurveyQuizz.js`}>
-                    <a>
-                        Santé
-                    </a>
-                </Link>
-            </div>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/agenda.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={`/experience/planning/${profile?.pseudo}`}>
-                    <a>
-                        Agenda
-                    </a>
-                </Link>
-            </div>
-            <div className='profil__actions--btn'>
-                <Image
-                    src={'/profil/album.webp'}
-                    alt='logo icone contact'
-                    width={25}
-                    height={25} 
-                />
-                <Link href={'#'}>
-                    <a>
-                        Album
-                    </a>
-                </Link>
-            </div>
-        </div>
         
 
         <div className='profilChoiceBlock'>
@@ -525,7 +486,13 @@ export default function Profile({profile, date, relation}) {
             <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
                 Ma Santé
             </div>
+            <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
+                Album
+            </div>
         </div>
+
+
+
         <div className='display__desktop'>
             {profilChoice == 'photo' && 
                 <>
@@ -786,7 +753,7 @@ export const getServerSideProps = async ({query}) => {
     }catch(e){
         console.log(e)
         return{
-            redirect:'/experience/dashboard',
+            redirect:'/experience/',
             permanent:false
         }
     }

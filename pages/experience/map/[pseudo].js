@@ -87,9 +87,9 @@ export default function Map({profile, country}) {
     
     const [selectedLocation, setSelectedLocation] = useState({})
     const [viewState, setViewState] = useState({
-        longitude: profile.experience[0].long,
-        latitude:profile.experience[0].lat,
-        zoom: 3.5
+        longitude: '2.333333',
+        latitude:'48.866667',
+        zoom: 5
     });
   return (
     <ProfileStyle>
@@ -238,7 +238,7 @@ export const getServerSideProps = async ({query}) => {
     }catch(e){
         console.log(e)
         return{
-            redirect: '/experience/dashboard',
+            redirect: '/experience/',
             permanent:false
         }
     }

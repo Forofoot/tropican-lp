@@ -88,7 +88,6 @@ export default createGlobalStyle`
       display: flex;
       flex-direction: column;
       gap: 25px;
-      opacity: 0.4;
       width: auto;
       span{
         &:first-child{

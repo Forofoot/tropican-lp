@@ -21,6 +21,9 @@ model Grandparent {
   lastName      String
   email         String
   password      String
+  city         String?
+  age           DateTime?
+  phone         String?
   role          String          @default("grandparent")
   healthissue   Boolean @default(false)
   sportaddict   Boolean @default(false)
@@ -46,6 +49,9 @@ model Grandchildren {
   lastName      String
   email         String
   password      String
+  city         String?
+  age           DateTime?
+  phone         String?
   role          String          @default("grandchildren")
   healthissue   Boolean @default(false)
   sportaddict   Boolean @default(false)
@@ -112,10 +118,12 @@ model Activity {
   mobility      Boolean @default(false)
   language      Boolean @default(false)
   audition      Boolean @default(false)
-  sportaddict  Boolean @default(false)
-  swim         Boolean @default(true)
-  accomodation String
-  theme     Theme[]
+  sportaddict    Boolean @default(false)
+  swim           Boolean @default(true)
+  accomodation   String
+  theme          Theme[]
+  image          String
+  image_publicId String
 }
 
 model Theme {
