@@ -6,9 +6,20 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useCookies } from "react-cookie";
 
+import { DateRangePicker } from 'react-date-range';
+
+import moment from 'moment';
+import 'moment/locale/fr';
+
+
 const ProfileStyle = styled.section`
+
+
     text-align: center;
     padding: 50px 20px 0;
+    .display__desktop{
+        display: none;
+    }
     .profilChoiceBlock{
         display: none;
     }
@@ -17,6 +28,23 @@ const ProfileStyle = styled.section`
         .mobile{
             display: none!important;
         }
+        .display__desktop{
+            display: flex;
+            .experienceBlock{
+        display: flex;
+        flex-direction:column;
+        gap: 30px;
+        padding-top: 25px;
+    }
+    .rdrDateRangePickerWrapper,
+    .rdrMonth{
+        width: 600px;
+    }
+    .rdrDefinedRangesWrapper{
+        display: none;
+    }
+        }
+
         .profilChoiceBlock{
         display:flex;
         .profilChoice {
@@ -197,14 +225,64 @@ const ProfileStyle = styled.section`
                     }
                 }
             }
+
         }
-
+        .profil{
+            &__grid--desktop{
+                width: 100%;
+                &-title{
+                    text-align: start;
+                    margin-bottom: 20px;
+                }
+                &-subtitle{
+                    display: flex;
+                    justify-content: space-between;
+                    color: #212F89;
+                    margin-bottom: 15px;
+                    font-family: 'Sofia Pro';
+                    font-style: normal;
+                    font-weight: 300;
+                    a{
+                        color: #212F89;
+                    }
+                }
+                &-album{
+                    display: flex;
+                    justify-content:space-around;
+                    gap: 20px;
+                    .album__card--info{
+                        text-align: start;
+                    }
+                }
+            }
+        }
 `
+let daysOfYear = [];
 
-export default function Profile({profile}) {
+export default function Profile({profile, date}) {
+
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    
+    const handleSelect = ( ranges ) =>{
+        setStartDate(ranges.selection.startDate)
+        setEndDate(ranges.selection.endDate)
+    }
+
+    date?.experience.forEach(pro => {
+        for (let d = pro.start; d <= pro.end; d.setDate(d.getDate() + 1)) {
+            daysOfYear.push(new Date(d));
+        }
+    });
+    
+    profile?.experience.forEach(aa => {
+        aa.start = moment(aa.start).format('l')
+        aa.end = moment(aa.end).format('l')
+    })
     
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [profilChoice, setProfilChoice] = useState('photo')
+
   const router = useRouter()
 
   useEffect(() => {
@@ -218,9 +296,10 @@ export default function Profile({profile}) {
     removeCookie("user",  {path: '/'})
     router.push('/experience/login')
   }
+
+
   return (
     <ProfileStyle>
-
         <div className='profil__photo mobile'>
                     <figure>
                         {profile?.avatar ? (
@@ -427,17 +506,129 @@ export default function Profile({profile}) {
         <div className='display__desktop'>
             {profilChoice == 'photo' && 
                 <>
-                    <h1>Mes Photos</h1>
+                    <div className='profil__grid--desktop'>
+                        <p className='profil__grid--desktop-title'>Mes photos</p>
+                        <div className='profil__grid--desktop-subtitle' >
+                            <p>Voyage avec Titouan </p>
+                            <p>
+                                <Link href={'#'}>
+                                    <a>Voir plus</a>
+                                </Link>
+                            </p>
+                        </div>
+                        <div className='profil__grid--desktop-album'>
+                            <div className='album__card'>
+                                <Image
+                                    src={'/profil/album_profil.png'}
+                                    alt=""
+                                    height={270}
+                                    width={270} 
+                                />
+                                <div className='album__card--info'>
+                                <p>
+                                    <Image
+                                        src={"/profil/mark-position.webp"}
+                                        alt="logo localisation"
+                                        width={15}
+                                        height={15}
+                                    />
+                                    Massif Central<br></br>
+                                    <span>23/06/22</span>
+                                </p>
+                                </div>
+                            </div>
+                            <div className='album__card'>
+                                <Image
+                                    src={'/profil/album_profil.png'}
+                                    alt=""
+                                    height={270}
+                                    width={270} 
+                                />
+                                <div className='album__card--info'>
+                                <p>
+                                    <Image
+                                        src={"/profil/mark-position.webp"}
+                                        alt="logo localisation"
+                                        width={15}
+                                        height={15}
+                                    />
+                                    Strasbourg<br></br>
+                                    <span>17/02/22</span>
+                                </p>
+                                </div>
+                            </div>
+                            <div className='album__card'>
+                                <Image
+                                    src={'/profil/album_profil.png'}
+                                    alt=""
+                                    height={270}
+                                    width={270} 
+                                />
+                                <div className='album__card--info'>
+                                <p>
+                                    <Image
+                                        src={"/profil/mark-position.webp"}
+                                        alt="logo localisation"
+                                        width={15}
+                                        height={15}
+                                    />
+                                    Annecy<br></br>
+                                    <span>20/01/22</span>
+                                </p>
+                                </div>
+                            </div>
+                            <div className='album__card'>
+                                <Image
+                                    src={'/profil/album_profil.png'}
+                                    alt=""
+                                    height={270}
+                                    width={270} 
+                                />
+                                <div className='album__card--info'>
+                                <p>
+                                    <Image
+                                        src={"/profil/mark-position.webp"}
+                                        alt="logo localisation"
+                                        width={15}
+                                        height={15}
+                                    />
+                                    Carcassonne<br></br>
+                                    <span>12/01/22</span>
+                                </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </>
             }
             {profilChoice == 'agenda' && 
+           
                 <>
-                    <h1>Mon agenda</h1>
+                 <DateRangePicker
+            ranges={[]}
+            minDate={new Date()}
+            rangeColors={["#F885CA"]}
+            onChange={handleSelect}
+            inputRanges={[]}
+            disabledDates={daysOfYear}
+        />
+                    <div className='experienceBlock'>
+                        {profile?.experience.map((exp,i) =>(
+                        <div key={i}>
+                        {exp.start == exp.end ? (
+                        <h3>Le {exp.end}</h3>
+                        ) : (
+                        <h3>Du {exp.start} au {exp.end}</h3>
+                        )}
+                        <p>Expérience avec {exp.grandParent?.firstName || exp.grandChildren?.firstName} à {exp.place}</p>
+                        </div>
+                        ))}
+                    </div>
                 </>
             }
             {profilChoice == 'sante' && 
                 <>
-                    <h1>Ma santé</h1>
+                
                 </>
             }
             
