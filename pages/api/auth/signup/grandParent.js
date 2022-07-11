@@ -42,7 +42,7 @@ export default async function handler(
         })
         await prisma.$disconnect()
         //Send success response
-        res.status(201).json({ message: 'User created', ...status });
+        res.status(201).json();
         //Close DB connection
     } else {
         //Response for other than POST method

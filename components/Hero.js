@@ -158,6 +158,7 @@ const HeroStyle = styled.section`
         const firstStar = useRef()
             const secondStar = useRef()
             const thirdStar = useRef()
+            const imageRef = useRef()
 
         useEffect(() => {
         
@@ -216,6 +217,7 @@ const HeroStyle = styled.section`
             </div>
             <div className='heroBanner'>
                 <Image
+                    ref={imageRef}
                     src={src}
                     alt="Image banner d'une cabane dans un arbre"
                     layout='fill'

@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const PreQuizzStyle = styled.section`
   min-height: 95vh;
@@ -97,6 +98,16 @@ const PreQuizzStyle = styled.section`
 
 export default function PreQuizz({user, relation}) {
   return (
+
+    <>
+        <Head>
+        <title>Leste - Quizz</title>
+        <meta
+          name="description"
+          content="Démarrez notre quizz et trouvez une experience a faire"
+        />
+      </Head>
+
     <PreQuizzStyle className='container'>
       <div className='preQuizzIntroduction'>
         <h1>Quizz</h1>
@@ -143,5 +154,5 @@ export default function PreQuizz({user, relation}) {
         <p className='warningLabel'>Aucune données ne sera divulguer</p>
       </div>
     </PreQuizzStyle>
-  )
+  </>)
 }

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { parseCookies } from "../../../helpers/"
 import { PrismaClient } from '@prisma/client'
 import styled from 'styled-components'
+import Head from 'next/head'
 
 const SurveyComponent = dynamic(() => import("../../../components/survey/SurveyQuizz"), {
     ssr: false,
@@ -15,10 +16,19 @@ const QuizzStyle = styled.section`
 
 export default function Quizz({user, relation}) {
   return (
+
+    <>
+        <Head>
+        <title>Leste - Jeu en cours !</title>
+        <meta
+          name="description"
+          content="Démarrez notre quizz et trouvez une experience a faire"
+        />
+      </Head>
     <QuizzStyle className='container'>
       <SurveyComponent user={user} relation={relation}/>
     </QuizzStyle>
-  )
+  </>)
 }
 
 

@@ -4,6 +4,7 @@ import { parseCookies } from "../../helpers/"
 import { useCookies } from "react-cookie"
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const DashboardStyle = styled.section`
     height: 100vh;
@@ -60,12 +61,21 @@ const Dashboard = ({user, friendRequest}) => {
 
 
     return (
+
+      <>
+        <Head>
+        <title>Leste - Dashboard</title>
+        <meta
+          name="description"
+          content="Le Dashboard de la plateforme Leste"
+        />
+      </Head>
         <DashboardStyle>
 
             <Link href="/experience/quizz"><a>Commencer le quizz</a></Link> 
             
         </DashboardStyle>
-    );
+    </>);
 }
 
 export default Dashboard;

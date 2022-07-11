@@ -80,6 +80,9 @@ export default async function handler(
                     res.status(500).json({message: "Erreur"})
                 }
             }
+            if(!letCheckCurrentUserGrandChildren || !letCheckCurrentUserGrandParent){
+                res.status(500).json('Aucun utilisateur trouvé')
+            }
         }
     }catch(e){
         console.log(e)

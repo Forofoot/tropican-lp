@@ -8,7 +8,8 @@ import { DateRangePicker } from 'react-date-range';
 import Moment from 'react-moment';
 import 'moment/locale/fr';
 import Link from 'next/link';
-
+import toast, { Toaster } from 'react-hot-toast';
+import {useRouter} from 'next/router'
 // Modern theme
 import "survey-react/modern.min.css"
 
@@ -43,6 +44,10 @@ const SurverStyle = styled.section`
     }
     .agendaSection{
         width: 100%;
+    }
+    .loadingGif{
+        display: flex;
+        justify-content: center;
     }
     .questionBlock{
         margin-bottom: 30px;
@@ -267,10 +272,26 @@ const SurverStyle = styled.section`
         .rdrDateRangePickerWrapper,
         .rdrCalendarWrapper,
         .rdrMonth{
-            width: 100%;
-            max-width: 650px;
+            width: 100%!important;
         }
     }
+    .rdrWeekDays,.rdrDays{
+    width: 95%;
+    }
+    .rdrMonthAndYearWrapper {
+    width: 91%; 
+    }
+    .rdrCalendarWrapper.rdrDateRangeWrapper {
+    width: 100%;
+    }
+    .rdrDefinedRangesWrapper {
+    width: 100%;
+    }
+    .rdrDateRangePickerWrapper, .rdrMonth {
+        width: 100%;
+}
+
+}
     .infosQuestion{
         max-width:510px;
         margin: auto;
@@ -327,6 +348,7 @@ const SurverStyle = styled.section`
         display: flex;
         flex-direction: column;
         background: none;
+        width: 100%;
         .rdrDateDisplayWrapper{
             order: 3;
             margin-top: 20px;
@@ -362,6 +384,7 @@ const SurverStyle = styled.section`
         .rdrMonthAndYearWrapper,
         .rdrMonths{
             background-color: #ffffff;
+            width: 100%!important;
         }
     }
     .desktopInfosDescription{
@@ -708,6 +731,7 @@ export default function SurveryQuizz({user, relation}) {
         ]
     
     };
+    const router = useRouter()
     Survey.StylesManager.applyTheme("modern")
     // Create a modal
     const survey = new Survey.Model(questions)
@@ -757,7 +781,7 @@ export default function SurveryQuizz({user, relation}) {
         }
     });
     survey.onComplete.add(function (survey, options) {
-
+        setCurrentPage('loading')
         setstate([
             survey.data.place,
             survey.data.accomodation,
@@ -800,7 +824,7 @@ export default function SurveryQuizz({user, relation}) {
 
     const handleChoose = ( choose ) =>{
         if(!value.pseudo){
-            alert('Choisir une relation et une date')
+            toast.error('Choisir un pseudo et une date')
         }else{
             setCurrentPage(choose)
         }
@@ -831,9 +855,14 @@ export default function SurveryQuizz({user, relation}) {
               relationId: value.relationId
             }),
         });
+        if(response.ok){
+            toast.success('Expérience créée')
+            router.push(`/experience/map/${relation.pseudo}`)
+        }
     }
   return (
     <SurverStyle>
+        <Toaster />
         {currentPage == 'agenda' &&
             <>
                 <h1>Durée de votre magnifique expérience</h1>
@@ -1066,6 +1095,17 @@ export default function SurveryQuizz({user, relation}) {
                     </Link>
                 </p>
             </>
+        }              
+        {currentPage == 'loading' &&
+        <div className='loadingGif'>
+            <Image
+                src={'/tools/loading.gif'}
+                alt='Chargement...'
+                width={300}
+                height={300}
+            />
+        
+        </div>
         }
     </SurverStyle>
   )
