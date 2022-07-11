@@ -8,58 +8,17 @@ import Head from 'next/head';
 
 const DashboardStyle = styled.section`
     height: 100vh;
-    h3{
-      margin-top: 45px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 45px;
     a{
       color:#000;
     }
 `
 
-const Dashboard = ({user, friendRequest}) => {
-    const [cookies] = useCookies(["user"])
-    const [currentUser, setCurrentUser] = useState(null)
-    useEffect(() => {
-        setCurrentUser(cookies.user)
-    }, [cookies.user])
-
-    const handleCreateRelation = async( relationId ) =>{
-      try{
-        const res = await fetch('/api/notification/accept', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              currentUserID: currentUser?.id,
-              relationID: relationId,
-              sender: currentUser?.role
-          }),
-      });
-      }catch(e){
-        console.log(e)
-      }
-    }
-
-    const handleDeleteRelation = async( relationId) => {
-      try{
-        const res = await fetch('/api/notification/reject', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            currentUserID: currentUser?.id,
-            relationID: relationId,
-            sender: currentUser?.role
-          }),
-      });
-      }catch(e){
-        console.log(e)
-      }
-    }
-
-
+const Dashboard = ({grandChildren, grandParent}) => {
     return (
 
       <>
@@ -71,8 +30,8 @@ const Dashboard = ({user, friendRequest}) => {
         />
       </Head>
         <DashboardStyle>
-
-            <Link href="/experience/quizz"><a>Commencer le quizz</a></Link> 
+          <h2>Nombre de grands parents sur le site : {grandParent}</h2>
+          <h2>Nombre de petits enfants sur le site : {grandChildren}</h2>
             
         </DashboardStyle>
     </>);
@@ -82,16 +41,19 @@ export default Dashboard;
 
 
 export const getServerSideProps = async ({ req, res }) => {
+  
+  const prisma = new PrismaClient()
   try {
-      if (res) {
-        if(cookie.user){
-          const parsedUser =  JSON.parse(cookie.user)
-          const prisma = new PrismaClient()
-          return{
-            props:{
-              user: parsedUser && parsedUser,
-            }
-          }
+      const grandChildren = await prisma.grandchildren.count()
+      const grandParent = await prisma.grandparent.count()
+
+      await prisma.$disconnect()
+      console.log(grandChildren)
+      console.log(grandParent)
+      return{
+        props:{
+          grandChildren,
+          grandParent
         }
       }
   }catch(e){
