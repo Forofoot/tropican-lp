@@ -164,8 +164,8 @@ p{
         }
 
         .iconImg{
-            width:50px;
-            height:50px;
+            width:70px;
+            height:70px;
             border-radius:50%;
             background-color:#fff;
             display:flex;
@@ -173,6 +173,7 @@ p{
             justify-content:center;
             margin:auto;
             margin-bottom:20px;
+            font-size:2rem;
         }
     }
 }
