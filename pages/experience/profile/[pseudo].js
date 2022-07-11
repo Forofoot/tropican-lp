@@ -413,7 +413,7 @@ export default function Profile({profile, date, relation}) {
     if(!cookies.user){
         router.push('/experience/login')
     }
-    if(cookies.user.pseudo != profile?.pseudo){
+    if(cookies.user?.pseudo != profile?.pseudo){
         router.push('/experience/')
     }
   },)
