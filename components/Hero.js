@@ -225,7 +225,7 @@ const HeroStyle = styled.section`
             </div>
             <div className="absolute_banner">
             <div className='containerInfo'>
-                <h1>Vivez des expériences,<br></br>exceptionnelles</h1>
+                <h1>Vivez des expériences,<br></br>exceptionnelles et uniques</h1>
                 <p>Nous vous aidons à transcender vos liens</p>
             </div>
             <div className='btnPrimary'>
