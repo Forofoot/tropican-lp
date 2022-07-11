@@ -317,7 +317,7 @@ export default function Home({ profile }) {
                                         )}
                                     </div>
                                 </div>
-                                <Link href="#"><a>Voir plus <AiOutlineRight /></a></Link>
+                                <Link href={`/experience/map/${currentUser?.pseudo}`}git ><a>Voir plus <AiOutlineRight /></a></Link>
                             </div>
                         ))}
 
