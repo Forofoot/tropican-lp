@@ -557,13 +557,8 @@ export default function Profile({profile, date, relation}) {
                         <div className='profil__grid--desktop-album'>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
-                                    src={'/profil/image-profil6.webp'}
-                                    alt=""
-=======
                                     src={'/profil/album_profil.png'}
                                     alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -582,13 +577,8 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
-                                    src={'/profil/image-profil7.webp'}
-                                    alt=""
-=======
                                     src={'/profil/album_profil.png'}
                                     alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -607,13 +597,8 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
-                                    src={'/profil/image-profil5.webp'}
-                                    alt=""
-=======
                                     src={'/profil/album_profil.png'}
                                     alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
@@ -632,13 +617,8 @@ export default function Profile({profile, date, relation}) {
                             </div>
                             <div className='album__card'>
                                 <Image
-<<<<<<< HEAD
-                                    src={'/profil/image-profil2.webp'}
-                                    alt=""
-=======
                                     src={'/profil/album_profil.png'}
                                     alt="image pour illustrer le profil, paysage de montagne avec deux personnes"
->>>>>>> 45ed91184b61d5a02420c185abb9b78cebf78225
                                     height={270}
                                     width={270} 
                                 />
