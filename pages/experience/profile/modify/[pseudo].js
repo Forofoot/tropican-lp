@@ -3,6 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 import { PrismaClient } from '@prisma/client';
 import styled from 'styled-components';
 import { useCookies } from "react-cookie";
+import toast, { Toaster } from 'react-hot-toast';
 
 const ModifyStyle = styled.section`
     min-height: 95vh;
@@ -97,11 +98,11 @@ export default function Modify({profile}) {
     e.preventDefault();
 
     if (!inputedUser.email.includes('@') ) {
-        alert('Invalid details');
-        return;
+        toast.error('Veuillez inclure un @')
     }
 
     try {
+        toast.loading('Chargement en cours ...')
         const formData = new FormData();
         formData.append("image", imageUploaded);
         formData.append("userId", profile.id)
@@ -122,6 +123,8 @@ export default function Modify({profile}) {
         const data = await res.json();
 
         if(res.ok){
+            toast.remove()
+            toast.success('Profile modifié')
             setCookie("user", JSON.stringify(data), {
                 path: "/",
                 maxAge: 3600, // Expires after 1hr
@@ -130,7 +133,8 @@ export default function Modify({profile}) {
 
             router.push(`/experience/profile/${data.pseudo}`)
         }else{
-            alert(data)
+            toast.remove()
+            toast.error('Sauvegarde impossible')
         }
         
   
@@ -144,10 +148,14 @@ export default function Modify({profile}) {
     if(!cookies.user){
         router.push('/experience/login')
     }
+    if(cookies.user.pseudo != profile?.pseudo){
+        router.push('/experience/')
+    }
   },)
 
   return (
     <ModifyStyle className='container'>
+        <Toaster/>
         <h1>Modifier le profil</h1>
 
         <form onSubmit={submitData}>

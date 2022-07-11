@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { PrismaClient } from '@prisma/client';
 import styled from 'styled-components';
 import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl'
@@ -7,6 +7,8 @@ import Image from 'next/dist/client/image';
 import moment from 'moment'
 import Link from 'next/dist/client/link';
 import Head from 'next/head';
+import { useCookies } from "react-cookie";
+import { useRouter } from 'next/router';
 
 const ProfileStyle = styled.section`
     text-align: center;
@@ -86,12 +88,23 @@ const ProfileStyle = styled.section`
 
 export default function Map({profile, country}) {
     
+    const router = useRouter()
     const [selectedLocation, setSelectedLocation] = useState({})
     const [viewState, setViewState] = useState({
         longitude: '2.333333',
         latitude:'48.866667',
         zoom: 5
     });
+    const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+
+    useEffect(() => {
+        if(!cookies.user){
+            router.push('/experience/login')
+        }
+        if(cookies.user.pseudo != profile?.pseudo){
+            router.push('/experience/')
+        }
+    },)
   return (
 
     <>
@@ -185,6 +198,7 @@ export const getServerSideProps = async ({query}) => {
             pseudo:currentPseudo
         },
         select:{
+            pseudo:true,
             experience:{
                 select:{
                     name:true,
@@ -218,6 +232,7 @@ export const getServerSideProps = async ({query}) => {
             pseudo:currentPseudo
         },
         select:{
+            pseudo:true,
             experience:{
                 select:{
                     name:true,
