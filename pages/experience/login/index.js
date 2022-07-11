@@ -134,9 +134,6 @@ const AuthStyle = styled.section`
             background: #212F89;
             border-radius: 25px;
             color: #F4F4F4;
-            font-family: 'Sofia Pro';
-            font-style: normal;
-            font-weight: 700;
             display: block;
             margin: auto;
             margin-bottom: 20px;
