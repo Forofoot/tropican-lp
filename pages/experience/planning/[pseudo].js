@@ -46,13 +46,13 @@ export default function Map({profile, date}) {
         setEndDate(ranges.selection.endDate)
     }
 
-    date.experience.forEach(pro => {
+    date?.experience.forEach(pro => {
         for (let d = pro.start; d <= pro.end; d.setDate(d.getDate() + 1)) {
             daysOfYear.push(new Date(d));
         }
     });
     
-    profile.experience.forEach(aa => {
+    profile?.experience.forEach(aa => {
         aa.start = moment(aa.start).format('l')
         aa.end = moment(aa.end).format('l')
     })
@@ -68,7 +68,7 @@ export default function Map({profile, date}) {
         />
 
         <div className='experienceBlock'>
-            {profile.experience.map((exp,i) =>(
+            {profile?.experience.map((exp,i) =>(
                 <div key={i}>
                     {exp.start == exp.end ? (
                         <h3>Le {exp.end}</h3>

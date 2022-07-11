@@ -9,38 +9,64 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
 
-        const { currentUserID, relationID, sender } = req.body
+        try{
+        const {relationID, sender, currentUser } = req.body
 
-        if(sender == 'grandchildren'){
-            let notificationGrandChildren = await prisma.notification.findUnique({
-                where:{
-                    grandParent_id: relationID,
-                    grandChildren_id: currentUserID
-                }
-            })
-           let deleteNotification = await prisma.notification.delete({
-                where: {
-                    id: notificationGrandChildren.id
-                }
-            }); 
-            await prisma.$disconnect()
-            res.status(201).json({message: "demande d'amis refusé"})
-        }
 
-        if(sender == 'grandparent'){
-            let notificationGrandParent = await prisma.notification.findUnique({
+            const letCheckCurrentUserGrandChildren = await prisma.grandchildren.findUnique({
                 where:{
-                    grandParent_id: currentUserID,
-                    grandChildren_id: relationID
+                    pseudo:currentUser
                 }
-            })
-           let deleteNotification = await prisma.notification.delete({
-                where: {
-                    id: notificationGrandParent.id
+            })    
+
+
+            const letCheckCurrentUserGrandParent = await prisma.grandparent.findUnique({
+                where:{
+                    pseudo:currentUser
                 }
-            }); 
-            await prisma.$disconnect()
-             res.status(201).json({message: "demande d'amis refusé"})
+            })   
+
+            if(letCheckCurrentUserGrandChildren){
+                if(sender == 'grandparent'){
+                    let notificationGrandChildren = await prisma.notification.findFirst({
+                        where:{
+                            grandParent_id: relationID,
+                            grandChildren_id: letCheckCurrentUserGrandChildren.id
+                        }
+                    })
+                    if(notificationGrandChildren){
+                        let deleteNotification = await prisma.notification.delete({
+                            where: {
+                                id: notificationGrandChildren.id
+                            }
+                        }); 
+                        await prisma.$disconnect()
+                        res.status(201).json({message: "demande d'amis refusé"})
+                    }
+                }
+            }
+            if(letCheckCurrentUserGrandParent){
+                if(sender == 'grandchildren'){
+                    let notificationGrandParent = await prisma.notification.findFirst({
+                        where:{
+                            grandParent_id: letCheckCurrentUserGrandParent.id,
+                            grandChildren_id:relationID
+                        }
+                    })
+                    console.log(notificationGrandParent)
+                    if(notificationGrandParent){
+                        let deleteNotification = await prisma.notification.delete({
+                            where: {
+                                id: notificationGrandParent.id
+                            }
+                        }); 
+                        await prisma.$disconnect()
+                        res.status(201).json({message: "demande d'amis refusé"})
+                    }
+                }
+            }
+        }catch(e){
+            console.log(e)
         }
     }
 }
