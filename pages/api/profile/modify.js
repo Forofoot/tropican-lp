@@ -1,6 +1,7 @@
 import { uploadAvatar } from "../../../utils/cloudinary";
 import { IncomingForm } from "formidable";
 import { PrismaClient } from "@prisma/client";
+import { hash } from 'bcryptjs';
 
 const cloudinary = require("cloudinary").v2;
 
@@ -26,14 +27,16 @@ export default async function handle(req, res) {
     const {userId} = data.fields
     const {currentAvatar} = data.fields
     const {currentPseudo} = data.fields
+
+    const {pseudo} = data.fields
+    const {phone} = data.fields
+    const {email} = data.fields
+    const {password} = data.fields
+    const {city} = data.fields
     
     const parsedId = parseInt(userId)
-  
-    const deleteOldImage = await cloudinary.uploader.destroy(
-      currentAvatar
-    );
-    const imageData = await uploadAvatar(file.path);
-  
+
+
     const grandChildrenResult = await prisma.grandchildren.findUnique({
       where:{
         pseudo: currentPseudo
@@ -47,37 +50,185 @@ export default async function handle(req, res) {
     })
   
     if(grandChildrenResult){
-      const result = await prisma.grandchildren.update({
-        where:{
-            id:parsedId
-        },
-        data:{
-          avatar:imageData.url,
-          avatar_publicId: imageData.public_id
+      if(!password){
+        if(!file){
+          const result = await prisma.grandchildren.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
+        }else{
+          const deleteOldImage = await cloudinary.uploader.destroy(
+            currentAvatar
+          );
+      
+          const imageData = await uploadAvatar(file.path);
+          const result = await prisma.grandchildren.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              avatar:imageData.url,
+              avatar_publicId: imageData.public_id,
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
         }
-      });
-      await prisma.$disconnect()
-      res.status(200).json({
-        pseudo: result.pseudo,
-        role: result.role
-      })
+        
+      }else{
+        if(!file){
+          const result = await prisma.grandchildren.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city,
+              password: await hash(password, 12),
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
+        }else{
+          const deleteOldImage = await cloudinary.uploader.destroy(
+            currentAvatar
+          );
+      
+          const imageData = await uploadAvatar(file.path);
+          const result = await prisma.grandchildren.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              avatar:imageData.url,
+              avatar_publicId: imageData.public_id,
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city,
+              password: await hash(password, 12),
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
+        }
+      }
     }
   
     if(grandParentResult){
-      const result = await prisma.grandparent.update({
-        where:{
-            id:parsedId
-        },
-        data:{
-          avatar:imageData.url,
-          avatar_publicId: imageData.public_id
+      if(!password){
+        if(!file){
+          const result = await prisma.grandparent.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
+        }else{
+          const deleteOldImage = await cloudinary.uploader.destroy(
+            currentAvatar
+          );
+      
+          const imageData = await uploadAvatar(file.path);
+
+          const result = await prisma.grandparent.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              avatar:imageData.url,
+              avatar_publicId: imageData.public_id,
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city,
+            }
+          });
         }
-      });
-      await prisma.$disconnect()
-      res.status(200).json({
-        pseudo: result.pseudo,
-        role: result.role
-      })
+      }else{
+        if(!file){
+          const result = await prisma.grandparent.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city,
+              password: await hash(password, 12),
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
+        }else{
+          const deleteOldImage = await cloudinary.uploader.destroy(
+            currentAvatar
+          );
+      
+          const imageData = await uploadAvatar(file.path);
+
+          const result = await prisma.grandparent.update({
+            where:{
+                id:parsedId
+            },
+            data:{
+              avatar:imageData.url,
+              avatar_publicId: imageData.public_id,
+              pseudo: pseudo,
+              phone:phone,
+              email:email,
+              city:city,
+              password: await hash(password, 12),
+            }
+          });
+          await prisma.$disconnect()
+          res.status(200).json({
+            pseudo: result.pseudo,
+            role: result.role
+          })
+        }
+      }
     }
   
     if(!grandParentResult && !grandChildrenResult){
