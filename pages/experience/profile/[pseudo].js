@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useCookies } from "react-cookie";
+import toast, { Toaster } from 'react-hot-toast';
 
 import { DateRangePicker } from 'react-date-range';
 
@@ -295,11 +296,13 @@ export default function Profile({profile, date}) {
     e.preventDefault()
     removeCookie("user",  {path: '/'})
     router.push('/experience/login')
+    toast.success('Déconnecté')
   }
 
 
   return (
     <ProfileStyle>
+        <Toaster />
         <div className='profil__photo mobile'>
                     <figure>
                         {profile?.avatar ? (

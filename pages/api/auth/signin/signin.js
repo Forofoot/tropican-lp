@@ -28,7 +28,7 @@ export default async function handler(
         if (resultGrandChildren) {
             const checkGrandChildrenPassword = await compare(password, resultGrandChildren.password);
             if(!checkGrandChildrenPassword){
-                return false
+                res.status(500).json('Mot de passe ou nom d\'utilisateur incorrect')
             }else{
                 res.status(200).json({
                     pseudo: resultGrandChildren.pseudo,
@@ -52,7 +52,7 @@ export default async function handler(
         }
 
         if(!resultGrandChildren || !resultGrandParent){
-            return false
+            res.status(500).json('Aucun utilisateur trouvé')
         }
     } 
     }catch(e){

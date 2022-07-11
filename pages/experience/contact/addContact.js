@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie'
 import Image from 'next/image'
 import { parseCookies } from "../../../helpers"
 import { PrismaClient } from '@prisma/client'
-
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddContactStyle = styled.section`
     text-align: center;
@@ -125,8 +125,8 @@ export default function AddContact({friendRequest}) {
   useEffect(() => {
     setCurrentUser(cookies.user)
   }, [cookies.user]);
-
   const handleAddUser = async(relation) => {
+    toast.loading('Ajout en cours')
     const res = await fetch('/api/contact/addFriend', {
       method: 'POST',
       headers: {
@@ -139,12 +139,17 @@ export default function AddContact({friendRequest}) {
       }),
     });
     if(res.ok){
+      toast.remove()
+      toast.success('Demande d\'ami envoyée')
       cardUser.current.classList.add('active')
+    }else{
+      toast.error('Erreur lors de l\'envoi de la demande')
     }
   }
 
   const showResult = async(e) =>{
     e.preventDefault()
+    toast.loading('Recherche en cours ...')
     const res = await fetch('/api/contact/searchFriend',{
       method: 'POST',
       headers: {
@@ -159,20 +164,16 @@ export default function AddContact({friendRequest}) {
     const data = await res.json()
     if(res.ok){
       setDatas(data)
-      errormessage.current.classList.remove('active')
+      toast.remove()
       if(cardUser.current){
         cardUser.current.classList.remove('active')
       }
-    }else{
-      errormessage.current.classList.add('active')
-      setError(data)
     }
   }
   return (
     <AddContactStyle className='container'>
+        <Toaster />
         <h1>Recherche relation</h1>
-
-        <p className='error' ref={errormessage}>{error}</p>
         <form onSubmit={showResult}>
           <input type='text' value={inputedFriend.pseudo || ""} name='addContact' placeholder='Entrer l’identifiant (abcd#1234)' onChange={(e) => setInputedFriend({ ...inputedFriend, pseudo:e.target.value })}/>
         </form>
