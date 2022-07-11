@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { parseCookies } from "../../helpers/"
+import { parseCookies } from "../../helpers"
 import { useCookies } from "react-cookie"
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
@@ -194,8 +194,6 @@ export default function Home({ profile }) {
         }
     })
 
-    console.log(profile)
-
     const [swim, setswim] = useState('nager')
     return (
         <HomeStyle>
@@ -213,7 +211,7 @@ export default function Home({ profile }) {
                 <h2>Expériences prévues</h2>
                 <div className="cardsContainer">
                     {profile?.experience.map((exp, i) => (
-                        <div className="cardExperience">
+                        <div key={i} className="cardExperience">
                             <div className="icon">
                                 <BsCalendarDate />
                             </div>
@@ -344,7 +342,6 @@ export const getServerSideProps = async ({ req, res }) => {
                             }
                         }
                     })
-                    console.log(profile)
                     await prisma.$disconnect()
                     return {
                         props: {
@@ -378,7 +375,6 @@ export const getServerSideProps = async ({ req, res }) => {
                             }
                         }
                     })
-                    console.log(profile)
                     await prisma.$disconnect()
                     return {
                         props: {

@@ -25,7 +25,6 @@ export default async function handler(
             });
     
             if(resultGrandChildren){
-                console.log('oui')
                 const friendRequest = await prisma.notification.findMany({
                     where:{
                       grandChildren_id: resultGrandChildren.id
@@ -46,7 +45,6 @@ export default async function handler(
             }
 
             if(resultGrandParent){
-                console.log('non')
                 const friendRequest = await prisma.notification.findMany({
                     where:{
                       grandParent_id: resultGrandParent.id
@@ -74,7 +72,7 @@ export default async function handler(
             res.status(500).json({ message: 'Route not valid' });
         }
     }catch(e){
-        console.log('test')
+        console.log(e)
     }
     //Only POST mothod is accepted
 }

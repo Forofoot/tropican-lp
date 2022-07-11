@@ -157,7 +157,7 @@ export default function Index() {
 
  useEffect(() => {
     if(cookies.user){
-        router.push('/experience/dashboard')
+        router.push('/experience/')
     }
  });
 
@@ -251,7 +251,7 @@ export default function Index() {
             maxAge: 3600, // Expires after 1hr
             sameSite: true,
         })
-        router.reload('/experience/dashboard')
+        router.reload('/experience/')
     }else{
         errormessage.current.classList.add('active')
         setError(data)
