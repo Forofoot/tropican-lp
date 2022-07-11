@@ -44,7 +44,7 @@ export default function ArticleCard({ article }) {
                 <div className="cover">
                     <Image
                         src={'https:' + articleCover.fields.file.url}
-                        alt=''
+                        alt= {'couverture article '+titleArticle}
                         height={articleCover.fields.file.details.image.height}
                         width={articleCover.fields.file.details.image.width}
                     />

@@ -104,6 +104,7 @@ export default createGlobalStyle`
   }
   .btnDefault,
   .btnPrimary{
+    border:solid 1px;
     all: unset;
     padding: 15px 0;
     text-align: center;
@@ -117,10 +118,18 @@ export default createGlobalStyle`
     background-color: transparent;
     transition: all .3s ease-in-out;
     will-change: background-color, color;
+  }
+
+  .hoverEffect{
     &:hover{
+      border: 1px solid #212F89;
       cursor: pointer;
-      background-color: #F4F4F4;
-      color: #7159AD;
+      background-color: transparent;
+      color: #212F89;
+
+      a{
+        color: #212F89; 
+      }
     }
   }
 

@@ -19,7 +19,7 @@ export default function Home({ infos, cards }) {
         <Video />
         <Review cards={cards} />
         <Brands />
-        <div className='btnPrimary btnMore'>
+        <div className='btnPrimary btnMore hoverEffect'>
         <style jsx>{`
             .btnMore{
               padding: 15px 40px;
