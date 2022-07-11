@@ -123,6 +123,7 @@ export default function Modify({profile}) {
         const data = await res.json();
 
         if(res.ok){
+            toast.remove()
             toast.success('Profile modifié')
             setCookie("user", JSON.stringify(data), {
                 path: "/",
@@ -132,7 +133,7 @@ export default function Modify({profile}) {
 
             router.push(`/experience/profile/${data.pseudo}`)
         }else{
-            alert(data)
+            toast.remove()
             toast.error('Sauvegarde impossible')
         }
         
