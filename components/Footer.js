@@ -9,7 +9,7 @@ const FooterStyle = styled.footer`
       border-radius: 25px 25px 0 0;
     .footerTop{
       color:#F4F4F4;
-      background-color:#7159AD;
+      background-color:#212F89;
       padding:50px 25px;
       @media (min-width: 768px) {
         padding: 50px 8% ;
