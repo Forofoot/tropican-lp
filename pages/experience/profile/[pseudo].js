@@ -15,33 +15,49 @@ import 'moment/locale/fr';
 
 
 const ProfileStyle = styled.section`
-
-
     text-align: center;
     padding: 50px 20px 0;
-    .display__desktop{
-     
-            .profilChoiceBlock{
+    @media(min-width: 768px){
+            .profil__icone{
+                display: none!important;
+            }
+        }
+    @media(max-width:768px){
+        .profilChoiceBlock{
         display: flex;
         flex-wrap: wrap!important;
         justify-content: space-between;
     }
     .profilChoice{
+        display:flex;
+        gap: 15px;
         width: 45%;
-        background: blue;
+        background: #212F89;
         border-radius: 25px;
         margin-bottom: 30px;
         padding: 10px 19px;
+        color: white;
+        justify-content: center;
+        .profil__icone{
+            display: block;
+            text-align: center;
+        }
     }
-        
-    }
-    
+
+}
+   
     .deco{
         margin: 30px 0;
         color: #212F89;
         padding: 10px 35px;
         border-radius: 25px;
         border: 1px solid #212F89;
+    }
+    .rdrDefinedRangesWrapper{
+        display: none;
+    }
+    .rdrDateRangePickerWrapper{
+        margin-bottom: 45px;
     }
     @media(min-width: 768px){
         padding: 50px 140px 0;
@@ -51,23 +67,21 @@ const ProfileStyle = styled.section`
         .display__desktop{
             display: flex;
             .experienceBlock{
-        display: flex;
-        flex-direction:column;
-        gap: 30px;
-        padding-top: 25px;
-    }
-    .rdrDateRangePickerWrapper,
-    .rdrMonth{
-        width: 600px;
-    }
-    .rdrDefinedRangesWrapper{
-        display: none;
-    }
+                display: flex;
+                flex-direction:column;
+                gap: 30px;
+                padding-top: 25px;
+            }
+            .rdrDateRangePickerWrapper,
+            .rdrMonth{
+                width: 600px;
+            }
         }
 
         .profilChoiceBlock{
         display:flex;
         flex-wrap: nowrap;
+        
         .profilChoice {
             width: 50%;
             text-align: center;
@@ -257,6 +271,9 @@ const ProfileStyle = styled.section`
                 &-title{
                     text-align: start;
                     margin-bottom: 20px;
+                    font-weight: 700;
+                    font-family: 'Mark Pro';
+                    font-size: 1.125rem;
                 }
                 &-subtitle{
                     display: flex;
@@ -280,7 +297,19 @@ const ProfileStyle = styled.section`
                 }
             }
         }
+        @media(max-width: 768px){
+            .album__card{
+                &:nth-child(3), &:nth-child(4){
+                    display: none;
+                }
+            }
+        }
         .sante__container{
+            @media(max-width:768px){
+                .infosQuestion{
+                    padding: 55px!important;
+                }
+            }
             margin: auto;
             margin-bottom: 30px;
             .infosQuestion{
@@ -478,16 +507,48 @@ export default function Profile({profile, date, relation}) {
 
         <div className='profilChoiceBlock'>
             <div className={`profilChoice ${profilChoice == 'photo' ? 'active' : ''}`} onClick={() => setProfilChoice('photo')}>
-                Mes Photos
+            <div className='profil__icone' >
+                    <Image
+                        src={'/profil/album.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Photos
             </div>
             <div className={`profilChoice ${profilChoice == 'agenda' ? 'active' : ''}`} onClick={() => setProfilChoice('agenda')}>
-                Mon agenda
+                <div className='profil__icone' >
+                    <Image
+                        src={'/profil/agenda.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Agenda
             </div>
             <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
-                Ma Santé
+            <div className='profil__icone' >
+                    <Image
+                        src={'/profil/sante.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Santé
             </div>
             <div className={`profilChoice ${profilChoice == 'sante' ? 'active' : ''}`} onClick={() => setProfilChoice('sante')}>
-                Album
+            <div className='profil__icone' >
+                    <Image
+                        src={'/profil/contact.webp'}
+                        alt="icone"
+                        width={20}
+                        height={20}
+                    />
+                </div>
+                Relation
             </div>
         </div>
 
