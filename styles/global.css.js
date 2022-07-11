@@ -110,6 +110,7 @@ export default createGlobalStyle`
     text-align: center;
     width: 180px;
     border-radius: 50px;
+    cursor: pointer;
   }
 
   .btnDefault{
