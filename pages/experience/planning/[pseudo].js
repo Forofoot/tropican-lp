@@ -180,7 +180,7 @@ export const getServerSideProps = async ({query}) => {
     }catch(e){
         console.log(e)
         return{
-            redirect:'/experience/dashboard',
+            redirect:'/experience/',
             permanent:false
         }
     }
