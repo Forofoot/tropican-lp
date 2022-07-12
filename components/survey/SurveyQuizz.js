@@ -180,6 +180,7 @@ const SurverStyle = styled.section`
         padding: 0;
         position: unset;
         overflow: auto;
+        margin: auto;
 
         .sv-btn{
             background-color: #212F89!important;
@@ -199,7 +200,7 @@ const SurverStyle = styled.section`
     .back{
         all: unset;
         position: absolute;
-        top: 30px;
+        top: 45px;
         left: 0;
         width: 35px;
         height: 35px;
@@ -550,7 +551,7 @@ export default function SurveryQuizz({user, relation}) {
                 "isRequired": true,
                 "choices": [
                 {
-                    "value": "Guesthouse",
+                    "value": "Maison d'hote",
                     "imageLink":"https://res.cloudinary.com/leste/image/upload/v1657140952/quizz/Maison_d_h%C3%B4te_azmpqm.webp"
                 },
                 {
