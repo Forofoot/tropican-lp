@@ -399,7 +399,7 @@ export default function Home({ profile }) {
                         </div>
 
                         <div className="btn">
-                            <Link href="/experience/profile/modify/[pseudo].js"><a>Modifer</a></Link>
+                            <Link href={`/experience/profile/modify/${profile.pseudo}`} title='Modifier ma santé'><a>Modifer</a></Link>
                         </div>
 
                     </div>

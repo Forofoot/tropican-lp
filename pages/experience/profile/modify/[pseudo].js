@@ -8,6 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const ModifyStyle = styled.section`
     min-height: 95vh;
     h1{
+        margin-top: 30px;
         text-align: center;
         margin-bottom: 40px;
     }

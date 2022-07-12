@@ -18,6 +18,9 @@ const HeaderStyle = styled.header`
       display: none!important;;
     }
   }
+  &.hideNav{
+    display: none;
+  }
   .close{
       position: absolute;
       top:0;
@@ -418,7 +421,7 @@ export default function Navbar() {
     }
   }
   return (
-    <HeaderStyle>
+    <HeaderStyle className={`${router.pathname == '/experience/login' ? ('hideNav') : ('')}`}>
       <Toaster />
         <nav>
           <div onClick={() => setActive(!active)} className={`burger ${router.pathname == '/experience' ? ('experience') : ('')}`}>

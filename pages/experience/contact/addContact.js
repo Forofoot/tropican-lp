@@ -10,6 +10,7 @@ import Head from 'next/head'
 
 const AddContactStyle = styled.section`
     text-align: center;
+    padding-top: 30px;
     margin: auto;
     min-height: 100vh;
     @media (min-width:768px) {

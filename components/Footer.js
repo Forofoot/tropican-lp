@@ -3,10 +3,13 @@ import Link from "next/link"
 import NewsletterSubscribe from "./NewsletterSubscribe"
 import { BsFacebook } from 'react-icons/bs';
 import { AiFillInstagram } from 'react-icons/ai';
-
+import { useRouter } from "next/router";
 
 const FooterStyle = styled.footer`
       border-radius: 25px 25px 0 0;
+    &.hideFooter{
+      display: none;
+    }
     .footerTop{
       color:#F4F4F4;
       background-color:#212F89;
@@ -113,6 +116,7 @@ const FooterStyle = styled.footer`
 `
 
 export default function Footer() {
+  const router = useRouter()
   let socials = [
       {
           title: 'Facebook',
@@ -126,7 +130,7 @@ export default function Footer() {
       }
   ]
   return (
-    <FooterStyle>
+    <FooterStyle className={`${router.pathname == '/experience/login' ? ('hideFooter') : ('')}`}>
       <div className="footerTop">
       <div className="footerWrapper">
           <div className="networkSocial">

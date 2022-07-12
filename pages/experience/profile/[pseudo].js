@@ -161,20 +161,13 @@ const ProfileStyle = styled.section`
                 &--img{
                     margin-right: 45px;
                     position: relative;
-                    .modif{
-                        position: absolute;
-                        right: -20px;
-                        bottom: -20px;
-                    }
                 }
             }
         }
         &__photo{
             width: 100px;
             height: 100px;
-            border-radius: 50px;
             align-items: stretch;
-            overflow: hidden;
             margin-left: 50%;
             transform: translateX(-50%);
             margin-bottom: 20px;
@@ -262,6 +255,7 @@ const ProfileStyle = styled.section`
             }
 
         }
+        
         .profil{
             &__grid--desktop{
                 width: 100%;
@@ -355,6 +349,19 @@ const ProfileStyle = styled.section`
             color: #313131;
             margin-bottom: 40px;
         }
+
+        figure{
+            img{
+                border-radius: 50%;
+            }
+        }
+
+        .modif{
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            cursor: pointer;
+        }
 `
 let daysOfYear = [];
 
@@ -439,6 +446,7 @@ export default function Profile({profile, date, relation}) {
                         alt={profile?.pseudo}
                         width={125}
                         height={125}
+                        layout='raw'
                     />
                 ) : (
                     <Image
@@ -446,20 +454,23 @@ export default function Profile({profile, date, relation}) {
                         alt={'photo de profil'}
                         width={125}
                         height={125}
+                        layout='raw'
                     />
                 )} 
             </figure>
             <div className='modif' >
-                    
-                    <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
-                    <Image 
-                        src={'/profil/edit.webp'}
-                        alt="icon crayon"
-                        width={35}
-                        height={35} 
-                    />
-                    </Link>
-                </div>
+                <Link href={`/experience/profile/modify/${profile?.pseudo}`}>
+                    <a>
+                        <Image 
+                            src={'/profil/edit.webp'}
+                            alt="icon crayon"
+                            width={35}
+                            height={35}
+                            layout='raw'
+                        />
+                    </a>
+                </Link>
+            </div>
         </div>  
             <p className='profil__name mobile'>{profile?.firstName} {profile?.lastName}</p>
             <div className='profil__pseudo mobile'>
@@ -476,6 +487,7 @@ export default function Profile({profile, date, relation}) {
                                 alt={profile?.pseudo}
                                 width={125}
                                 height={125}
+                                layout='raw'
                             />
                         ) : (
                             <Image
@@ -483,6 +495,7 @@ export default function Profile({profile, date, relation}) {
                                 alt={'photo de profil'}
                                 width={125}
                                 height={125}
+                                layout='raw'
                             />
                         )} 
                 </figure>
@@ -557,9 +570,11 @@ export default function Profile({profile, date, relation}) {
                         height={20}
                     />
                 </div>
-                <a href='/experience/contact/addContact.js'>
-                    Relation
-                </a>
+                <Link href='/experience/contact/addContact' title='Relation'>
+                    <a>
+                        Relation
+                    </a>
+                </Link>
                 
             </div>
         </div>
