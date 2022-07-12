@@ -131,6 +131,7 @@ const ProfileStyle = styled.section`
                     .info--pseudo{
                         font-size: 1.25rem;
                         margin-bottom: 15px;
+                        padding-left:5px;
                         p{
                             text-align: start;
                         }
@@ -368,6 +369,24 @@ const ProfileStyle = styled.section`
         .btnPrimary{
             margin-top: 40px;
         }
+        .profilChoiceBlockRelation{
+            display: flex;
+            flex-wrap: wrap!important;
+            justify-content: space-between;
+            margin-top: 15px;
+            .profilChoiceRelation{
+                display: flex;
+                gap: 15px;
+                background: #212F89;
+                border-radius: 25px;
+                padding: 10px 19px!important;
+                color: white!important;
+                justify-content: center;
+                .profil__icone{
+                    display: block!important;;
+                }
+            }
+        }
 `
 let daysOfYear = [];
 
@@ -516,6 +535,23 @@ export default function Profile({profile, date, relation}) {
                     <div>
                     <p>{profile?.pseudo}</p>
                     <p onClick={(e) => copyToClipboard(e)}>Partager</p>
+                    </div>
+                </div>
+                <div className='profilChoiceBlockRelation'>
+                    <div className='profilChoiceRelation'>
+                        <div className='profil__icone' >
+                            <Image
+                                src={'/profil/agenda.webp'}
+                                alt="icone"
+                                width={20}
+                                height={20}
+                            />
+                        </div>
+                        <Link href='/experience/contact/addContact' title='Relation'>
+                            <a>
+                                Relation
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>
