@@ -120,9 +120,21 @@ export default createGlobalStyle`
     will-change: background-color, color;
   }
 
+  
+  .btnMore{
+    padding: 15px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 1px solid #212F89;
+    margin-bottom: 80px;
+    width:120px;
+  }
+
   .hoverEffect{
+    transition: all .3s ease-in-out;
     &:hover{
-      border: 1px solid #212F89;
       cursor: pointer;
       background-color: transparent;
       color: #212F89;
@@ -137,7 +149,6 @@ export default createGlobalStyle`
     text-transform: none;
     background-color: #212F89;
     color: #F4F4F4;
-    border: none;
   }
 
   figure{

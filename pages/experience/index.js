@@ -70,8 +70,9 @@ p{
     border-radius: 50px;
     margin:auto;
     margin-bottom:50px;
+    transition: all ease-in-out .3s;
+    border: 1px solid #212F89;
     &:hover{
-        border: 1px solid #212F89;
         cursor: pointer;
         background-color: transparent;
         color: #212F89;
@@ -269,7 +270,6 @@ export default function Home({ profile }) {
             router.push('/experience/login')
         }
     })
-    console.log(profile)
     const [swim, setswim] = useState('nager')
     const [vision, setvision] = useState('vois')
     const [health, sethealth] = useState('sante')

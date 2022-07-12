@@ -89,6 +89,7 @@ const SurverStyle = styled.section`
                 will-change: transform;
                 transform: rotate(45deg);
                 transition: transform ease-out .2s;
+                cursor: pointer;
                 &.active{
                     transform: rotate(-135deg); 
                     margin-bottom: 0;
@@ -928,7 +929,7 @@ export default function SurveryQuizz({user, relation}) {
                                 disabledDates={daysOfYear}
                             />
                         </div>
-                        <button className='btnPrimary' onClick={() => handleChoose('infos')}>
+                        <button className='btnPrimary btnMore hoverEffect' onClick={() => handleChoose('infos')}>
                             Valider
                         </button>
                     </div>
@@ -977,7 +978,7 @@ export default function SurveryQuizz({user, relation}) {
                     </div>
 
                     <button className='back' onClick={() => handleChoose('agenda')}></button>
-                    <button className='btnPrimary' onClick={() => handleChoose('quizz')}>
+                    <button className='btnPrimary btnMore hoverEffect' onClick={() => handleChoose('quizz')}>
                         Valider
                     </button>
                 </div>

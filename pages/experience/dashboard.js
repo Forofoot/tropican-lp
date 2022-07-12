@@ -48,8 +48,6 @@ export const getServerSideProps = async ({ req, res }) => {
       const grandParent = await prisma.grandparent.count()
 
       await prisma.$disconnect()
-      console.log(grandChildren)
-      console.log(grandParent)
       return{
         props:{
           grandChildren,

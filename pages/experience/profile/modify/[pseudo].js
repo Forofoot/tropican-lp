@@ -195,7 +195,7 @@ export default function Modify({profile}) {
                 <input type='password' name="password" placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
             </div>
             
-            <button className='btnPrimary' type='submit'>Valider</button>
+            <button className='btnPrimary btnMore hoverEffect' type='submit'>Valider</button>
         </form>
     </ModifyStyle>
   )

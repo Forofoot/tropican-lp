@@ -196,7 +196,7 @@ const HeaderStyle = styled.header`
         will-change:left;
         transition: left .3s ease-in-out;
         left: -100%;
-        z-index: 5;
+        z-index: 50;
         display: flex;
         justify-content: center;
         flex-direction: column;

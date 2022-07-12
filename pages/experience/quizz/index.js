@@ -83,6 +83,7 @@ const PreQuizzStyle = styled.section`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 25px;
+    transition: all ease-in-out .3s;
   }
   .warningLabel{
     text-align: center;
@@ -124,7 +125,7 @@ export default function PreQuizz({user, relation}) {
         <p>
           Tout ça pour mieux vous connaître et de vous proposer votre expérience sur mesure !
         </p>
-        <div className='btnPrimary'>
+        <div className='btnPrimary btnMore hoverEffect'>
           <Link href="/experience/quizz/start" title='Commencer le quizz'>
             <a>
               Suivant

@@ -20,17 +20,6 @@ export default function Home({ infos, cards }) {
         <Review cards={cards} />
         <Brands />
         <div className='btnPrimary btnMore hoverEffect'>
-        <style jsx>{`
-            .btnMore{
-              padding: 15px 40px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              margin: auto;
-              margin-bottom: 80px;
-              width:120px;
-            }
-          `}</style>
           <Link href="/experience/login">
             <a className='btn'>
               Voir plus
