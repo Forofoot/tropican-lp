@@ -362,11 +362,14 @@ const ProfileStyle = styled.section`
             bottom: -10px;
             cursor: pointer;
         }
+        .btnPrimary{
+            margin-top: 40px;
+        }
 `
 let daysOfYear = [];
 
 export default function Profile({profile, date, relation}) {
-    const getpseudo = useRef(null)
+    const getpseudo = useRef()
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     
@@ -762,7 +765,7 @@ export default function Profile({profile, date, relation}) {
             }
             
         </div>
-        <button className="deco" onClick={(e) => logout(e)}>Déconnexion</button>
+        <button className="btnPrimary btnMore hoverEffect" onClick={(e) => logout(e)}>Déconnexion</button>
     </ProfileStyle>
   </>)
 }

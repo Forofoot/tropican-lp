@@ -112,7 +112,6 @@ const AddContactStyle = styled.section`
 `
 
 export default function AddContact({friendRequest}) {
-  const errormessage = useRef()
   const cardUser = useRef()
 
   const [cookies] = useCookies(['user'])

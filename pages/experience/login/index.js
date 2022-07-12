@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { Cookies, useCookies } from "react-cookie"
 import { useRouter } from 'next/router'
@@ -156,7 +156,6 @@ const AuthStyle = styled.section`
             
         }
         button{
-            all: unset;
             padding: 15px 45px;
             background: #212F89;
             border-radius: 25px;
@@ -264,9 +263,6 @@ export default function Index() {
     }
   };
 
-  
-  const errormessage = useRef()
-
   const handleSignin = async (e) => {
     e.preventDefault()
     toast.loading('Connexion en cours ...')
@@ -367,7 +363,7 @@ export default function Index() {
                         <input type="text" value={inputedGrandChildren.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
                         <input type="password"  value={inputedGrandChildren.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedGrandChildren({ ...inputedGrandChildren, password:e.target.value })}/>
-                        <button type='submit' className="hoverEffect">S&apos;inscrire</button>
+                        <button type='submit' className="btnPrimary btnMore hoverEffect">S&apos;inscrire</button>
                     </form>
                     }
 
@@ -383,7 +379,7 @@ export default function Index() {
                             <input type="text" value={inputedGrandParent.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, pseudo:e.target.value })}/>
                             <label>Mot de passe</label>
                             <input type="password"  value={inputedGrandParent.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedGrandParent({ ...inputedGrandParent, password:e.target.value })}/>
-                            <button type='submit' className="hoverEffect">S&apos;inscrire</button>
+                            <button type='submit' className="btnPrimary btnMore hoverEffect">S&apos;inscrire</button>
                         </form>
                     }
                     </>
@@ -396,7 +392,7 @@ export default function Index() {
                         <input type="text" value={inputedUser.pseudo || ""} placeholder='Pseudo' onChange={(e) => setInputedUser({ ...inputedUser, pseudo:e.target.value })}/>
                         <label>Mot de passe</label>
                         <input type="password"  value={inputedUser.password || ""} placeholder='Mot de passe' minLength={8} onChange={(e) => setInputedUser({ ...inputedUser, password:e.target.value })}/>
-                        <button type='submit' className=" hoverEffect">Se connecter</button>
+                        <button type='submit' className="btnPrimary btnMore hoverEffect">Se connecter</button>
                         <p>
                             <a> Mot de passe oublié ?</a>
                         </p>
