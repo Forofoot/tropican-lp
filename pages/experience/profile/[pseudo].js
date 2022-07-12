@@ -330,7 +330,8 @@ const ProfileStyle = styled.section`
                         cursor: pointer;
                     }
                     &.active{
-                        background: pink;
+                        background: #212F89;
+                        color: #FEFEFE;
                     }
 
                 }

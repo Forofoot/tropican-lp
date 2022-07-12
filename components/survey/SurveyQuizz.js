@@ -319,7 +319,8 @@ const SurverStyle = styled.section`
                 cursor: pointer;
             }
             &.active{
-                background: pink;
+                background: #212F89;
+                color: #FEFEFE;
             }
         }
     }
@@ -827,7 +828,7 @@ export default function SurveryQuizz({user, relation}) {
 
     const handleChoose = ( choose ) =>{
         if(!value.pseudo){
-            toast.error('Choisir un pseudo et une date')
+            toast.error('Choisir une relation et une date')
         }else{
             setCurrentPage(choose)
         }
