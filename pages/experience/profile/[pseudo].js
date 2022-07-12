@@ -385,11 +385,6 @@ export default function Profile({profile, date, relation}) {
         }
     });
     
-    profile?.experience.forEach(aa => {
-        aa.start = moment(aa.start).format('l')
-        aa.end = moment(aa.end).format('l')
-    })
-    
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [profilChoice, setProfilChoice] = useState('photo')
 
@@ -706,10 +701,10 @@ export default function Profile({profile, date, relation}) {
                         />
                         {profile?.experience.map((exp,i) =>(
                         <div key={i}>
-                        {exp.start == exp.end ? (
-                        <h3>Du {moment(`${exp.end}`).format('ll')}</h3>
+                        {moment(`${exp.start}`).format('ll') == moment(`${exp.end}`).format('ll') ? (
+                            <h3>Le {moment(`${exp.end}`).format('ll')}</h3>
                         ) : (
-                        <h3>Du {moment(`${exp.start}`).format('ll')} au {moment(`${exp.end}`)}</h3>
+                            <h3>Du {moment(`${exp.start}`).format('ll')} au {moment(`${exp.end}`).format('ll')}</h3>
                         )}
                         <p>Expérience avec {exp.grandParent?.firstName || exp.grandChildren?.firstName} à {exp.place}</p>
                         </div>
@@ -796,6 +791,8 @@ export const getServerSideProps = async ({query}) => {
                     select:{
                         name:true,
                         place:true,
+                        start:true,
+                        end:true,
                         grandChildren:{
                             select:{
                                 firstName:true
@@ -810,10 +807,24 @@ export const getServerSideProps = async ({query}) => {
                 }
             }
             })
+            const date = await prisma.grandparent.findUnique({
+                where:{
+                    pseudo:currentPseudo
+                },
+                select:{
+                    experience:{
+                        select:{
+                            start:true,
+                            end:true,
+                        }
+                    }
+                }
+            })
             await prisma.$disconnect()
             return{
             props:{
-                    profile
+                    profile,
+                    date
                 }
             }
         }
@@ -830,6 +841,8 @@ export const getServerSideProps = async ({query}) => {
                     select:{
                         name:true,
                         place:true,
+                        start:true,
+                        end:true,
                         grandParent:{
                             select:{
                                 firstName:true
@@ -844,10 +857,24 @@ export const getServerSideProps = async ({query}) => {
                 }
             }
         })
+        const date = await prisma.grandchildren.findUnique({
+            where:{
+                pseudo:currentPseudo
+            },
+            select:{
+                experience:{
+                    select:{
+                        start:true,
+                        end:true,
+                    }
+                }
+            }
+        })
         await prisma.$disconnect()
         return{
             props:{
-                profile
+                profile,
+                date
             }
         }
     }catch(e){

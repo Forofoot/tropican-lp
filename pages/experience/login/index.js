@@ -22,9 +22,6 @@ const AuthStyle = styled.section`
         justify-content: initial;
     }
     h1{
-        font-family: 'Mark Pro';
-        font-style: normal;
-        font-weight: 700;
         line-height: 70px;
         margin-bottom: 10px;
         font-size: 3.5rem;
@@ -33,9 +30,6 @@ const AuthStyle = styled.section`
         }
     }
     h2{
-        font-family: 'Sofia Pro';
-        font-style: normal;
-        font-weight: 400;
         font-size: 1.375rem;
         margin-bottom: 50px;
         @media(max-width: 768px){
