@@ -8,9 +8,19 @@ import Head from 'next/head'
 
 const AuthStyle = styled.section`
     width: 100%;
-    max-width: 1000px;
     margin: auto;
     position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        align-items: initial;
+        justify-content: initial;
+    }
     h1{
         font-family: 'Mark Pro';
         font-style: normal;
@@ -42,17 +52,29 @@ const AuthStyle = styled.section`
     }
     .loginPhoto{
         display: none;
+        position: relative;
         @media(min-width: 768px){
-            display: flex;
-            align-items: center;
+            display: block;
+            width: 60%;
             padding:20px ;
+        }
+        span{
+            position: relative;
         }
     }
     .container__login{
+        width: 100%;
         @media(min-width: 768px){
             display:flex;
+            gap: 90px;
             &--form{
-                width: 100%
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                form{
+                    padding: 0;
+                }
             }
         }
     }
@@ -302,9 +324,9 @@ export default function Index() {
                 <Image
                     src={'/profil/photo_login.webp'}
                     alt="photo d'un lac pour illustrer la page de connexion ou de création de compte"
-                    width={720}
-                    height={1024}
-                
+                    layout='fill'
+                    objectFit='cover'
+                    priority
                 />
             </div>
             <div className='container__login--form'>

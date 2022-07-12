@@ -9,8 +9,9 @@ const PreQuizzStyle = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 95vh;
   @media(min-width: 1024px){
-    flex-direction: row-reverse;    
+    flex-direction: row-reverse;
     gap: 80px;
   }
   h1,h2{

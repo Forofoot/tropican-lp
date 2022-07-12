@@ -17,6 +17,7 @@ const daysOfYear = []
 
 const SurverStyle = styled.section`
     position: relative;
+    padding-top: 30px;
     min-height: 95vh;
     h1{
         display: none;
@@ -197,7 +198,7 @@ const SurverStyle = styled.section`
     .back{
         all: unset;
         position: absolute;
-        top: 0;
+        top: 30px;
         left: 0;
         width: 35px;
         height: 35px;
@@ -423,7 +424,8 @@ const SurverStyle = styled.section`
     }
 
     @media (min-width: 1024px){
-        padding: 0 140px;
+        padding-left: 140px;
+        padding-right: 140px;
         h1{
             display: block;
             text-align: center;
@@ -779,6 +781,7 @@ export default function SurveryQuizz({user, relation}) {
             daysOfYear.push(new Date(d));
         }
     });
+
     survey.onComplete.add(function (survey, options) {
         setCurrentPage('loading')
         setstate([
