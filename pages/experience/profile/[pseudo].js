@@ -161,6 +161,8 @@ const ProfileStyle = styled.section`
                 &--img{
                     margin-right: 45px;
                     position: relative;
+                    width: 125px;
+                    height: 125px;
                 }
             }
         }
@@ -443,17 +445,15 @@ export default function Profile({profile, date, relation}) {
                     <Image
                         src={profile?.avatar}
                         alt={profile?.pseudo}
-                        width={125}
-                        height={125}
-                        layout='raw'
+                        layout='fill'
+                        objectFit='cover'
                     />
                 ) : (
                     <Image
                         src={'/logo.webp'}
                         alt={'photo de profil'}
-                        width={125}
-                        height={125}
-                        layout='raw'
+                        layout='fill'
+                        objectFit='cover'
                     />
                 )} 
             </figure>
@@ -484,17 +484,15 @@ export default function Profile({profile, date, relation}) {
                             <Image
                                 src={profile?.avatar}
                                 alt={profile?.pseudo}
-                                width={125}
-                                height={125}
-                                layout='raw'
+                                layout='fill'
+                                objectFit='cover'
                             />
                         ) : (
                             <Image
                                 src={'/logo.webp'}
-                                alt={'photo de profil'}
-                                width={125}
-                                height={125}
-                                layout='raw'
+                                alt={'photo de profil'}    
+                                layout='fill'
+                                objectFit='cover'
                             />
                         )} 
                 </figure>
