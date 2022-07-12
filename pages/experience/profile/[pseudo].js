@@ -541,7 +541,7 @@ export default function Profile({profile, date, relation}) {
                     <div className='profilChoiceRelation'>
                         <div className='profil__icone' >
                             <Image
-                                src={'/profil/agenda.webp'}
+                                src={'/profil/contact.webp'}
                                 alt="icone"
                                 width={20}
                                 height={20}
