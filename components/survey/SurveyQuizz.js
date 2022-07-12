@@ -43,6 +43,9 @@ const SurverStyle = styled.section`
         color: #212F89;
         font-weight: 100;
     }
+    .sv-action__content{
+        display: flex!important;
+    }
     .agendaSection{
         width: 100%;
     }
